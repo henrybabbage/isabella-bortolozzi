@@ -29,6 +29,5 @@ function assertValue(v, errorMessage) {
   if (v === undefined) {
     throw new Error(errorMessage)
   }
-
   return v
 }
