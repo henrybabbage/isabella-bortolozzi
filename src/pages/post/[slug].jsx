@@ -1,31 +1,19 @@
 import { PortableText } from '@portabletext/react'
-import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
 import { useLiveQuery } from 'next-sanity/preview'
 
-import Container from '~/components/Container'
-import { readToken } from '~/lib/sanity.api'
-import { getClient } from '~/lib/sanity.client'
-import { urlForImage } from '~/lib/sanity.image'
+import Container from '@/components/Container'
+import { readToken } from '@/lib/sanity.api'
+import { getClient } from '@/lib/sanity.client'
+import { urlForImage } from '@/lib/sanity.image'
 import {
-  getPost,
-  type Post,
-  postBySlugQuery,
-  postSlugsQuery,
-} from '~/lib/sanity.queries'
-import type { SharedPageProps } from '~/pages/_app'
-import { formatDate } from '~/utils'
+    getPost,
+    postBySlugQuery,
+    postSlugsQuery,
+} from '@/lib/sanity.queries'
+import { formatDate } from '@/utils'
 
-interface Query {
-  [key: string]: string
-}
-
-export const getStaticProps: GetStaticProps<
-  SharedPageProps & {
-    post: Post
-  },
-  Query
-> = async ({ draftMode = false, params = {} }) => {
+export const getStaticProps = async ({ draftMode = false, params = {} }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const post = await getPost(client, params.slug)
 
@@ -45,7 +33,7 @@ export const getStaticProps: GetStaticProps<
 }
 
 export default function ProjectSlugRoute(
-  props: InferGetStaticPropsType<typeof getStaticProps>,
+  props
 ) {
   const [post] = useLiveQuery(props.post, postBySlugQuery, {
     slug: props.post.slug.current,

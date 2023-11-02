@@ -1,10 +1,9 @@
 import Image from 'next/image'
 
-import { urlForImage } from '~/lib/sanity.image'
-import { type Post } from '~/lib/sanity.queries'
-import { formatDate } from '~/utils'
+import { urlForImage } from '@/lib/sanity.image'
+import { formatDate } from '@/utils'
 
-export default function Card({ post }: { post: Post }) {
+export default function Card({ post }) {
   return (
     <div className="card">
       {post.mainImage ? (

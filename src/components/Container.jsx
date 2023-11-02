@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function Container({ children }: { children: React.ReactNode }) {
+export default function Container({ children }) {
   return (
     <div className="container">
       <header className="header">

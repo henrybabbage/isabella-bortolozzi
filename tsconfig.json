@@ -21,9 +21,9 @@
       }
     ],
     "paths": {
-      "~/*": ["./src/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/pages/index.jsx", "src/pages/_app.jsx", "src/pages/post/[slug].jsx", "src/pages/api/disable-draft.js", "src/pages/api/draft.js", "src/components/PreviewProvider.jsx", "src/components/Card.jsx", "src/pages/studio/[[...index]].jsx", "src/utils/index.js"],
   "exclude": ["node_modules"]
 }

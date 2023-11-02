@@ -4,22 +4,22 @@
 
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
-import { deskTool } from 'sanity/desk'
 import {
-  defineUrlResolver,
-  Iframe,
-  IframeOptions,
+    defineUrlResolver,
+    Iframe,
+    IframeOptions,
 } from 'sanity-plugin-iframe-pane'
 import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
+import { deskTool } from 'sanity/desk'
 
 // see https://www.sanity.io/docs/api-versioning for how versioning works
 import {
-  apiVersion,
-  dataset,
-  previewSecretId,
-  projectId,
-} from '~/lib/sanity.api'
-import { schema } from '~/schemas'
+    apiVersion,
+    dataset,
+    previewSecretId,
+    projectId,
+} from '@/lib/sanity.api'
+import { schema } from '@/schemas'
 
 const iframeOptions = {
   url: defineUrlResolver({
@@ -32,8 +32,8 @@ const iframeOptions = {
 
 export default defineConfig({
   basePath: '/studio',
-  name: 'project-name',
-  title: 'Project Name',
+  name: 'isabella-bortolozzi',
+  title: 'Galerie Isabella Bortolozzi',
   projectId,
   dataset,
   //edit schemas in './src/schemas'

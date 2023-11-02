@@ -1,12 +1,11 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { isValidSecret } from 'sanity-plugin-iframe-pane/is-valid-secret'
 
-import { previewSecretId, readToken } from '~/lib/sanity.api'
-import { getClient } from '~/lib/sanity.client'
+import { previewSecretId, readToken } from '@/lib/sanity.api'
+import { getClient } from '@/lib/sanity.client'
 
 export default async function preview(
-  req: NextApiRequest,
-  res: NextApiResponse<string | void>,
+  req,
+  res
 ) {
   if (!readToken) {
     res.status(500).send('Misconfigured server')
