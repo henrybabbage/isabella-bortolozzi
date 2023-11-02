@@ -24,6 +24,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/pages/index.jsx", "src/pages/_app.jsx", "src/pages/post/[slug].jsx", "src/pages/api/disable-draft.js", "src/pages/api/draft.js", "src/components/PreviewProvider.jsx", "src/components/Card.jsx", "src/pages/studio/[[...index]].jsx", "src/utils/formatDate.js", "src/lib/sanity.queries.js", "src/lib/sanity.links.js", "src/lib/sanity.image.js", "src/lib/sanity.client.js", "src/lib/sanity.api.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/pages/index.jsx", "src/pages/_app.jsx", "src/pages/post/[slug].jsx", "src/pages/api/disable-draft.js", "src/pages/api/draft.js", "src/components/PreviewProvider.jsx", "src/components/Card.jsx", "src/pages/studio/[[...index]].jsx", "src/utils/formatDate.js", "src/lib/sanity.queries.js", "src/lib/sanity.links.js", "src/lib/sanity.image.js", "src/lib/sanity.client.js", "src/lib/sanity.api.js", "src/schemas/objects/countries.js"],
   "exclude": ["node_modules"]
 }
