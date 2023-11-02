@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Exhibitions() {
+export default function ViewingRooms() {
   return (
     <div>
     </div>

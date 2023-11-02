@@ -7,9 +7,9 @@ import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { urlForImage } from '@/lib/sanity.image'
 import {
-    getExhibition,
     exhibitionBySlugQuery,
     exhibitionSlugsQuery,
+    getExhibition,
 } from '@/lib/sanity.queries'
 import { formatDate } from '@/utils/formatDate'
 
