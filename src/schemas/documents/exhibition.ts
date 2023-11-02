@@ -1,11 +1,11 @@
-import { DatabaseIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import { StackCompactIcon } from '@sanity/icons'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
 	name: 'exhibition',
 	title: 'Exhibition',
 	type: 'document',
-	icon: DatabaseIcon,
+	icon: StackCompactIcon,
 	fields: [
 		defineField({
 			name: 'title',
@@ -76,7 +76,12 @@ export default defineType({
 			name: 'artists',
 			title: 'Artist(s)',
 			type: 'array',
-			of: [{ type: 'reference', to: { type: 'artist' } }],
+            of: [
+                defineArrayMember({
+                  type: 'reference',
+                  to: [{ type: 'artist' }],
+                }),
+            ],
 		}),
 		defineField({
 			name: 'type',
@@ -197,7 +202,7 @@ export default defineType({
 			return {
 				title,
 				subtitle: hasMoreArtists ? `${subtitle}…` : subtitle,
-				media: media || DatabaseIcon,
+				media: media || StackCompactIcon,
 			}
 		},
 	},
