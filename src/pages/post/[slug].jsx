@@ -1,6 +1,6 @@
 import { PortableText } from '@portabletext/react'
-import Image from 'next/image'
 import { useLiveQuery } from 'next-sanity/preview'
+import Image from 'next/image'
 
 import Container from '@/components/Container'
 import { readToken } from '@/lib/sanity.api'
@@ -11,7 +11,7 @@ import {
     postBySlugQuery,
     postSlugsQuery,
 } from '@/lib/sanity.queries'
-import { formatDate } from '@/utils'
+import { formatDate } from '@/utils/formatDate'
 
 export const getStaticProps = async ({ draftMode = false, params = {} }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
