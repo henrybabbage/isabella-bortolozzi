@@ -4,7 +4,8 @@ import Card from '@/components/Card'
 import Container from '@/components/Container'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
-import { getPosts, postsQuery } from '@/lib/sanity.queries'
+import { getPosts } from '@/lib/sanity.fetch'
+import { postsQuery } from '@/lib/sanity.queries'
 
 export const getStaticProps = async ({ draftMode = false }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
