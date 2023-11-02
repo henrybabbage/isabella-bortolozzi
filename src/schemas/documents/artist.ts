@@ -74,31 +74,31 @@ export default defineType({
         name: 'artistBio2',
         title: 'Artist bio',
         type: 'object',
+        group: 'cv',
         options: {
             collapsible: true,
             collapsed: true,
         },
-        group: 'cv',
         fields: [
-            {
+            defineField({
                 name: 'locationOfBirth',
                 title: 'Born in',
                 type: 'string',
                 description: 'City + Country ONLY',
-            },
-            {
+            }),
+            defineField({
                 name: 'yearOfBirth',
                 title: 'Year of Birth',
                 type: 'string',
                 validation: (Rule) => Rule.max(4),
                 description: '(YYYY) Year ONLY',
-            },
-            {
+            }),
+            defineField({
                 name: 'livesAndWorks',
                 title: 'Based in',
                 type: 'string',
                 description: 'City + Country ONLY',
-            },
+            }),
         ],
     }),
     defineField({
