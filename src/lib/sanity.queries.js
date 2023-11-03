@@ -1,32 +1,11 @@
 import groq from 'groq'
 
-export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`
-
-export const exhibitionsQuery = groq`*[_type == "exhibition" && defined(slug.current)] | order(endDate desc)`
-
-export const viewingRoomsQuery = groq`*[_type == "viewingRoom" && defined(slug.current)] | order(endDate desc)`
-
-export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0]`
-
-export const exhibitionBySlugQuery = groq`*[_type == "exhibition" && slug.current == $slug][0]`
-
-export const viewingRoomBySlugQuery = groq`*[_type == "viewingRoom" && slug.current == $slug][0]`
-
-export const artistBySlugQuery = groq`*[_type == "artist" && slug.current == $slug][0]`
-
-export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
-`
-export const artistSlugsQuery = groq`
-*[_type == "artist" && defined(slug.current)][].slug.current
-`
-
-export const exhibitionSlugsQuery = groq`
-*[_type == "exhibition" && defined(slug.current)][].slug.current
-`
-
-export const viewingRoomSlugsQuery = groq`
-*[_type == "viewingRoom" && defined(slug.current)][].slug.current
+export const venue = groq`
+    venue->{
+        name,
+        city,
+        country,
+    }
 `
 
 export const mainImage = groq`
@@ -121,12 +100,53 @@ export const imageComplete = groq`
     }
 `
 
-export const venue = groq`
-    venue->{
-        name,
-        city,
-        country,
+export const exhibitionCompact = groq`
+    _id,
+    _type,
+    "slug": slug.current,
+    type,
+    location,
+    startDate,
+    endDate,
+    year,
+    artists[]->{name},
+    ${venue},
+    ${mainImage},
+    title,
+    subtitle,
+`
+
+export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`
+
+export const exhibitionsQuery = groq`*[_type == "exhibition" && defined(slug.current)] | order(endDate desc)
+    {
+        ${exhibitionCompact}
     }
+`
+
+export const viewingRoomsQuery = groq`*[_type == "viewingRoom" && defined(slug.current)] | order(endDate desc)`
+
+export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0]`
+
+export const exhibitionBySlugQuery = groq`*[_type == "exhibition" && slug.current == $slug][0]`
+
+export const viewingRoomBySlugQuery = groq`*[_type == "viewingRoom" && slug.current == $slug][0]`
+
+export const artistBySlugQuery = groq`*[_type == "artist" && slug.current == $slug][0]`
+
+export const postSlugsQuery = groq`
+*[_type == "post" && defined(slug.current)][].slug.current
+`
+export const artistSlugsQuery = groq`
+*[_type == "artist" && defined(slug.current)][].slug.current
+`
+
+export const exhibitionSlugsQuery = groq`
+*[_type == "exhibition" && defined(slug.current)][].slug.current
+`
+
+export const viewingRoomSlugsQuery = groq`
+*[_type == "viewingRoom" && defined(slug.current)][].slug.current
 `
 
 export const galleryQuery = groq`*[_type == 'home'][0]
