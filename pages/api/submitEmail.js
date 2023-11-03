@@ -1,4 +1,4 @@
-import { client } from '@/lib/sanity.client'
+import { client } from 'lib/sanity.client'
 
 export default async function submitEmail(req, res) {
 	const { email } = JSON.parse(req.body)

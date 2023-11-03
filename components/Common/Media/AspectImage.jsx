@@ -1,12 +1,12 @@
 
-import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import Image from 'next/image'
 import { useState } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
-import Modal from '@/components/Common/Dialog/Modal'
-import { sanityClient } from '@/lib/sanity.client'
+import Modal from 'components/Common/Dialog/Modal'
+import { sanityClient } from 'lib/sanity.client'
 
 import ZoomImage from './ZoomImage'
 

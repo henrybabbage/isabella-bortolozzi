@@ -1,7 +1,6 @@
+import { previewSecretId, readToken } from 'lib/sanity.api'
+import { getClient } from 'lib/sanity.client'
 import { isValidSecret } from 'sanity-plugin-iframe-pane/is-valid-secret'
-
-import { previewSecretId, readToken } from '@/lib/sanity.api'
-import { getClient } from '@/lib/sanity.client'
 
 export default async function preview(
   req,

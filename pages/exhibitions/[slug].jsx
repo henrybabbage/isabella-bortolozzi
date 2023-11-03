@@ -1,13 +1,12 @@
-import { useLiveQuery } from 'next-sanity/preview'
-
-import ExhibitionPage from '@/components/Exhibition/ExhibitionPage'
-import { readToken } from '@/lib/sanity.api'
-import { getClient } from '@/lib/sanity.client'
-import { getExhibition } from '@/lib/sanity.fetch'
+import ExhibitionPage from 'components/Exhibition/ExhibitionPage'
+import { readToken } from 'lib/sanity.api'
+import { getClient } from 'lib/sanity.client'
+import { getExhibition } from 'lib/sanity.fetch'
 import {
     exhibitionBySlugQuery,
     exhibitionSlugsQuery,
-} from '@/lib/sanity.queries'
+} from 'lib/sanity.queries'
+import { useLiveQuery } from 'next-sanity/preview'
 
 export default function ExhibitionSlugRoute(
   props

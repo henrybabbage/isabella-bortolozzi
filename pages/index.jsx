@@ -1,9 +1,8 @@
+import { readToken } from 'lib/sanity.api'
+import { getClient } from 'lib/sanity.client'
+import { getPosts } from 'lib/sanity.fetch'
+import { postsQuery } from 'lib/sanity.queries'
 import { useLiveQuery } from 'next-sanity/preview'
-
-import { readToken } from '@/lib/sanity.api'
-import { getClient } from '@/lib/sanity.client'
-import { getPosts } from '@/lib/sanity.fetch'
-import { postsQuery } from '@/lib/sanity.queries'
 
 export default function IndexPage(props) {
   const [posts] = useLiveQuery(props.posts, postsQuery)

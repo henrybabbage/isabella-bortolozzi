@@ -4,7 +4,6 @@
 
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
-import { deskTool } from 'sanity/desk'
 import {
     defineUrlResolver,
     Iframe,
@@ -13,16 +12,17 @@ import {
 import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
 import { media } from 'sanity-plugin-media'
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input'
+import { deskTool } from 'sanity/desk'
 
-import deskStructure from '@/lib/deskStructure'
+import deskStructure from 'lib/deskStructure'
 // see https://www.sanity.io/docs/api-versioning for how versioning works
 import {
     apiVersion,
     dataset,
     previewSecretId,
     projectId,
-} from '@/lib/sanity.api'
-import { schema } from '@/schemas'
+} from 'lib/sanity.api'
+import { schema } from 'schemas'
 
 const iframeOptions = {
   url: defineUrlResolver({

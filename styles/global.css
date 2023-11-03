@@ -3,34 +3,58 @@
 @tailwind utilities;
 
 :root {
-  --font-family-sans: Inter;
-  --font-family-serif: PT Serif;
-  --font-family-mono: IMB Plex Mono;
+    --font-serif: 'Marist', serif;
 
-  --white: #fff;
-  --black: #101112;
-  --gray-200: #ced2d9;
-  --gray-600: #6e7683;
+    --white: #fff;
+    --black: #222;
+    --whitesmoke: #f4f3ef;
 
-  --max-width-0: 320px;
-  --max-width-1: 768px;
+    --font-line-height: 24px;
+    --font-letter-spacing: 5%;
+
+    --max-width-0: 320px;
+    --max-width-1: 768px;
+}
+
+@layer base {
+	@font-face {
+		font-family: 'Marist';
+		src: url('../public/fonts/Marist/Marist_Regular.woff2') format('woff2'),
+			url('../public/fonts/Marist/Marist_Regular.woff') format('woff');
+		font-style: normal;
+		font-weight: 400;
+		font-display: optional;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	@font-face {
+		font-family: 'Marist';
+		src: url('../public/fonts/Marist/Marist_Regular_Italic.woff2') format('woff2'),
+			url('../public/fonts/Marist/Marist_Regular_Italic.woff') format('woff');
+		font-style: italic;
+		font-weight: 400;
+		font-display: optional;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
 }
 
 html {
-  background-color: var(--white);
-  font-family: var(--font-family-sans), var(--font-family-serif), sans-serif;
-  -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+    background-color: var(--white);
+    font-family: var(--font-serif), sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  line-height: inherit;
+    margin: 0;
+    line-height: inherit;
 }
 
 button {
-  all: unset;
+    all: unset;
 }
 
 a {
@@ -44,10 +68,10 @@ Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 
 sub,
 sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
 }
 
 sub {

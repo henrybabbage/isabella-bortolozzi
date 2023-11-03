@@ -1,12 +1,11 @@
-import { useLiveQuery } from 'next-sanity/preview'
-
-import { readToken } from '@/lib/sanity.api'
-import { getClient } from '@/lib/sanity.client'
+import { readToken } from 'lib/sanity.api'
+import { getClient } from 'lib/sanity.client'
 import {
     artistBySlugQuery,
     artistSlugsQuery,
     getArtist,
-} from '@/lib/sanity.queries'
+} from 'lib/sanity.queries'
+import { useLiveQuery } from 'next-sanity/preview'
 
 export const getStaticProps = async ({ draftMode = false, params = {} }) => {
     const client = getClient(draftMode ? { token: readToken } : undefined)

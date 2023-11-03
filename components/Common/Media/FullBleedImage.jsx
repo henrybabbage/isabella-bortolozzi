@@ -1,7 +1,7 @@
-import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import Image from 'next/image'
 
-import { sanityClient } from '@/lib/sanity.client'
+import { sanityClient } from 'lib/sanity.client'
 
 export default function FullBleedImage({ image, alt, priority = true }) {
     const imageProps = useNextSanityImage(sanityClient, image)

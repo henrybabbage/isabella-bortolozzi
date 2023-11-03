@@ -2,9 +2,8 @@ import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Client, useHydrated } from "react-hydration-provider"
 import { useMediaQuery } from "react-responsive"
-
-import { Desktop, TabletAndBelow } from "@/utils/breakpoints"
-import { cn } from '@/utils/cn'
+import { Desktop, TabletAndBelow } from "utils/breakpoints"
+import { cn } from 'utils/cn'
 
 import CloseButton from '../Common/Buttons/CloseButton'
 import PlusButton from "../Common/Buttons/PlusButton"

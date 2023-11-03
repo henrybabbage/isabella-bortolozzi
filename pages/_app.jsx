@@ -5,20 +5,19 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
-
-import useFoucFix from '@/utils/useFoucFix'
+import useFoucFix from 'utils/useFoucFix'
 
 const PreviewProvider = lazy(() => import('@/components/PreviewProvider'))
 
 const serif = localFont({
 	src: [
 		{
-			path: '@/public/fonts/Marist/Marist_Regular.woff2',
+			path: '../public/fonts/Marist/Marist_Regular.woff2',
 			weight: '400',
 			style: 'regular',
 		},
 		{
-			path: '@/public/fonts/Marist/Marist_Regular_Italic.woff2',
+			path: '../public/fonts/Marist/Marist_Regular_Italic.woff2',
 			weight: '400',
 			style: 'italic',
 		},
@@ -95,7 +94,7 @@ export default function App({ Component, pageProps }) {
 			<style jsx global>
 			{`
 				:root {
-					--font-family-serif: ${serif.style.fontFamily}
+					--font-serif: ${serif.style.fontFamily}
 				}
 			`}
 			</style>
