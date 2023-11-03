@@ -25,6 +25,8 @@
     "next-sanity": "5.5.10",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hydration-provider": "^2.0.0",
+    "react-responsive": "^9.0.2",
     "sanity": "3.19.0",
     "sanity-plugin-iframe-pane": "2.6.0",
     "sanity-plugin-media": "^2.2.4",
