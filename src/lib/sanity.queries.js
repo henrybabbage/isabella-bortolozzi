@@ -135,7 +135,29 @@ export const viewingRoomsQuery = groq`*[_type == "viewingRoom" && defined(slug.c
 
 export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0]`
 
-export const exhibitionBySlugQuery = groq`*[_type == "exhibition" && slug.current == $slug][0]`
+export const exhibitionBySlugQuery = groq`*[_type == "exhibition" && slug.current == $slug][0]
+    {
+        _id,
+        _type,
+        "slug": slug.current,
+        title,
+        subtitle,
+        startDate,
+        endDate,
+        year,
+        type,
+        ${venue},
+        artists[]->{
+            name,
+        },
+        body,
+        photographerCredit,
+        "totalImages": count(imageGallery),
+        imageGallery[]{
+            ${imageComplete},
+        }
+    }
+`
 
 export const viewingRoomBySlugQuery = groq`*[_type == "viewingRoom" && slug.current == $slug][0]`
 

@@ -1,35 +1,88 @@
 import Link from "next/link"
 import { useRouter } from 'next/router'
-import { useState } from "react"
-import { useHydrated } from "react-hydration-provider"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { Client, useHydrated } from "react-hydration-provider"
 import { useMediaQuery } from "react-responsive"
 
+import { Desktop, TabletAndBelow } from "@/utils/breakpoints"
 import { cn } from '@/utils/cn'
 
-import CloseButton from '../Buttons/CloseButton'
-import PlusButton from "../Buttons/PlusButton"
+import CloseButton from '../Common/Buttons/CloseButton'
+import PlusButton from "../Common/Buttons/PlusButton"
+import ArtworkDrawer from "../Common/Drawers/ArtworkDrawer"
+import AspectImage from "../Common/Media/AspectImage"
+import FullBleedImage from "../Common/Media/FullBleedImage"
 
 export default function ExhibitionPage({exhibition}) {
     const [isLoading, setIsLoading] = useState(true)
     const [artworkDrawerIsOpen, setArtworkDrawerIsOpen] = useState(false)
+    const [currentScrollElement, setCurrentScrollElement] = useState(0)
+
+    useEffect(() => {
+		setIsLoading(true)
+		setTimeout(() => {
+			setIsLoading(false)
+		}, 3400)
+	}, [])
 
     const router = useRouter()
 
+    const scrollToSections = useRef(new Set())
+    const scrollViewRef = useRef(null)
+
+    const handleScroll = useCallback(() => {
+		let offset = Math.abs(scrollViewRef.current.children[0].getBoundingClientRect().top)
+
+		Array.from(scrollToSections.current).map((section, idx) => {
+			if (section === null || section === undefined) {
+				return
+			}
+
+			const sectionCenter = section.offsetTop + section.offsetHeight / 2
+			if (sectionCenter > offset && sectionCenter < offset + window.innerHeight) {
+				setCurrentScrollElement(idx)
+			}
+		})
+	}, [scrollViewRef])
+
+    const didClickPrevious = () => {
+		let goToRef = currentScrollElement - 1
+		if (goToRef < 0 || goToRef > scrollToSections.current.size) {
+			return
+		}
+		scrollToSection(goToRef)
+	}
+
+	const didClickNext = () => {
+		let goToRef = currentScrollElement + 1
+		if (goToRef < 0 || goToRef > scrollToSections.current.size) {
+			return
+		}
+		scrollToSection(goToRef)
+	}
+
+	const scrollToSection = (idx) => {
+		Array.from(scrollToSections.current)[idx]?.scrollIntoView({
+			behavior: 'smooth',
+			block: 'center',
+		})
+	}
+
     const hydrated = useHydrated()
-	const isTabletOrMobile = useMediaQuery({ query: '(max-width: 991px)' }, hydrated ? undefined : { deviceWidth: 991 })
-	const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
+	const tabletOrMobile = useMediaQuery({ query: '(max-width: 991px)' }, hydrated ? undefined : { deviceWidth: 991 })
+	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
     
     const handleMobileClick = (state, value, event) => {
-		if (isDesktopOrLaptop) return
-		else if (!isDesktopOrLaptop) {
+		if (desktopOrLaptop) return
+		else if (!desktopOrLaptop) {
 			event.stopPropagation()
 			state(value)
 		}
 	}
 
 	const handleDesktopMouseEnter = (state, value, event) => {
-		if (!isDesktopOrLaptop) return
-		else if (isDesktopOrLaptop) {
+		if (!desktopOrLaptop) return
+		else if (desktopOrLaptop) {
 			event.stopPropagation()
 			state(value)
 		}
@@ -55,23 +108,77 @@ export default function ExhibitionPage({exhibition}) {
             >
                 <PlusButton didPressButton={() => {}} />
             </div>
-            {artworkDrawerIsOpen && (
+            <div
+                className={cn('pointer-events-none absolute z-200 grid h-screen w-screen grid-cols-12 duration-300 delay-150 ease-in-out',
+                    tabletOrMobile ? 'place-items-end' : null,
+                    artworkDrawerIsOpen ? 'opacity-100' : 'opacity-0',
+                )}
+            >
                 <div
-                    className={cn('pointer-events-none absolute z-200 grid h-screen w-screen grid-cols-12 duration-300 delay-150 ease-in-out',
-                        isTabletOrMobile ? 'place-items-end' : null,
-                        artworkDrawerIsOpen ? 'opacity-100' : 'opacity-0',
+                    className={cn('col-span-12 col-start-1 h-full bg-transparent sm:col-span-8 sm:col-start-1',
+                        artworkDrawerIsOpen ? 'pointer-events-auto' : 'pointer-events-none'
                     )}
-                >
-                    <div
-                        className={cn('col-span-12 col-start-1 h-full bg-transparent sm:col-span-8 sm:col-start-1',
-                        artworkDrawerIsOpen ? 'pointer-events-auto' : 'pointer-events-none')}
-                        onMouseEnter={(event) => handleDesktopMouseEnter(setArtworkDrawerIsOpen, false, event)}
-                        onClick={(event) => handleMobileClick(setArtworkDrawerIsOpen, false, event)}
-                    ></div>
-                    <aside className="pointer-events-none z-200 col-span-12 col-start-1 h-[540px] w-full bg-whitesmoke-400 sm:col-span-4 sm:col-start-9 sm:h-screen sm:w-auto">
-                    </aside>
-                </div>
-            )}
+                    onMouseEnter={(event) => handleDesktopMouseEnter(setArtworkDrawerIsOpen, false, event)}
+                    onClick={(event) => handleMobileClick(setArtworkDrawerIsOpen, false, event)}
+                ></div>
+                <aside className="pointer-events-none z-200 col-span-12 col-start-1 h-[540px] w-full bg-whitesmoke-400 sm:col-span-4 sm:col-start-9 sm:h-screen sm:w-auto">
+                    <ArtworkDrawer />
+                </aside>
+            </div>
+            <div
+                ref={scrollViewRef}
+                className="relative h-full w-full snap-y snap-mandatory"
+            >
+                <section ref={(element) => scrollToSections.current.add(element)} className="relative">
+                    {exhibition &&
+                        exhibition?.imageGallery &&
+                        exhibition?.imageGallery
+                            ?.slice(0, 1)
+                            .map((image, idx) => (
+                                <FullBleedImage
+                                    reference={(element) => scrollToSections.current.add(element)}
+                                    key={idx}
+                                    image={image}
+                                    alt={image.alt}
+                                    priority={true}
+                                />
+                            ))}
+                </section>
+                <section>
+                    {exhibition &&
+                        exhibition?.imageGallery &&
+                        exhibition?.imageGallery
+                            ?.slice(1)
+                            .map((image, idx) =>
+                                image?.fullbleed ? (
+                                    <FullBleedImage
+                                        reference={(element) => scrollToSections.current.add(element)}
+                                        key={idx}
+                                        image={image}
+                                        alt={image.alt}
+                                        priority={false}
+                                    />
+                                ) : (
+                                    <AspectImage
+                                        reference={(element) => scrollToSections.current.add(element)}
+                                        image={image}
+                                        alt={image.alt}
+                                        priority={false}
+                                        fill={true}
+                                        mode="contain"
+                                        sizes="100vw"
+                                        key={idx}
+                                    />
+                                )
+                            )}
+                </section>
+                <section className="h-full w-full">
+                    <Client>
+                        <TabletAndBelow></TabletAndBelow>
+                        <Desktop></Desktop>
+                    </Client>
+                </section>
+            </div>
         </div>
     )
 }
