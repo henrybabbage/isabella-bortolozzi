@@ -18,7 +18,7 @@ export default function TableItem({ exhibition, id }) {
 	const artistNames = exhibition?.artists?.map((a) => a.name)
 	const artistList = artistNames?.join(', ')
 
-	const slug = exhibition?.slug?.current ?? ''
+	const slug = exhibition?.slug ?? ''
 
 	const router = useRouter()
 	const page = router.pathname === '/exhibitions' ? 'exhibitions' : 'viewing-rooms'
