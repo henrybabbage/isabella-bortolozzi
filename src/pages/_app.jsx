@@ -6,6 +6,7 @@ import { lazy } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 
 import useFoucFix from '@/utils/useFoucFix'
+import { usePreserveScroll } from '@/utils/usePreserveScroll'
 
 const PreviewProvider = lazy(() => import('@/components/PreviewProvider'))
 
@@ -33,6 +34,7 @@ export default function App({
   pageProps,
 }) {
     useFoucFix()
+    usePreserveScroll()
     const { draftMode, token } = pageProps
     return (
         <>
