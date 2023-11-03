@@ -23,6 +23,7 @@
     "@tailwindcss/typography": "0.5.10",
     "next": "14.0.1",
     "next-sanity": "5.5.10",
+    "next-sanity-image": "^6.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hydration-provider": "^2.0.0",
@@ -31,7 +32,8 @@
     "sanity-plugin-iframe-pane": "2.6.0",
     "sanity-plugin-media": "^2.2.4",
     "sanity-plugin-simpler-color-input": "^1.1.0",
-    "styled-components": "6.1.0"
+    "styled-components": "6.1.0",
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
     "@types/react": "18.2.33",
