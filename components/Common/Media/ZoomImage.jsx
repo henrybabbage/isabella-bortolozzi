@@ -1,7 +1,6 @@
-import { useNextSanityImage } from 'next-sanity-image'
-import Image from 'next/image'
-
 import { sanityClient } from 'lib/sanity.client'
+import Image from 'next/image'
+import { useNextSanityImage } from 'next-sanity-image'
 
 export default function ZoomImage({
     image,

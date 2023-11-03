@@ -1,17 +1,16 @@
 
-import { useNextSanityImage } from 'next-sanity-image'
+import Modal from 'components/Common/Dialog/Modal'
+import { sanityClient } from 'lib/sanity.client'
 import Image from 'next/image'
+import { useNextSanityImage } from 'next-sanity-image'
 import { useState } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
-import Modal from 'components/Common/Dialog/Modal'
-import { sanityClient } from 'lib/sanity.client'
-
 import ZoomImage from './ZoomImage'
 
 const LANDSCAPE_WIDTH_DESKTOP = '66vw'
-const PORTRAIT_HEIGHT_DESKTOP = '90vh'
+const PORTRAIT_HEIGHT_DESKTOP = '100vh'
 const LANDSCAPE_WIDTH_MOBILE = '90vw'
 const PORTRAIT_HEIGHT_MOBILE = '90vh'
 

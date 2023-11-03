@@ -101,7 +101,7 @@ export default function ExhibitionPage({exhibition}) {
                 <PlusButton didPressButton={() => {}} />
             </div>
             <div
-                className={cn('pointer-events-none absolute z-200 grid h-screen w-screen grid-cols-12 duration-300 delay-150 ease-in-out',
+                className={cn('pointer-events-none absolute z-200 grid h-screen w-screen grid-cols-12 transition-opacity duration-150 ease-in-out',
                     tabletOrMobile ? 'place-items-end' : null,
                     artworkDrawerIsOpen ? 'opacity-100' : 'opacity-0',
                 )}
@@ -119,9 +119,9 @@ export default function ExhibitionPage({exhibition}) {
             </div>
             <div
                 ref={scrollViewRef}
-                className="relative h-full w-full snap-y snap-mandatory"
+                className="relative flex flex-col h-screen w-screen snap-y snap-mandatory"
             >
-                <section ref={(element) => scrollToSections.current.add(element)} className="relative">
+                <section ref={(element) => scrollToSections.current.add(element)} className="snap-center">
                     {exhibition &&
                         exhibition?.imageGallery &&
                         exhibition?.imageGallery
@@ -136,7 +136,7 @@ export default function ExhibitionPage({exhibition}) {
                                 />
                             ))}
                 </section>
-                <section>
+                <section className="snap-center">
                     {exhibition &&
                         exhibition?.imageGallery &&
                         exhibition?.imageGallery
