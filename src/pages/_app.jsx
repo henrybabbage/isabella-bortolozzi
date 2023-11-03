@@ -1,6 +1,6 @@
 import '@/styles/global.css'
 
-import { IBM_Plex_Mono, Inter, PT_Serif } from 'next/font/google'
+import localFont from 'next/font/local'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { lazy, useEffect, useRef } from 'react'
