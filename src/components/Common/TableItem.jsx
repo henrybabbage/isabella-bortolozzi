@@ -1,10 +1,11 @@
-import { useActiveItemStore } from '@/context/store'
-import { formatDateWithoutYear, getYear } from '@/utils/dateHelpers'
 import clsx from 'clsx'
 import { useInView } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useRef } from 'react'
+
+import { useActiveItemStore } from '@/context/store'
+import { formatDateWithoutYear, getYear } from '@/utils/dateHelpers'
 
 export default function TableItem({ exhibition, id }) {
 	const ref = useRef(null)

@@ -1,8 +1,9 @@
+import clsx from 'clsx'
+import Image from 'next/image'
+import { useNextSanityImage } from 'next-sanity-image'
+
 import { useActiveItemStore } from '@/context/store'
 import { sanityClient } from '@/sanity/lib/sanity.client'
-import clsx from 'clsx'
-import { useNextSanityImage } from 'next-sanity-image'
-import Image from 'next/image'
 
 export default function TableImage({ currentImage, id }) {
 	const imageProps = useNextSanityImage(sanityClient, currentImage?.asset)
