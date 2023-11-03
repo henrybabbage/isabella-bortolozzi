@@ -90,7 +90,7 @@ export default function ExhibitionPage({exhibition}) {
     return (
         <div className={cn('h-screen w-screen scrollbar-hide', isLoading && '!overflow-hidden')}>
             <div className="fixed top-6 right-6 z-[999]">
-                <div onClick={() => router.back()}>
+                <div onClick={() => router.push( { pathname: '/' + router.query.backNavigation }, undefined, { scroll: false } )}>
                     <CloseButton didPressButton={() => {}} />
                 </div>
             </div>
