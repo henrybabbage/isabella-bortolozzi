@@ -2,6 +2,7 @@ import { useLiveQuery } from 'next-sanity/preview'
 import { Client } from 'react-hydration-provider'
 
 import TableView from '@/components/Common/TableView'
+import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getExhibitions } from '@/lib/sanity.fetch'
 import { exhibitionsQuery } from '@/lib/sanity.queries'
