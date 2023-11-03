@@ -1,8 +1,22 @@
 import React from 'react'
+import { Client } from 'react-hydration-provider'
 
-export default function Exhibitions() {
+import { TableView } from '@/components/Common/TableView'
+import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
+
+export default function Exhibitions({exhibitions}) {
   return (
-    <div>
-    </div>
+    <main className="h-screen w-screen">
+        <Client>
+            <Desktop>
+                <section>
+                    <TableView exhibitions={exhibitions} />
+                </section>
+            </Desktop>
+            <TabletAndBelow>
+                <section></section>
+            </TabletAndBelow>
+        </Client>
+    </main>
   )
 }
