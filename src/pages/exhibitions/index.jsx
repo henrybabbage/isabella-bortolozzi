@@ -35,5 +35,6 @@ export const getStaticProps = async ({ draftMode = false }) => {
             token: draftMode ? readToken : '',
             exhibitions,
         },
+        revalidate: 60,
     }
 }

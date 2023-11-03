@@ -118,7 +118,7 @@ export const exhibitionCompact = groq`
 
 export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`
 
-export const exhibitionsQuery = groq`*[_type == "exhibition" && defined(slug.current)] | order(endDate desc)
+export const exhibitionsQuery = groq`*[_type == "exhibition" && location == 'gallery' && defined(slug.current)] | order(endDate desc)
     {
         ${exhibitionCompact}
     }
