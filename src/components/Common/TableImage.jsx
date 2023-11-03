@@ -14,15 +14,17 @@ export default function TableImage({ currentImage, id }) {
 
 	return (
 		<div className={cn('absolute inset-0 h-full w-full', inViewItem === id ? 'opacity-100' : 'opacity-0')}>
-			<Image
-				src={imageProps.src}
-				loader={imageProps.loader}
-				alt=""
-				fill
-				sizes="(max-width: 768px) 25vw, (max-width: 1200px) 25vw, 50vw"
-				priority
-				style={{ objectFit: 'cover', objectPosition: 'center' }}
-			/>
+			{imageProps && 
+                <Image
+                    src={imageProps.src}
+                    loader={imageProps.loader}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 25vw, (max-width: 1200px) 25vw, 50vw"
+                    priority
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                />
+            }
 		</div>
 	)
 }

@@ -10,7 +10,6 @@ import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 export default function Exhibitions(props) {
     const [exhibitions] = useLiveQuery(props.exhibitions, exhibitionsQuery)
-    console.log({exhibitions})
     return (
         <main className="h-screen w-screen">
             <Client>

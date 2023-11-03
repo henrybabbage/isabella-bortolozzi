@@ -3,7 +3,7 @@ import TableItem from './TableItem'
 
 export default function TableView({ exhibitions }) {
 	if (!exhibitions) return null
-
+    console.log({exhibitions})
 	return (
 		<div className="grid w-full grid-cols-12 items-start px-6">
 			<div className="sticky top-0 col-span-3 col-start-1 flex h-screen w-full items-center">
