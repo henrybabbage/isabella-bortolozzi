@@ -10,23 +10,20 @@ import useFoucFix from '@/utils/useFoucFix'
 
 const PreviewProvider = lazy(() => import('@/components/PreviewProvider'))
 
-const mono = IBM_Plex_Mono({
-  variable: '--font-family-mono',
-  subsets: ['latin'],
-  weight: ['500', '700'],
-})
-
-const sans = Inter({
-  variable: '--font-family-sans',
-  subsets: ['latin'],
-  weight: ['500', '700', '800'],
-})
-
-const serif = PT_Serif({
-  variable: '--font-family-serif',
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  weight: ['400', '700'],
+const serif = localFont({
+	src: [
+		{
+			path: '../public/fonts/Marist/Marist_Regular.woff2',
+			weight: '400',
+			style: 'regular',
+		},
+		{
+			path: '../public/fonts/Marist/Marist_Regular_Italic.woff2',
+			weight: '400',
+			style: 'italic',
+		},
+	],
+	variable: '--font-serif',
 })
 
 export default function App({ Component, pageProps }) {
@@ -41,12 +38,12 @@ export default function App({ Component, pageProps }) {
 
 	useEffect(() => {
 		if (history.scrollRestoration !== 'manual') {
-		history.scrollRestoration = 'manual'
+			history.scrollRestoration = 'manual'
 		}
 		const getCurrentPath = () => location.pathname + location.search
 		router.beforePopState(() => {
-		activeRestorePath.current = getCurrentPath()
-		return true
+			activeRestorePath.current = getCurrentPath()
+			return true
 		})
 		const onComplete = () => {
 		const scrollPath = activeRestorePath.current
@@ -98,9 +95,7 @@ export default function App({ Component, pageProps }) {
 			<style jsx global>
 			{`
 				:root {
-				--font-family-sans: ${sans.style.fontFamily} --font-family-serif:
-					${serif.style.fontFamily} --font-family-mono:
-					${mono.style.fontFamily};
+					--font-family-serif: ${serif.style.fontFamily}
 				}
 			`}
 			</style>
