@@ -1,4 +1,4 @@
-import { exhibitionBySlugQuery, exhibitionsQuery, postBySlugQuery, postsQuery, viewingRoomBySlugQuery, viewingRoomsQuery } from './sanity.queries'
+import { artistBySlugQuery, artistsQuery, exhibitionBySlugQuery, exhibitionsQuery, postBySlugQuery, postsQuery, viewingRoomBySlugQuery, viewingRoomsQuery } from './sanity.queries'
 
 export async function getPost(client, slug) {
 	return await client.fetch(postBySlugQuery, {
@@ -8,6 +8,16 @@ export async function getPost(client, slug) {
 
 export async function getPosts(client) {
 	return await client.fetch(postsQuery)
+}
+
+export async function getArtist(client, slug) {
+	return await client.fetch(artistBySlugQuery, {
+		slug,
+	})
+}
+
+export async function getArtists(client) {
+	return await client.fetch(artistsQuery)
 }
 
 export async function getExhibition(client, slug) {

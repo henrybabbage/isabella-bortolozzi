@@ -118,13 +118,20 @@ export const exhibitionCompact = groq`
 
 export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`
 
+export const artistsQuery = groq`*[_type == "artist" && galleryArtist == true] | order(orderRank)
+    {
+        name,
+        "slug": slug.current,
+    }
+`
+
 export const exhibitionsQuery = groq`*[_type == "exhibition" && location == 'gallery' && defined(slug.current)] | order(endDate desc)
     {
         ${exhibitionCompact}
     }
 `
 
-export const viewingRoomsQuery = groq`*[_type == "viewingRoom" && defined(slug.current)] | order(endDate desc)`
+export const viewingRoomsQuery = groq`*[_type == "viewingRoom" && defined(slug.current)] | order(_createdAt desc)`
 
 export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0]`
 
@@ -132,7 +139,7 @@ export const exhibitionBySlugQuery = groq`*[_type == "exhibition" && slug.curren
 
 export const viewingRoomBySlugQuery = groq`*[_type == "viewingRoom" && slug.current == $slug][0]`
 
-export const artistBySlugQuery = groq`*[_type == "artist" && slug.current == $slug][0]`
+export const artistBySlugQuery = groq`*[_type == "artist" && galleryArtist == true && slug.current == $slug][0]`
 
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
