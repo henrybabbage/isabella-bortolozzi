@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Client, useHydrated } from "react-hydration-provider"
@@ -90,19 +89,13 @@ export default function ExhibitionPage({exhibition}) {
 
     return (
         <div className={cn('h-screen w-screen scrollbar-hide', isLoading && '!overflow-hidden')}>
-            <div className="absolute top-6 right-6">
-                <Link
-                    scroll={false}
-                    href={{
-                        pathname: '/' + router.query.backNavigation,
-                        query: { useStoredScrollPosition: true },
-                    }}
-                >
+            <div className="fixed top-6 right-6 z-[999]">
+                <div onClick={() => router.back()}>
                     <CloseButton didPressButton={() => {}} />
-                </Link>
+                </div>
             </div>
             <div
-                className="absolute bottom-6 right-6"
+                className="fixed bottom-6 right-6 z-[999]"
                 onMouseEnter={(event) => handleDesktopMouseEnter(setArtworkDrawerIsOpen, true, event)}
                 onClick={(event) => handleMobileClick(setArtworkDrawerIsOpen, true, event)}
             >

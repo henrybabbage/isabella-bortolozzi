@@ -24,7 +24,7 @@ export default function ZoomImage({
             <Image
                 src={imageProps.src}
                 loader={imageProps.loader}
-                alt={alt}
+                alt={alt ?? ''}
                 sizes={sizes}
                 fill={fill}
                 priority={priority}

@@ -82,7 +82,7 @@ export default function AspectImage({
                     <Image
                         src={imageProps.src}
                         loader={imageProps.loader}
-                        alt={alt}
+                        alt={alt ?? ''}
                         width={width}
                         height={height}
                         sizes={sizes}

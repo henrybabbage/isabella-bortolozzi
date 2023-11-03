@@ -14,15 +14,15 @@ export const getStaticProps = async ({ draftMode = false, params = {} }) => {
 
     if (!artist) {
         return {
-        notFound: true,
+            notFound: true,
         }
     }
 
     return {
         props: {
-        draftMode,
-        token: draftMode ? readToken : '',
-        artist,
+            draftMode,
+            token: draftMode ? readToken : '',
+            artist,
         },
     }
 }

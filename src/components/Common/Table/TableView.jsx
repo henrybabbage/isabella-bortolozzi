@@ -1,9 +1,13 @@
+import { useState } from 'react'
+
 import TableImage from './TableImage'
 import TableItem from './TableItem'
 
 export default function TableView({ exhibitions }) {
+    const [selectedItem, setSelectedItem] = useState()
+
 	if (!exhibitions) return null
-    console.log({exhibitions})
+
 	return (
 		<div className="grid w-full grid-cols-12 items-start px-6">
 			<div className="sticky top-0 col-span-3 col-start-1 flex h-screen w-full items-center">

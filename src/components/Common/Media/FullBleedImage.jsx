@@ -11,7 +11,7 @@ export default function FullBleedImage({ image, alt, priority = true }) {
                     <Image
                         src={imageProps.src}
                         loader={imageProps.loader}
-                        alt={alt}
+                        alt={alt ?? ''}
                         quality={100}
                         fill
                         priority={priority}

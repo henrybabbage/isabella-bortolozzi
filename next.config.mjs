@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const config = {
     experimental: {
-        scrollRestoration: true,
+        scrollRestoration: false,
     },
     reactStrictMode: true,
     images: { remotePatterns: [{ hostname: 'cdn.sanity.io' }] },
