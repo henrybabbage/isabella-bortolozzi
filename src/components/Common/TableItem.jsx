@@ -1,20 +1,19 @@
 import clsx from 'clsx'
-import { useInView } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 import { useActiveItemStore } from '@/context/store'
 import { formatDateWithoutYear, getYear } from '@/utils/dateHelpers'
 
 export default function TableItem({ exhibition, id }) {
-	const ref = useRef(null)
-	const isInView = useInView(ref, { margin: '-50% 0px -50% 0px' })
+	const { ref, inView } = useInView({ rootMargin: '-50% 0px -50% 0px' })
 	const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
 
 	useEffect(() => {
-		if (isInView) setInViewItem(id)
-	}, [isInView, id, setInViewItem])
+		if (inView) setInViewItem(id)
+	}, [inView, id, setInViewItem])
 
 	const artistNames = exhibition?.artists?.map((a) => a.name)
 	const artistList = artistNames?.join(', ')
@@ -27,7 +26,6 @@ export default function TableItem({ exhibition, id }) {
 	return (
 		<Link
             scroll={false}
-            // legacyBehavior
 			href={{
 				pathname: `${page}/[slug]`,
 				query: {
@@ -40,7 +38,7 @@ export default function TableItem({ exhibition, id }) {
 				ref={ref}
 				className={clsx(
 					'group relative grid h-[calc(26vw-48px)] max-h-[26vw] cursor-pointer grid-flow-dense grid-cols-9 content-start border-t border-solid border-inactive-200 pb-6 text-left font-serif',
-					isInView ? 'text-black-600' : 'text-secondary-200'
+					inView ? 'text-black-600' : 'text-secondary-200'
 				)}
 			>
 				<div className="col-span-5 col-start-1 flex flex-col">
