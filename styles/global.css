@@ -17,27 +17,9 @@
 }
 
 @layer base {
-	@font-face {
-		font-family: 'Marist';
-		src: url('../public/fonts/Marist/Marist_Regular.woff2') format('woff2'),
-			url('../public/fonts/Marist/Marist_Regular.woff') format('woff');
-		font-style: normal;
-		font-weight: 400;
-		font-display: optional;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
-
-	@font-face {
-		font-family: 'Marist';
-		src: url('../public/fonts/Marist/Marist_Regular_Italic.woff2') format('woff2'),
-			url('../public/fonts/Marist/Marist_Regular_Italic.woff') format('woff');
-		font-style: italic;
-		font-weight: 400;
-		font-display: optional;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
+    body { 
+        @apply text-xl;
+    }
 }
 
 html {
@@ -46,6 +28,8 @@ html {
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
