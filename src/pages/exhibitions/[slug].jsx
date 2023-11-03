@@ -13,25 +13,6 @@ import {
 } from '@/lib/sanity.queries'
 import { formatDate } from '@/utils/formatDate'
 
-export const getStaticProps = async ({ draftMode = false, params = {} }) => {
-  const client = getClient(draftMode ? { token: readToken } : undefined)
-  const post = await getPost(client, params.slug)
-
-  if (!post) {
-    return {
-      notFound: true,
-    }
-  }
-
-  return {
-    props: {
-      draftMode,
-      token: draftMode ? readToken : '',
-      post,
-    },
-  }
-}
-
 export default function ExhibitionSlugRoute(
   props
 ) {
@@ -52,4 +33,23 @@ export const getStaticPaths = async () => {
     paths: slugs?.map(({ slug }) => `/exhibition/${slug}`) || [],
     fallback: 'blocking',
   }
+}
+
+export const getStaticProps = async ({ draftMode = false, params = {} }) => {
+    const client = getClient(draftMode ? { token: readToken } : undefined)
+    const post = await getPost(client, params.slug)
+  
+    if (!post) {
+        return {
+            notFound: true,
+        }
+    }
+  
+    return {
+        props: {
+            draftMode,
+            token: draftMode ? readToken : '',
+            post,
+        },
+    }
 }

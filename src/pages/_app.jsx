@@ -2,6 +2,9 @@ import '@/styles/global.css'
 
 import { IBM_Plex_Mono, Inter, PT_Serif } from 'next/font/google'
 import { lazy } from 'react'
+import { HydrationProvider } from 'react-hydration-provider'
+
+import useFoucFix from '@/utils/useFoucFix'
 
 const PreviewProvider = lazy(() => import('@/components/PreviewProvider'))
 
@@ -28,25 +31,26 @@ export default function App({
   Component,
   pageProps,
 }) {
-  const { draftMode, token } = pageProps
-  return (
-    <>
-      <style jsx global>
-        {`
-          :root {
-            --font-family-sans: ${sans.style.fontFamily};
-            --font-family-serif: ${serif.style.fontFamily};
-            --font-family-mono: ${mono.style.fontFamily};
-          }
-        `}
-      </style>
-      {draftMode ? (
-        <PreviewProvider token={token}>
-          <Component {...pageProps} />
-        </PreviewProvider>
-      ) : (
-        <Component {...pageProps} />
-      )}
-    </>
-  )
+    useFoucFix()
+    const { draftMode, token } = pageProps
+    return (
+        <HydrationProvider>
+            <style jsx global>
+                {`
+                :root {
+                    --font-family-sans: ${sans.style.fontFamily};
+                    --font-family-serif: ${serif.style.fontFamily};
+                    --font-family-mono: ${mono.style.fontFamily};
+                }
+                `}
+            </style>
+            {draftMode ? (
+                <PreviewProvider token={token}>
+                <Component {...pageProps} />
+                </PreviewProvider>
+            ) : (
+                <Component {...pageProps} />
+            )}
+        </HydrationProvider>
+    )
 }

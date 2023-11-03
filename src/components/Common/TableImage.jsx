@@ -1,9 +1,9 @@
-import clsx from 'clsx'
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
 
 import { useActiveItemStore } from '@/context/store'
-import { sanityClient } from '@/sanity/lib/sanity.client'
+import { sanityClient } from '@/lib/sanity.client'
+import { cn } from '@/utils/cn'
 
 export default function TableImage({ currentImage, id }) {
 	const imageProps = useNextSanityImage(sanityClient, currentImage?.asset)
@@ -13,7 +13,7 @@ export default function TableImage({ currentImage, id }) {
 	if (!currentImage) return null
 
 	return (
-		<div className={clsx('absolute inset-0 h-full w-full', inViewItem === id ? 'opacity-100' : 'opacity-0')}>
+		<div className={cn('absolute inset-0 h-full w-full', inViewItem === id ? 'opacity-100' : 'opacity-0')}>
 			<Image
 				src={imageProps.src}
 				loader={imageProps.loader}

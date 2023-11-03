@@ -23,3 +23,11 @@ export function getClient(preview) {
   }
   return client
 }
+
+export const sanityClient = createClient({
+	projectId: projectId || 'yy07oxit',
+	dataset: dataset || 'production',
+	apiVersion: apiVersion || '2023-06-30',
+	useCdn: false,
+    token: process.env.SANITY_API_WRITE_TOKEN,
+})

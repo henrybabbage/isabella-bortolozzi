@@ -1,5 +1,5 @@
-import UniversalTableImage from './UniversalTableImage'
-import UniversalTableItem from './UniversalTableItem'
+import TableImage from './TableImage'
+import TableItem from './TableItem'
 
 export default function TableView({ exhibitions }) {
 	if (!exhibitions) return null
@@ -10,7 +10,7 @@ export default function TableView({ exhibitions }) {
 				<div className="relative h-[22.5vw] w-[22.5vw] bg-whitesmoke-400 p-6">
 					{exhibitions &&
 						exhibitions.map((exhibition) => (
-							<UniversalTableImage
+							<TableImage
 								key={exhibition._id}
 								id={exhibition._id}
 								currentImage={exhibition.mainImage ?? ''}
@@ -23,7 +23,7 @@ export default function TableView({ exhibitions }) {
 					{exhibitions &&
 						exhibitions.map((exhibition) => (
 							<li key={exhibition._id}>
-								<UniversalTableItem id={exhibition._id} exhibition={exhibition} />
+								<TableItem id={exhibition._id} exhibition={exhibition} />
 							</li>
 						))}
 				</ul>
