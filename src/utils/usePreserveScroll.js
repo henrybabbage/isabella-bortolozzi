@@ -8,9 +8,9 @@ export const usePreserveScroll = () => {
 	const isBack = useRef(false)
 
 	useEffect(() => {
-			router.beforePopState(() => {
-			isBack.current = true
-			return true
+        router.beforePopState(() => {
+        isBack.current = true
+        return true
 	})
 
 	const onRouteChangeStart = () => {
@@ -20,9 +20,9 @@ export const usePreserveScroll = () => {
 
 	const onRouteChangeComplete = (url) => {
 		if (isBack.current && scrollPositions.current[url]) {
-			window.scroll({
-			top: scrollPositions.current[url],
-			behavior: 'auto',
+                window.scroll({
+                top: scrollPositions.current[url],
+                behavior: 'auto',
 			})
 		}
 
