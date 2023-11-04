@@ -7,6 +7,7 @@ import { useMediaQuery } from 'react-responsive'
 import CloseButton from '@/components/Common/Buttons/CloseButton'
 import { sanityClient } from '@/lib/sanity.client'
 import { artistsQuery } from '@/lib/sanity.queries'
+import { cn } from '@/utils/cn'
 
 export default function Header({ isFixed = true }) {
 	const [artists, setArtists] = useState([])
@@ -59,10 +60,10 @@ export default function Header({ isFixed = true }) {
 	return (
 		<header
 			onClick={closeHeaderMenu}
-			className={`${isFixed ? 'fixed' : 'absolute'} z-700 ${
-				isOpen ? 'h-full w-full bg-background/95 transition' : 'bg-transparent'
-			}`}
-		>
+			className={cn(
+                isFixed ? 'fixed' : 'absolute',
+                isOpen ? 'h-full w-full bg-background/95 transition' : 'bg-transparent',
+                'z-700')}>
 			{isDesktopOrLaptop && (
 				<Link
 					href="/"
@@ -70,7 +71,7 @@ export default function Header({ isFixed = true }) {
 					onClick={closeHeaderMenu}
 					onMouseEnter={openHeaderMenu}
 				>
-					<h1 className="heading font-serif text-secondary transition hover:text-primary">
+					<h1 className="heading text-secondary transition hover:text-primary">
 						Isabella Bortolozzi
 					</h1>
 				</Link>
@@ -79,15 +80,14 @@ export default function Header({ isFixed = true }) {
 				<nav className="absolute top-0 z-100 h-[calc((100vw/4))] w-full">
 					<div className="z-200 grid h-full w-full grid-cols-12 px-6" onMouseLeave={closeHeaderMenu}>
 						<div className="col-span-3 col-start-1 pt-6 sm:pl-6">
-							<div className="nav flex cursor-pointer flex-col space-y-9 pt-12 sm:space-y-0">
+							<div className="flex cursor-pointer flex-col space-y-9 pt-12 sm:space-y-0">
 								{menu.map((item, index) => {
 									return (
 										<Link
 											key={index}
 											href={item.path}
-											className={`nav cursor-pointer text-left font-serif transition ${
-												isPathName(item.path) ? 'hover:text-secondary' : 'text-primary'
-											}`}
+											className={cn(isPathName(item.path) ? 'hover:text-secondary' : 'text-primary',
+                                            'cursor-pointer text-left transition')}
 											onClick={closeHeaderMenu}
 										>
 											{item.title}
@@ -96,17 +96,15 @@ export default function Header({ isFixed = true }) {
 								})}
 							</div>
 						</div>
-						<div className="nav col-span-6 col-start-4 pt-6 text-left font-serif">
+						<div className="col-span-6 col-start-4 pt-6 text-left">
 							{artists.map((artist, index) => {
 								return (
 									<Link
 										key={index}
 										href={`/${artist.slug}`}
-										className={`nav mr-1 inline-flex shrink-0 cursor-pointer transition ${
-											isPathName(artist.slug)
-												? 'hover:text-secondary'
-												: 'text-primary'
-										}`}
+										className={cn(
+                                            isPathName(artist.slug) ? 'hover:text-secondary' : 'text-primary',
+                                            'mr-1 inline-flex shrink-0 cursor-pointer transition')}
 										onClick={closeHeaderMenu}
 									>
 										{index != artists.length - 1 ? artist.name + ',' : artist.name}
@@ -115,7 +113,7 @@ export default function Header({ isFixed = true }) {
 							})}
 						</div>
 						<div className="absolute right-6 top-6 z-100 hidden cursor-pointer sm:block">
-							<CloseButton size={24} invert={false} strokeWidth={1.5} didPressButton={closeHeaderMenu} />
+							<CloseButton didPressButton={closeHeaderMenu} />
 						</div>
 					</div>
 				</nav>
