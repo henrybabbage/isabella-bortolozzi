@@ -53,10 +53,6 @@ export default function Header({ isFixed = true }) {
 		setIsOpen(false)
 	}, [pathname, router.query.slug])
 
-	const isPathName = (path) => {
-		return router.pathname === path
-	}
-
 	return (
 		<header
 			onClick={closeHeaderMenu}
@@ -86,8 +82,7 @@ export default function Header({ isFixed = true }) {
 										<Link
 											key={index}
 											href={item.path}
-											className={cn(isPathName(item.path) ? 'hover:text-secondary' : 'text-primary',
-                                            'cursor-pointer text-left transition')}
+											className='hover:text-secondary text-primary cursor-pointer text-left transition'
 											onClick={closeHeaderMenu}
 										>
 											{item.title}
@@ -102,9 +97,7 @@ export default function Header({ isFixed = true }) {
 									<Link
 										key={index}
 										href={`/${artist.slug}`}
-										className={cn(
-                                            isPathName(artist.slug) ? 'hover:text-secondary' : 'text-primary',
-                                            'mr-1 inline-flex shrink-0 cursor-pointer transition')}
+										className='hover:text-secondary text-primary mr-1 inline-flex shrink-0 cursor-pointer transition'
 										onClick={closeHeaderMenu}
 									>
 										{index != artists.length - 1 ? artist.name + ',' : artist.name}

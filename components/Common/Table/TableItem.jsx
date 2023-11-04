@@ -2,10 +2,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { formatDateWithoutYear, getYear } from 'utils/dateHelpers'
 
 import { useActiveItemStore } from '@/context/store'
-import { cn } from 'utils/cn'
-import { formatDateWithoutYear, getYear } from 'utils/dateHelpers'
+import { cn } from '@/utils/cn'
 
 export default function TableItem({ exhibition, id }) {
 	const { ref, inView } = useInView({ rootMargin: '-50% 0px -50% 0px' })
