@@ -8,25 +8,6 @@ import {
     artistSlugsQuery,
 } from '@/lib/sanity.queries'
 
-export const getStaticProps = async ({ draftMode = false, params = {} }) => {
-    const client = getClient(draftMode ? { token: readToken } : undefined)
-    const artist = await getArtist(client, params.slug)
-
-    if (!artist) {
-        return {
-            notFound: true,
-        }
-    }
-
-    return {
-        props: {
-            draftMode,
-            token: draftMode ? readToken : '',
-            artist,
-        },
-    }
-}
-
 export default function ArtistSlugRoute(
   props
 ) {
@@ -46,5 +27,24 @@ export const getStaticPaths = async () => {
     return {
         paths: slugs?.map(({ slug }) => `/${slug}`) || [],
         fallback: 'blocking',
+    }
+}
+
+export const getStaticProps = async ({ draftMode = false, params = {} }) => {
+    const client = getClient(draftMode ? { token: readToken } : undefined)
+    const artist = await getArtist(client, params.slug)
+
+    if (!artist) {
+        return {
+            notFound: true,
+        }
+    }
+
+    return {
+        props: {
+            draftMode,
+            token: draftMode ? readToken : '',
+            artist,
+        },
     }
 }
