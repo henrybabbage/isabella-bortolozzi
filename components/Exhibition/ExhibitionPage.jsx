@@ -87,7 +87,7 @@ export default function ExhibitionPage({exhibition}) {
 	}
 
     return (
-        <div className={cn('relative snap-y h-screen w-screen scrollbar-hide', isLoading && '!overflow-hidden')}>
+        <div className={cn('animate-fade-in relative snap-y h-screen w-screen scrollbar-hide', isLoading && '!overflow-hidden')}>
             <div className="fixed top-6 right-6 z-[999]">
                 <div onClick={() => router.back()}>
                     <CloseButton didPressButton={() => {}} />
@@ -114,7 +114,7 @@ export default function ExhibitionPage({exhibition}) {
                     onClick={(event) => handleMobileClick(setDrawerIsOpen, false, event)}
                 ></div>
                 <aside className="pointer-events-none z-200 col-span-12 col-start-1 h-[540px] w-full bg-whitesmoke-400 sm:col-span-4 sm:col-start-9 sm:h-screen sm:w-auto">
-                    <ArtworkDrawer />
+                    <ArtworkDrawer setDrawerIsOpen={setDrawerIsOpen} didClickNext={didClickNext} didClickPrevious={didClickPrevious} tabletOrMobile={tabletOrMobile} />
                 </aside>
             </div>
             <div

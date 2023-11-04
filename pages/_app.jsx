@@ -1,3 +1,4 @@
+import RootLayout from '@/components/Layout/RootLayout'
 import '@/styles/global.css'
 
 import localFont from 'next/font/local'
@@ -103,7 +104,9 @@ export default function App({ Component, pageProps }) {
 				<Component {...pageProps} />
 			</PreviewProvider>
 			) : (
-			<Component {...pageProps} />
+                <RootLayout>
+                    <Component {...pageProps} />
+                </RootLayout>
 			)}
 		</HydrationProvider>
 		</>
