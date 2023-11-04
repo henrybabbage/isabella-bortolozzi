@@ -7,7 +7,7 @@ import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 import useFoucFix from 'utils/useFoucFix'
 
-const PreviewProvider = lazy(() => import('@/components/PreviewProvider'))
+const PreviewProvider = lazy(() => import('@/components/Previews/PreviewProvider'))
 
 const serif = localFont({
 	src: [
