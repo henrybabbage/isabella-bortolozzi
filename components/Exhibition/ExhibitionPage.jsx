@@ -13,7 +13,7 @@ import FullBleedImage from "../Common/Media/FullBleedImage"
 
 export default function ExhibitionPage({exhibition}) {
     const [isLoading, setIsLoading] = useState(true)
-    const [artworkDrawerIsOpen, setArtworkDrawerIsOpen] = useState(false)
+    const [drawerIsOpen, setDrawerIsOpen] = useState(false)
     const [currentScrollElement, setCurrentScrollElement] = useState(0)
 
     useEffect(() => {
@@ -87,7 +87,7 @@ export default function ExhibitionPage({exhibition}) {
 	}
 
     return (
-        <div className={cn('h-screen w-screen scrollbar-hide', isLoading && '!overflow-hidden')}>
+        <div className={cn('relative snap-y h-screen w-screen scrollbar-hide', isLoading && '!overflow-hidden')}>
             <div className="fixed top-6 right-6 z-[999]">
                 <div onClick={() => router.back()}>
                     <CloseButton didPressButton={() => {}} />
@@ -95,23 +95,23 @@ export default function ExhibitionPage({exhibition}) {
             </div>
             <div
                 className="fixed bottom-6 right-6 z-[999]"
-                onMouseEnter={(event) => handleDesktopMouseEnter(setArtworkDrawerIsOpen, true, event)}
-                onClick={(event) => handleMobileClick(setArtworkDrawerIsOpen, true, event)}
+                onMouseEnter={(event) => handleDesktopMouseEnter(setDrawerIsOpen, true, event)}
+                onClick={(event) => handleMobileClick(setDrawerIsOpen, true, event)}
             >
                 <PlusButton didPressButton={() => {}} />
             </div>
             <div
                 className={cn('pointer-events-none absolute z-200 grid h-screen w-screen grid-cols-12 transition-opacity duration-150 ease-in-out',
                     tabletOrMobile ? 'place-items-end' : null,
-                    artworkDrawerIsOpen ? 'opacity-100' : 'opacity-0',
+                    drawerIsOpen ? 'opacity-100' : 'opacity-0',
                 )}
             >
                 <div
                     className={cn('col-span-12 col-start-1 h-full bg-transparent sm:col-span-8 sm:col-start-1',
-                        artworkDrawerIsOpen ? 'pointer-events-auto' : 'pointer-events-none'
+                        drawerIsOpen ? 'pointer-events-auto' : 'pointer-events-none'
                     )}
-                    onMouseEnter={(event) => handleDesktopMouseEnter(setArtworkDrawerIsOpen, false, event)}
-                    onClick={(event) => handleMobileClick(setArtworkDrawerIsOpen, false, event)}
+                    onMouseEnter={(event) => handleDesktopMouseEnter(setDrawerIsOpen, false, event)}
+                    onClick={(event) => handleMobileClick(setDrawerIsOpen, false, event)}
                 ></div>
                 <aside className="pointer-events-none z-200 col-span-12 col-start-1 h-[540px] w-full bg-whitesmoke-400 sm:col-span-4 sm:col-start-9 sm:h-screen sm:w-auto">
                     <ArtworkDrawer />
@@ -119,52 +119,54 @@ export default function ExhibitionPage({exhibition}) {
             </div>
             <div
                 ref={scrollViewRef}
-                className="relative flex flex-col h-screen w-screen snap-y snap-mandatory"
+                className="flex flex-col h-screen w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
             >
-                <section ref={(element) => scrollToSections.current.add(element)} className="snap-center">
-                    {exhibition &&
-                        exhibition?.imageGallery &&
-                        exhibition?.imageGallery
-                            ?.slice(0, 1)
-                            .map((image, idx) => (
-                                <FullBleedImage
-                                    reference={(element) => scrollToSections.current.add(element)}
-                                    key={idx}
-                                    image={image}
-                                    alt={image.alt}
-                                    priority={true}
-                                />
-                            ))}
-                </section>
-                <section className="snap-center">
-                    {exhibition &&
-                        exhibition?.imageGallery &&
-                        exhibition?.imageGallery
-                            ?.slice(1)
-                            .map((image, idx) =>
-                                image?.fullbleed ? (
+                <section className="relative flex flex-col w-screen items-center">
+                    <section className="relative">
+                        {exhibition &&
+                            exhibition?.imageGallery &&
+                            exhibition?.imageGallery
+                                ?.slice(0, 1)
+                                .map((image, idx) => (
                                     <FullBleedImage
                                         reference={(element) => scrollToSections.current.add(element)}
                                         key={idx}
                                         image={image}
                                         alt={image.alt}
-                                        priority={false}
+                                        priority={true}
                                     />
-                                ) : (
-                                    <AspectImage
-                                        reference={(element) => scrollToSections.current.add(element)}
-                                        image={image}
-                                        alt={image.alt}
-                                        priority={false}
-                                        fill={true}
-                                        mode="contain"
-                                        sizes="100vw"
-                                        key={idx}
-                                    />
-                                )
-                            )}
+                        ))}
+                    </section>
+                    <section className="relative flex flex-col items-center">
+                        {exhibition &&
+                            exhibition?.imageGallery &&
+                            exhibition?.imageGallery
+                                ?.slice(1)
+                                .map((image, idx) =>
+                                    image?.fullbleed ? (
+                                        <FullBleedImage
+                                            reference={(element) => scrollToSections.current.add(element)}
+                                            key={idx}
+                                            image={image}
+                                            alt={image.alt}
+                                            priority={false}
+                                        />
+                                    ) : (
+                                        <AspectImage
+                                            reference={(element) => scrollToSections.current.add(element)}
+                                            image={image}
+                                            alt={image.alt}
+                                            priority={false}
+                                            fill={true}
+                                            mode="contain"
+                                            sizes="100vw"
+                                            key={idx}
+                                        />
+                                    )
+                        )}
+                    </section>
                 </section>
-                <section className="h-full w-full">
+                <section ref={(element) => scrollToSections.current.add(element)} className="h-screen w-screen snap-center">
                     <Client>
                         <TabletAndBelow></TabletAndBelow>
                         <Desktop></Desktop>

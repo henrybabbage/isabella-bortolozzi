@@ -10,7 +10,7 @@ import { useMediaQuery } from 'react-responsive'
 import ZoomImage from './ZoomImage'
 
 const LANDSCAPE_WIDTH_DESKTOP = '66vw'
-const PORTRAIT_HEIGHT_DESKTOP = '100vh'
+const PORTRAIT_HEIGHT_DESKTOP = '96vh'
 const LANDSCAPE_WIDTH_MOBILE = '90vw'
 const PORTRAIT_HEIGHT_MOBILE = '90vh'
 
@@ -60,38 +60,42 @@ export default function AspectImage({
 	const desktopAndAbove = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
     
     return tabletAndBelow ? (
-        <div style={aspectRatioValuesMobile} className="relative">
-            <Image
-                src={imageProps.src}
-                loader={imageProps.loader}
-                alt={alt}
-                sizes={sizes}
-                fill={fill}
-                priority={priority}
-                style={{
-                    objectFit: 'cover',
-                    objectPosition: 'top'
-                }}
-            />
+        <div className='flex flex-col items-center h-screen justify-center w-full snap-start'>
+            <div style={aspectRatioValuesMobile} className='relative'>
+                <Image
+                    src={imageProps.src}
+                    loader={imageProps.loader}
+                    alt={alt}
+                    sizes={sizes}
+                    fill={fill}
+                    priority={priority}
+                    style={{
+                        objectFit: 'cover',
+                        objectPosition: 'top'
+                    }}
+                />
+            </div>
         </div>
     ) : (
         <Modal open={open} onOpenChange={setOpen}>
             <Modal.Button className="cursor-pointer">
-                <div style={aspectRatioValuesDesktop} className="relative">
-                    <Image
-                        src={imageProps.src}
-                        loader={imageProps.loader}
-                        alt={alt ?? ''}
-                        width={width}
-                        height={height}
-                        sizes={sizes}
-                        fill={fill}
-                        priority={priority}
-                        style={{
-                            objectFit: `${mode}`,
-                            objectPosition: 'top'
-                        }}
-                    />
+                <div className="flex flex-col items-center h-screen justify-center w-full snap-start">
+                    <div style={aspectRatioValuesDesktop} className='relative'>
+                        <Image
+                            src={imageProps.src}
+                            loader={imageProps.loader}
+                            alt={alt ?? ''}
+                            width={width}
+                            height={height}
+                            sizes={landscape ? '(max-width: 991px) 100vw, 72vw' : '(max-width: 991px) 100vw, 34vw'}
+                            fill={fill}
+                            priority={priority}
+                            style={{
+                                objectFit: `${mode}`,
+                                objectPosition: 'top'
+                            }}
+                        />
+                    </div>
                 </div>
             </Modal.Button>
             <Modal.Content>
