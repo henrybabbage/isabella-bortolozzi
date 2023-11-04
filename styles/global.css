@@ -7,7 +7,7 @@
 
     --white: #fff;
     --black: #222;
-    --whitesmoke: #f4f3ef;
+    --background: #f4f3ef;
 
     --font-line-height: 24px;
     --font-letter-spacing: 5%;
@@ -23,7 +23,6 @@
 }
 
 html {
-    background-color: var(--white);
     font-family: var(--font-serif), sans-serif;
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
@@ -33,6 +32,7 @@ html {
 }
 
 body {
+    background-color: var(--background);
     margin: 0;
     line-height: inherit;
 }

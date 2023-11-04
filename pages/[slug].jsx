@@ -1,30 +1,12 @@
-import { readToken } from 'lib/sanity.api'
-import { getClient } from 'lib/sanity.client'
+import { useLiveQuery } from 'next-sanity/preview'
+
+import { readToken } from '@/lib/sanity.api'
+import { getClient } from '@/lib/sanity.client'
+import { getArtist } from '@/lib/sanity.fetch'
 import {
     artistBySlugQuery,
     artistSlugsQuery,
-    getArtist,
-} from 'lib/sanity.queries'
-import { useLiveQuery } from 'next-sanity/preview'
-
-export const getStaticProps = async ({ draftMode = false, params = {} }) => {
-    const client = getClient(draftMode ? { token: readToken } : undefined)
-    const artist = await getArtist(client, params.slug)
-
-    if (!artist) {
-        return {
-            notFound: true,
-        }
-    }
-
-    return {
-        props: {
-            draftMode,
-            token: draftMode ? readToken : '',
-            artist,
-        },
-    }
-}
+} from '@/lib/sanity.queries'
 
 export default function ArtistSlugRoute(
   props
@@ -45,5 +27,24 @@ export const getStaticPaths = async () => {
     return {
         paths: slugs?.map(({ slug }) => `/${slug}`) || [],
         fallback: 'blocking',
+    }
+}
+
+export const getStaticProps = async ({ draftMode = false, params = {} }) => {
+    const client = getClient(draftMode ? { token: readToken } : undefined)
+    const artist = await getArtist(client, params.slug)
+
+    if (!artist) {
+        return {
+            notFound: true,
+        }
+    }
+
+    return {
+        props: {
+            draftMode,
+            token: draftMode ? readToken : '',
+            artist,
+        },
     }
 }

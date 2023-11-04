@@ -5,7 +5,7 @@ import { useNextSanityImage } from 'next-sanity-image'
 export default function FullBleedImage({ image, alt, priority = true }) {
     const imageProps = useNextSanityImage(sanityClient, image)
     return (
-            <div className="relative -z-10 h-screen w-screen cursor-pointer overflow-hidden">
+            <div className="-z-10 h-screen w-screen cursor-pointer overflow-hidden relative snap-start">
                 {image && (
                     <Image
                         src={imageProps.src}

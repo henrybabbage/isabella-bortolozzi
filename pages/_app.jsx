@@ -1,3 +1,4 @@
+import RootLayout from '@/components/Layout/RootLayout'
 import '@/styles/global.css'
 
 import localFont from 'next/font/local'
@@ -7,7 +8,7 @@ import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 import useFoucFix from 'utils/useFoucFix'
 
-const PreviewProvider = lazy(() => import('@/components/PreviewProvider'))
+const PreviewProvider = lazy(() => import('@/components/Previews/PreviewProvider'))
 
 const serif = localFont({
 	src: [
@@ -103,7 +104,9 @@ export default function App({ Component, pageProps }) {
 				<Component {...pageProps} />
 			</PreviewProvider>
 			) : (
-			<Component {...pageProps} />
+                <RootLayout>
+                    <Component {...pageProps} />
+                </RootLayout>
 			)}
 		</HydrationProvider>
 		</>

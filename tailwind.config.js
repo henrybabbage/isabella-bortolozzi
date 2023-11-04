@@ -19,6 +19,7 @@ module.exports = {
             colors: {
 				primary: '#222222',
 				secondary: '#BFBFBF',
+                background: '#f4f3ef',
 			},
             fontFamily: {
 				serif: ['var(--font-serif)', ...fontFamily.serif],
@@ -70,11 +71,11 @@ module.exports = {
 				},
 			},
 			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
-				'scale-in': 'scale-in 0.2s ease-out',
+				'accordion-down': 'accordion-down 0.3s ease-out',
+				'accordion-up': 'accordion-up 0.3s ease-out',
+				'scale-in': 'scale-in 0.3s ease-out',
 				'slide-in': 'slide-in 1s ease-in',
-				'fade-in': 'fade-in 0.5s ease-in-out',
+				'fade-in': 'fade-in 1s ease-in-out',
 			},
         },
       },

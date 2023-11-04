@@ -2,10 +2,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { formatDateWithoutYear, getYear } from 'utils/dateHelpers'
 
 import { useActiveItemStore } from '@/context/store'
-import { cn } from 'utils/cn'
-import { formatDateWithoutYear, getYear } from 'utils/dateHelpers'
+import { cn } from '@/utils/cn'
 
 export default function TableItem({ exhibition, id }) {
 	const { ref, inView } = useInView({ rootMargin: '-50% 0px -50% 0px' })
@@ -38,7 +38,7 @@ export default function TableItem({ exhibition, id }) {
 				ref={ref}
 				className={cn(
 					'group relative grid h-[calc(26vw-48px)] max-h-[26vw] cursor-pointer grid-flow-dense grid-cols-9 content-start border-t border-solid border-inactive-200 pb-6 text-left font-serif',
-					inView ? 'text-black-600' : 'text-secondary-200'
+					inView ? 'text-primary' : 'text-secondary'
 				)}
 			>
 				<div className="col-span-5 col-start-1 flex flex-col">
