@@ -1,8 +1,8 @@
 
 import Modal from 'components/Common/Dialog/Modal'
 import { sanityClient } from 'lib/sanity.client'
-import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import Image from 'next/image'
 import { useState } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
@@ -87,7 +87,7 @@ export default function AspectImage({
                             alt={alt ?? ''}
                             width={width}
                             height={height}
-                            sizes={landscape ? '(max-width: 991px) 100vw, 72vw' : '(max-width: 991px) 100vw, 34vw'}
+                            sizes="100vw"
                             fill={fill}
                             priority={priority}
                             style={{

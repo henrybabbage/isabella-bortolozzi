@@ -156,7 +156,7 @@ export default function ExhibitionPage({exhibition}) {
                                             reference={(element) => scrollToSections.current.add(element)}
                                             image={image}
                                             alt={image.alt}
-                                            priority={false}
+                                            priority={true}
                                             fill={true}
                                             mode="contain"
                                             sizes="100vw"
