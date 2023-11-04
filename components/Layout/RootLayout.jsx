@@ -7,7 +7,7 @@ import Header from '../Common/Drawers/Header'
 
 export default function RootLayout({children}) {
     return (
-        <div className="bg-background min-h-screen w-full">
+        <div className="min-h-screen w-full -z-0">
             <Client>
 				<TabletAndBelow></TabletAndBelow>
 				<Desktop>
