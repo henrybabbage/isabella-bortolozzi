@@ -3,6 +3,7 @@ import { Client } from 'react-hydration-provider'
 import { Desktop, TabletAndBelow } from 'utils/breakpoints'
 
 import TableView from '@/components/Common/Table/TableView'
+import ExhibitionsHeader from '@/components/ExhibitionsPage/ExhibitionsHeader'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getExhibitions } from '@/lib/sanity.fetch'
@@ -14,6 +15,7 @@ export default function Exhibitions(props) {
         <main className="h-screen w-screen">
             <Client>
                 <Desktop>
+                    <ExhibitionsHeader exhibitions={exhibitions} />
                     <TableView exhibitions={exhibitions} />
                 </Desktop>
                 <TabletAndBelow>

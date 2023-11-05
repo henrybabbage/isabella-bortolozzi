@@ -1,4 +1,4 @@
-import ExhibitionPage from 'components/Exhibition/ExhibitionPage'
+import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
 import { readToken } from 'lib/sanity.api'
 import { getClient } from 'lib/sanity.client'
 import { getExhibition } from 'lib/sanity.fetch'

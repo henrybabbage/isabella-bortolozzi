@@ -7,7 +7,7 @@ import { sanityClient } from '@/lib/sanity.client'
 import { artistsQuery } from '@/lib/sanity.queries'
 import { cn } from '@/utils/cn'
 
-export default function Header({ isFixed = true }) {
+export default function GlobalHeader({ isFixed = true }) {
 	const [artists, setArtists] = useState([])
 	const [isOpen, setIsOpen] = useState(false)
 

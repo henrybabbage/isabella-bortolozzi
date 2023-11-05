@@ -3,7 +3,7 @@ import { Client } from 'react-hydration-provider'
 
 import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
-import Header from '../Common/Drawers/Header'
+import GlobalHeader from '../Common/Drawers/GlobalHeader'
 
 export default function RootLayout({children}) {
     return (
@@ -11,7 +11,7 @@ export default function RootLayout({children}) {
             <Client>
 				<TabletAndBelow></TabletAndBelow>
 				<Desktop>
-					<Header isFixed={true} />
+					<GlobalHeader isFixed={true} />
 				</Desktop>
 			</Client>
             {children}
