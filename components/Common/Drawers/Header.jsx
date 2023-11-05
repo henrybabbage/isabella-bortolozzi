@@ -54,11 +54,11 @@ export default function Header({ isFixed = true }) {
 			className={cn(
                 isFixed ? 'fixed' : 'absolute',
                 isOpen ? 'h-screen w-screen bg-background/95' : 'bg-transparent',
-                'z-700 transition-opacity')}
+                'z-700 transition')}
         >
             <Link
                 href="/"
-                className="relative z-1000 inline-block cursor-pointer p-6"
+                className="relative z-1000 inline-block cursor-pointer px-6 pt-6"
                 onClick={closeHeaderMenu}
                 onMouseEnter={openHeaderMenu}
             >
@@ -68,10 +68,10 @@ export default function Header({ isFixed = true }) {
             </Link>
             <nav className={cn(
                 isOpen ? 'opacity-100' : 'opacity-0',
-                'absolute top-0 z-100 h-[calc((100vw/4))] w-screen transition-opacity')}>
-                <div className="z-200 grid h-full w-full grid-cols-12 px-6" onMouseLeave={closeHeaderMenu}>
-                    <div className="col-span-3 col-start-1 pt-6 sm:pl-6">
-                        <div className="flex cursor-pointer flex-col space-y-9 pt-12 sm:space-y-0">
+                'absolute top-0 z-100 h-[calc((100vw/4))] w-screen transition-opacity')} onMouseLeave={closeHeaderMenu}>
+                <div className="z-200 grid h-full w-full grid-cols-12 px-6">
+                    <div className="col-span-3 col-start-1 pt-[5.25rem] pl-6">
+                        <div className="flex cursor-pointer flex-col space-y-0">
                             {menu.map((item, index) => {
                                 return (
                                     <Link
