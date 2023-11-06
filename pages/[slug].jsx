@@ -27,12 +27,12 @@ export default function ArtistSlugRoute(props) {
     })
 
     return (
-        <>
+        <main className='flex flex-col h-full w-screen relative gap-24'>
             <ArtistSubNav artist={artist} isLoading={isLoading} />
-            <CarouselSection />
-            <ExhibitionsSection />
-            <CVSection />
-        </>
+            <CarouselSection  artist={artist} isLoading={isLoading} />
+            <ExhibitionsSection artist={artist} />
+            <CVSection artist={artist} />
+        </main>
     )
 }
 

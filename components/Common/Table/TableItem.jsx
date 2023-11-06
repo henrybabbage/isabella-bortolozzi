@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { formatDateWithoutYear, getYear } from 'utils/dateHelpers'
 
-import { useActiveItemStore } from '@/context/store'
+import { useActiveItemStore } from '@/context/useActiveItemStore'
 import { cn } from '@/utils/cn'
 
 export default function TableItem({ exhibition, id }) {

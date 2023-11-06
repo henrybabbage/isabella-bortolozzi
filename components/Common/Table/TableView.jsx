@@ -6,6 +6,7 @@ import TableItem from './TableItem'
 export default function TableView({ exhibitions }) {
     const [selectedItem, setSelectedItem] = useState()
 
+    console.log({exhibitions})
 	if (!exhibitions) return null
 
 	return (
