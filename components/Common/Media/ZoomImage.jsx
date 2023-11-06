@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
 
 export default function ZoomImage({
-    image,
+    image = {},
     alt = '',
     sizes = '100vw',
     priority = true,
@@ -20,7 +20,7 @@ export default function ZoomImage({
             style={{ width: '100vw', height: `calc(100vw * ${ratio})` }}
             className="relative overflow-y-auto"
         >
-            <Image
+            {imageProps && <Image
                 src={imageProps.src}
                 loader={imageProps.loader}
                 alt={alt ?? ''}
@@ -31,7 +31,7 @@ export default function ZoomImage({
                     objectFit: `${mode}`,
                     objectPosition: 'top'
                 }}
-            />
+            />}
         </div>
     )
 }
