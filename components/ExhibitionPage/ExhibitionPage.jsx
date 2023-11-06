@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Client, useHydrated } from "react-hydration-provider"
 import { useMediaQuery } from "react-responsive"
@@ -22,8 +21,6 @@ export default function ExhibitionPage({exhibition}) {
 			setIsLoading(false)
 		}, 3400)
 	}, [])
-
-    const router = useRouter()
 
     const scrollToSections = useRef(new Set())
     const scrollViewRef = useRef(null)
@@ -88,13 +85,11 @@ export default function ExhibitionPage({exhibition}) {
 
     return (
         <div className={cn('animate-fade-in relative snap-y h-screen w-screen scrollbar-hide', isLoading && '!overflow-hidden')}>
-            <div className="fixed top-6 right-6 z-[999]">
-                <div onClick={() => router.back()}>
-                    <CloseButton didPressButton={() => {}} />
-                </div>
+            <div className="fixed top-6 right-6 z-500">
+                <CloseButton />
             </div>
             <div
-                className="fixed bottom-6 right-6 z-[999]"
+                className="fixed bottom-6 right-6 z-500"
                 onMouseEnter={(event) => handleDesktopMouseEnter(setDrawerIsOpen, true, event)}
                 onClick={(event) => handleMobileClick(setDrawerIsOpen, true, event)}
             >
