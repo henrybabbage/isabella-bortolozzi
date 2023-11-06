@@ -10,6 +10,8 @@ import { cn } from "@/utils/cn"
 import PlusButton from "../Common/Buttons/PlusButton"
 import ArtworkDrawer from "../Common/Drawers/ArtworkDrawer"
 import SlideImage from "./SlideImage"
+import ArrowRightButton from "../Common/Buttons/ArrowRightButton"
+import ArrowLeftButton from "../Common/Buttons/ArrowLeftButton"
 
 export default function CarouselSection({ artist, isLoading }) {
     const [drawerIsOpen, setDrawerIsOpen] = useState(false)
@@ -44,7 +46,15 @@ export default function CarouselSection({ artist, isLoading }) {
         <>
             <section ref={ref} id="carousel" className="relative h-screen w-screen flex flex-col items-center justify-center">
                 <div className="h-screen w-full">
-                    <Carousel animation="fade" enableKeyboardControls swiping wrapAround withoutControls>
+                    <Carousel
+                        animation="fade"
+                        enableKeyboardControls
+                        swiping
+                        wrapAround
+                        renderCenterLeftControls={renderCenterLeftControls}
+                        renderCenterRightControls={renderCenterRightControls}
+                        renderBottomCenterControls={null}
+                    >
                         {imageGallery && imageGallery.map((image, idx) => (
                             <SlideImage image={image.asset} key={idx} />
                         ))}
@@ -77,4 +87,26 @@ export default function CarouselSection({ artist, isLoading }) {
             </section>
         </>
 	)
+}
+
+const renderCenterRightControls = ({ nextSlide }) => {
+    return (
+        <div className="z-[999] absolute right-6">
+            <ArrowRightButton onClick={nextSlide} />       
+        </div>
+    )
+}
+
+const renderCenterLeftControls = ({ previousSlide }) => {
+    return (
+        <div className="z-[999] absolute left-6">
+            <ArrowLeftButton onClick={previousSlide} />       
+        </div>
+    )
+}
+
+const paginationCounter = ({ slideCount, currentSlide }) => {
+    return  (
+        <div>{`${currentSlide + 1} | ${slideCount}`}</div>
+    )
 }

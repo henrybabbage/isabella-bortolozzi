@@ -12,7 +12,7 @@ export default function ArtistDrawer({ setDrawerIsOpen, didClickPrevious, didCli
 			className={cn(tabletOrMobile ? 'static' : 'relative', 'pointer-events-auto z-100 flex h-full w-full flex-col place-content-end bg-background p-6')}
 		>
             <div></div>
-            <div className="inline-flex space-x-[10px]">
+            <div className="inline-flex space-x-2">
                 <button onClick={didClickPrevious} className="cursor-pointer z-500">
                     <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
                         Prev
