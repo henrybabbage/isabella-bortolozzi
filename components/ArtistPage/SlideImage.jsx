@@ -15,7 +15,7 @@ export default function SlideImage({ image }) {
                     fill
                     sizes="100vw"
                     priority
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: 'contain' }}
                 />
             }
         </div>

@@ -13,10 +13,12 @@ export default function CarouselSection({ artist, isLoading }) {
     console.log(imageGallery)
 	return (
 		<section ref={ref} id="carousel" className="relative h-screen w-screen flex flex-col items-center justify-center">
-			<div className="h-3/4 w-3/4 relative bg-secondary">
+			<div className="h-3/4 w-3/4">
                 <Carousel animation="fade" enableKeyboardControls swiping wrapAround withoutControls>
                     {imageGallery && imageGallery.map((image, idx) => (
-                        <SlideImage image={image} key={idx} />
+                        <div className="h-full w-full" key={idx}>
+                            <SlideImage image={image.asset} />
+                        </div>
                     ))}
                 </Carousel>
             </div>
