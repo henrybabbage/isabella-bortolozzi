@@ -5,13 +5,13 @@ import config from 'sanity.config'
 
 export default function StudioPage() {
   return (
-    <>
+    <div className="z-[9999]">
       <Head>
         {Object.entries(metadata).map(([key, value]) => (
           <meta key={key} name={key} content={value} />
         ))}
       </Head>
       <NextStudio config={config} unstable_globalStyles />
-    </>
+    </div>
   )
 }
