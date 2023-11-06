@@ -54,11 +54,11 @@ export default function GlobalHeader({ isFixed = true }) {
 			className={cn(
                 isFixed ? 'fixed' : 'absolute',
                 isOpen ? 'h-screen w-screen bg-background/95' : 'bg-transparent',
-                'z-900 transition')}
+                'z-200 transition')}
         >
             <Link
                 href="/"
-                className="relative z-1000 inline-block cursor-pointer px-6 pt-6"
+                className="relative inline-block cursor-pointer px-6 pt-6"
                 onClick={closeHeaderMenu}
                 onMouseEnter={openHeaderMenu}
             >
@@ -68,7 +68,7 @@ export default function GlobalHeader({ isFixed = true }) {
             </Link>
             <nav className={cn(
                 isOpen ? 'block' : 'hidden',
-                'absolute z-1000 top-0 h-[calc((100vw/4))] w-screen transition-opacity')} onMouseLeave={closeHeaderMenu}>
+                'absolute top-0 h-[calc((100vw/4))] w-screen transition-opacity')} onMouseLeave={closeHeaderMenu}>
                 <div className="grid h-full w-full grid-cols-12 px-6">
                     <div className="col-span-3 col-start-1 pt-[5.25rem] pl-6">
                         <div className="flex cursor-pointer flex-col space-y-0">

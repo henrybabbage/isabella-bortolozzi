@@ -20,8 +20,18 @@ export default function TableItem({ exhibition, id }) {
 
 	const slug = exhibition?.slug ?? ''
 
-	const router = useRouter()
-	const page = router.pathname === '/exhibitions' ? 'exhibitions' : 'viewing-rooms'
+    const getItemPath = (type) => {
+		switch (type) {
+			case 'exhibition':
+				return '/exhibitions'
+			case 'viewingRoom':
+				return '/viewing-rooms'
+			case 'artist':
+				return ''
+		}
+	}
+
+	const page = getItemPath(exhibition._type)
 
 	return (
 		<Link
@@ -30,7 +40,6 @@ export default function TableItem({ exhibition, id }) {
 				pathname: `${page}/[slug]`,
 				query: {
 					slug: slug,
-					backNavigation: page,
 				},
 			}}
 		>

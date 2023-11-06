@@ -15,7 +15,7 @@ const LANDSCAPE_WIDTH_MOBILE = '90vw'
 const PORTRAIT_HEIGHT_MOBILE = '90vh'
 
 export default function AspectImage({
-    image,
+    image = {},
     alt = '',
     width = 0,
     height = 0,
@@ -28,7 +28,7 @@ export default function AspectImage({
 
     const imageProps = useNextSanityImage(sanityClient, image)
 
-    const ratioMultiplier = 1 / image.asset.metadata.dimensions.aspectRatio
+    const ratioMultiplier = 1 / image?.asset?.metadata?.dimensions?.aspectRatio ?? 1
     const landscape = ratioMultiplier < 1
 
     const desktopLandscapeWidth = LANDSCAPE_WIDTH_DESKTOP
@@ -62,6 +62,7 @@ export default function AspectImage({
     return tabletAndBelow ? (
         <div className='flex flex-col items-center h-screen justify-center w-full snap-start'>
             <div style={aspectRatioValuesMobile} className='relative'>
+                {imageProps && 
                 <Image
                     src={imageProps.src}
                     loader={imageProps.loader}
@@ -73,7 +74,7 @@ export default function AspectImage({
                         objectFit: 'cover',
                         objectPosition: 'top'
                     }}
-                />
+                />}
             </div>
         </div>
     ) : (
@@ -81,6 +82,7 @@ export default function AspectImage({
             <Modal.Button className="cursor-pointer">
                 <div className="flex flex-col items-center h-screen justify-center w-full snap-start">
                     <div style={aspectRatioValuesDesktop} className='relative'>
+                        {imageProps && 
                         <Image
                             src={imageProps.src}
                             loader={imageProps.loader}
@@ -94,7 +96,7 @@ export default function AspectImage({
                                 objectFit: `${mode}`,
                                 objectPosition: 'top'
                             }}
-                        />
+                        />}
                     </div>
                 </div>
             </Modal.Button>

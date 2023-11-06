@@ -22,6 +22,15 @@
     }
 }
 
+/* This assumes no margin or padding on #app's parent(s) */
+#app {
+    height: 100vh;
+    max-height: 100dvh;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    overflow: auto;
+}
+
 html {
     font-family: var(--font-serif), sans-serif;
     -webkit-text-size-adjust: 100%;
