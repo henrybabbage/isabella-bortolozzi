@@ -16,7 +16,6 @@ export default function ExhibitionPage({exhibition}) {
     const [currentScrollElement, setCurrentScrollElement] = useState(0)
 
     useEffect(() => {
-		setIsLoading(true)
 		setTimeout(() => {
 			setIsLoading(false)
 		}, 3400)
