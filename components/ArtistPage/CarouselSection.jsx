@@ -92,7 +92,7 @@ export default function CarouselSection({ artist, isLoading }) {
 const renderCenterRightControls = ({ nextSlide }) => {
     return (
         <div className="z-[999] absolute right-6">
-            <ArrowRightButton onClick={nextSlide} />       
+            <ArrowRightButton nextSlide={nextSlide} />       
         </div>
     )
 }
@@ -100,7 +100,7 @@ const renderCenterRightControls = ({ nextSlide }) => {
 const renderCenterLeftControls = ({ previousSlide }) => {
     return (
         <div className="z-[999] absolute left-6">
-            <ArrowLeftButton onClick={previousSlide} />       
+            <ArrowLeftButton nextSlide={previousSlide} />       
         </div>
     )
 }
