@@ -1,11 +1,12 @@
 import { readToken } from 'lib/sanity.api'
 import { getClient } from 'lib/sanity.client'
-import { getPosts } from 'lib/sanity.fetch'
-import { postsQuery } from 'lib/sanity.queries'
 import { useLiveQuery } from 'next-sanity/preview'
 
+import { getHome } from '@/lib/sanity.fetch'
+import { homeQuery } from '@/lib/sanity.queries'
+
 export default function IndexPage(props) {
-  const [posts] = useLiveQuery(props.posts, postsQuery)
+  const [home] = useLiveQuery(props.home, homeQuery)
   return (
         <></>
     )
@@ -13,13 +14,13 @@ export default function IndexPage(props) {
 
 export const getStaticProps = async ({ draftMode = false }) => {
     const client = getClient(draftMode ? { token: readToken } : undefined)
-    const posts = await getPosts(client)
+    const home = await getHome(client)
   
     return {
         props: {
             draftMode,
             token: draftMode ? readToken : '',
-            posts,
+            home,
         },
     }
 }
