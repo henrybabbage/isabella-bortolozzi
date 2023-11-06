@@ -1,7 +1,7 @@
-import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import Image from 'next/image'
 
-import { useActiveItemStore } from 'context/store'
+import { useActiveItemStore } from '@/context/useActiveItemStore'
 import { sanityClient } from 'lib/sanity.client'
 import { cn } from 'utils/cn'
 

@@ -6,7 +6,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
-import useFoucFix from 'utils/useFoucFix'
+import useFoucFix from '@/hooks/useFoucFix'
 
 const PreviewProvider = lazy(() => import('@/components/Previews/PreviewProvider'))
 
