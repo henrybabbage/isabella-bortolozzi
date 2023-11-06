@@ -1,7 +1,7 @@
 
 export default function ArtistBio({ artistBio1, artistBio2 }) {
 	return (
-		<>
+		<section className='mb-6'>
 			{artistBio1 && (
 				<div>
 					{artistBio1?.yearOfBirth ? <p className="text-primary">Born {artistBio1?.yearOfBirth}</p> : null}
@@ -16,6 +16,6 @@ export default function ArtistBio({ artistBio1, artistBio2 }) {
 					{artistBio2?.livesAndWorks ? <p className="text-primary">Lives and works in {artistBio2?.livesAndWorks}</p> : null}
 				</div>
 			)}
-		</>
+		</section>
 	)
 }
