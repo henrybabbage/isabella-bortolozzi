@@ -1,4 +1,3 @@
-import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
 import { readToken } from 'lib/sanity.api'
 import { getClient } from 'lib/sanity.client'
 import { getExhibition } from 'lib/sanity.fetch'
@@ -7,6 +6,8 @@ import {
     exhibitionSlugsQuery,
 } from 'lib/sanity.queries'
 import { useLiveQuery } from 'next-sanity/preview'
+
+import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
 
 export default function ExhibitionSlugRoute(
   props

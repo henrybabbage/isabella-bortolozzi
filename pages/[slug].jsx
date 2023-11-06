@@ -1,5 +1,10 @@
 import { useLiveQuery } from 'next-sanity/preview'
+import { useEffect, useState } from 'react'
 
+import ArtistSubNav from '@/components/ArtistPage/ArtistSubNav'
+import CarouselSection from '@/components/ArtistPage/CarouselSection'
+import CVSection from '@/components/ArtistPage/CVSection'
+import ExhibitionsSection from '@/components/ArtistPage/ExhibitionsSection'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getArtist } from '@/lib/sanity.fetch'
@@ -8,15 +13,26 @@ import {
     artistSlugsQuery,
 } from '@/lib/sanity.queries'
 
-export default function ArtistSlugRoute(
-  props
-) {
+export default function ArtistSlugRoute(props) {
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+		setTimeout(() => {
+			setIsLoading(false)
+		}, 3400)
+	}, [])
+
     const [artist] = useLiveQuery(props.artist, artistBySlugQuery, {
         slug: props.artist.slug.current,
     })
 
     return (
-        <></>
+        <>
+            <ArtistSubNav artist={artist} isLoading={isLoading} />
+            <CarouselSection />
+            <ExhibitionsSection />
+            <CVSection />
+        </>
     )
 }
 
@@ -46,5 +62,6 @@ export const getStaticProps = async ({ draftMode = false, params = {} }) => {
             token: draftMode ? readToken : '',
             artist,
         },
+        revalidate: 60,
     }
 }
