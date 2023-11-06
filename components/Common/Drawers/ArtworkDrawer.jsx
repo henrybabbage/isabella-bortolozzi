@@ -1,12 +1,9 @@
-import { useRouter } from "next/router"
 import { useState } from "react"
 
 import { cn } from "@/utils/cn"
 
-export default function ArtworkDrawer({ setDrawerIsOpen, didClickPrevious, didClickNext, isTabletOrMobile }) {
+export default function ArtworkDrawer({ setDrawerIsOpen, didClickPrevious, didClickNext, tabletOrMobile }) {
     const [pressReleaseSelected, setPressReleaseSelected] = useState(false)
-    
-    const router = useRouter()
 
 	const togglePressRelease = () => {
 		setPressReleaseSelected((pressReleaseSelected) => !pressReleaseSelected)
@@ -19,7 +16,7 @@ export default function ArtworkDrawer({ setDrawerIsOpen, didClickPrevious, didCl
 
     return (
         <section
-			className={cn(isTabletOrMobile ? 'static' : 'relative', 'pointer-events-auto z-100 flex h-full w-full flex-col place-content-end bg-background p-6 sm:w-full')}
+			className={cn(tabletOrMobile ? 'static' : 'relative', 'pointer-events-auto z-100 flex h-full w-full flex-col place-content-end bg-background p-6')}
 		>
             <div></div>
             <div className="inline-flex space-x-[10px]">

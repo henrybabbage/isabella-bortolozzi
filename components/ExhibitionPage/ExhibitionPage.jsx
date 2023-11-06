@@ -95,7 +95,7 @@ export default function ExhibitionPage({exhibition}) {
                 <PlusButton didPressButton={() => {}} />
             </div>
             <div
-                className={cn('pointer-events-none absolute z-200 grid h-screen w-screen grid-cols-12 transition-opacity duration-150 ease-in-out',
+                className={cn('pointer-events-none absolute z-100 grid h-screen w-screen grid-cols-12 transition-opacity ease-in-out',
                     tabletOrMobile ? 'place-items-end' : null,
                     drawerIsOpen ? 'opacity-100' : 'opacity-0',
                 )}
@@ -107,7 +107,7 @@ export default function ExhibitionPage({exhibition}) {
                     onMouseEnter={(event) => handleDesktopMouseEnter(setDrawerIsOpen, false, event)}
                     onClick={(event) => handleMobileClick(setDrawerIsOpen, false, event)}
                 ></div>
-                <aside className="pointer-events-none z-200 col-span-12 col-start-1 h-[540px] w-full bg-whitesmoke-400 sm:col-span-4 sm:col-start-9 sm:h-screen sm:w-auto">
+                <aside className="pointer-events-none z-500 col-span-12 col-start-1 h-[540px] w-full sm:col-span-4 sm:col-start-9 sm:h-screen sm:w-auto">
                     <ArtworkDrawer setDrawerIsOpen={setDrawerIsOpen} didClickNext={didClickNext} didClickPrevious={didClickPrevious} tabletOrMobile={tabletOrMobile} />
                 </aside>
             </div>
