@@ -1,4 +1,3 @@
-import RootLayout from '@/components/Layout/RootLayout'
 import '@/styles/global.css'
 
 import localFont from 'next/font/local'
@@ -6,6 +5,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
+
+import RootLayout from '@/components/Layout/RootLayout'
 import useFoucFix from '@/hooks/useFoucFix'
 
 const PreviewProvider = lazy(() => import('@/components/Previews/PreviewProvider'))

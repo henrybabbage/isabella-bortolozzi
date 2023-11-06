@@ -7,5 +7,5 @@ export default function NumberCounter({ n }) {
 		delay: 200,
 		config: { mass: 1, tension: 20, friction: 10 },
 	})
-	return <animated.span className="body font-serif">{number.to((n) => n.toFixed(0))}</animated.span>
+	return <animated.span className="text-primary">{number.to((n) => n.toFixed(0))}</animated.span>
 }

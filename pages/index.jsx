@@ -8,7 +8,10 @@ import { homeQuery } from '@/lib/sanity.queries'
 export default function IndexPage(props) {
   const [home] = useLiveQuery(props.home, homeQuery)
   return (
-        <></>
+        <main className="h-screen snap-y snap-mandatory w-full overflow-x-hidden">
+            <section className="h-screen snap-start"></section>
+            <section className="h-screen snap-start"></section>
+        </main>
     )
 }
 
