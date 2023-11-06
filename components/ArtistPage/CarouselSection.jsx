@@ -7,13 +7,14 @@ import { useActiveSectionStore } from '@/context/useActiveSectionStore'
 import { useSectionInView } from '@/hooks/useSectionInView'
 import { cn } from "@/utils/cn"
 
+import ArrowLeftButton from "../Common/Buttons/ArrowLeftButton"
+import ArrowRightButton from "../Common/Buttons/ArrowRightButton"
 import PlusButton from "../Common/Buttons/PlusButton"
 import ArtworkDrawer from "../Common/Drawers/ArtworkDrawer"
 import SlideImage from "./SlideImage"
-import ArrowRightButton from "../Common/Buttons/ArrowRightButton"
-import ArrowLeftButton from "../Common/Buttons/ArrowLeftButton"
 
 export default function CarouselSection({ artist, isLoading }) {
+    const [index, setIndex] = useState(0)
     const [drawerIsOpen, setDrawerIsOpen] = useState(false)
     const [currentImage, setCurrentImage] = useState(0)
 
@@ -45,15 +46,18 @@ export default function CarouselSection({ artist, isLoading }) {
 	return (
         <>
             <section ref={ref} id="carousel" className="relative h-screen w-screen flex flex-col items-center justify-center">
-                <div className="h-screen w-full">
+                <div className="h-full w-full">
                     <Carousel
                         animation="fade"
+                        speed={100}
                         enableKeyboardControls
                         swiping
                         wrapAround
+                        slideIndex={index}
+                        beforeSlide={(_, v) => setIndex(v)}
                         renderCenterLeftControls={renderCenterLeftControls}
                         renderCenterRightControls={renderCenterRightControls}
-                        renderBottomCenterControls={null}
+                        renderBottomCenterControls={false}
                     >
                         {imageGallery && imageGallery.map((image, idx) => (
                             <SlideImage image={image.asset} key={idx} />
@@ -70,12 +74,12 @@ export default function CarouselSection({ artist, isLoading }) {
                 <div
                 className={cn('pointer-events-none absolute z-100 grid h-screen w-screen grid-cols-12 transition-opacity ease-in-out',
                     tabletOrMobile ? 'place-items-end' : null,
-                    drawerIsOpen ? 'opacity-100' : 'opacity-0',
+                    drawerIsOpen ? 'block' : 'hidden',
                     )}
                 >
                     <div
                         className={cn('col-span-12 col-start-1 h-full bg-transparent sm:col-span-8 sm:col-start-1',
-                            drawerIsOpen ? 'pointer-events-auto' : 'pointer-events-none'
+                            drawerIsOpen ? 'pointer-events-auto block' : 'pointer-events-none hidden'
                         )}
                         onMouseEnter={(event) => handleDesktopMouseEnter(setDrawerIsOpen, false, event)}
                         onClick={(event) => handleMobileClick(setDrawerIsOpen, false, event)}
