@@ -6,8 +6,8 @@ export default function CVSection() {
     const { ref } = useSectionInView("CV", 0.5)
   	const { setActiveSection } = useActiveSectionStore()
     return (
-        <div ref={ref} id="CV">
+        <section ref={ref} id="CV" className="h-screen min-h-screen">
             CV
-        </div>
+        </section>
     )
 }

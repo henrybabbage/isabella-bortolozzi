@@ -6,8 +6,8 @@ export default function ExhibitionsSection() {
     const { ref } = useSectionInView("Exhibitions", 0.5)
   	const { setActiveSection } = useActiveSectionStore()
     return (
-        <div ref={ref} id="Exhibitions">
+        <section ref={ref} id="Exhibitions" className="h-screen min-h-screen">
         
-        </div>
+        </section>
     )
 }

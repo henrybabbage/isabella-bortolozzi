@@ -5,8 +5,8 @@ export default function CarouselSection() {
 	const { ref } = useSectionInView("Carousel", 0.5)
   	const { setActiveSection } = useActiveSectionStore()
 	return (
-		<div ref={ref} id="carousel">
+		<section ref={ref} id="carousel" className="h-screen">
 			Carousel
-		</div>
+		</section>
 	)
 }
