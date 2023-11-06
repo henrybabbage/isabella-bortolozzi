@@ -54,7 +54,7 @@ export default function GlobalHeader({ isFixed = true }) {
 			className={cn(
                 isFixed ? 'fixed' : 'absolute',
                 isOpen ? 'h-screen w-screen bg-background/95' : 'bg-transparent',
-                'z-200 transition')}
+                'z-500 transition')}
         >
             <Link
                 href="/"
