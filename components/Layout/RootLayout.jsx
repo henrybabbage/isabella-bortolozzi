@@ -13,7 +13,7 @@ export default function RootLayout({children}) {
             <Client>
 				<TabletAndBelow></TabletAndBelow>
 				<Desktop>
-					{router.pathname !== 'studio' ? <GlobalHeader isFixed={true} /> : null}
+					{router.pathname.startsWith('/studio') ? <></> : <GlobalHeader isFixed={true} />}
 				</Desktop>
 			</Client>
             {children}
