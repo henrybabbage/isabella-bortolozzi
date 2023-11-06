@@ -10,7 +10,7 @@ export default function CarouselSection({ artist, isLoading }) {
   	const { setActiveSection } = useActiveSectionStore()
 
     const imageGallery = artist?.imageGallery ?? []
-    console.log(imageGallery)
+
 	return (
 		<section ref={ref} id="carousel" className="relative h-screen w-screen flex flex-col items-center justify-center">
 			<div className="h-3/4 w-3/4">
