@@ -43,7 +43,7 @@ export default function CarouselSection({ artist, isLoading }) {
 
 	return (
         <>
-            <section ref={ref} id="carousel" className="relative h-screen w-screen flex flex-col items-center justify-center">
+            <section ref={ref} id="works" className="relative h-screen w-screen flex flex-col items-center justify-center">
                 <div className="h-full w-full">
                     <Carousel
                         animation="fade"

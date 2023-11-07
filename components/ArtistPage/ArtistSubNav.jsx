@@ -30,6 +30,7 @@ export default function ArtistSubNav({ artist, isLoading, }) {
                         onClick={() => {
                             setInViewSection('works')
                         }}
+                        scroll={false}
                     >
                         {'Works'}
                     </Link>
@@ -46,6 +47,7 @@ export default function ArtistSubNav({ artist, isLoading, }) {
                         onClick={() => {
                             setInViewSection('exhibitions')
                         }}
+                        scroll={false}
                     >
                         {'Exhibitions'}
                     </Link>
@@ -59,6 +61,7 @@ export default function ArtistSubNav({ artist, isLoading, }) {
                         onClick={() => {
                             setInViewSection('biography')
                         }}
+                        scroll={false}
                     >
                         {'Biography'}
                     </Link>
