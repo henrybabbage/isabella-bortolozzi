@@ -14,7 +14,7 @@ export function CustomPortableText({
 	const components = {
 		block: {
 			normal: ({ children }) => {
-				return <p className={cn(paragraphClasses, "text-primary")}>{children}</p>
+				return <p className={cn(paragraphClasses, "whitespace-pre")}>{children}</p>
 			},
 		},
 		marks: {
@@ -24,7 +24,7 @@ export function CustomPortableText({
 				link: ({ children, value }) => {
 				return (
 					<a
-						className="underline transition hover:text-secondary text-primary"
+						className={cn(paragraphClasses, "underline")}
 						href={value?.href}
 						target='_blank'
 						rel="noreferrer noopener"
