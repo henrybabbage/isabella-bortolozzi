@@ -7,7 +7,11 @@ import { formatDateWithoutYear, getYear } from 'utils/dateHelpers'
 import { useActiveItemStore } from '@/context/useActiveItemStore'
 import { cn } from '@/utils/cn'
 
+import { CustomPortableText } from '../Text/CustomPortableText'
+
 export default function TableItem({ exhibition, id }) {
+    const router = useRouter()
+
 	const { ref, inView } = useInView({ rootMargin: '-50% 0px -50% 0px' })
 	const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
 
@@ -33,6 +37,8 @@ export default function TableItem({ exhibition, id }) {
 
 	const page = getItemPath(exhibition._type)
 
+    if (!exhibition) return null
+
 	return (
 		<Link
             scroll={false}
@@ -52,8 +58,10 @@ export default function TableItem({ exhibition, id }) {
 			>
 				<div className="col-span-5 col-start-1 flex flex-col">
 					<div className="flex w-full flex-col pt-3">
-						{exhibition?.title && <h1 className="heading">{exhibition.title}</h1>}
-						{exhibition?.subtitle && <h2 className="body">{exhibition.subtitle}</h2>}
+						{exhibition.title && <h1 className="heading">{exhibition.title}</h1>}
+						{exhibition.subtitle && <h2 className="body">{exhibition.subtitle}</h2>}
+                        {router.pathname.startsWith('/news') && exhibition.heading && <CustomPortableText value={exhibition.heading} />}
+                        {router.pathname.startsWith('/news') && exhibition.text && <CustomPortableText value={exhibition.text} />}
 					</div>
 					<div className="col-span-5 col-start-1">
 						<h2 className="body pl-8">{artistList}</h2>

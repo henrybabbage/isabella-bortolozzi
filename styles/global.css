@@ -180,3 +180,7 @@ video {
 	height: auto;
 }
 
+input[type='text'],
+textarea {
+	background-color: var(--bg-background);
+}
