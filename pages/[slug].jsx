@@ -27,7 +27,7 @@ export default function ArtistSlugRoute(props) {
     })
 
     return (
-        <main className='flex flex-col h-full w-screen relative gap-24'>
+        <main className='flex flex-col h-full w-screen relative gap-24 animate-fade-in'>
             <ArtistSubNav artist={artist} isLoading={isLoading} />
             <CarouselSection artist={artist} isLoading={isLoading} />
             <ExhibitionsSection artist={artist} />

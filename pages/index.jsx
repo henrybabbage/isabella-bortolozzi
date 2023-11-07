@@ -10,7 +10,7 @@ import { homeQuery } from '@/lib/sanity.queries'
 export default function IndexPage(props) {
   const [home] = useLiveQuery(props.home, homeQuery)
   return (
-        <main className="fade-in h-screen snap-y snap-mandatory w-full overflow-x-hidden">
+        <main className="animate-fade-in h-screen snap-y snap-mandatory w-full overflow-x-hidden">
             <section className="h-screen snap-start">
                 <ExhibitionSection exhibition={props.home.publicisedExhibitions[0]} />
             </section>

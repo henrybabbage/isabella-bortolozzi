@@ -58,17 +58,17 @@ export default function TableItem({ exhibition, id }) {
 			>
 				<div className="col-span-5 col-start-1 flex flex-col">
 					<div className="flex w-full flex-col pt-3">
-						{exhibition.title && <h1 className="heading">{exhibition.title}</h1>}
-						{exhibition.subtitle && <h2 className="body">{exhibition.subtitle}</h2>}
-                        {router.pathname.startsWith('/news') && exhibition.heading && <CustomPortableText value={exhibition.heading} />}
-                        {router.pathname.startsWith('/news') && exhibition.text && <CustomPortableText value={exhibition.text} />}
+						{exhibition.title && <h1 className="">{exhibition.title}</h1>}
+						{exhibition.subtitle && <h2 className="">{exhibition.subtitle}</h2>}
+                        {router.pathname.startsWith('/news') && exhibition.heading && <CustomPortableText value={exhibition.heading} paragraphClasses={inView ? 'text-primary' : 'text-secondary'} />}
+                        {router.pathname.startsWith('/news') && exhibition.text && <CustomPortableText value={exhibition.text} paragraphClasses={inView ? 'text-primary' : 'text-secondary'} />}
 					</div>
 					<div className="col-span-5 col-start-1">
-						<h2 className="body pl-8">{artistList}</h2>
+						<h2 className="pl-8">{artistList}</h2>
 					</div>
 				</div>
 				<div className="col-span-2 col-start-6 flex flex-col pt-3">
-					<h3 className="body pr-6">
+					<h3 className="pr-6">
 						{exhibition?.venue && exhibition?.venue?.name && (
 							<span>
 								{exhibition?.venue?.city || exhibition?.venue?.country
@@ -87,12 +87,12 @@ export default function TableItem({ exhibition, id }) {
 				<div className="col-span-2 col-start-8 flex justify-end pt-3">
 					<div className="flex">
 						{exhibition?.startDate && exhibition?.endDate && (
-							<h3 className="body">
+							<h3 className="">
 								{formatDateWithoutYear(exhibition?.startDate)}—
 								{formatDateWithoutYear(exhibition?.endDate)}
 							</h3>
 						)}
-						{exhibition?.endDate && <h3 className="body pl-6">{getYear(exhibition?.endDate)}</h3>}
+						{exhibition?.endDate && <h3 className="pl-6">{getYear(exhibition?.endDate)}</h3>}
 					</div>
 				</div>
 			</div>
