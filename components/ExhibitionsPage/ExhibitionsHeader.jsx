@@ -1,5 +1,3 @@
-import React from 'react'
-
 import YearsPopover from '../Common/Popover/YearsPopover'
 
 export default function ExhibitionsHeader({ exhibitions }) {

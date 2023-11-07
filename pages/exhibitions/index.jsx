@@ -12,7 +12,7 @@ import { exhibitionsQuery } from '@/lib/sanity.queries'
 export default function Exhibitions(props) {
     const [exhibitions] = useLiveQuery(props.exhibitions, exhibitionsQuery)
     return (
-        <main className="h-screen w-screen">
+        <main className="animate-fade-in h-screen w-screen">
             <Client>
                 <Desktop>
                     <ExhibitionsHeader exhibitions={exhibitions} />
