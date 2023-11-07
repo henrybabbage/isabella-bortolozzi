@@ -3,7 +3,6 @@ import { useState } from "react"
 import { useHydrated } from "react-hydration-provider"
 import { useMediaQuery } from "react-responsive"
 
-import { useActiveSectionStore } from '@/context/useActiveSectionStore'
 import { useSectionInView } from '@/hooks/useSectionInView'
 import { cn } from "@/utils/cn"
 
@@ -19,7 +18,6 @@ export default function CarouselSection({ artist, isLoading }) {
     const [currentImage, setCurrentImage] = useState(0)
 
 	const { ref } = useSectionInView("Carousel", 0.5)
-  	const { setActiveSection } = useActiveSectionStore()
 
     const imageGallery = artist?.imageGallery ?? []
 
