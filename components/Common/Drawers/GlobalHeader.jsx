@@ -62,7 +62,7 @@ export default function GlobalHeader({ isFixed = true }) {
                 onClick={closeHeaderMenu}
                 onMouseEnter={openHeaderMenu}
             >
-                <h1 className="heading text-secondary transition hover:text-primary">
+                <h1 className="heading text-primary transition hover:text-secondary">
                     Isabella Bortolozzi
                 </h1>
             </Link>
