@@ -6,7 +6,8 @@ import { sanityClient } from "@/lib/sanity.client";
 export default function SlideImage({ image }) {
     const imageProps = useNextSanityImage(sanityClient, image)
     return (
-        <div className="relative h-[80vh] w-screen mt-24 flex flex-col items-center justify-center">
+        <section className="h-auto w-full overflow-hidden sm:h-screen sm:overflow-auto flex flex-col justify-center">
+			<div className="relative h-[80vh]">
                 {imageProps && 
                     <Image
                         src={imageProps.src}
@@ -20,6 +21,7 @@ export default function SlideImage({ image }) {
                         }}
                     />
                 }
-        </div>
+            </div>
+        </section>
     )
 }
