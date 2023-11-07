@@ -12,7 +12,7 @@ import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 export default function News(props) {
     const [news] = useLiveQuery(props.news, newsQuery)
     return (
-        <main className="h-screen w-screen">
+        <main className="fade-in h-screen w-screen">
             <Client>
                 <Desktop>
                     <NewsHeader news={props.news} />
