@@ -4,7 +4,7 @@ import { getImprint } from "@/lib/sanity.fetch"
 
 export default function Imprint({ imprint }) {
     return (
-        <main className="h-screen w-screen pt-6 animate-fade-in">
+        <main className="h-screen w-screen py-6 animate-fade-in">
            <section className='fixed h-auto z-50 top-0 grid w-screen grid-cols-12 px-6'>
                 <div className="col-span-5 col-start-4 flex w-full space-x-12 pt-6">
                     <h1 className="text-secondary">Imprint</h1>
