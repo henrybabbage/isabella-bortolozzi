@@ -69,12 +69,22 @@ module.exports = {
 						transform: 'scale(1)',
 					},
 				},
+				'slide-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(200%)',
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0%)',
+					},
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.3s ease-out',
 				'accordion-up': 'accordion-up 0.3s ease-out',
 				'scale-in': 'scale-in 0.3s ease-out',
-				'slide-in': 'slide-in 0.3s ease-in',
+				'slide-in': 'slide-in 1s ease-in',
 				'fade-in': 'fade-in 0.3s ease-in-out',
 			},
         },

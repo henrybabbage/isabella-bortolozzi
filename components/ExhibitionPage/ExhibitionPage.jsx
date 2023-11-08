@@ -86,7 +86,7 @@ export default function ExhibitionPage({exhibition}) {
     return (
         <>
             <LoadingScreen exhibition={exhibition} isLoading={isLoading} />
-            <div className={cn('animate-fade-in relative snap-y h-screen w-screen scrollbar-hide', isLoading && '!overflow-hidden')}>
+            <div className={cn(isLoading ? '!overflow-hidden' : 'animate-slide-in delay-[3000]', 'animate-fade-in relative snap-y h-screen w-screen scrollbar-hide')}>
                 <div className="fixed top-6 right-6 z-500">
                     <CloseButton />
                 </div>
@@ -153,7 +153,7 @@ export default function ExhibitionPage({exhibition}) {
                                                 reference={(element) => scrollToSections.current.add(element)}
                                                 image={image}
                                                 alt={image.alt}
-                                                priority={true}
+                                                priority={false}
                                                 fill={true}
                                                 mode="contain"
                                                 sizes="100vw"

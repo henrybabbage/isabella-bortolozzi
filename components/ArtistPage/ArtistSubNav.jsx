@@ -39,7 +39,7 @@ export default function ArtistSubNav({ artist, isLoading, }) {
 					</div>
 					<Link
                         className={cn(
-                            'z-100 w-fit cursor-pointer transition',
+                            'z-100 w-fit cursor-pointer transition hover:text-primary',
                             isLoading ? 'hidden' : 'block',
                             inViewSection === 'exhibitions' ? 'text-primary' : 'text-secondary'
                         )}
@@ -53,7 +53,7 @@ export default function ArtistSubNav({ artist, isLoading, }) {
                     </Link>
 					<Link
                         className={cn(
-                            'z-100 w-fit cursor-pointer transition',
+                            'z-100 w-fit cursor-pointer transition hover:text-primary',
                             isLoading ? 'hidden' : 'block',
                             inViewSection === 'biography' ? 'text-primary' : 'text-secondary'
                         )}
