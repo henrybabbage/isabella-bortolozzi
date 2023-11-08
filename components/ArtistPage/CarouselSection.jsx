@@ -3,7 +3,6 @@ import { useState } from "react"
 import { useHydrated } from "react-hydration-provider"
 import { useMediaQuery } from "react-responsive"
 
-import { useActiveSectionStore } from '@/context/useActiveSectionStore'
 import { useSectionInView } from '@/hooks/useSectionInView'
 import { cn } from "@/utils/cn"
 
@@ -18,8 +17,7 @@ export default function CarouselSection({ artist, isLoading }) {
     const [drawerIsOpen, setDrawerIsOpen] = useState(false)
     const [currentImage, setCurrentImage] = useState(0)
 
-	const { ref } = useSectionInView("Carousel", 0.5)
-  	const { setActiveSection } = useActiveSectionStore()
+	const { ref } = useSectionInView("works", 0.1)
 
     const imageGallery = artist?.imageGallery ?? []
 
@@ -45,7 +43,7 @@ export default function CarouselSection({ artist, isLoading }) {
 
 	return (
         <>
-            <section ref={ref} id="carousel" className="relative h-screen w-screen flex flex-col items-center justify-center">
+            <section ref={ref} id="works" className="relative h-screen w-screen flex flex-col items-center justify-center">
                 <div className="h-full w-full">
                     <Carousel
                         animation="fade"

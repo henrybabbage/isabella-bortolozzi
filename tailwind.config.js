@@ -69,15 +69,58 @@ module.exports = {
 						transform: 'scale(1)',
 					},
 				},
+				'slide-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(200%)',
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0%)',
+					},
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.3s ease-out',
 				'accordion-up': 'accordion-up 0.3s ease-out',
 				'scale-in': 'scale-in 0.3s ease-out',
-				'slide-in': 'slide-in 0.3s ease-in',
+				'slide-in': 'slide-in 1s ease-in',
 				'fade-in': 'fade-in 0.3s ease-in-out',
 			},
         },
       },
-      plugins: [],
+      plugins: [
+        plugin(function ({ addUtilities }) {
+			addUtilities(
+				{
+					'.scrollbar-hide': {
+						/* IE and Edge */
+						'-ms-overflow-style': 'none',
+
+						/* Firefox */
+						'scrollbar-width': 'none',
+
+						/* Safari and Chrome */
+						'&::-webkit-scrollbar': {
+							display: 'none',
+						},
+					},
+
+					'.scrollbar-default': {
+						/* IE and Edge */
+						'-ms-overflow-style': 'auto',
+
+						/* Firefox */
+						'scrollbar-width': 'auto',
+
+						/* Safari and Chrome */
+						'&::-webkit-scrollbar': {
+							display: 'block',
+						},
+					},
+				},
+				['responsive']
+			)
+		}),
+    ],
 }

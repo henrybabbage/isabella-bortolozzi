@@ -17,10 +17,15 @@
 }
 
 @layer base {
+    /* html {
+        @apply scroll-smooth;
+    } */
+
     body { 
         @apply text-xl;
     }
 }
+  
 
 /* This assumes no margin or padding on #app's parent(s) */
 #app {
