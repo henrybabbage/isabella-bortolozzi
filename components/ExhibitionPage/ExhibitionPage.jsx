@@ -86,7 +86,7 @@ export default function ExhibitionPage({exhibition}) {
     return (
         <>
             <LoadingScreen exhibition={exhibition} isLoading={isLoading} />
-            <div className={cn(isLoading ? '!overflow-hidden' : 'animate-slide-in delay-[3000]', 'animate-fade-in relative snap-y h-screen w-screen scrollbar-hide')}>
+            <div className={cn(isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100', 'relative snap-y h-screen w-screen scrollbar-hide')}>
                 <div className="fixed top-6 right-6 z-500">
                     <CloseButton />
                 </div>

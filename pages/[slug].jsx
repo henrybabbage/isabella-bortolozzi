@@ -12,6 +12,7 @@ import {
     artistBySlugQuery,
     artistSlugsQuery,
 } from '@/lib/sanity.queries'
+import { cn } from '@/utils/cn'
 
 export default function ArtistSlugRoute(props) {
     const [isLoading, setIsLoading] = useState(true)
@@ -29,9 +30,11 @@ export default function ArtistSlugRoute(props) {
     return (
         <main className='flex flex-col h-full w-screen relative gap-24 animate-fade-in'>
             <ArtistSubNav artist={artist} isLoading={isLoading} />
-            <CarouselSection artist={artist} isLoading={isLoading} />
-            <ExhibitionsSection artist={artist} />
-            <CVSection artist={artist} />
+            <div className={cn(isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100', 'relative')}>
+                <CarouselSection artist={artist} isLoading={isLoading} />
+                <ExhibitionsSection artist={artist} />
+                <CVSection artist={artist} />
+            </div>
         </main>
     )
 }

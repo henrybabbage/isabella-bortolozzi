@@ -63,27 +63,27 @@ export default function CarouselSection({ artist, isLoading }) {
                     </Carousel>
                 </div>
                 <div
+                    className="fixed bottom-6 right-6 z-500"
                     onMouseEnter={(event) => handleDesktopMouseEnter(setDrawerIsOpen, true, event)}
                     onClick={(event) => handleMobileClick(setDrawerIsOpen, true, event)}
-                    className="absolute h-fit bottom-6 right-6 z-500"
                 >
                     <PlusButton didPressButton={() => {}} />
                 </div>
                 <div
-                className={cn('pointer-events-none absolute z-100 grid h-screen w-screen grid-cols-12 transition-opacity ease-in-out',
-                    tabletOrMobile ? 'place-items-end' : null,
-                    drawerIsOpen ? 'block' : 'hidden',
+                    className={cn('pointer-events-none absolute z-100 grid h-screen w-screen grid-cols-12 transition-opacity ease-in-out',
+                        tabletOrMobile ? 'place-items-end' : null,
+                        drawerIsOpen ? 'opacity-100' : 'opacity-0',
                     )}
                 >
                     <div
                         className={cn('col-span-12 col-start-1 h-full bg-transparent sm:col-span-8 sm:col-start-1',
-                            drawerIsOpen ? 'pointer-events-auto block' : 'pointer-events-none hidden'
+                            drawerIsOpen ? 'pointer-events-auto' : 'pointer-events-none'
                         )}
                         onMouseEnter={(event) => handleDesktopMouseEnter(setDrawerIsOpen, false, event)}
                         onClick={(event) => handleMobileClick(setDrawerIsOpen, false, event)}
                     ></div>
                     <aside className="pointer-events-none z-500 col-span-12 col-start-1 h-[540px] w-full sm:col-span-4 sm:col-start-9 sm:h-screen sm:w-auto">
-                        <ArtworkDrawer setDrawerIsOpen={setDrawerIsOpen} didClickNext={() => {}} didClickPrevious={() => {}} tabletOrMobile={tabletOrMobile} />
+                        <ArtworkDrawer drawerIsOpen={drawerIsOpen} setDrawerIsOpen={setDrawerIsOpen} didClickNext={() => {}} didClickPrevious={() => {}} tabletOrMobile={tabletOrMobile} />
                     </aside>
                 </div>
             </section>

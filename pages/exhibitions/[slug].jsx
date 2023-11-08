@@ -17,7 +17,9 @@ export default function ExhibitionSlugRoute(
     })
 
     return (
-        <ExhibitionPage exhibition={exhibition} />
+        <main className='animate-fade-in'>
+            <ExhibitionPage exhibition={exhibition} />
+        </main>
     )
 }
 
