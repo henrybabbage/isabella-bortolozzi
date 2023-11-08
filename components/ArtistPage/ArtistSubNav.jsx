@@ -14,17 +14,17 @@ export default function ArtistSubNav({ artist, isLoading, }) {
 
 	return (
 		<aside className="fixed top-0 grid w-screen grid-cols-12 px-4 sm:px-6 z-100">
-			<div className="absolute col-span-3 col-start-1 flex h-[4.5rem] pt-6 w-full items-baseline bg-background"></div>
-			<div className="absolute col-span-9 col-start-4 flex h-[4.5rem] pt-6 w-full items-baseline space-x-12 bg-background">
-				<h1 className="text-secondary-200">
+			<div className="absolute col-span-3 col-start-1 flex h-[4rem] pt-6 w-full items-baseline bg-background"></div>
+			<div className="absolute col-span-9 col-start-4 flex h-[4rem] pt-6 w-full items-baseline space-x-12 bg-background">
+				<h1 className="text-secondary">
 					{artist.name}
 				</h1>
-				<nav className="flex space-x-4">
+				<nav className="flex space-x-4 text-secondary">
                     <Link
                         className={cn(
-                            'z-100 w-fit cursor-pointer transition ease-in-out',
+                            'z-100 w-fit cursor-pointer transition hover:text-primary',
                             isLoading ? 'hidden' : 'block',
-                            inViewSection === 'works' ? 'text-black' : 'text-secondary-200'
+                            inViewSection === 'works' ? 'text-primary' : 'text-secondary'
                         )}
                         href={'#works'}
                         onClick={() => {
@@ -39,9 +39,9 @@ export default function ArtistSubNav({ artist, isLoading, }) {
 					</div>
 					<Link
                         className={cn(
-                            'z-100 w-fit cursor-pointer transition ease-in-out',
+                            'z-100 w-fit cursor-pointer transition',
                             isLoading ? 'hidden' : 'block',
-                            inViewSection === 'exhibitions' ? 'text-black' : 'text-secondary-200'
+                            inViewSection === 'exhibitions' ? 'text-primary' : 'text-secondary'
                         )}
                         href={'#exhibitions'}
                         onClick={() => {
@@ -53,9 +53,9 @@ export default function ArtistSubNav({ artist, isLoading, }) {
                     </Link>
 					<Link
                         className={cn(
-                            'z-100 w-fit cursor-pointer transition ease-in-out',
+                            'z-100 w-fit cursor-pointer transition',
                             isLoading ? 'hidden' : 'block',
-                            inViewSection === 'biography' ? 'text-black' : 'text-secondary-200'
+                            inViewSection === 'biography' ? 'text-primary' : 'text-secondary'
                         )}
                         href={'#biography'}
                         onClick={() => {
