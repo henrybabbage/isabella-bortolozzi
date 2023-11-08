@@ -17,7 +17,7 @@ export default function CarouselSection({ artist, isLoading }) {
     const [drawerIsOpen, setDrawerIsOpen] = useState(false)
     const [currentImage, setCurrentImage] = useState(0)
 
-	const { ref } = useSectionInView("biography", 0.1)
+	const { ref } = useSectionInView("works", 0.1)
 
     const imageGallery = artist?.imageGallery ?? []
 

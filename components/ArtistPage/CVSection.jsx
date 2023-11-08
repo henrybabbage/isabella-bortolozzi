@@ -7,7 +7,7 @@ import ExhibitionList from './ExhibitionList'
 export default function CVSection({ artist }) {
     const { ref } = useSectionInView("biography", 0.1)
     return (
-        <section ref={ref} id="biography" className="scroll-mt-16 h-screen min-h-screen px-6">
+        <section ref={ref} id="biography" className="scroll-mt-20 h-screen min-h-screen px-6">
             <div className="grid grid-cols-12">
                 <div className="h-fit col-span-9 col-start-4">
                     <ArtistBio artistBio1={artist?.artistBio1} artistBio2={artist?.artistBio2} />

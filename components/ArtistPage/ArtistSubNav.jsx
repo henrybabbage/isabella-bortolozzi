@@ -19,7 +19,7 @@ export default function ArtistSubNav({ artist, isLoading, }) {
 				<h1 className="text-secondary">
 					{artist.name}
 				</h1>
-				<nav className="flex space-x-4 text-secondary">
+				<nav className="flex space-x-4">
                     <Link
                         className={cn(
                             'z-100 w-fit cursor-pointer transition hover:text-primary',
