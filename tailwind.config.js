@@ -59,6 +59,14 @@ module.exports = {
 						opacity: '1',
 					},
 				},
+				'fade-out': {
+					'100%': {
+						opacity: '1',
+					},
+					'0%': {
+						opacity: '0',
+					},
+				},
 				'scale-in': {
 					'0%': {
 						opacity: '0',
@@ -84,6 +92,7 @@ module.exports = {
 				'scale-in': 'scale-in 0.3s ease-out',
 				'slide-in': 'slide-in 0.5s ease-in',
 				'fade-in': 'fade-in 0.3s ease-in-out',
+				'fade-out': 'fade-out 0.3s ease-in-out',
 			},
         },
       },
