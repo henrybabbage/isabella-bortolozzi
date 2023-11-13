@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import CloseButton from '@/components/Common/Buttons/CloseButton'
+import CloseButton from '@/components/Common/Buttons/BackButton'
 import { sanityClient } from '@/lib/sanity.client'
 import { artistsQuery } from '@/lib/sanity.queries'
 import { cn } from '@/utils/cn'

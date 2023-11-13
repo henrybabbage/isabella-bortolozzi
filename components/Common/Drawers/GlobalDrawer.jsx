@@ -16,23 +16,28 @@ export default function GlobalDrawer({ content, didClickPrevious, didClickNext }
 	const togglePressRelease = () => {
 		setPressReleaseSelected((pressReleaseSelected) => !pressReleaseSelected)
 	}
+
+    const handleDrawerOpen = () => {
+        setIsOpen(true)
+    }
     
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen} modal={true}>
             <SheetTrigger asChild>
-                <PlusButton didPressButton={()=>{}} />
+                <PlusButton didPressButton={handleDrawerOpen} />
             </SheetTrigger>
-            <SheetContent side='right' onCloseAutoFocus={(event) => event.preventDefault()}>
-                <SheetFooter>
+            <SheetContent side='right' onCloseAutoFocus={(event) => event.preventDefault()} className="z-[999] h-full flex flex-col justify-between">
+                <div className='w-full h-full'></div>
+                <SheetFooter className="h-fit w-full">
                     <div className="inline-flex space-x-3">
                         <button onClick={didClickPrevious} className="cursor-pointer">
-                            <h3 className="pointer-events-auto z-[999] text-secondary transition hover:text-primary">
+                            <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
                                 Prev
                             </h3>
                         </button>
                         <span className="text-secondary">|</span>
                         <button onClick={didClickNext} className="cursor-pointer">
-                            <h3 className="pointer-events-auto z-[999] text-secondary transition hover:text-primary">
+                            <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
                                 Next
                             </h3>
                         </button>
