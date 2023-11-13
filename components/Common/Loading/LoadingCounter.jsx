@@ -15,7 +15,7 @@ export default function LoadingCounter({ totalImages }) {
                 </p>
             ) : (
                 <p className="z-10 flex whitespace-pre">
-                    {router.pathname.startsWith('/exhibitions') ? 'Loading images...' : 'Loading works...'}.
+                    {router.pathname.startsWith('/exhibitions') ? 'Loading images...' : 'Loading works...'}
                 </p>
             )}
         </>
