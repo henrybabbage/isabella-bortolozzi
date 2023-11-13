@@ -90,6 +90,8 @@ export default function AspectImage({
                             width={width}
                             height={height}
                             sizes="100vw"
+                            blurDataURL={image.asset.metadata.lqip}
+                            placeholder='blur'
                             fill={fill}
                             priority={priority}
                             style={{

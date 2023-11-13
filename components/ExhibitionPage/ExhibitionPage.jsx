@@ -90,14 +90,7 @@ export default function ExhibitionPage({exhibition}) {
                 <div className="fixed top-6 right-6 z-500">
                     <BackButton />
                 </div>
-                <div
-                    className="fixed bottom-6 right-6 z-500"
-                    onMouseEnter={(event) => handleDesktopMouseEnter(setDrawerIsOpen, true, event)}
-                    onClick={(event) => handleMobileClick(setDrawerIsOpen, true, event)}
-                >
-                    <PlusButton didPressButton={() => {}} />
-                </div>
-                <div className="fixed bottom-6 right-6">
+                <div className="fixed bottom-6 right-6 z-500">
                     <GlobalDrawer content={exhibition} didClickPrevious={() => {}} didClickNext={() => {}} />
                 </div>
                 <div

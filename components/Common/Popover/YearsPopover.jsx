@@ -1,7 +1,10 @@
 import * as Popover from '@radix-ui/react-popover'
 import { useEffect, useState } from 'react'
 
+import { useActiveYearStore } from '@/context/useActiveYearStore'
+import { cn } from '@/utils/cn'
 import { getYear } from '@/utils/dateHelpers'
+import Link from 'next/link'
 
 export default function YearsPopover({ exhibitions }) {
     const [years, setYears] = useState([])
@@ -12,6 +15,9 @@ export default function YearsPopover({ exhibitions }) {
 		years = Array.from([...new Set(years)])
 		setYears(years)
 	}, [exhibitions])
+
+    const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
+    const inViewYear = useActiveYearStore((state) => state.inViewYear)
 
     return (
         <Popover.Root open={open} onOpenChange={setOpen} className='bg-background h-fit'>
@@ -26,15 +32,23 @@ export default function YearsPopover({ exhibitions }) {
                     <div className="col-span-9 col-start-4 pl-3">
                         <div className="h-fit w-2/3">
                             {years.map((year, index) => (
-                                <button type="button" aria-label='Select year' key={index} className="h-fit">
+                                <Link
+                                    href={`#${year}`}
+                                    onClick={() => setInViewYear(year)}
+                                    aria-label='Select year'
+                                    key={index}
+                                    className="h-fit"
+                                >
                                     <h3
-                                        className="mr-1 inline-flex shrink-0 text-secondary hover:text-primary"
+                                        className={cn(
+                                            "mr-1 inline-flex shrink-0 text-secondary hover:text-primary",
+                                            inViewYear === year ? 'text-primary' : 'text-secondary'
+                                        )}
                                         key={index}
-                                        onClick={() => {}}
                                     >
                                         {index != years.length - 1 ? year + ',' : year}
                                     </h3>
-                                </button>
+                                </Link>
                             ))}
                         </div>
                     </div>
