@@ -5,19 +5,24 @@ import { useInView } from 'react-intersection-observer'
 import { formatDateWithoutYear, getYear } from 'utils/dateHelpers'
 
 import { useActiveItemStore } from '@/context/useActiveItemStore'
+import { useActiveYearStore } from '@/context/useActiveYearStore'
 import { cn } from '@/utils/cn'
 
 import { CustomPortableText } from '../Text/CustomPortableText'
 
-export default function TableItem({ exhibition, id }) {
+export default function TableItem({ exhibition, id, year }) {
     const router = useRouter()
 
 	const { ref, inView } = useInView({ rootMargin: '-50% 0px -50% 0px' })
 	const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
+	const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
 
 	useEffect(() => {
-		if (inView) setInViewItem(id)
-	}, [inView, id, setInViewItem])
+		if (inView) {
+            setInViewItem(id)
+            setInViewYear(year)
+        }
+	}, [id, year, inView, setInViewItem, setInViewYear])
 
 	const artistNames = exhibition?.artists?.map((a) => a.name)
 	const artistList = artistNames?.join(', ')

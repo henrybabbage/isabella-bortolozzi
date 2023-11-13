@@ -27,7 +27,7 @@ export default function TableView({ exhibitions }) {
 					{exhibitions &&
 						exhibitions.map((exhibition) => (
 							<li key={exhibition._id}>
-								<TableItem id={exhibition._id} exhibition={exhibition} />
+								<TableItem id={exhibition._id} year={exhibition.year} exhibition={exhibition} />
 							</li>
 						))}
 				</ul>
