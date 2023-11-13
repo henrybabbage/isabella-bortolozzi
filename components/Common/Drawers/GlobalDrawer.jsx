@@ -31,7 +31,7 @@ export default function GlobalDrawer({ content, index, didClickPrevious, didClic
             </SheetTrigger>
             <SheetContent side='right' onCloseAutoFocus={(event) => event.preventDefault()} className="z-[999] h-full flex flex-col justify-between">
                 <div className='w-full h-full flex flex-col justify-end'>
-                    <CustomPortableText value={inViewImage.details} />
+                    {inViewImage && <CustomPortableText value={inViewImage.details} />}
                 </div>
                 <SheetFooter className="h-fit w-full">
                     <div className="inline-flex space-x-3">
@@ -40,7 +40,7 @@ export default function GlobalDrawer({ content, index, didClickPrevious, didClic
                                 Prev
                             </h3>
                         </button>
-                        <span className="text-secondary">|</span>
+                        <span className="text-primary">|</span>
                         <button onClick={didClickNext} className="cursor-pointer">
                             <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
                                 Next

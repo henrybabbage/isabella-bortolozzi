@@ -26,7 +26,7 @@ export default function CarouselSection({ artist, isLoading }) {
 	return (
         <>
             <section ref={ref} id="works" className="relative h-screen w-screen flex flex-col items-center justify-center">
-                <div className="h-full w-full" onClick={() => setIndex(index + 1)}>
+                <div className="h-full w-full">
                     <Carousel
                         animation="fade"
                         speed={100}
@@ -39,7 +39,6 @@ export default function CarouselSection({ artist, isLoading }) {
                         renderCenterRightControls={renderCenterRightControls}
                         renderBottomCenterControls={false}
                         renderBottomLeftControls={paginationCounter}
-                        className='cursor-pointer'
                     >
                         {imageGallery && imageGallery.map((image, idx) => (
                             <SlideImage image={image.asset} key={idx} />
@@ -73,10 +72,10 @@ const renderCenterLeftControls = ({ previousSlide }) => {
 const paginationCounter = ({ slideCount, currentSlide }) => {
     return  (
         <div className="absolute left-6 bottom-6">
-            <h3 className="inline-flex space-x-3">
-                <span>{currentSlide + 1}</span>
-                <span>{'|'}</span>
-                <span>{slideCount}</span>
+            <h3 className="inline-flex gap-2.5 w-auto justify-start">
+                <span className='w-5 text-center'>{currentSlide + 1}</span>
+                <span className='w-2 text-center'>{'|'}</span>
+                <span className='w-5 text-center'>{slideCount}</span>
             </h3>
         </div>
     )

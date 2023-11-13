@@ -5,12 +5,35 @@ import { useNextSanityImage } from 'next-sanity-image'
 import { sanityClient } from '@/lib/sanity.client'
 import { cn } from '@/utils/cn'
 
+const InlineImage = ({ value }) => {
+    const image = value.asset ?? {}
+	const imageProps = useNextSanityImage(sanityClient, image)
+	return (
+		<div className="my-6 space-y-2 relative">
+            {value.asset && 
+                <Image
+                    imageProps={imageProps.src}
+                    loader={imageProps.loader}
+                    alt={''}
+                    width={434}
+                    height={434}
+                    priority
+                    style={{ objectFit: 'contain' }}
+                />
+            }
+            {value.caption && (
+                <div className="text-sm text-primary">
+                    {value.caption}
+                </div>
+            )}
+        </div>
+	)
+}
+
 export function CustomPortableText({
 	paragraphClasses,
 	value,
 }) {
-	const image = value.asset ?? {}
-	const imageProps = useNextSanityImage(sanityClient, image)
 	const components = {
 		block: {
 			normal: ({ children }) => {
@@ -35,22 +58,7 @@ export function CustomPortableText({
 			},
 		},
 		types: {
-			image: ({
-				value,
-			}) => {
-				return (
-					<div className="my-6 space-y-2">
-						<Image
-							imageProps={imageProps.src} loader={imageProps.loader} alt={''} width={434} height={434} priority style={{ objectFit: 'contain' }}
-						/>
-						{value?.caption && (
-							<div className="text-sm text-primary">
-								{value.caption}
-							</div>
-						)}
-					</div>
-				)
-			},
+			image: InlineImage,
 		},
 	}
 	return <PortableText components={components} value={value} />
