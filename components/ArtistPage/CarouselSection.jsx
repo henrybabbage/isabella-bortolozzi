@@ -14,12 +14,20 @@ export default function CarouselSection({ artist, isLoading }) {
 
 	const { ref } = useSectionInView("works", 0.1)
 
+    const didClickPrevious = () => {
+        setIndex(index - 1)
+    }
+    
+    const didClickNext = () => {
+        setIndex(index + 1)
+    }
+
     const imageGallery = artist?.imageGallery ?? []
 
 	return (
         <>
             <section ref={ref} id="works" className="relative h-screen w-screen flex flex-col items-center justify-center">
-                <div className="h-full w-full">
+                <div className="h-full w-full" onClick={() => setIndex(index + 1)}>
                     <Carousel
                         animation="fade"
                         speed={100}
@@ -32,6 +40,7 @@ export default function CarouselSection({ artist, isLoading }) {
                         renderCenterRightControls={renderCenterRightControls}
                         renderBottomCenterControls={false}
                         renderBottomLeftControls={paginationCounter}
+                        className='cursor-pointer'
                     >
                         {imageGallery && imageGallery.map((image, idx) => (
                             <SlideImage image={image.asset} key={idx} />
@@ -39,7 +48,7 @@ export default function CarouselSection({ artist, isLoading }) {
                     </Carousel>
                 </div>
                 <div className="absolute bottom-6 right-6">
-                    <GlobalDrawer content={artist} didClickPrevious={() => {}} didClickNext={() => {}} />
+                    <GlobalDrawer content={artist} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />
                 </div>
             </section>
         </>

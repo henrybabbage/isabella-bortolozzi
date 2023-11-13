@@ -102,11 +102,11 @@ export default function App({ Component, pageProps }) {
 			</style>
 			{draftMode ? (
 			<PreviewProvider token={token}>
-				<Component {...pageProps} />
+				<Component {...pageProps} key={router.asPath} />
 			</PreviewProvider>
 			) : (
                 <RootLayout>
-                    <Component {...pageProps} />
+                    <Component {...pageProps} key={router.asPath} />
                 </RootLayout>
 			)}
 		</HydrationProvider>
