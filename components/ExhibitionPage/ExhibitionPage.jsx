@@ -6,11 +6,10 @@ import { cn } from 'utils/cn'
 
 import BackButton from "../Common/Buttons/BackButton"
 import PlusButton from "../Common/Buttons/PlusButton"
-import ArtworkDrawer from "../Common/Drawers/ArtworkDrawer"
+import GlobalDrawer from "../Common/Drawers/GlobalDrawer"
 import LoadingScreen from "../Common/Loading/LoadingScreen"
 import AspectImage from "../Common/Media/AspectImage"
 import FullBleedImage from "../Common/Media/FullBleedImage"
-import GlobalDrawer from "../Common/Drawers/GlobalDrawer"
 
 export default function ExhibitionPage({exhibition}) {
     const [isLoading, setIsLoading] = useState(true)
