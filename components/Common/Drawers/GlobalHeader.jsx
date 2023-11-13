@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import CloseButton from '@/components/Common/Buttons/CloseButton'
+import CloseButton from '@/components/Common/Buttons/BackButton'
 import { sanityClient } from '@/lib/sanity.client'
 import { artistsQuery } from '@/lib/sanity.queries'
 import { cn } from '@/utils/cn'
@@ -62,13 +62,13 @@ export default function GlobalHeader({ isFixed = true }) {
                 onClick={closeHeaderMenu}
                 onMouseEnter={openHeaderMenu}
             >
-                <h1 className="heading text-primary transition hover:text-secondary">
+                <h1 className="text-primary transition hover:text-secondary">
                     Isabella Bortolozzi
                 </h1>
             </Link>
             <nav className={cn(
                 isOpen ? 'block' : 'hidden',
-                'absolute top-0 h-[calc((100vw/4))] w-screen transition-opacity')} onMouseLeave={closeHeaderMenu}>
+                'absolute top-0 h-[calc((100vw/4))] w-screen')} onMouseLeave={closeHeaderMenu}>
                 <div className="grid h-full w-full grid-cols-12 px-6">
                     <div className="col-span-3 col-start-1 pt-[5.25rem] pl-6">
                         <div className="flex cursor-pointer flex-col space-y-0">

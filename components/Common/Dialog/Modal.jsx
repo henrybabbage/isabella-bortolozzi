@@ -1,6 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
 
-import CloseButton from '../Buttons/CloseButton'
+import CloseButton from '../Buttons/BackButton'
 
 export default function Modal({ open, onOpenChange, children }) {
     return (
