@@ -3,9 +3,10 @@ import { useHydrated } from "react-hydration-provider"
 import { useMediaQuery } from "react-responsive"
 
 import PlusButton from "../Buttons/PlusButton"
+import { CustomPortableText } from "../Text/CustomPortableText"
 import { Sheet, SheetContent, SheetFooter, SheetTrigger } from "./Sheet"
 
-export default function GlobalDrawer({ content, didClickPrevious, didClickNext }) {
+export default function GlobalDrawer({ content, index, didClickPrevious, didClickNext }) {
     const [isOpen, setIsOpen] = useState(false)
     const [pressReleaseSelected, setPressReleaseSelected] = useState(false)
 
@@ -20,6 +21,8 @@ export default function GlobalDrawer({ content, didClickPrevious, didClickNext }
     const handleDrawerOpen = () => {
         setIsOpen(true)
     }
+
+    const inViewImage = content.imageGallery[index]
     
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen} modal={true}>
@@ -27,7 +30,9 @@ export default function GlobalDrawer({ content, didClickPrevious, didClickNext }
                 <PlusButton didPressButton={handleDrawerOpen} />
             </SheetTrigger>
             <SheetContent side='right' onCloseAutoFocus={(event) => event.preventDefault()} className="z-[999] h-full flex flex-col justify-between">
-                <div className='w-full h-full'></div>
+                <div className='w-full h-full flex flex-col justify-end'>
+                    <CustomPortableText value={inViewImage.details} />
+                </div>
                 <SheetFooter className="h-fit w-full">
                     <div className="inline-flex space-x-3">
                         <button onClick={didClickPrevious} className="cursor-pointer">

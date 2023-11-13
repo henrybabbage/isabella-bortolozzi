@@ -10,7 +10,6 @@ import SlideImage from "./SlideImage"
 
 export default function CarouselSection({ artist, isLoading }) {
     const [index, setIndex] = useState(0)
-    const [currentImage, setCurrentImage] = useState(0)
 
 	const { ref } = useSectionInView("works", 0.1)
 
@@ -48,7 +47,7 @@ export default function CarouselSection({ artist, isLoading }) {
                     </Carousel>
                 </div>
                 <div className="absolute bottom-6 right-6">
-                    <GlobalDrawer content={artist} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />
+                    <GlobalDrawer content={artist} index={index} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />
                 </div>
             </section>
         </>
