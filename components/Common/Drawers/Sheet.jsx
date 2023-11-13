@@ -2,7 +2,7 @@ import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { cva } from "class-variance-authority"
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils/cn"
 
 import { CloseButton } from '../Buttons/CloseButton'
 
@@ -54,7 +54,7 @@ const SheetContent = React.forwardRef(({ side = "right", className, children, ..
       {...props}
     >
       {children}
-      <SheetPrimitive.Close className="absolute right-4 top-4 rounded-none opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-background">
+      <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
         <CloseButton />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>

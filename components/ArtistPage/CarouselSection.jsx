@@ -1,45 +1,20 @@
 import Carousel from "nuka-carousel"
 import { useState } from "react"
-import { useHydrated } from "react-hydration-provider"
-import { useMediaQuery } from "react-responsive"
 
 import { useSectionInView } from '@/hooks/useSectionInView'
-import { cn } from "@/utils/cn"
 
 import ArrowLeftButton from "../Common/Buttons/ArrowLeftButton"
 import ArrowRightButton from "../Common/Buttons/ArrowRightButton"
-import PlusButton from "../Common/Buttons/PlusButton"
-import ArtworkDrawer from "../Common/Drawers/ArtworkDrawer"
+import GlobalDrawer from "../Common/Drawers/GlobalDrawer"
 import SlideImage from "./SlideImage"
 
 export default function CarouselSection({ artist, isLoading }) {
     const [index, setIndex] = useState(0)
-    const [drawerIsOpen, setDrawerIsOpen] = useState(false)
     const [currentImage, setCurrentImage] = useState(0)
 
 	const { ref } = useSectionInView("works", 0.1)
 
     const imageGallery = artist?.imageGallery ?? []
-
-    const hydrated = useHydrated()
-	const tabletOrMobile = useMediaQuery({ query: '(max-width: 991px)' }, hydrated ? undefined : { deviceWidth: 991 })
-	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
-
-    const handleMobileClick = (state, value, event) => {
-		if (desktopOrLaptop) return
-		else if (!desktopOrLaptop) {
-			event.stopPropagation()
-			state(value)
-		}
-	}
-
-	const handleDesktopMouseEnter = (state, value, event) => {
-		if (!desktopOrLaptop) return
-		else if (desktopOrLaptop) {
-			event.stopPropagation()
-			state(value)
-		}
-	}
 
 	return (
         <>
@@ -56,35 +31,15 @@ export default function CarouselSection({ artist, isLoading }) {
                         renderCenterLeftControls={renderCenterLeftControls}
                         renderCenterRightControls={renderCenterRightControls}
                         renderBottomCenterControls={false}
+                        renderBottomLeftControls={paginationCounter}
                     >
                         {imageGallery && imageGallery.map((image, idx) => (
                             <SlideImage image={image.asset} key={idx} />
                         ))}
                     </Carousel>
                 </div>
-                <div
-                    className="fixed bottom-6 right-6 z-500"
-                    onMouseEnter={(event) => handleDesktopMouseEnter(setDrawerIsOpen, true, event)}
-                    onClick={(event) => handleMobileClick(setDrawerIsOpen, true, event)}
-                >
-                    <PlusButton didPressButton={() => {}} />
-                </div>
-                <div
-                    className={cn('pointer-events-none absolute z-100 grid h-screen w-screen grid-cols-12 transition-opacity ease-in-out',
-                        tabletOrMobile ? 'place-items-end' : null,
-                        drawerIsOpen ? 'opacity-100' : 'opacity-0',
-                    )}
-                >
-                    <div
-                        className={cn('col-span-12 col-start-1 h-full bg-transparent sm:col-span-8 sm:col-start-1',
-                            drawerIsOpen ? 'pointer-events-auto' : 'pointer-events-none'
-                        )}
-                        onMouseEnter={(event) => handleDesktopMouseEnter(setDrawerIsOpen, false, event)}
-                        onClick={(event) => handleMobileClick(setDrawerIsOpen, false, event)}
-                    ></div>
-                    <aside className="pointer-events-none z-500 col-span-12 col-start-1 h-[540px] w-full sm:col-span-4 sm:col-start-9 sm:h-screen sm:w-auto">
-                        <ArtworkDrawer drawerIsOpen={drawerIsOpen} setDrawerIsOpen={setDrawerIsOpen} didClickNext={() => {}} didClickPrevious={() => {}} tabletOrMobile={tabletOrMobile} />
-                    </aside>
+                <div className="absolute bottom-6 right-6 z-[999]">
+                    <GlobalDrawer content={artist} didClickPrevious={() => previousSlide()} didClickNext={() => nextSlide()} />
                 </div>
             </section>
         </>
@@ -102,13 +57,19 @@ const renderCenterRightControls = ({ nextSlide }) => {
 const renderCenterLeftControls = ({ previousSlide }) => {
     return (
         <div className="z-[9999] absolute left-6">
-            <ArrowLeftButton nextSlide={previousSlide} />       
+            <ArrowLeftButton previousSlide={previousSlide} />       
         </div>
     )
 }
 
 const paginationCounter = ({ slideCount, currentSlide }) => {
     return  (
-        <div>{`${currentSlide + 1} | ${slideCount}`}</div>
+        <div className="absolute left-6 bottom-6">
+            <h3 className="inline-flex space-x-3">
+                <span>{currentSlide + 1}</span>
+                <span>{'|'}</span>
+                <span>{slideCount}</span>
+            </h3>
+        </div>
     )
 }
