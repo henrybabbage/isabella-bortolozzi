@@ -1,10 +1,19 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
+
+import { useActiveItemStore } from '@/context/useActiveItemStore'
 
 import TableImage from './TableImage'
 import TableItem from './TableItem'
 
 export default function TableView({ exhibitions }) {
-    const [selectedItem, setSelectedItem] = useState()
+
+    const inViewItem = useActiveItemStore((state) => state.inViewItem)
+
+    useEffect(() => {
+        if (inViewItem) {
+            console.log(inViewItem)
+        }
+    }, [inViewItem])
 
 	if (!exhibitions) return null
 
@@ -26,7 +35,7 @@ export default function TableView({ exhibitions }) {
 				<ul>
 					{exhibitions &&
 						exhibitions.map((exhibition) => (
-							<li key={exhibition._id}>
+							<li key={exhibition._id} id={exhibition.year} className='scroll-mt-[calc(-13vh+12px)]'>
 								<TableItem id={exhibition._id} year={exhibition.year} exhibition={exhibition} />
 							</li>
 						))}

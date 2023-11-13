@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useActiveYearStore } from '@/context/useActiveYearStore'
 import { cn } from '@/utils/cn'
 import { getYear } from '@/utils/dateHelpers'
+import Link from 'next/link'
 
 export default function YearsPopover({ exhibitions }) {
     const [years, setYears] = useState([])
@@ -31,18 +32,23 @@ export default function YearsPopover({ exhibitions }) {
                     <div className="col-span-9 col-start-4 pl-3">
                         <div className="h-fit w-2/3">
                             {years.map((year, index) => (
-                                <button type="button" aria-label='Select year' key={index} className="h-fit">
+                                <Link
+                                    href={`#${year}`}
+                                    onClick={() => setInViewYear(year)}
+                                    aria-label='Select year'
+                                    key={index}
+                                    className="h-fit"
+                                >
                                     <h3
                                         className={cn(
                                             "mr-1 inline-flex shrink-0 text-secondary hover:text-primary",
                                             inViewYear === year ? 'text-primary' : 'text-secondary'
                                         )}
                                         key={index}
-                                        onClick={() => setInViewYear(year)}
                                     >
                                         {index != years.length - 1 ? year + ',' : year}
                                     </h3>
-                                </button>
+                                </Link>
                             ))}
                         </div>
                     </div>
