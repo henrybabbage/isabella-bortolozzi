@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Client, useHydrated } from "react-hydration-provider"
-import { useInView } from "react-intersection-observer"
 import { useMediaQuery } from "react-responsive"
 import { Desktop, TabletAndBelow } from "utils/breakpoints"
 import { cn } from 'utils/cn'
@@ -16,6 +15,8 @@ export default function ExhibitionPage({exhibition}) {
     const [drawerIsOpen, setDrawerIsOpen] = useState(false)
     const [currentScrollElement, setCurrentScrollElement] = useState(0)
 
+    console.log(currentScrollElement)
+
     useEffect(() => {
 		setTimeout(() => {
 			setIsLoading(false)
@@ -23,43 +24,28 @@ export default function ExhibitionPage({exhibition}) {
 	}, [])
     
     const scrollToSections = useRef(new Set())
-    // const scrollViewRef = useRef(null)
-    const { ref, inView } = useInView()
+    const scrollViewRef = useRef(null)
 
-    // const handleScroll = useCallback(() => {
-    //     if(inView) {
-    //         console.log('inView')
-    //     }
-    // }, [inView])
+    const handleScroll = useCallback(() => {
+		let offset = Math.abs(scrollViewRef.current.children[0].getBoundingClientRect().top)
+
+		Array.from(scrollToSections.current).map((section, idx) => {
+
+			const sectionCenter = section.offsetTop + section.offsetHeight / 2
+			if (sectionCenter > offset && sectionCenter < offset + window.innerHeight) {
+				setCurrentScrollElement(idx)
+			}
+
+		})
+	}, [scrollViewRef])
 
     useEffect(() => {
-        if(inView) {
-            console.log('inView')
-        }
-    }, [inView])
-
-    // const handleScroll = useCallback(() => {
-	// 	let offset = Math.abs(scrollViewRef.current.children[0].getBoundingClientRect().top)
-
-	// 	Array.from(scrollToSections.current).map((section, idx) => {
-	// 		if (section === null || section === undefined) {
-	// 			return
-	// 		}
-
-	// 		const sectionCenter = section.offsetTop + section.offsetHeight / 2
-	// 		if (sectionCenter > offset && sectionCenter < offset + window.innerHeight) {
-	// 			setCurrentScrollElement(idx)
-	// 		}
-	// 	})
-	// }, [scrollViewRef])
-
-    // useEffect(() => {
-	// 	const scrollView = scrollViewRef.current
-	// 	scrollView.addEventListener('scroll', handleScroll)
-	// 	return () => {
-	// 		scrollView.removeEventListener('scroll', handleScroll)
-	// 	}
-	// }, [scrollViewRef, handleScroll])
+		const scrollView = scrollViewRef.current
+		scrollView.addEventListener('scroll', handleScroll)
+		return () => {
+			scrollView.removeEventListener('scroll', handleScroll)
+		}
+	}, [scrollViewRef, handleScroll])
 
     const didClickPrevious = () => {
 		let goToRef = currentScrollElement - 1
@@ -112,11 +98,10 @@ export default function ExhibitionPage({exhibition}) {
                     <BackButton />
                 </div>
                 <div className="fixed bottom-6 right-6 z-500">
-                    <GlobalDrawer content={exhibition} didClickPrevious={() => {}} didClickNext={() => {}} />
+                    <GlobalDrawer content={exhibition} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />
                 </div>
                 <div
-                    // ref={scrollViewRef}
-                    ref={ref}
+                    ref={scrollViewRef}
                     className="flex flex-col h-screen w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
                 >
                     <section className="relative flex flex-col w-screen items-center">
@@ -134,7 +119,7 @@ export default function ExhibitionPage({exhibition}) {
                                     />
                         ))}
                     </section>
-                    <section className="relative flex flex-col items-center">
+                    <section className="relative flex flex-col w-screen items-center">
                         {exhibition &&
                             exhibition?.imageGallery &&
                             exhibition?.imageGallery
@@ -162,9 +147,9 @@ export default function ExhibitionPage({exhibition}) {
                                     )
                         )}
                     </section>
-                    <section className="h-screen w-screen snap-start">
+                    <section className="relative flex flex-col w-screen h-screen snap-start">
                         <Client>
-                            <Desktop></Desktop>
+                            <Desktop><div></div></Desktop>
                             <TabletAndBelow></TabletAndBelow>
                         </Client>
                     </section>

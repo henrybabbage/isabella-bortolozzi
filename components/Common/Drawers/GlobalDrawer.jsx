@@ -30,7 +30,7 @@ export default function GlobalDrawer({ content, index, didClickPrevious, didClic
     const inViewImage = content.imageGallery[index]
     
     return (
-        <Sheet open={isOpen} onOpenChange={setIsOpen} modal={true}>
+        <Sheet open={isOpen} onOpenChange={setIsOpen} modal={false} onInteractOutside={(event) => event.preventDefault()}>
             <SheetTrigger asChild>
                 <PlusButton didPressButton={handleDrawerOpen} />
             </SheetTrigger>
@@ -41,13 +41,13 @@ export default function GlobalDrawer({ content, index, didClickPrevious, didClic
                 <SheetFooter className="h-fit w-full flex justify-between">
                     <div className="w-full">
                         <div className='inline-flex gap-2.5'>
-                            <button type="button" onClick={didClickPrevious}>
+                            <button type="button" aria-label='Scroll to previous section' onClick={didClickPrevious}>
                                 <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
                                     Prev
                                 </h3>
                             </button>
                             <span className="text-primary">|</span>
-                            <button type="button" onClick={didClickNext}>
+                            <button type="button" aria-label='Scroll to next section' onClick={didClickNext}>
                                 <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
                                     Next
                                 </h3>
