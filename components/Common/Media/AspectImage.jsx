@@ -3,7 +3,7 @@ import Modal from 'components/Common/Dialog/Modal'
 import { sanityClient } from 'lib/sanity.client'
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
@@ -14,7 +14,7 @@ const PORTRAIT_HEIGHT_DESKTOP = '96vh'
 const LANDSCAPE_WIDTH_MOBILE = '90vw'
 const PORTRAIT_HEIGHT_MOBILE = '90vh'
 
-export default function AspectImage({
+const AspectImage = forwardRef(function AspectImage({
     image = {},
     alt = '',
     width = 0,
@@ -22,8 +22,8 @@ export default function AspectImage({
     sizes = '100vw',
     priority = false,
     fill = false,
-    mode = 'contain'
-}) {
+    mode = 'contain',
+}, ref) {
     const [open, setOpen] = useState(false)
 
     const imageProps = useNextSanityImage(sanityClient, image)
@@ -60,7 +60,7 @@ export default function AspectImage({
 	const desktopAndAbove = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
     
     return tabletAndBelow ? (
-        <div className='flex flex-col items-center h-screen justify-center w-full snap-start'>
+        <div ref={ref} className='flex flex-col items-center h-screen justify-center w-full snap-start'>
             <div style={aspectRatioValuesMobile} className='relative'>
                 {imageProps && 
                 <Image
@@ -80,7 +80,7 @@ export default function AspectImage({
     ) : (
         <Modal open={open} onOpenChange={setOpen}>
             <Modal.Button className="cursor-pointer">
-                <div className="flex flex-col items-center h-screen justify-center w-full snap-start">
+                <div ref={ref} className="flex flex-col items-center h-screen justify-center w-full snap-start">
                     <div style={aspectRatioValuesDesktop} className='relative'>
                         {imageProps && 
                         <Image
@@ -107,4 +107,6 @@ export default function AspectImage({
             </Modal.Content>
         </Modal>
     )
-}
+})
+
+export default AspectImage

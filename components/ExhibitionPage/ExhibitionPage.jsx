@@ -30,6 +30,9 @@ export default function ExhibitionPage({exhibition}) {
 		let offset = Math.abs(scrollViewRef.current.children[0].getBoundingClientRect().top)
 
 		Array.from(scrollToSections.current).map((section, idx) => {
+            if (section === null || section === undefined) {
+                return
+            }
 
 			const sectionCenter = section.offsetTop + section.offsetHeight / 2
 			if (sectionCenter > offset && sectionCenter < offset + window.innerHeight) {
@@ -111,7 +114,7 @@ export default function ExhibitionPage({exhibition}) {
                                 ?.slice(0, 1)
                                 .map((image, idx) => (
                                     <FullBleedImage
-                                        reference={(element) => scrollToSections.current.add(element)}
+                                        ref={(element) => scrollToSections.current.add(element)}
                                         key={idx}
                                         image={image}
                                         alt={image.alt}
@@ -127,7 +130,7 @@ export default function ExhibitionPage({exhibition}) {
                                 .map((image, idx) =>
                                     image?.fullbleed ? (
                                         <FullBleedImage
-                                            reference={(element) => scrollToSections.current.add(element)}
+                                            ref={(element) => scrollToSections.current.add(element)}
                                             key={idx}
                                             image={image}
                                             alt={image.alt}
@@ -135,7 +138,7 @@ export default function ExhibitionPage({exhibition}) {
                                         />
                                     ) : (
                                         <AspectImage
-                                            reference={(element) => scrollToSections.current.add(element)}
+                                            ref={(element) => scrollToSections.current.add(element)}
                                             image={image}
                                             alt={image.alt}
                                             priority={false}
