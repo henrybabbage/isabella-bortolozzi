@@ -3,12 +3,13 @@ import { useState } from "react"
 import { useHydrated } from "react-hydration-provider"
 import { useMediaQuery } from "react-responsive"
 
+import { cn } from "@/utils/cn"
+
 import PlusButton from "../Buttons/PlusButton"
 import { CustomPortableText } from "../Text/CustomPortableText"
 import { Sheet, SheetContent, SheetFooter, SheetTrigger } from "./Sheet"
-import { cn } from "@/utils/cn"
 
-export default function GlobalDrawer({ content, pressRelease, index, didClickPrevious, didClickNext }) {
+export default function GlobalDrawer({ content, pressRelease, index, email = 'info@bortolozzi.com', didClickPrevious, didClickNext }) {
     const [isOpen, setIsOpen] = useState(false)
     const [pressReleaseSelected, setPressReleaseSelected] = useState(false)
 
@@ -51,6 +52,18 @@ export default function GlobalDrawer({ content, pressRelease, index, didClickPre
                     </div>
                 </div>
                 <SheetFooter className="h-fit w-full flex flex-col bg-background">
+                    {router.pathname.startsWith('/viewing-room') && (
+                        <div className="w-full h-fit">
+                            <button className="pointer-events-auto flex h-12 w-full items-center justify-center rounded-[2px] bg-secondary transition hover:bg-secondary/50">
+                                <a
+                                    className="text-center transition text-primary"
+                                    href={`mailto:${email}?subject=Enquiry`}
+                                >
+                                    Enquire
+                                </a>
+                            </button>
+                        </div>
+                    )}
                     <div className="w-full justify-start flex flex-col">
                         <div className='inline-flex gap-2.5'>
                             <button type="button" aria-label='Scroll to previous section' onClick={didClickPrevious}>
