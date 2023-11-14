@@ -17,12 +17,14 @@ export default function GlobalDrawer({ content, index, didClickPrevious, didClic
 	const tabletOrMobile = useMediaQuery({ query: '(max-width: 991px)' }, hydrated ? undefined : { deviceWidth: 991 })
 	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
 
-	const togglePressRelease = () => {
+	const togglePressRelease = (event) => {
 		setPressReleaseSelected((pressReleaseSelected) => !pressReleaseSelected)
+        event.stopPropagation()
 	}
 
-    const handleDrawerOpen = () => {
+    const handleDrawerOpen = (event) => {
         setIsOpen(true)
+        event.stopPropagation()
     }
 
     const inViewImage = content.imageGallery[index]
@@ -53,7 +55,7 @@ export default function GlobalDrawer({ content, index, didClickPrevious, didClic
                         </div>
                     </div>
                     <div className='w-full flex justify-end'>
-                        {!router.pathname.startsWith('/exhibitions') && (
+                        {router.pathname.startsWith('/exhibitions') && (
                             <button type="button" onClick={togglePressRelease}>
                                 <h3 className="text-secondary transition hover:text-primary">
                                     {pressReleaseSelected ? 'Caption' : 'Press Release'}
