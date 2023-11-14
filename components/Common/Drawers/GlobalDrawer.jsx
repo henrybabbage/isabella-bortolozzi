@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive"
 import PlusButton from "../Buttons/PlusButton"
 import { CustomPortableText } from "../Text/CustomPortableText"
 import { Sheet, SheetContent, SheetFooter, SheetTrigger } from "./Sheet"
+import { cn } from "@/utils/cn"
 
 export default function GlobalDrawer({ content, pressRelease, index, didClickPrevious, didClickNext }) {
     const [isOpen, setIsOpen] = useState(false)
@@ -35,12 +36,18 @@ export default function GlobalDrawer({ content, pressRelease, index, didClickPre
                 <PlusButton didPressButton={handleDrawerOpen} />
             </SheetTrigger>
             <SheetContent side='right' onCloseAutoFocus={(event) => event.preventDefault()} className="z-[999] h-full max-h-full flex flex-col justify-between">
-                <div className='w-full h-full overflow-scroll scrollbar-hide'>
-                    <div className="flex flex-col justify-end">
-                        {!pressReleaseSelected && inViewImage && <CustomPortableText value={inViewImage.details} />}
+                <div className='w-full h-full flex flex-col justify-end overflow-scroll scrollbar-hide'>
+                    <div className={cn(
+                        "flex flex-col",
+                        !pressReleaseSelected ? 'block' : 'hidden'
+                    )}>
+                        <CustomPortableText value={inViewImage.details} />
                     </div>
-                    <div className="pointer-events-auto flex flex-col justify-start">
-                        {pressReleaseSelected && pressRelease && <CustomPortableText value={pressRelease} />}
+                    <div className={cn(
+                        "pointer-events-auto flex flex-col h-full justify-start",
+                        pressReleaseSelected ? 'block' : 'hidden'
+                    )}>
+                        <CustomPortableText value={pressRelease} />
                     </div>
                 </div>
                 <SheetFooter className="h-fit w-full flex flex-col bg-background">
