@@ -9,6 +9,7 @@ import GlobalDrawer from "../Common/Drawers/GlobalDrawer"
 import LoadingScreen from "../Common/Loading/LoadingScreen"
 import AspectImage from "../Common/Media/AspectImage"
 import FullBleedImage from "../Common/Media/FullBleedImage"
+import SnapSection from "./SnapSection"
 
 export default function ExhibitionPage({exhibition}) {
     const [isLoading, setIsLoading] = useState(true)
@@ -107,49 +108,7 @@ export default function ExhibitionPage({exhibition}) {
                     ref={scrollViewRef}
                     className="flex flex-col h-screen w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
                 >
-                    <section className="relative flex flex-col w-screen items-center">
-                        {exhibition &&
-                            exhibition?.imageGallery &&
-                            exhibition?.imageGallery
-                                ?.slice(0, 1)
-                                .map((image, idx) => (
-                                    <FullBleedImage
-                                        ref={(element) => scrollToSections.current.add(element)}
-                                        key={idx}
-                                        image={image}
-                                        alt={image.alt}
-                                        priority={true}
-                                    />
-                        ))}
-                    </section>
-                    <section className="relative flex flex-col w-screen items-center">
-                        {exhibition &&
-                            exhibition?.imageGallery &&
-                            exhibition?.imageGallery
-                                ?.slice(1)
-                                .map((image, idx) =>
-                                    image?.fullbleed ? (
-                                        <FullBleedImage
-                                            ref={(element) => scrollToSections.current.add(element)}
-                                            key={idx}
-                                            image={image}
-                                            alt={image.alt}
-                                            priority={false}
-                                        />
-                                    ) : (
-                                        <AspectImage
-                                            ref={(element) => scrollToSections.current.add(element)}
-                                            image={image}
-                                            alt={image.alt}
-                                            priority={false}
-                                            fill={true}
-                                            mode="contain"
-                                            sizes="100vw"
-                                            key={idx}
-                                        />
-                                    )
-                        )}
-                    </section>
+                    <SnapSection exhibition={exhibition} scrollToSections={scrollToSections} index={currentScrollElement} />
                     <section className="relative flex flex-col w-screen h-screen snap-start">
                         <Client>
                             <Desktop><div></div></Desktop>

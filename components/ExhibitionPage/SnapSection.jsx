@@ -1,48 +1,63 @@
-import { forwardRef } from "react";
-import { useInView } from "react-intersection-observer";
+import { forwardRef, useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 
-import { useActiveImageStore } from "@/context/useActiveImageStore";
+import { useActiveImageStore } from '@/context/useActiveImageStore'
 
-import AspectImage from "../Common/Media/AspectImage";
-import FullBleedImage from "../Common/Media/FullBleedImage";
+import AspectImage from '../Common/Media/AspectImage'
+import FullBleedImage from '../Common/Media/FullBleedImage'
 
-const SnapSection = forwardRef(function SnapSection({ exhibition }, ref) {
-    const { inViewRef, inView } = useInView({ rootMargin: '-50% 0px -50% 0px' })
+const SnapSection = forwardRef(function SnapSection({ exhibition, scrollToSections, index }, ref) {
+	const { ref: inViewRef, inView } = useInView()
 	const setInViewImage = useActiveImageStore((state) => state.setInViewImage)
 	const inViewImage = useActiveImageStore((state) => state.inViewImage)
-    console.log(inView)
-    return (
-        <div ref={inViewRef}>
-            <section ref={ref} className="relative flex flex-col w-screen items-center">
-                {exhibition &&
-                    exhibition?.imageGallery &&
-                    exhibition?.imageGallery
-                        ?.slice(1)
-                        .map((image, idx) =>
-                            image?.fullbleed ? (
-                                <FullBleedImage
-                                    ref={(element) => scrollToSections.current.add(element)}
-                                    key={idx}
-                                    image={image}
-                                    alt={image.alt}
-                                    priority={false}
-                                />
-                            ) : (
-                                <AspectImage
-                                    ref={(element) => scrollToSections.current.add(element)}
-                                    image={image}
-                                    alt={image.alt}
-                                    priority={false}
-                                    fill={true}
-                                    mode="contain"
-                                    sizes="100vw"
-                                    key={idx}
-                                />
-                            )
-                )}
-            </section>
-        </div>
-    )
+
+	useEffect(() => {
+		if (inView) {
+			console.log(inView)
+        }
+	}, [index, inView, setInViewImage])
+
+	console.log(inView)
+
+  	return (
+        <section ref={inViewRef}
+            className="relative flex flex-col w-screen items-center"
+        >
+			{exhibition &&
+				exhibition.imageGallery &&
+				exhibition.imageGallery
+				.map((image, idx) =>
+					idx === 0 ? (
+						<FullBleedImage
+							ref={(element) => scrollToSections.current.add(element)}
+							key={idx}
+							image={image}
+							alt={image.alt}
+							priority={false}
+						/>
+					) : image.fullbleed === true ? (
+						<FullBleedImage
+							ref={(element) => scrollToSections.current.add(element)}
+							key={idx}
+							image={image}
+							alt={image.alt}
+							priority={false}
+						/>
+					) : (
+						<AspectImage
+							ref={(element) => scrollToSections.current.add(element)}
+							image={image}
+							alt={image.alt}
+							priority={false}
+							fill={true}
+							mode="contain"
+							sizes="100vw"
+							key={idx}
+						/>
+					)
+			)}
+        </section>
+  	)
 })
 
 export default SnapSection
