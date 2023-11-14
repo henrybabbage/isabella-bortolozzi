@@ -98,7 +98,7 @@ export default function ExhibitionPage({exhibition}) {
                     <BackButton />
                 </div>
                 <div className="fixed bottom-6 right-6 z-500">
-                    <GlobalDrawer content={exhibition} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />
+                    <GlobalDrawer content={exhibition} pressRelease={exhibition.body} index={currentScrollElement} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />
                 </div>
                 <div
                     ref={scrollViewRef}
