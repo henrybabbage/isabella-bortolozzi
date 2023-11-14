@@ -72,10 +72,10 @@ export default function ExhibitionPage({exhibition}) {
         <>
             <LoadingScreen exhibition={exhibition} isLoading={isLoading} />
             <div className={cn(isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100', 'relative snap-y h-screen w-screen scrollbar-hide')}>
-                <div className="fixed top-6 right-6 z-100">
+                <div className="fixed top-6 right-6 z-50">
                     <BackButton />
                 </div>
-                <div className="fixed bottom-6 right-6 z-100">
+                <div className="fixed bottom-6 right-6 z-50">
                     <GlobalDrawer content={exhibition} pressRelease={exhibition.body} index={currentScrollElement} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />
                 </div>
                 <div
