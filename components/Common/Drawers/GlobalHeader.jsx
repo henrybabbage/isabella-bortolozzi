@@ -61,12 +61,13 @@ export default function GlobalHeader({ isFixed = true }) {
                 className="relative inline-block cursor-pointer px-6 pt-6"
                 onClick={closeHeaderMenu}
                 onMouseEnter={openHeaderMenu}
+                aria-label='Click to return to home page or hover to view nav'
             >
                 <h1 className="text-primary transition hover:text-secondary">
                     Isabella Bortolozzi
                 </h1>
             </Link>
-            <nav className={cn(
+            <nav aria-label='Website menu nav' className={cn(
                 isOpen ? 'block' : 'hidden',
                 'absolute top-0 h-[calc((100vw/4))] w-screen')} onMouseLeave={closeHeaderMenu}>
                 <div className="grid h-full w-full grid-cols-12 px-6">
@@ -79,6 +80,7 @@ export default function GlobalHeader({ isFixed = true }) {
                                         href={item.path}
                                         className='hover:text-secondary text-primary cursor-pointer text-left transition'
                                         onClick={closeHeaderMenu}
+                                        aria-label='Main page links'
                                     >
                                         {item.title}
                                     </Link>
@@ -94,6 +96,7 @@ export default function GlobalHeader({ isFixed = true }) {
                                     href={`/${artist.slug}`}
                                     className='hover:text-secondary text-primary mr-1 inline-flex shrink-0 cursor-pointer transition'
                                     onClick={closeHeaderMenu}
+                                    aria-label='Artist page links'
                                 >
                                     {index != artists.length - 1 ? artist.name + ',' : artist.name}
                                 </Link>

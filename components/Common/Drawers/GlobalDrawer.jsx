@@ -3,11 +3,13 @@ import { useState } from "react"
 import { useHydrated } from "react-hydration-provider"
 import { useMediaQuery } from "react-responsive"
 
+import { cn } from "@/utils/cn"
+
 import PlusButton from "../Buttons/PlusButton"
 import { CustomPortableText } from "../Text/CustomPortableText"
 import { Sheet, SheetContent, SheetFooter, SheetTrigger } from "./Sheet"
 
-export default function GlobalDrawer({ content, pressRelease, index, didClickPrevious, didClickNext }) {
+export default function GlobalDrawer({ content, pressRelease, index, email = 'info@bortolozzi.com', didClickPrevious, didClickNext }) {
     const [isOpen, setIsOpen] = useState(false)
     const [pressReleaseSelected, setPressReleaseSelected] = useState(false)
 
@@ -35,37 +37,55 @@ export default function GlobalDrawer({ content, pressRelease, index, didClickPre
                 <PlusButton didPressButton={handleDrawerOpen} />
             </SheetTrigger>
             <SheetContent side='right' onCloseAutoFocus={(event) => event.preventDefault()} className="z-[999] h-full max-h-full flex flex-col justify-between">
-                <div className='w-full h-full overflow-scroll scrollbar-hide'>
-                    <div className="flex flex-col justify-end">
-                        {!pressReleaseSelected && inViewImage && <CustomPortableText value={inViewImage.details} />}
+                <div className='w-full h-full flex flex-col justify-end overflow-scroll scrollbar-hide'>
+                    <div className={cn(
+                        "flex flex-col",
+                        !pressReleaseSelected ? 'block' : 'hidden'
+                    )}>
+                        <CustomPortableText value={inViewImage.details} />
                     </div>
-                    <div className="pointer-events-auto flex flex-col justify-start">
-                        {pressReleaseSelected && pressRelease && <CustomPortableText value={pressRelease} />}
+                    <div className={cn(
+                        "pointer-events-auto flex flex-col h-full justify-start",
+                        pressReleaseSelected ? 'block' : 'hidden'
+                    )}>
+                        <CustomPortableText value={pressRelease} />
                     </div>
                 </div>
-                <SheetFooter className="h-fit w-full flex flex-col bg-background">
-                    <div className="w-full justify-start flex flex-col">
+                <SheetFooter className="h-auto w-full flex flex-col bg-background gap-4">
+                    {router.pathname.startsWith('/viewing-rooms') && (
+                        <div className="w-full h-fit">
+                            <button type="button" aria-label="Enquire with the gallery via email" className="group flex h-12 w-full items-center justify-center border-secondary hover:border-primary border-solid border rounded-[2px] bg-none transition">
+                                <a
+                                    className="text-center pointer-events-auto transition group-hover:text-primary text-secondary"
+                                    href={`mailto:${email}?subject=Enquiry`}
+                                >
+                                    Enquire
+                                </a>
+                            </button>
+                        </div>
+                    )}
+                    <div className="w-full justify-start flex">
                         <div className='inline-flex gap-2.5'>
                             <button type="button" aria-label='Scroll to previous section' onClick={didClickPrevious}>
                                 <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
-                                    Prev
+                                    {'Prev'}
                                 </h3>
                             </button>
                             <span className="text-primary">|</span>
                             <button type="button" aria-label='Scroll to next section' onClick={didClickNext}>
                                 <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
-                                    Next
+                                    {'Next'}
                                 </h3>
                             </button>
                         </div>
-                    </div>
-                    <div className='w-full flex justify-end'>
-                        {router.pathname.startsWith('/exhibitions') && (
-                            <button type="button" onClick={togglePressRelease}>
-                                <h3 className="text-secondary transition hover:text-primary">
-                                    {pressReleaseSelected ? 'Caption' : 'Press Release'}
-                                </h3>
-                            </button>
+                        {router.pathname.startsWith('/exhibitions') || router.pathname.startsWith('/viewing-rooms') && (
+                            <div className='w-full flex justify-end'>
+                                <button type="button" aria-label="Toggle to view the caption or the press release" onClick={togglePressRelease}>
+                                    <h3 className="text-secondary transition hover:text-primary">
+                                        {pressReleaseSelected ? 'Caption' : 'Press Release'}
+                                    </h3>
+                                </button>
+                            </div>
                         )}
                     </div>
                 </SheetFooter>
