@@ -27,18 +27,19 @@ export default function ZoomImage({
             className="relative overflow-y-auto"
         >
             {imageProps &&
-            <Image
-                src={imageProps.src}
-                loader={imageProps.loader}
-                alt={alt ?? ''}
-                sizes={sizes}
-                fill={fill}
-                priority={priority}
-                style={{
-                    objectFit: `${mode}`,
-                    objectPosition: 'top'
-                }}
-            />}
+                <Image
+                    src={imageProps.src}
+                    loader={imageProps.loader}
+                    alt={alt ?? ''}
+                    sizes={sizes}
+                    fill={fill}
+                    priority={priority}
+                    style={{
+                        objectFit: `${mode}`,
+                        objectPosition: 'top'
+                    }}
+                />
+            }
         </div>
     )
 }
