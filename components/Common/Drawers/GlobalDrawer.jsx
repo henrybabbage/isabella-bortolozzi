@@ -48,13 +48,13 @@ export default function GlobalDrawer({ content, pressRelease, index, didClickPre
                         <div className='inline-flex gap-2.5'>
                             <button type="button" aria-label='Scroll to previous section' onClick={didClickPrevious}>
                                 <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
-                                    Prev
+                                    {'Prev'}
                                 </h3>
                             </button>
                             <span className="text-primary">|</span>
                             <button type="button" aria-label='Scroll to next section' onClick={didClickNext}>
                                 <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
-                                    Next
+                                    {'Next'}
                                 </h3>
                             </button>
                         </div>

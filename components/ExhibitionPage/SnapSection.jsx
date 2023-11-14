@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from 'react'
+import { forwardRef, Fragment, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { useActiveImageStore } from '@/context/useActiveImageStore'
@@ -17,46 +17,46 @@ const SnapSection = forwardRef(function SnapSection({ exhibition, scrollToSectio
         }
 	}, [index, inView, setInViewImage])
 
-	console.log(inView)
-
   	return (
-        <section ref={inViewRef}
-            className="relative flex flex-col w-screen items-center"
-        >
-			{exhibition &&
-				exhibition.imageGallery &&
-				exhibition.imageGallery
-				.map((image, idx) =>
-					idx === 0 ? (
-						<FullBleedImage
-							ref={(element) => scrollToSections.current.add(element)}
-							key={idx}
-							image={image}
-							alt={image.alt}
-							priority={false}
-						/>
-					) : image.fullbleed === true ? (
-						<FullBleedImage
-							ref={(element) => scrollToSections.current.add(element)}
-							key={idx}
-							image={image}
-							alt={image.alt}
-							priority={false}
-						/>
-					) : (
-						<AspectImage
-							ref={(element) => scrollToSections.current.add(element)}
-							image={image}
-							alt={image.alt}
-							priority={false}
-							fill={true}
-							mode="contain"
-							sizes="100vw"
-							key={idx}
-						/>
-					)
-			)}
-        </section>
+		<Fragment ref={ref}>
+			<section ref={inViewRef}
+				className="relative flex flex-col w-screen items-center"
+			>
+				{exhibition &&
+					exhibition.imageGallery &&
+					exhibition.imageGallery
+					.map((image, idx) =>
+						idx === 0 ? (
+							<FullBleedImage
+								ref={(element) => scrollToSections.current.add(element)}
+								key={idx}
+								image={image}
+								alt={image.alt}
+								priority={false}
+							/>
+						) : image.fullbleed === true ? (
+							<FullBleedImage
+								ref={(element) => scrollToSections.current.add(element)}
+								key={idx}
+								image={image}
+								alt={image.alt}
+								priority={false}
+							/>
+						) : (
+							<AspectImage
+								ref={(element) => scrollToSections.current.add(element)}
+								image={image}
+								alt={image.alt}
+								priority={false}
+								fill={true}
+								mode="contain"
+								sizes="100vw"
+								key={idx}
+							/>
+						)
+				)}
+			</section>
+		</Fragment>
   	)
 })
 
