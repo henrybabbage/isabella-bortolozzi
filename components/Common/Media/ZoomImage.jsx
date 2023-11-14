@@ -14,13 +14,20 @@ export default function ZoomImage({
     ratio
 }) {
     const imageProps = useNextSanityImage(sanityClient, image)
+    
+    const handleClose = (event) => {
+        setOpen(false)
+        event.stopPropagation()
+    }
+
     return (
         <div
-            onClick={() => setOpen(false)}
+            onClick={handleClose}
             style={{ width: '100vw', height: `calc(100vw * ${ratio})` }}
             className="relative overflow-y-auto"
         >
-            {imageProps && <Image
+            {imageProps &&
+            <Image
                 src={imageProps.src}
                 loader={imageProps.loader}
                 alt={alt ?? ''}

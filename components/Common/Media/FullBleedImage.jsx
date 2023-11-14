@@ -1,11 +1,12 @@
 import { sanityClient } from 'lib/sanity.client'
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import { forwardRef } from 'react'
 
-export default function FullBleedImage({ image = {}, alt = '', priority = false }) {
+const FullBleedImage = forwardRef(function FullBleedImage({ image = {}, alt = '', priority = false }, ref) {
     const imageProps = useNextSanityImage(sanityClient, image)
     return (
-            <div className="-z-10 h-screen w-screen cursor-pointer overflow-hidden relative snap-start">
+            <div ref={ref} className="-z-10 h-screen w-screen cursor-pointer overflow-hidden relative snap-start">
                 {image && (
                     <Image
                         src={imageProps.src}
@@ -23,4 +24,6 @@ export default function FullBleedImage({ image = {}, alt = '', priority = false 
                 )}
         </div>
     )
-}
+})
+
+export default FullBleedImage

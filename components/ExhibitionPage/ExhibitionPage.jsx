@@ -5,7 +5,6 @@ import { Desktop, TabletAndBelow } from "utils/breakpoints"
 import { cn } from 'utils/cn'
 
 import BackButton from "../Common/Buttons/BackButton"
-import PlusButton from "../Common/Buttons/PlusButton"
 import GlobalDrawer from "../Common/Drawers/GlobalDrawer"
 import LoadingScreen from "../Common/Loading/LoadingScreen"
 import AspectImage from "../Common/Media/AspectImage"
@@ -16,12 +15,14 @@ export default function ExhibitionPage({exhibition}) {
     const [drawerIsOpen, setDrawerIsOpen] = useState(false)
     const [currentScrollElement, setCurrentScrollElement] = useState(0)
 
+    console.log(currentScrollElement)
+
     useEffect(() => {
 		setTimeout(() => {
 			setIsLoading(false)
 		}, 3400)
 	}, [])
-
+    
     const scrollToSections = useRef(new Set())
     const scrollViewRef = useRef(null)
 
@@ -29,16 +30,25 @@ export default function ExhibitionPage({exhibition}) {
 		let offset = Math.abs(scrollViewRef.current.children[0].getBoundingClientRect().top)
 
 		Array.from(scrollToSections.current).map((section, idx) => {
-			if (section === null || section === undefined) {
-				return
-			}
+            if (section === null || section === undefined) {
+                return
+            }
 
 			const sectionCenter = section.offsetTop + section.offsetHeight / 2
 			if (sectionCenter > offset && sectionCenter < offset + window.innerHeight) {
 				setCurrentScrollElement(idx)
 			}
+
 		})
 	}, [scrollViewRef])
+
+    useEffect(() => {
+		const scrollView = scrollViewRef.current
+		scrollView.addEventListener('scroll', handleScroll)
+		return () => {
+			scrollView.removeEventListener('scroll', handleScroll)
+		}
+	}, [scrollViewRef, handleScroll])
 
     const didClickPrevious = () => {
 		let goToRef = currentScrollElement - 1
@@ -57,7 +67,7 @@ export default function ExhibitionPage({exhibition}) {
 	}
 
 	const scrollToSection = (idx) => {
-		Array.from(scrollToSections.current)[idx]?.scrollIntoView({
+		Array.from(scrollToSections.current)[idx].scrollIntoView({
 			behavior: 'smooth',
 			block: 'center',
 		})
@@ -91,61 +101,59 @@ export default function ExhibitionPage({exhibition}) {
                     <BackButton />
                 </div>
                 <div className="fixed bottom-6 right-6 z-500">
-                    <GlobalDrawer content={exhibition} didClickPrevious={() => {}} didClickNext={() => {}} />
+                    <GlobalDrawer content={exhibition} pressRelease={exhibition.body} index={currentScrollElement} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />
                 </div>
                 <div
                     ref={scrollViewRef}
                     className="flex flex-col h-screen w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
                 >
                     <section className="relative flex flex-col w-screen items-center">
-                        <section className="relative">
-                            {exhibition &&
-                                exhibition?.imageGallery &&
-                                exhibition?.imageGallery
-                                    ?.slice(0, 1)
-                                    .map((image, idx) => (
+                        {exhibition &&
+                            exhibition?.imageGallery &&
+                            exhibition?.imageGallery
+                                ?.slice(0, 1)
+                                .map((image, idx) => (
+                                    <FullBleedImage
+                                        ref={(element) => scrollToSections.current.add(element)}
+                                        key={idx}
+                                        image={image}
+                                        alt={image.alt}
+                                        priority={true}
+                                    />
+                        ))}
+                    </section>
+                    <section className="relative flex flex-col w-screen items-center">
+                        {exhibition &&
+                            exhibition?.imageGallery &&
+                            exhibition?.imageGallery
+                                ?.slice(1)
+                                .map((image, idx) =>
+                                    image?.fullbleed ? (
                                         <FullBleedImage
-                                            reference={(element) => scrollToSections.current.add(element)}
+                                            ref={(element) => scrollToSections.current.add(element)}
                                             key={idx}
                                             image={image}
                                             alt={image.alt}
-                                            priority={true}
+                                            priority={false}
                                         />
-                            ))}
-                        </section>
-                        <section className="relative flex flex-col items-center">
-                            {exhibition &&
-                                exhibition?.imageGallery &&
-                                exhibition?.imageGallery
-                                    ?.slice(1)
-                                    .map((image, idx) =>
-                                        image?.fullbleed ? (
-                                            <FullBleedImage
-                                                reference={(element) => scrollToSections.current.add(element)}
-                                                key={idx}
-                                                image={image}
-                                                alt={image.alt}
-                                                priority={false}
-                                            />
-                                        ) : (
-                                            <AspectImage
-                                                reference={(element) => scrollToSections.current.add(element)}
-                                                image={image}
-                                                alt={image.alt}
-                                                priority={false}
-                                                fill={true}
-                                                mode="contain"
-                                                sizes="100vw"
-                                                key={idx}
-                                            />
-                                        )
-                            )}
-                        </section>
+                                    ) : (
+                                        <AspectImage
+                                            ref={(element) => scrollToSections.current.add(element)}
+                                            image={image}
+                                            alt={image.alt}
+                                            priority={false}
+                                            fill={true}
+                                            mode="contain"
+                                            sizes="100vw"
+                                            key={idx}
+                                        />
+                                    )
+                        )}
                     </section>
-                    <section ref={(element) => scrollToSections.current.add(element)} className="h-screen w-screen snap-center">
+                    <section className="relative flex flex-col w-screen h-screen snap-start">
                         <Client>
+                            <Desktop><div></div></Desktop>
                             <TabletAndBelow></TabletAndBelow>
-                            <Desktop></Desktop>
                         </Client>
                     </section>
                 </div>
