@@ -54,9 +54,9 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
                 <SheetFooter className="h-auto w-full flex flex-col bg-background gap-4">
                     {router.pathname.startsWith('/viewing-rooms') && (
                         <div className="w-full h-fit">
-                            <button type="button" aria-label="Enquire with the gallery via email" className="flex h-12 w-full items-center justify-center border-primary border-solid border rounded-[2px] bg-none transition hover:bg-secondary/50">
+                            <button type="button" aria-label="Enquire with the gallery via email" className="group flex h-12 w-full items-center justify-center border-secondary hover:border-primary border-solid border rounded-[2px] bg-none transition">
                                 <a
-                                    className="text-center pointer-events-auto transition text-primary"
+                                    className="text-center pointer-events-auto transition group-hover:text-primary text-secondary"
                                     href={`mailto:${email}?subject=Enquiry`}
                                 >
                                     Enquire
