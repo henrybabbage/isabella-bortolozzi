@@ -1,3 +1,4 @@
+import { easeExpInOut } from 'd3-ease'
 import Carousel from "nuka-carousel"
 import { useState } from "react"
 
@@ -33,6 +34,7 @@ export default function CarouselSection({ artist, isLoading }) {
                         enableKeyboardControls
                         swiping
                         wrapAround
+                        easing={easeExpInOut}
                         slideIndex={index}
                         beforeSlide={(_, v) => setIndex(v)}
                         renderCenterLeftControls={renderCenterLeftControls}

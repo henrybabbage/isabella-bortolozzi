@@ -17,9 +17,9 @@
 }
 
 @layer base {
-    html {
+    /* html {
         @apply scroll-smooth;
-    }
+    } */
 
     body { 
         @apply text-xl;
