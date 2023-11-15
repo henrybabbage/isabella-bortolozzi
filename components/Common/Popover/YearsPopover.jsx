@@ -41,7 +41,7 @@ export default function YearsPopover({ exhibitions }) {
                                 >
                                     <h3
                                         className={cn(
-                                            "mr-1 inline-flex shrink-0 text-secondary hover:text-primary",
+                                            "mr-1 cursor-pointer inline-flex shrink-0 text-secondary hover:text-primary",
                                             inViewYear === year ? 'text-primary' : 'text-secondary'
                                         )}
                                         key={index}
