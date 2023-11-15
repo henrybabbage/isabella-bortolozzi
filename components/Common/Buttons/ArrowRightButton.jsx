@@ -1,4 +1,5 @@
 import { ArrowRightIcon } from '@radix-ui/react-icons'
+import { useState } from 'react'
 
 export default function ArrowRightButton({ nextSlide }) {
     const [isHovered, setIsHovered] = useState(false)

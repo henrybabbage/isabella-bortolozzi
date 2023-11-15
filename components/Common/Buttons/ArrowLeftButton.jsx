@@ -1,4 +1,5 @@
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
+import { useState } from 'react'
 
 export default function ArrowLeftButton({ previousSlide }) {
     const [isHovered, setIsHovered] = useState(false)
