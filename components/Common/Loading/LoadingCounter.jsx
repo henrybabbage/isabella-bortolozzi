@@ -8,10 +8,10 @@ export default function LoadingCounter({ totalImages }) {
     return (
         <>
             {totalImages ? (
-                <p className="z-10 inline-flex">
+                <p className="z-10 inline-flex gap-1">
                     <span>{router.pathname.startsWith('/exhibitions') ? 'Loading image ' : 'Loading work '}</span>
-                        <NumberCounter n={totalImages} />
-                    <span>{` of ${totalImages}`}</span>
+                    <NumberCounter n={totalImages} />
+                    <span>{`of ${totalImages}`}</span>
                 </p>
             ) : (
                 <p className="z-10 inline-flex">
