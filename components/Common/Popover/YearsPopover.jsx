@@ -21,13 +21,13 @@ export default function YearsPopover({ exhibitions }) {
 
     return (
         <Popover.Root open={open} onOpenChange={setOpen} className='bg-background h-fit'>
-            <Popover.Trigger asChild className='shadow-transparent shadow-none focus:shadow-none'>
+            <Popover.Trigger asChild className='shadow-transparent shadow-none focus:shadow-none outline-none focus:outline-none'>
                 <button type="button" aria-label="Open menu to select chosen year" className="h-fit">
                     <h3 className="text-secondary hover:text-primary">{open ? 'Close' : 'Select Year'}</h3>
                 </button>
             </Popover.Trigger>
             <Popover.Portal className="shadow-transparent shadow-none focus:shadow-none">
-                <Popover.Content onCloseAutoFocus={(event) => event.preventDefault()} className="shadow-transparent shadow-none focus:shadow-none h-fit bg-background">
+                <Popover.Content onCloseAutoFocus={(event) => event.preventDefault()} className="shadow-transparent shadow-none focus:shadow-none outline-none focus:outline-none h-fit bg-background">
                     <nav className="grid grid-cols-12 w-screen">
                         <div className="col-span-9 col-start-4 pl-3">
                             <div className="h-fit w-2/3">
