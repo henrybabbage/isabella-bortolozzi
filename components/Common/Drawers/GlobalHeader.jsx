@@ -58,12 +58,12 @@ export default function GlobalHeader({ isFixed = true }) {
         >
             <Link
                 href="/"
-                className="relative inline-block cursor-pointer px-6 pt-6"
+                className="relative inline-block px-6 pt-6 z-500"
                 onClick={closeHeaderMenu}
                 onMouseEnter={openHeaderMenu}
                 aria-label='Click to return to home page or hover to view nav'
             >
-                <h1 className="text-primary transition hover:text-secondary">
+                <h1 className="text-primary transition hover:text-secondary cursor-pointer">
                     Isabella Bortolozzi
                 </h1>
             </Link>
