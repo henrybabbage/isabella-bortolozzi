@@ -31,6 +31,7 @@ export default function ArtistSubNav({ artist, isLoading, }) {
                             setInViewSection('works')
                         }}
                         scroll={false}
+                        shallow={true}
                     >
                         {'Works'}
                     </Link>
@@ -48,6 +49,7 @@ export default function ArtistSubNav({ artist, isLoading, }) {
                             setInViewSection('exhibitions')
                         }}
                         scroll={false}
+                        shallow={true}
                     >
                         {'Exhibitions'}
                     </Link>
@@ -62,6 +64,7 @@ export default function ArtistSubNav({ artist, isLoading, }) {
                             setInViewSection('biography')
                         }}
                         scroll={false}
+                        shallow={true}
                     >
                         {'Biography'}
                     </Link>
