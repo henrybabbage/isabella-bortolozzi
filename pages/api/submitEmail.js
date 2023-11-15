@@ -1,9 +1,9 @@
-import { client } from '@/lib/sanity.client'
+import { sanityClient } from '@/lib/sanity.client'
 
 export default async function submitEmail(req, res) {
 	const { email } = JSON.parse(req.body)
 	try {
-		await client.create({
+		await sanityClient.create({
 			_type: 'visitorEmail',
 			email,
 		})
