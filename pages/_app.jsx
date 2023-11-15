@@ -34,6 +34,12 @@ export default function App({ Component, pageProps }) {
 
 	const router = useRouter()
 
+    const key = useMemo(() => {
+        const { pathname, query } = router
+        const slug = query.slug || ''
+        return `${pathname}-${slug}`
+    }, [router])
+
 	const scrollCache = useRef({})
 	const activeRestorePath = useRef()
 
@@ -121,11 +127,11 @@ export default function App({ Component, pageProps }) {
 			</style>
 			{draftMode ? (
 			<PreviewProvider token={token}>
-				<Component {...pageProps} key={router.asPath} />
+				<Component {...pageProps} key={key} />
 			</PreviewProvider>
 			) : (
                 <RootLayout>
-                    <Component {...pageProps} key={router.asPath} />
+                    <Component {...pageProps} key={key} />
                 </RootLayout>
 			)}
 		</HydrationProvider>
