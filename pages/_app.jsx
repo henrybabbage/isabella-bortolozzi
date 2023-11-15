@@ -85,23 +85,23 @@ export default function App({ Component, pageProps }) {
 	}, [router])
 
     // add "scroll-smooth" class for navigation within a page but do not apply the class during page transitions
-    useEffect(() => {
-        const html = document.querySelector('html')
-        const addSmoothScrollClass = () => {
-            html.classList.add('scroll-smooth')
-        }
-        const removeSmoothScrollClass = () => {
-            html.classList.remove('scroll-smooth')
-        }
-        router.events.on('routeChangeStart', removeSmoothScrollClass)
-        router.events.on('routeChangeComplete', addSmoothScrollClass)
-        router.events.on('routeChangeError', addSmoothScrollClass)
-        return () => {
-            router.events.off('routeChangeStart', removeSmoothScrollClass)
-            router.events.off('routeChangeComplete', addSmoothScrollClass)
-            router.events.off('routeChangeError', addSmoothScrollClass)
-        }
-    }, [router])
+    // useEffect(() => {
+    //     const html = document.querySelector('html')
+    //     const addSmoothScrollClass = () => {
+    //         html.classList.add('scroll-smooth')
+    //     }
+    //     const removeSmoothScrollClass = () => {
+    //         html.classList.remove('scroll-smooth')
+    //     }
+    //     router.events.on('routeChangeStart', removeSmoothScrollClass)
+    //     router.events.on('routeChangeComplete', addSmoothScrollClass)
+    //     router.events.on('routeChangeError', addSmoothScrollClass)
+    //     return () => {
+    //         router.events.off('routeChangeStart', removeSmoothScrollClass)
+    //         router.events.off('routeChangeComplete', addSmoothScrollClass)
+    //         router.events.off('routeChangeError', addSmoothScrollClass)
+    //     }
+    // }, [router])
 
 	return (
 		<>
