@@ -6,8 +6,10 @@ import {
     exhibitionSlugsQuery,
 } from 'lib/sanity.queries'
 import { useLiveQuery } from 'next-sanity/preview'
+import { Client } from 'react-hydration-provider'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
+import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 export default function ExhibitionSlugRoute(
   props
@@ -18,7 +20,14 @@ export default function ExhibitionSlugRoute(
 
     return (
         <main className='animate-fade-in'>
-            <ExhibitionPage exhibition={exhibition} />
+            <Client>
+                <Desktop>
+                    <ExhibitionPage exhibition={exhibition} />
+                </Desktop>
+                <TabletAndBelow>
+                    <div></div>
+                </TabletAndBelow>
+            </Client>
         </main>
     )
 }
