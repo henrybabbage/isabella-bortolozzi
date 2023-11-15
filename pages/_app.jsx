@@ -47,31 +47,31 @@ export default function App({ Component, pageProps }) {
 			return true
 		})
 		const onComplete = () => {
-		const scrollPath = activeRestorePath.current
-		if (!scrollPath || !(scrollPath in scrollCache.current)) {
-			window.scrollTo(0, 0)
-			return
-		}
+            const scrollPath = activeRestorePath.current
+            if (!scrollPath || !(scrollPath in scrollCache.current)) {
+                window.scrollTo(0, 0)
+                return
+            }
 
-		activeRestorePath.current = undefined
-		const [scrollX, scrollY] = scrollCache.current[scrollPath]
-		window.scrollTo(scrollX, scrollY)
-		// allow for page taking longer to longer
-		const delays = [10, 20, 40, 80, 160]
-		const checkAndScroll = () => {
-			if (
-				(window.scrollX === scrollX && window.scrollY === scrollY) ||
-				scrollPath !== getCurrentPath()
-			) {
-			return
-			}
-			window.scrollTo(scrollX, scrollY)
-			const delay = delays.shift()
-			if (delay) {
-				setTimeout(checkAndScroll, delay)
-			}
-		}
-		setTimeout(checkAndScroll, delays.shift())
+            activeRestorePath.current = undefined
+            const [scrollX, scrollY] = scrollCache.current[scrollPath]
+            window.scrollTo(scrollX, scrollY)
+            // allow for page taking longer to load
+            const delays = [10, 20, 40, 80, 160]
+            const checkAndScroll = () => {
+                if (
+                    (window.scrollX === scrollX && window.scrollY === scrollY) ||
+                    scrollPath !== getCurrentPath()
+                ) {
+                    return
+                }
+                window.scrollTo(scrollX, scrollY)
+                const delay = delays.shift()
+                if (delay) {
+                    setTimeout(checkAndScroll, delay)
+                }
+            }
+            setTimeout(checkAndScroll, delays.shift())
 		}
 		const onScroll = () => {
 			scrollCache.current[getCurrentPath()] = [window.scrollX, window.scrollY]
@@ -83,6 +83,25 @@ export default function App({ Component, pageProps }) {
 			window.removeEventListener('scroll', onScroll)
 		}
 	}, [router])
+
+    // add "scroll-smooth" class for navigation within a page but do not apply the class during page transitions
+    useEffect(() => {
+        const html = document.querySelector('html')
+        const addSmoothScrollClass = () => {
+            html.classList.add('scroll-smooth')
+        }
+        const removeSmoothScrollClass = () => {
+            html.classList.remove('scroll-smooth')
+        }
+        router.events.on('routeChangeStart', removeSmoothScrollClass)
+        router.events.on('routeChangeComplete', addSmoothScrollClass)
+        router.events.on('routeChangeError', addSmoothScrollClass)
+        return () => {
+            router.events.off('routeChangeStart', removeSmoothScrollClass)
+            router.events.off('routeChangeComplete', addSmoothScrollClass)
+            router.events.off('routeChangeError', addSmoothScrollClass)
+        }
+    }, [router])
 
 	return (
 		<>
