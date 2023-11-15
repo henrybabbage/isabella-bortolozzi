@@ -11,7 +11,7 @@
 
 // This works!
 
-import { sanityClient } from "lib/sanity.client"
+import { sanityClient } from "@/lib/sanity.client"
 
 const FIELD_TO_REMOVE = 'country'
 
