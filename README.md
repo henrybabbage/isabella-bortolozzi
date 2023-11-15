@@ -1,4 +1,25 @@
-# A minimal Next.js site with Sanity Studio
+# Galerie Isabella Bortolozzi
+
+This website is a Next.js project bootstrapped with create-next-app. Structured content is managed with Sanity.io.
+NextJS
+
+First, from the root directory run the development server:
+
+npm run dev
+
+Open http://localhost:3000 with your browser to see the result.
+Sanity.io
+
+Log in to Sanity and then start the development server from the sanity directory:
+
+sanity dev
+
+Open http://localhost:3333 with your browser to see the result.
+Vercel
+
+This project is deployed with Vercel.
+
+Check out Next.js deployment documentation for more details.
 
 This starter is a statically generated site that uses [Next.js][nextjs] for the frontend and [Sanity][sanity-homepage] to handle its content.
 It comes with a native Sanity Studio that offers features like real-time collaboration, instant side-by-side content previews, and intuitive editing.
