@@ -12,7 +12,7 @@ export default function Imprint({ imprint }) {
                 <Desktop>
                 <section className='fixed h-auto z-50 top-0 grid w-screen grid-cols-12 px-6'>
                         <div className="col-span-5 col-start-4 flex w-full space-x-12 pt-6">
-                            <h1 className="text-secondary">Imprint</h1>
+                            <h1 className="text-primary">Imprint</h1>
                         </div>
                     </section>
                     <section className="flex flex-col sm:grid sm:grid-cols-12 px-6 pb-6">
