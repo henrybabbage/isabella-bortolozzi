@@ -21,39 +21,39 @@ export default function YearsPopover({ exhibitions }) {
 
     return (
         <Popover.Root open={open} onOpenChange={setOpen} className='bg-background h-fit'>
-            <Popover.Trigger asChild>
+            <Popover.Trigger asChild className='shadow-transparent shadow-none focus:shadow-none'>
                 <button type="button" aria-label="Open menu to select chosen year" className="h-fit">
                     <h3 className="text-secondary hover:text-primary">{open ? 'Close' : 'Select Year'}</h3>
                 </button>
             </Popover.Trigger>
-            <Popover.Portal>
-            <Popover.Content onCloseAutoFocus={(event) => event.preventDefault()} className="shadow-transparent shadow-none focus:shadow-none h-fit bg-background">
-                <nav className="grid grid-cols-12 w-screen">
-                    <div className="col-span-9 col-start-4 pl-3">
-                        <div className="h-fit w-2/3">
-                            {years.map((year, index) => (
-                                <Link
-                                    href={`#${year}`}
-                                    onClick={() => setInViewYear(year)}
-                                    aria-label='Select year'
-                                    key={index}
-                                    className="h-fit"
-                                >
-                                    <h3
-                                        className={cn(
-                                            "mr-1 cursor-pointer inline-flex shrink-0 text-secondary hover:text-primary",
-                                            inViewYear === year ? 'text-primary' : 'text-secondary'
-                                        )}
+            <Popover.Portal className="shadow-transparent shadow-none focus:shadow-none">
+                <Popover.Content onCloseAutoFocus={(event) => event.preventDefault()} className="shadow-transparent shadow-none focus:shadow-none h-fit bg-background">
+                    <nav className="grid grid-cols-12 w-screen">
+                        <div className="col-span-9 col-start-4 pl-3">
+                            <div className="h-fit w-2/3">
+                                {years.map((year, index) => (
+                                    <Link
+                                        href={`#${year}`}
+                                        onClick={() => setInViewYear(year)}
+                                        aria-label='Select year'
                                         key={index}
+                                        className="h-fit"
                                     >
-                                        {index != years.length - 1 ? year + ',' : year}
-                                    </h3>
-                                </Link>
-                            ))}
+                                        <h3
+                                            className={cn(
+                                                "mr-1 cursor-pointer inline-flex shrink-0 text-secondary hover:text-primary",
+                                                inViewYear === year ? 'text-primary' : 'text-secondary'
+                                            )}
+                                            key={index}
+                                        >
+                                            {index != years.length - 1 ? year + ',' : year}
+                                        </h3>
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </nav>
-            </Popover.Content>
+                    </nav>
+                </Popover.Content>
             </Popover.Portal>
         </Popover.Root>
     )
