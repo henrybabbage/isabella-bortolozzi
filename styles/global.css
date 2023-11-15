@@ -17,9 +17,10 @@
 }
 
 @layer base {
-    html {
+    /* Apply after route transitions from ._app instead */
+    /* html {
         @apply scroll-smooth;
-    }
+    } */
 
     body { 
         @apply text-xl;
