@@ -51,8 +51,10 @@ body {
     line-height: inherit;
 }
 
-button {
-    all: unset;
+button,
+fieldset,
+input {
+  all: unset;
 }
 
 a {
