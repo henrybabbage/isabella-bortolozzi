@@ -6,17 +6,16 @@ This website is a Next.js project bootstrapped with create-next-app. Structured 
 
 First, from the root directory run the development server:
 
-npm run dev
+`npm run dev`
 
 Open http://localhost:3000 with your browser to see the result.
 Sanity.io
 
 Log in to Sanity and then start the development server from the sanity directory:
 
-sanity dev
+`sanity dev`
 
 Open http://localhost:3333 with your browser to see the result.
-Vercel
 
 This project is deployed with Vercel.
 
