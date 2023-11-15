@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
 import { forwardRef } from 'react'
 
-const FullBleedImage = forwardRef(function FullBleedImage({ image = {}, alt = '', priority = false }, ref) {
+const FullBleedImage = forwardRef(function FullBleedImage({ image = {}, alt = '', priority = true }, ref) {
     const imageProps = useNextSanityImage(sanityClient, image)
     return (
             <div ref={ref} className="-z-10 h-screen w-screen cursor-pointer overflow-hidden relative snap-start">

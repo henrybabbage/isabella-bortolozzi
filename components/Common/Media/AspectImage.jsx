@@ -20,7 +20,7 @@ const AspectImage = forwardRef(function AspectImage({
     width = 0,
     height = 0,
     sizes = '100vw',
-    priority = false,
+    priority = true,
     fill = false,
     mode = 'contain',
 }, ref) {

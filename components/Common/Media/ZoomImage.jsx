@@ -6,7 +6,7 @@ export default function ZoomImage({
     image = {},
     alt = '',
     sizes = '100vw',
-    priority = true,
+    priority = false,
     fill = true,
     mode = 'contain',
     open,
@@ -30,6 +30,8 @@ export default function ZoomImage({
                 <Image
                     src={imageProps.src}
                     loader={imageProps.loader}
+                    placeholder='blur'
+                    blurDataURL={image.asset.metadata.lqip}
                     alt={alt ?? ''}
                     sizes={sizes}
                     fill={fill}
