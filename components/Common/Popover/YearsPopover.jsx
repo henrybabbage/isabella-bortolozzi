@@ -27,7 +27,7 @@ export default function YearsPopover({ exhibitions }) {
                 </button>
             </Popover.Trigger>
             <Popover.Portal>
-            <Popover.Content onCloseAutoFocus={(event) => event.preventDefault()} className="shadow-none focus:shadow-none h-fit bg-background">
+            <Popover.Content onCloseAutoFocus={(event) => event.preventDefault()} className="shadow-transparent shadow-none focus:shadow-none h-fit bg-background">
                 <nav className="grid grid-cols-12 w-screen">
                     <div className="col-span-9 col-start-4 pl-3">
                         <div className="h-fit w-2/3">
