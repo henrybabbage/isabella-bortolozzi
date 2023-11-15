@@ -1,10 +1,10 @@
 import * as Popover from '@radix-ui/react-popover'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { useActiveYearStore } from '@/context/useActiveYearStore'
 import { cn } from '@/utils/cn'
 import { getYear } from '@/utils/dateHelpers'
-import Link from 'next/link'
 
 export default function YearsPopover({ exhibitions }) {
     const [years, setYears] = useState([])
