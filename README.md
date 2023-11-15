@@ -1,7 +1,6 @@
 # Galerie Isabella Bortolozzi
 
 This website is a Next.js project bootstrapped with create-next-app. Structured content is managed with Sanity.io.
-NextJS
 
 ## Configuration
 
