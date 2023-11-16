@@ -32,7 +32,7 @@ const SnapSection = forwardRef(function SnapSection({ exhibition, scrollToSectio
 								key={idx}
 								image={image}
 								alt={image.alt}
-								priority={false}
+								priority={true}
 							/>
 						) : image.fullbleed === true ? (
 							<FullBleedImage
@@ -40,14 +40,14 @@ const SnapSection = forwardRef(function SnapSection({ exhibition, scrollToSectio
 								key={idx}
 								image={image}
 								alt={image.alt}
-								priority={false}
+								priority={true}
 							/>
 						) : (
 							<AspectImage
 								ref={(element) => scrollToSections.current.add(element)}
 								image={image}
 								alt={image.alt}
-								priority={false}
+								priority={true}
 								fill={true}
 								mode="contain"
 								sizes="100vw"
