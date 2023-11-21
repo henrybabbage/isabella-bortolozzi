@@ -7,6 +7,7 @@ import news from './documents/news'
 import post from './documents/post'
 import venue from './documents/venue'
 import viewingRoom from './documents/viewingRoom'
+import visitorEmail from './documents/visitorEmail'
 import blockContent from './objects/blockContent'
 import caption from './objects/caption'
 import exhibitionRecord from './objects/exhibitionRecord'
@@ -25,7 +26,6 @@ import seo from './singletons/seo'
 export const schemaTypes = [post, blockContent]
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
-        post,
         blockContent,
         imageGallery,
         artwork,
@@ -46,5 +46,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         contact,
         newsletter,
         mailchimp,
+        visitorEmail,
     ],
 }
