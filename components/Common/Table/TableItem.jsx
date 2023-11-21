@@ -47,6 +47,7 @@ export default function TableItem({ exhibition, id, year }) {
 	return (
 		<Link
             scroll={false}
+            shallow={false}
 			href={{
 				pathname: `${page}/[slug]`,
 				query: {
@@ -74,30 +75,32 @@ export default function TableItem({ exhibition, id, year }) {
 				</div>
 				<div className="col-span-2 col-start-6 flex flex-col pt-3">
 					<h3 className="pr-6">
-						{exhibition?.venue && exhibition?.venue?.name && (
+						{exhibition.venue && exhibition.venue.name && (
 							<span>
-								{exhibition?.venue?.city || exhibition?.venue?.country
-									? exhibition?.venue?.name + ', '
-									: exhibition?.venue?.name}
+								{exhibition.venue.city || exhibition.venue.country
+									? exhibition.venue.name + ', '
+									: exhibition.venue.name}
 							</span>
 						)}
-						{exhibition?.venue?.city && (
+						{exhibition.venue && exhibition.venue.city && (
 							<span>
-								{exhibition?.venue?.country ? exhibition?.venue?.city + ', ' : exhibition?.venue?.city}
+								{exhibition.venue.country ? exhibition.venue.city + ', ' : exhibition.venue.city}
 							</span>
 						)}
-						{exhibition?.venue?.country && <span>{exhibition?.venue?.country}</span>}
+						{exhibition.venue && exhibition.venue.country && (
+                            <span>{exhibition.venue.country}</span>
+                        )}
 					</h3>
 				</div>
 				<div className="col-span-2 col-start-8 flex justify-end pt-3">
 					<div className="flex">
-						{exhibition?.startDate && exhibition?.endDate && (
+						{exhibition.startDate && exhibition.endDate && (
 							<h3 className="">
-								{formatDateWithoutYear(exhibition?.startDate)}—
-								{formatDateWithoutYear(exhibition?.endDate)}
+								{formatDateWithoutYear(exhibition.startDate)}—
+								{formatDateWithoutYear(exhibition.endDate)}
 							</h3>
 						)}
-						{exhibition?.endDate && <h3 className="pl-6">{getYear(exhibition?.endDate)}</h3>}
+						{exhibition.endDate && <h3 className="pl-6">{getYear(exhibition.endDate)}</h3>}
 					</div>
 				</div>
 			</div>

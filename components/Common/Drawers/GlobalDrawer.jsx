@@ -78,15 +78,17 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
                                 </h3>
                             </button>
                         </div>
-                        {router.pathname.startsWith('/exhibitions') || router.pathname.startsWith('/viewing-rooms') && (
-                            <div className='w-full flex justify-end'>
+                        <div className='w-full flex justify-end'>
+                            {pressRelease ? (
                                 <button type="button" aria-label="Toggle to view the caption or the press release" onClick={togglePressRelease}>
                                     <h3 className="text-secondary transition hover:text-primary">
                                         {pressReleaseSelected ? 'Caption' : 'Press Release'}
                                     </h3>
                                 </button>
-                            </div>
-                        )}
+                            ) : (
+                                <></>
+                            )}
+                        </div>
                     </div>
                 </SheetFooter>
             </SheetContent>
