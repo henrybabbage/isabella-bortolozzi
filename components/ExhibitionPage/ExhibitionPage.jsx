@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Client } from "react-hydration-provider"
 import { Desktop, TabletAndBelow } from "utils/breakpoints"
@@ -17,6 +18,8 @@ export default function ExhibitionPage({exhibition}) {
 			setIsLoading(false)
 		}, 3400)
 	}, [])
+
+    const router = useRouter()
     
     const scrollToSections = useRef(new Set())
     const scrollViewRef = useRef(null)
@@ -25,9 +28,7 @@ export default function ExhibitionPage({exhibition}) {
 		let offset = Math.abs(scrollViewRef.current.children[0].getBoundingClientRect().top)
 
 		Array.from(scrollToSections.current).map((section, idx) => {
-            if (section === null || section === undefined) {
-                return
-            }
+            if (!section) return
 
 			const sectionCenter = section.offsetTop + section.offsetHeight / 2
 			if (sectionCenter > offset && sectionCenter < offset + window.innerHeight) {
@@ -62,6 +63,7 @@ export default function ExhibitionPage({exhibition}) {
 	}
 
 	const scrollToSection = (idx) => {
+        if(!idx) return
 		Array.from(scrollToSections.current)[idx].scrollIntoView({
 			behavior: 'smooth',
 			block: 'center',
@@ -73,7 +75,7 @@ export default function ExhibitionPage({exhibition}) {
             <LoadingScreen exhibition={exhibition} isLoading={isLoading} />
             <div className={cn(isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100', 'relative snap-y h-screen w-screen scrollbar-hide')}>
                 <div className="fixed top-6 right-6 z-50">
-                    <BackButton />
+                    <BackButton backPathname={router.pathname.split('/')[1]} />
                 </div>
                 <div className="fixed bottom-6 right-6 z-50">
                     <GlobalDrawer content={exhibition} pressRelease={exhibition.body} index={currentScrollElement} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />

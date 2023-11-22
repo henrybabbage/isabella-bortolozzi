@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { forwardRef, useState } from 'react'
 
 const BackButton = forwardRef(function BackButton(props, ref) {
+    const { backPathname } = props
     const router = useRouter()
     const [isHovered, setIsHovered] = useState(false)
     const handleMouseEnter = () => setIsHovered(true)
