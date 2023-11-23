@@ -4,7 +4,6 @@ import artist from './documents/artist'
 import artwork from './documents/artwork'
 import exhibition from './documents/exhibition'
 import news from './documents/news'
-import post from './documents/post'
 import venue from './documents/venue'
 import viewingRoom from './documents/viewingRoom'
 import visitorEmail from './documents/visitorEmail'
@@ -23,7 +22,29 @@ import home from './singletons/home'
 import imprint from './singletons/imprint'
 import seo from './singletons/seo'
 
-export const schemaTypes = [post, blockContent]
+export const schemaTypes = [
+    blockContent,
+    imageGallery,
+    artwork,
+    caption,
+    mainImage,
+    artist,
+    simpleBlockContent,
+    exhibition,
+    exhibitionRecord,
+    link,
+    venue,
+    news,
+    viewingRoom,
+    seo,
+    imprint,
+    home,
+    colophon,
+    contact,
+    newsletter,
+    mailchimp,
+    visitorEmail
+]
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
         blockContent,

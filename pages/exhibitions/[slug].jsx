@@ -1,21 +1,21 @@
-import { readToken } from 'lib/sanity.api'
-import { getClient } from 'lib/sanity.client'
-import { getExhibition } from 'lib/sanity.fetch'
-import {
-    exhibitionBySlugQuery,
-    exhibitionSlugsQuery,
-} from 'lib/sanity.queries'
 import { useLiveQuery } from 'next-sanity/preview'
 import { Client } from 'react-hydration-provider'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
+import { readToken } from '@/lib/sanity.api'
+import { getClient } from '@/lib/sanity.client'
+import { getExhibition } from '@/lib/sanity.fetch'
+import {
+    exhibitionBySlugQuery,
+    exhibitionSlugsQuery,
+} from '@/lib/sanity.queries'
 import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 export default function ExhibitionSlugRoute(
   props
 ) {
     const [exhibition] = useLiveQuery(props.exhibition, exhibitionBySlugQuery, {
-        slug: props.exhibition.slug.current,
+        slug: props.exhibition.slug,
     })
 
     return (

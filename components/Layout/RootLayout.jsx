@@ -11,10 +11,10 @@ export default function RootLayout({children}) {
     return (
         <div className="min-h-screen w-full -z-0">
             <Client>
-				<TabletAndBelow></TabletAndBelow>
 				<Desktop>
 					{router.pathname.startsWith('/studio') ? <></> : <GlobalHeader isFixed={true} />}
 				</Desktop>
+				<TabletAndBelow></TabletAndBelow>
 			</Client>
             {children}
         </div>

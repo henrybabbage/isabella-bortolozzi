@@ -16,10 +16,10 @@ export default function IndexPage(props) {
             <Client>
                 <Desktop>
                     <section className="h-screen snap-start">
-                        <ExhibitionSection exhibition={props.home.publicisedExhibitions[0]} />
+                        <ExhibitionSection exhibition={home.publicisedExhibitions[0]} />
                     </section>
                     <section className="h-screen snap-start">
-                        <Footer featuredExhibition={props.home.publicisedExhibitions[0]} override={props.home.logoControl} gallery={props.gallery} />
+                        <Footer featuredExhibition={home.publicisedExhibitions[0]} override={home.logoControl} gallery={props.gallery} />
                     </section>
                 </Desktop>
                 <TabletAndBelow>

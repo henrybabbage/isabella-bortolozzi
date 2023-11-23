@@ -3,7 +3,8 @@
  */
 
 import { visionTool } from '@sanity/vision'
-import { defineConfig } from 'sanity'
+import { defineConfig, SanityDocument } from 'sanity'
+import { DefaultDocumentNodeResolver, deskTool } from 'sanity/desk'
 import {
     defineUrlResolver,
     Iframe,
@@ -12,26 +13,49 @@ import {
 import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
 import { media } from 'sanity-plugin-media'
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input'
-import { deskTool } from 'sanity/desk'
+import { schema } from 'schemas'
 
-import deskStructure from 'lib/deskStructure'
+import deskStructure from '@/lib/deskStructure'
 // see https://www.sanity.io/docs/api-versioning for how versioning works
 import {
     apiVersion,
     dataset,
     previewSecretId,
     projectId,
-} from 'lib/sanity.api'
-import { schema } from 'schemas'
+} from '@/lib/sanity.api'
 
 const iframeOptions = {
   url: defineUrlResolver({
     base: '/api/draft',
-    requiresSlug: ['post'],
+    requiresSlug: ['artist'],
   }),
   urlSecretId: previewSecretId,
   reload: { button: true },
 } satisfies IframeOptions
+
+function getPreviewUrl(doc: SanityDocument) {
+    return doc?.slug
+      ? `${window.location.host}/${doc.slug}`
+      : window.location.host
+}
+
+const defaultDocumentNode: DefaultDocumentNodeResolver = (S, {schemaType}) => {
+    // Only show preview pane on `movie` schema type documents
+    switch (schemaType) {
+      case `artist`:
+        return S.document().views([
+          S.view.form(),
+          S.view
+            .component(Iframe)
+            .options({
+              url: (doc: SanityDocument) => getPreviewUrl(doc),
+            })
+            .title('Preview'),
+        ])
+      default:
+        return S.document().views([S.view.form()])
+    }
+}
 
 export default defineConfig({
   basePath: '/studio',
@@ -61,7 +85,7 @@ export default defineConfig({
     // Add the "Open preview" action
     previewUrl({
       base: '/api/draft',
-      requiresSlug: ['post', 'exhibition', 'artist'],
+      requiresSlug: ['artist'],
       urlSecretId: previewSecretId,
     }),
     // Vision lets you query your content with GROQ in the studio

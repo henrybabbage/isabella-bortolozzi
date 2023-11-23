@@ -1,11 +1,15 @@
+import { useLiveQuery } from "next-sanity/preview"
 import { Client } from "react-hydration-provider"
 
 import { CustomPortableText } from "@/components/Common/Text/CustomPortableText"
-import { getClient } from "@/lib/sanity.client"
+import { readToken } from '@/lib/sanity.api'
+import { getClient } from '@/lib/sanity.client'
 import { getImprint } from "@/lib/sanity.fetch"
+import { imprintQuery } from "@/lib/sanity.queries"
 import { Desktop, TabletAndBelow } from "@/utils/breakpoints"
 
-export default function Imprint({ imprint }) {
+export default function Imprint(props) {
+    const [imprint] = useLiveQuery(props.imprint, imprintQuery)
     return (
         <main className="h-screen w-screen py-6 animate-fade-in">
             <Client>

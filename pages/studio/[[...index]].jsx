@@ -9,7 +9,7 @@ export default function StudioPage() {
         <>
             <Head>
                 {Object.entries(metadata).map(([key, value]) => (
-                <meta key={key} name={key} content={value} />
+                    <meta key={key} name={key} content={value} />
                 ))}
             </Head>
             <NextStudio config={config} unstable_globalStyles />

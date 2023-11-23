@@ -45,7 +45,7 @@ export default function ArtistSlugRoute(props) {
     }, [isLoading])
 
     const [artist] = useLiveQuery(props.artist, artistBySlugQuery, {
-        slug: props.artist.slug.current,
+        slug: props.artist.slug,
     })
 
     return (
