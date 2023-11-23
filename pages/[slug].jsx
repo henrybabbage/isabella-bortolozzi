@@ -21,17 +21,14 @@ export default function ArtistSlugRoute(props) {
     const [isLoading, setIsLoading] = useState(true)
 
     const { scrollIntoView: scrollIntoViewWorks, targetRef: worksRef } = useScrollIntoView({
-        duration: 800,
         offset: 0
     })
 
     const { scrollIntoView: scrollIntoViewExhibitions, targetRef: exhibitionsRef } = useScrollIntoView({
-        duration: 800,
         offset: 0
     })
 
     const { scrollIntoView: scrollIntoViewBiography, targetRef: biographyRef } = useScrollIntoView({
-        duration: 800,
         offset: 72
     })
 
@@ -40,6 +37,12 @@ export default function ArtistSlugRoute(props) {
 			setIsLoading(false)
 		}, 3400)
 	}, [])
+
+    useEffect(() => {
+        isLoading
+          ? (document.body.style.overflow = 'hidden')
+          : (document.body.style.overflow = 'auto')
+    }, [isLoading])
 
     const [artist] = useLiveQuery(props.artist, artistBySlugQuery, {
         slug: props.artist.slug.current,
