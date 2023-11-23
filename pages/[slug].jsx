@@ -76,7 +76,7 @@ export default function ArtistSlugRoute(props) {
 export const getStaticPaths = async () => {
     const client = getClient()
     const slugs = await client.fetch(artistSlugsQuery)
-
+    console.log({slugs})
     return {
         paths: slugs?.map(({ slug }) => `/${slug}`) || [],
         fallback: 'blocking',
@@ -84,8 +84,10 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ draftMode = false, params = {} }) => {
+    console.log({params})
     const client = getClient(draftMode ? { token: readToken } : undefined)
     const artist = await getArtist(client, params.slug)
+    console.log({artist})
 
     if (!artist) {
         return {

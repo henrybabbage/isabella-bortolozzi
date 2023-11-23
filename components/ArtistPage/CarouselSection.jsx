@@ -28,27 +28,29 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
         <>
             <section ref={ref} id="works" className="relative h-screen w-screen flex flex-col items-center justify-center">
                 <div ref={worksRef} className="h-full w-full">
-                    <Carousel
-                        animation="fade"
-                        speed={100}
-                        enableKeyboardControls
-                        swiping
-                        wrapAround
-                        easing={easeExpInOut}
-                        slideIndex={index}
-                        beforeSlide={(_, v) => setIndex(v)}
-                        renderCenterLeftControls={renderCenterLeftControls}
-                        renderCenterRightControls={renderCenterRightControls}
-                        renderBottomCenterControls={false}
-                        renderBottomLeftControls={paginationCounter}
-                    >
-                        {imageGallery && imageGallery.map((image, idx) => (
-                            <SlideImage image={image.asset} key={idx} />
-                        ))}
-                    </Carousel>
+                    {imageGallery.length > 0 &&
+                        <Carousel
+                            animation="fade"
+                            speed={100}
+                            enableKeyboardControls
+                            swiping
+                            wrapAround
+                            easing={easeExpInOut}
+                            slideIndex={index}
+                            beforeSlide={(_, v) => setIndex(v)}
+                            renderCenterLeftControls={renderCenterLeftControls}
+                            renderCenterRightControls={renderCenterRightControls}
+                            renderBottomCenterControls={false}
+                            renderBottomLeftControls={paginationCounter}
+                        >
+                            {imageGallery.length > 0 && imageGallery.map((image, idx) => (
+                                <SlideImage image={image.asset} key={idx} />
+                            ))}
+                        </Carousel>
+                    }
                 </div>
                 <div className="absolute bottom-6 right-6">
-                    <GlobalDrawer content={artist} index={index} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />
+                    {imageGallery.length > 0 && <GlobalDrawer content={artist} index={index} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />}
                 </div>
             </section>
         </>

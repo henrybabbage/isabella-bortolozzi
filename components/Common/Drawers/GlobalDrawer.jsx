@@ -29,7 +29,9 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
         event.stopPropagation()
     }
 
-    const inViewImage = content.imageGallery[index]
+	const inViewImage = content?.imageGallery?.[index]
+
+    if(!content) return null
 
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen} modal={false} onInteractOutside={(event) => event.preventDefault()}>
@@ -42,7 +44,7 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
                         "flex flex-col",
                         !pressReleaseSelected ? 'block' : 'hidden'
                     )}>
-                        <CustomPortableText value={inViewImage.details} />
+                        {inViewImage && <CustomPortableText value={inViewImage.details} />}
                     </div>
                     <div className={cn(
                         "pointer-events-auto flex flex-col h-full justify-start",
