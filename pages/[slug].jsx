@@ -84,10 +84,8 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ draftMode = false, params = {} }) => {
-    console.log({params})
     const client = getClient(draftMode ? { token: readToken } : undefined)
     const artist = await getArtist(client, params.slug)
-    console.log({artist})
 
     if (!artist) {
         return {
