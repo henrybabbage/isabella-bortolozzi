@@ -2,6 +2,7 @@ import { isValidSecret } from 'sanity-plugin-iframe-pane/is-valid-secret'
 
 import { previewSecretId, readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
+import { resolveHref } from '@/lib/sanity.links'
 
 export default async function preview(
     req,
@@ -16,6 +17,9 @@ export default async function preview(
 
     const secret = typeof query.secret === 'string' ? query.secret : undefined
     const slug = typeof query.slug === 'string' ? query.slug : undefined
+    const type = typeof query.type === 'string' ? query.type : undefined
+
+    console.log({type})
 
     if (!secret) {
         res.status(401)
@@ -35,9 +39,11 @@ export default async function preview(
         return res.status(401).send('Invalid secret')
     }
 
+    // resolve preview url path with resolveHref function to check document type
+
     if (slug) {
         res.setDraftMode({ enable: true })
-        res.writeHead(307, { Location: `/${slug}` })
+        res.writeHead(307, { Location: resolveHref(type, slug) })
         res.end()
         return
     }

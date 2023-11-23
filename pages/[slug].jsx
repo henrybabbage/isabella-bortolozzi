@@ -45,6 +45,7 @@ export default function ArtistSlugRoute(props) {
     }, [isLoading])
 
     const [artist] = useLiveQuery(props.artist, artistBySlugQuery, {
+        _type: props.artist._type,
         slug: props.artist.slug,
     })
 
@@ -76,7 +77,6 @@ export default function ArtistSlugRoute(props) {
 export const getStaticPaths = async () => {
     const client = getClient()
     const slugs = await client.fetch(artistSlugsQuery)
-    console.log({slugs})
     return {
         paths: slugs?.map(({ slug }) => `/${slug}`) || [],
         fallback: 'blocking',
