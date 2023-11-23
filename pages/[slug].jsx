@@ -1,3 +1,4 @@
+import { useScrollIntoView } from '@mantine/hooks'
 import { useLiveQuery } from 'next-sanity/preview'
 import { useEffect, useState } from 'react'
 import { Client } from 'react-hydration-provider'
@@ -19,6 +20,21 @@ import { cn } from '@/utils/cn'
 export default function ArtistSlugRoute(props) {
     const [isLoading, setIsLoading] = useState(true)
 
+    const { scrollIntoView: scrollIntoViewWorks, targetRef: worksRef } = useScrollIntoView({
+        duration: 800,
+        offset: 0
+    })
+
+    const { scrollIntoView: scrollIntoViewExhibitions, targetRef: exhibitionsRef } = useScrollIntoView({
+        duration: 800,
+        offset: 0
+    })
+
+    const { scrollIntoView: scrollIntoViewBiography, targetRef: biographyRef } = useScrollIntoView({
+        duration: 800,
+        offset: 72
+    })
+
     useEffect(() => {
 		setTimeout(() => {
 			setIsLoading(false)
@@ -33,11 +49,17 @@ export default function ArtistSlugRoute(props) {
         <main className='flex flex-col h-full w-screen relative gap-24 animate-fade-in'>
             <Client>
                 <Desktop>
-                    <ArtistSubNav artist={artist} isLoading={isLoading} />
+                    <ArtistSubNav
+                        artist={artist}
+                        isLoading={isLoading}
+                        scrollIntoViewWorks={scrollIntoViewWorks}
+                        scrollIntoViewExhibitions={scrollIntoViewExhibitions}
+                        scrollIntoViewBiography={scrollIntoViewBiography}
+                    />
                     <div className={cn(isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100', 'relative')}>
-                        <CarouselSection artist={artist} isLoading={isLoading} />
-                        <ExhibitionsSection artist={artist} />
-                        <CVSection artist={artist} />
+                        <CarouselSection worksRef={worksRef} artist={artist} isLoading={isLoading} />
+                        <ExhibitionsSection exhibitionsRef={exhibitionsRef} artist={artist} />
+                        <CVSection biographyRef={biographyRef} artist={artist} />
                     </div>
                 </Desktop>
                 <TabletAndBelow>

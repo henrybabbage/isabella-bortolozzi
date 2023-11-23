@@ -1,12 +1,9 @@
-
-import Link from 'next/link'
-
 import { useActiveSectionStore } from '@/context/useActiveSectionStore'
 import { cn } from '@/utils/cn'
 
 import LoadingCounter from '../Common/Loading/LoadingCounter'
 
-export default function ArtistSubNav({ artist, isLoading, }) {
+export default function ArtistSubNav({ artist, isLoading, scrollIntoViewWorks, scrollIntoViewExhibitions, scrollIntoViewBiography }) {
     const inViewSection = useActiveSectionStore((state) => state.inViewSection)
     const setInViewSection = useActiveSectionStore((state) => state.setInViewSection)
 
@@ -20,54 +17,57 @@ export default function ArtistSubNav({ artist, isLoading, }) {
 					{artist.name}
 				</h1>
 				<nav className="flex space-x-4">
-                    <Link
+                    <button
+                        type="button"
                         className={cn(
                             'z-100 w-fit cursor-pointer transition hover:text-primary',
                             isLoading ? 'hidden' : 'block',
                             inViewSection === 'works' ? 'text-primary' : 'text-secondary'
                         )}
-                        href={'#works'}
                         onClick={() => {
                             setInViewSection('works')
+                            scrollIntoViewWorks({
+                                alignment: 'start'
+                            })
                         }}
-                        scroll={false}
-                        shallow={true}
                     >
                         {'Works'}
-                    </Link>
+                    </button>
 					<div className={cn(isLoading ? 'block' : 'hidden')}>
 						<LoadingCounter totalImages={artist.imageGallery?.length} />
 					</div>
-					<Link
+					<button
+                        type="button"
                         className={cn(
                             'z-100 w-fit cursor-pointer transition hover:text-primary',
                             isLoading ? 'hidden' : 'block',
                             inViewSection === 'exhibitions' ? 'text-primary' : 'text-secondary'
                         )}
-                        href={'#exhibitions'}
                         onClick={() => {
                             setInViewSection('exhibitions')
+                            scrollIntoViewExhibitions({
+                                alignment: 'start'
+                            })
                         }}
-                        scroll={false}
-                        shallow={true}
                     >
                         {'Exhibitions'}
-                    </Link>
-					<Link
+                    </button>
+					<button
+                        type="button"
                         className={cn(
                             'z-100 w-fit cursor-pointer transition hover:text-primary',
                             isLoading ? 'hidden' : 'block',
                             inViewSection === 'biography' ? 'text-primary' : 'text-secondary'
                         )}
-                        href={'#biography'}
                         onClick={() => {
                             setInViewSection('biography')
+                            scrollIntoViewBiography({
+                                alignment: 'start'
+                            })
                         }}
-                        scroll={false}
-                        shallow={true}
                     >
                         {'Biography'}
-                    </Link>
+                    </button>
 				</nav>
 			</div>
 		</aside>

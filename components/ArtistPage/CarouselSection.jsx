@@ -9,7 +9,7 @@ import ArrowRightButton from "../Common/Buttons/ArrowRightButton"
 import GlobalDrawer from "../Common/Drawers/GlobalDrawer"
 import SlideImage from "./SlideImage"
 
-export default function CarouselSection({ artist, isLoading }) {
+export default function CarouselSection({ artist, isLoading, worksRef }) {
     const [index, setIndex] = useState(0)
 
 	const { ref } = useSectionInView("works", 0.1)
@@ -27,7 +27,7 @@ export default function CarouselSection({ artist, isLoading }) {
 	return (
         <>
             <section ref={ref} id="works" className="relative h-screen w-screen flex flex-col items-center justify-center">
-                <div className="h-full w-full">
+                <div ref={worksRef} className="h-full w-full">
                     <Carousel
                         animation="fade"
                         speed={100}
