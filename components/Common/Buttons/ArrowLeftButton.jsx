@@ -9,6 +9,7 @@ export default function ArrowLeftButton({ previousSlide }) {
     return (
         <button
             type="button"
+            aria-label='Click the left arrow to go to the previous item'
             onClick={previousSlide}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}

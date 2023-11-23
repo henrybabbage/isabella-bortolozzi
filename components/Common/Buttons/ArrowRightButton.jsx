@@ -9,6 +9,7 @@ export default function ArrowRightButton({ nextSlide }) {
     return (
         <button
             type="button"
+            aria-label='Click the right arrow to go to the next item'
             onClick={nextSlide}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}

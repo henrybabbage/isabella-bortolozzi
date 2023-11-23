@@ -3,7 +3,7 @@ import { forwardRef, useState } from 'react'
 
 const CloseButton = forwardRef(function CloseButton(
   { didPressButton },
-  ref = { ref },
+  ref,
 ) {
     const [isHovered, setIsHovered] = useState(false)
     const handleMouseEnter = () => setIsHovered(true)
@@ -11,6 +11,7 @@ const CloseButton = forwardRef(function CloseButton(
     const iconColor = isHovered ? '#BFBFBF' : '#222222'
     return (
         <button
+            ref={ref}
             type="button"
             aria-label="Close the open dialog"
             onClick={didPressButton}
