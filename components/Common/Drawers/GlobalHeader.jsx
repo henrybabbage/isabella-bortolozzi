@@ -54,16 +54,16 @@ export default function GlobalHeader({ isFixed = true }) {
 			className={cn(
                 isFixed ? 'fixed' : 'absolute',
                 isOpen ? 'h-screen w-screen bg-background/95' : 'bg-transparent',
-                'z-500 transition')}
+                'z-500 transition-colors')}
         >
             <Link
                 href="/"
-                className="relative inline-block px-6 pt-6 z-500"
+                className="absolute w-fit whitespace-nowrap px-6 pt-6 z-500"
                 onClick={closeHeaderMenu}
                 onMouseEnter={openHeaderMenu}
                 aria-label='Click to return to home page or hover to view nav'
             >
-                <h1 className="text-primary transition hover:text-secondary cursor-pointer">
+                <h1 className="text-primary transition-colors hover:text-secondary cursor-pointer">
                     Isabella Bortolozzi
                 </h1>
             </Link>
