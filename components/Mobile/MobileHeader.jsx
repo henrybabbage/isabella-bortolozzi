@@ -53,7 +53,7 @@ export default function MobileHeader({ isFixed = true }) {
                 isOpen ? 'h-screen w-screen bg-background/95' : 'bg-transparent',
                 'z-500 transition-colors')}
         >
-            <div>
+            <div className="z-[999]">
                 <Link
                     href="/"
                     className="absolute w-fit whitespace-nowrap px-6 pt-6"
@@ -86,9 +86,6 @@ export default function MobileHeader({ isFixed = true }) {
                                 )
                             })}
                         </div>
-                    </div>
-                    <div className="right-6 top-6 absolute h-fit">
-                        <CloseButton didPressButton={toggleHeaderMenu} />
                     </div>
                 </div>
             </nav>

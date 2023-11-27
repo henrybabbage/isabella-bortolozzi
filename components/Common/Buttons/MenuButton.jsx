@@ -7,7 +7,7 @@ export default function MenuButton({ isOpen, setIsOpen }) {
     const iconColor = isActive ? '#BFBFBF' : '#222222'
 	return (
 		<div
-            className="fixed top-0 right-0 my-3 cursor-pointer px-3 md:hidden"
+            className="fixed z-[999] top-0 right-0 my-3 cursor-pointer px-3 md:hidden"
             onClick={handleClick}
         >
 			<Hamburger
