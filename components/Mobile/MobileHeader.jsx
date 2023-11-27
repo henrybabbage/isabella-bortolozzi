@@ -69,8 +69,8 @@ export default function MobileHeader({ isFixed = true }) {
             <nav aria-label='Website menu nav' className={cn(
                 isOpen ? 'block' : 'hidden',
                 'absolute top-0 h-[100vh] w-screen')}>
-                <div className="grid h-full w-full grid-cols-12 px-6">
-                    <div className="col-span-12 col-start-1 pt-[5.25rem]">
+                <div className="grid h-full w-full grid-cols-12 pl-6 pr-2">
+                    <div className="col-span-12 col-start-1 pt-[5.25rem] overflow-y-auto scrollbar-hide">
                         <div className="flex cursor-pointer flex-col h-auto space-y-9 pb-6">
                             <ArtistsAccordion artists={artists} />
                             {menu.map((item, index) => {
@@ -103,7 +103,7 @@ const ArtistsAccordion = ({ artists }) => {
                     </Accordion.Trigger>
                 </Accordion.Header>
                 <Accordion.Content className="overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                    <div className="text-left h-auto flex flex-col">
+                    <div className="text-left h-auto flex flex-col pt-9">
                         {artists.map((artist, index) => {
                             return (
                                 <Link
