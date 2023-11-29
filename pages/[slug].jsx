@@ -27,15 +27,18 @@ export default function ArtistSlugRoute(props) {
 	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
 
     const { scrollIntoView: scrollIntoViewWorks, targetRef: worksRef } = useScrollIntoView({
-        offset: 0
+        offset: 0,
+        duration: 800
     })
 
     const { scrollIntoView: scrollIntoViewExhibitions, targetRef: exhibitionsRef } = useScrollIntoView({
-        offset: 0
+        offset: 0,
+        duration: 800
     })
 
     const { scrollIntoView: scrollIntoViewBiography, targetRef: biographyRef } = useScrollIntoView({
-        offset: 0
+        offset: 0,
+        duration: 800
     })
 
     useEffect(() => {
