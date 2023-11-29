@@ -11,7 +11,7 @@ import { viewingRoomsQuery } from '@/lib/sanity.queries'
 export default function ViewingRooms(props) {
     const [viewingRooms] = useLiveQuery(props.viewingRooms, viewingRoomsQuery)
     return (
-        <main className="animate-fade-in h-screen w-screen">
+        <main className="animate-fade-in h-[100dvh] w-screen">
             <Client>
                 <ViewingRoomsHeader />
                 <TableView exhibitions={viewingRooms} />

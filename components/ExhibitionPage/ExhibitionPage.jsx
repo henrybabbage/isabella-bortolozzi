@@ -75,7 +75,7 @@ export default function ExhibitionPage({exhibition}) {
     return (
         <>
             <LoadingScreen exhibition={exhibition} isLoading={isLoading} />
-            <div className={cn(isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100', 'relative snap-y h-screen w-screen scrollbar-hide')}>
+            <div className={cn(isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100', 'relative snap-y h-[100dvh] w-screen scrollbar-hide')}>
                 <div className="fixed top-6 right-6 z-50">
                     <BackButton backPathname={router.pathname.split('/')[1]} />
                 </div>
@@ -84,7 +84,7 @@ export default function ExhibitionPage({exhibition}) {
                 </div>
                 <div
                     ref={scrollViewRef}
-                    className="flex flex-col h-screen w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
+                    className="flex flex-col h-[100dvh] w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
                 >
                     <SnapSection exhibition={exhibition} scrollToSections={scrollToSections} index={currentScrollElement} />
                 </div>
