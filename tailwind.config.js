@@ -20,6 +20,7 @@ module.exports = {
 				primary: '#222222',
 				secondary: '#BFBFBF',
                 background: '#f4f3ef',
+                border: '#D9D8D5',
 			},
             fontFamily: {
 				serif: ['var(--font-serif)', ...fontFamily.serif],
