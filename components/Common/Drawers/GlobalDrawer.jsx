@@ -1,7 +1,5 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { useHydrated } from "react-hydration-provider"
-import { useMediaQuery } from "react-responsive"
 
 import { cn } from "@/utils/cn"
 
@@ -14,10 +12,6 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
     const [pressReleaseSelected, setPressReleaseSelected] = useState(false)
 
     const router = useRouter()
-
-    const hydrated = useHydrated()
-	const tabletOrMobile = useMediaQuery({ query: '(max-width: 991px)' }, hydrated ? undefined : { deviceWidth: 991 })
-	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
 
 	const togglePressRelease = (event) => {
 		setPressReleaseSelected((pressReleaseSelected) => !pressReleaseSelected)

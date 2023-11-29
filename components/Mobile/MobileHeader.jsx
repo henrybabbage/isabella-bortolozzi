@@ -7,7 +7,6 @@ import { sanityClient } from '@/lib/sanity.client'
 import { artistsQuery } from '@/lib/sanity.queries'
 import { cn } from '@/utils/cn'
 
-import CloseButton from '../Common/Buttons/CloseButton'
 import MenuButton from '../Common/Buttons/MenuButton'
 
 export default function MobileHeader({ isFixed = true }) {
@@ -72,7 +71,7 @@ export default function MobileHeader({ isFixed = true }) {
                 <div className="grid h-full w-full grid-cols-12 pl-6 pr-2">
                     <div className="col-span-12 col-start-1 pt-[5.25rem] overflow-y-auto scrollbar-hide">
                         <div className="flex cursor-pointer flex-col h-auto space-y-9 pb-6">
-                            <ArtistsAccordion artists={artists} />
+                            <ArtistsAccordion artists={artists} toggleHeaderMenu={toggleHeaderMenu} />
                             {menu.map((item, index) => {
                                 return (
                                     <Link
@@ -93,7 +92,7 @@ export default function MobileHeader({ isFixed = true }) {
     )
 }
 
-const ArtistsAccordion = ({ artists }) => {
+const ArtistsAccordion = ({ artists, toggleHeaderMenu }) => {
     return (
         <Accordion.Root type="single" collapsible>
             <Accordion.Item value="item-1">
@@ -108,6 +107,7 @@ const ArtistsAccordion = ({ artists }) => {
                             return (
                                 <Link
                                     key={index}
+                                    onClick={toggleHeaderMenu}
                                     href={`/${artist.slug}`}
                                     className='hover:text-secondary text-primary font-serif mr-1 inline-flex shrink-0 cursor-pointer transition'
                                     aria-label='Artist page links'
