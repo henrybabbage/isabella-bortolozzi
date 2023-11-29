@@ -48,20 +48,32 @@ export default function Footer({ gallery, featuredExhibition, override }) {
     const dominantColor = featuredExhibition.mainImage.asset.metadata.palette.dominant.background
 
 	return (
-		<div className="relative flex h-screen w-screen flex-col justify-end p-6">
-			<div className="mb-6 flex w-full justify-between h-12 items-start">
-				<h3 className="h-fit">{gallery.footer.phoneNumber}</h3>
-				<h3 className="h-fit">{gallery.footer.email}</h3>
-				<h3 className="h-fit">{gallery.footer.newsletterHeading}</h3>
-				<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col h-auto">
+		<div className="relative flex h-screen w-screen flex-col justify-end px-6 pt-6 pb-4">
+            <div className="h-auto w-full">
+				<SvgBortolozziLogo
+					fill={override?.overrideColor === true ? override?.logoColor.value : dominantColor}
+					height="100%"
+					width="100%"
+				/>
+			</div>
+			<div className="mt-6 flex w-full justify-between h-12 items-start">
 
+				<h3 className="h-fit">{gallery.footer.phoneNumber}</h3>
+
+				<h3 className="h-fit">{gallery.footer.email}</h3>
+				
+                <h3 className="h-fit">{gallery.footer.newsletterHeading}</h3>
+				
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col h-auto">
                     <div className='flex'>
                         <label htmlFor="email" className="h-fit">
                             {gallery.footer.newsletterPrompt}
                         </label>
                         <input
-                            className="h-fit flex flex-col w-full border-b outline-none"
+                            placeholder="Email address"
+                            className="placeholder:text-secondary h-fit flex flex-col w-full border-b border-primary outline-none"
                             type="text"
+                            name="email"
                             {...register('email', {
                                 required: 'This field is required',
                                 pattern: {
@@ -103,21 +115,16 @@ export default function Footer({ gallery, featuredExhibition, override }) {
                             </div>
                         )}
                     </div>
-
 				</form>
+
 				<Link href="/imprint" className="cursor-pointer">
 					<h3 className="text-primary transition hover:text-secondary">Imprint</h3>
 				</Link>
-				<a href={gallery?.footer?.instagram} target="_blank" rel="noreferrer" className="cursor-pointer">
+				
+                <a href={gallery?.footer?.instagram} target="_blank" rel="noreferrer" className="cursor-pointer">
 					<h3 className="text-primary transition hover:text-secondary">Instagram</h3>
 				</a>
-			</div>
-			<div className="h-auto w-full">
-				<SvgBortolozziLogo
-					fill={override?.overrideColor === true ? override?.logoColor.value : dominantColor}
-					height="100%"
-					width="100%"
-				/>
+                
 			</div>
 		</div>
 	)
