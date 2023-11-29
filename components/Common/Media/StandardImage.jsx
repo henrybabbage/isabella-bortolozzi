@@ -3,10 +3,10 @@ import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
 import { cn } from 'utils/cn'
 
-export default function StandardImage({ currentImage }) {
-    const imageProps = useNextSanityImage(sanityClient, currentImage?.asset)
+export default function StandardImage({ image }) {
+    const imageProps = useNextSanityImage(sanityClient, image?.asset)
 
-    if (!currentImage) return null
+    if (!image) return null
 
     return (
         <div className={cn('absolute inset-0 h-full w-full')}>
@@ -15,7 +15,7 @@ export default function StandardImage({ currentImage }) {
                 loader={imageProps.loader}
                 alt=""
                 fill
-                sizes="(max-width: 768px) 25vw, (max-width: 1200px) 25vw, 50vw"
+                sizes="100vw"
                 priority
                 style={{ objectFit: 'cover', objectPosition: 'center' }}
             />

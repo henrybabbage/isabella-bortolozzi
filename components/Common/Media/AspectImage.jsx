@@ -63,18 +63,21 @@ const AspectImage = forwardRef(function AspectImage({
         <div ref={ref} className='flex flex-col items-center h-screen justify-center w-full snap-start'>
             <div style={aspectRatioValuesMobile} className='relative'>
                 {imageProps && 
-                <Image
-                    src={imageProps.src}
-                    loader={imageProps.loader}
-                    alt={alt}
-                    sizes={sizes}
-                    fill={fill}
-                    priority={priority}
-                    style={{
-                        objectFit: 'cover',
-                        objectPosition: 'top'
-                    }}
-                />}
+                    <Image
+                        src={imageProps.src}
+                        loader={imageProps.loader}
+                        alt={alt}
+                        sizes="100vw"
+                        blurDataURL={image.asset.metadata.lqip}
+                        placeholder='blur'
+                        fill={fill}
+                        priority={false}
+                        style={{
+                            objectFit: 'cover',
+                            objectPosition: 'top'
+                        }}
+                    />
+                }
             </div>
         </div>
     ) : (
@@ -83,22 +86,23 @@ const AspectImage = forwardRef(function AspectImage({
                 <div ref={ref} className="flex flex-col items-center h-screen justify-center w-full snap-start">
                     <div style={aspectRatioValuesDesktop} className='relative'>
                         {imageProps && 
-                        <Image
-                            src={imageProps.src}
-                            loader={imageProps.loader}
-                            alt={alt ?? ''}
-                            width={width}
-                            height={height}
-                            sizes="100vw"
-                            blurDataURL={image.asset.metadata.lqip}
-                            placeholder='blur'
-                            fill={fill}
-                            priority={priority}
-                            style={{
-                                objectFit: `${mode}`,
-                                objectPosition: 'top'
-                            }}
-                        />}
+                            <Image
+                                src={imageProps.src}
+                                loader={imageProps.loader}
+                                alt={alt ?? ''}
+                                width={width}
+                                height={height}
+                                sizes="100vw"
+                                blurDataURL={image.asset.metadata.lqip}
+                                placeholder='blur'
+                                fill={fill}
+                                priority={priority}
+                                style={{
+                                    objectFit: `${mode}`,
+                                    objectPosition: 'top'
+                                }}
+                            />
+                        }
                     </div>
                 </div>
             </Modal.Button>
