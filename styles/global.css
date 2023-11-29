@@ -26,7 +26,13 @@
         @apply text-xl;
     }
 }
-  
+
+@layer utilities {
+    .small-caps {
+      font-variant: all-small-caps;
+    }
+}
+
 
 /* This assumes no margin or padding on #app's parent(s) */
 #app {
