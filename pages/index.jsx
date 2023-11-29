@@ -25,10 +25,10 @@ export default function IndexPage(props) {
                     </section>
                 </Desktop>
                 <TabletAndBelow>
-                    <section className="h-screen snap-start">
+                    <section className="h-[100dvh] snap-start">
                         <ExhibitionSection exhibition={home.publicisedExhibitions[0]} />
                     </section>
-                    <section className="h-screen snap-start">
+                    <section className="h-[100dvh] snap-start">
                         <MobileFooter featuredExhibition={home.publicisedExhibitions[0]} override={home.logoControl} gallery={gallery} />
                     </section>
                 </TabletAndBelow>

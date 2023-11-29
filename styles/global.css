@@ -60,9 +60,9 @@ body {
 
 button,
 fieldset,
-input {
+/* input {
   all: unset;
-}
+} */
 
 a {
 	color: inherit;

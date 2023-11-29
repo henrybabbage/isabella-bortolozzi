@@ -13,10 +13,20 @@ export default function RootLayout({children}) {
         <div className="min-h-screen w-full -z-0 overscroll-none">
             <Client>
 				<Desktop>
-					{!router.pathname.startsWith('/studio') ? <GlobalHeader isFixed={true} /> : null}
+					{!router.pathname.startsWith('/studio')
+                        && !router.pathname.startsWith('/exhibitions/')
+                        && !router.pathname.startsWith('/viewing-rooms/')
+                            ? <GlobalHeader isFixed={true} />
+                            : null
+                    }
 				</Desktop>
 				<TabletAndBelow>
-                    {!router.pathname.startsWith('/studio') ? <MobileHeader isFixed={true} /> : null}
+                    {!router.pathname.startsWith('/studio')
+                        && !router.pathname.startsWith('/exhibitions/')
+                        && !router.pathname.startsWith('/viewing-rooms/')
+                            ? <MobileHeader isFixed={true} />
+                            : null
+                    }
                 </TabletAndBelow>
 			</Client>
             {children}

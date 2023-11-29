@@ -110,36 +110,36 @@ export default function App({ Component, pageProps }) {
     }, [router])
 
     // Use the layout defined at the page level, if available
-    const Layout = Component.layout || (({ children }) => (<RootLayout>{children}</RootLayout>))
+    // const Layout = Component.layout || (({ children }) => (<RootLayout>{children}</RootLayout>))
 
 	return (
 		<>
-		<Head>
-			<title>Galerie Isabella Bortolozzi</title>
-			<meta name="description" content="Galerie Isabella Bortolozzi" />
-			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-			<link rel="icon" href="data:," />
-		</Head>
-		<HydrationProvider>
-			<style jsx global>
-			{`
-				:root {
-					--font-serif: ${serif.style.fontFamily}
-				}
-			`}
-			</style>
-			{draftMode ? (
-                <PreviewProvider token={token}>
-                     <Layout>
-                        <Component {...pageProps} key={key} />
-                     </Layout>
-                </PreviewProvider>
-                ) : (
-                    <Layout>
-                        <Component {...pageProps} key={key} />
-                    </Layout>
-            )}
-		</HydrationProvider>
+            <Head>
+                <title>Galerie Isabella Bortolozzi</title>
+                <meta name="description" content="Galerie Isabella Bortolozzi" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="icon" href="data:," />
+            </Head>
+            <HydrationProvider>
+                <style jsx global>
+                {`
+                    :root {
+                        --font-serif: ${serif.style.fontFamily}
+                    }
+                `}
+                </style>
+                {draftMode ? (
+                    <PreviewProvider token={token}>
+                        <RootLayout>
+                            <Component {...pageProps} key={key} />
+                        </RootLayout>
+                    </PreviewProvider>
+                    ) : (
+                        <RootLayout>
+                            <Component {...pageProps} key={key} />
+                        </RootLayout>
+                )}
+            </HydrationProvider>
 		</>
 	)
 }
