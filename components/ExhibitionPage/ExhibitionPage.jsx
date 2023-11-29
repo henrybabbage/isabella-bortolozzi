@@ -87,8 +87,12 @@ export default function ExhibitionPage({exhibition}) {
                     <SnapSection exhibition={exhibition} scrollToSections={scrollToSections} index={currentScrollElement} />
                     <section className="relative flex flex-col w-screen h-screen snap-start">
                         <Client>
-                            <Desktop><div></div></Desktop>
-                            <TabletAndBelow></TabletAndBelow>
+                            <Desktop>
+                                <div></div>            
+                            </Desktop>
+                            <TabletAndBelow>
+                                <div></div>    
+                            </TabletAndBelow>
                         </Client>
                     </section>
                 </div>
