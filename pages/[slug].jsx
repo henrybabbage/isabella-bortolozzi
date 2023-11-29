@@ -2,6 +2,8 @@ import { useScrollIntoView } from '@mantine/hooks'
 import { useLiveQuery } from 'next-sanity/preview'
 import { useEffect, useState } from 'react'
 import { Client } from 'react-hydration-provider'
+import { useHydrated } from 'react-hydration-provider'
+import { useMediaQuery } from 'react-responsive'
 
 import ArtistSubNav from '@/components/ArtistPage/ArtistSubNav'
 import CarouselSection from '@/components/ArtistPage/CarouselSection'
@@ -50,6 +52,9 @@ export default function ArtistSlugRoute(props) {
         slug: props.artist.slug,
     })
 
+    const hydrated = useHydrated()
+	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
+
     return (
         <main className='flex flex-col h-full w-screen relative animate-fade-in'>
             <Client>
@@ -73,7 +78,7 @@ export default function ArtistSlugRoute(props) {
                 </TabletAndBelow>
                     <div
                         className={cn(
-                            isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100',
+                            isLoading && desktopOrLaptop ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100',
                             'relative flex flex-col gap-24 sm:gap-0'
                         )}
                     >
