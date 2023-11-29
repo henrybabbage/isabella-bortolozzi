@@ -6,7 +6,6 @@ export default function MobileFooter({ gallery, featuredExhibition, override }) 
 		<div className="flex w-screen h-screen flex-col justify-end md:hidden">
 			<div className="flex flex-col space-y-7 p-6">
 				<div className="flex flex-col">
-                    <p className="font-serif">Isabella Bortolozzi</p>
 					<a href={gallery.footer.googleMaps || 'https://www.google.com/maps/'} target="_blank" rel="noreferrer" className="font-serif">
 						{gallery.footer.address}
 					</a>

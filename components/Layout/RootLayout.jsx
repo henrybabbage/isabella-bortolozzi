@@ -9,15 +9,14 @@ import MobileHeader from '../Mobile/MobileHeader'
 
 export default function RootLayout({children}) {
     const router = useRouter()
-    if (router.pathname.startsWith('/studio')) return null
     return (
         <div className="min-h-screen w-full -z-0">
             <Client>
 				<Desktop>
-					<GlobalHeader isFixed={true} />
+					{!router.pathname.startsWith('/studio') ? <GlobalHeader isFixed={true} /> : null}
 				</Desktop>
 				<TabletAndBelow>
-                    <MobileHeader isFixed={true} />
+                    {!router.pathname.startsWith('/studio') ? <MobileHeader isFixed={true} /> : null}
                 </TabletAndBelow>
 			</Client>
             {children}
