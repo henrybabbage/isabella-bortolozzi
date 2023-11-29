@@ -17,7 +17,7 @@ export default function Imprint(props) {
                         <h1 className="text-primary">Imprint</h1>
                     </div>
                 </section>
-                <section className="flex flex-col sm:grid sm:grid-cols-12 px-6 pb-6">
+                <section className="flex flex-col sm:grid sm:grid-cols-12 px-6 py-6">
                     {imprint.heading && (
                         <div className="sm:col-span-5 sm:col-start-9">
                             <CustomPortableText value={imprint.heading} />
