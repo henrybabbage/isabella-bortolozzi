@@ -28,9 +28,9 @@ export default function YearsPopover({ exhibitions }) {
             </Popover.Trigger>
             <Popover.Portal className="shadow-transparent shadow-none focus:shadow-none">
                 <Popover.Content onCloseAutoFocus={(event) => event.preventDefault()} className="shadow-transparent shadow-none focus:shadow-none outline-none focus:outline-none h-fit bg-background">
-                    <nav className="grid grid-cols-12 w-screen">
-                        <div className="col-span-9 col-start-4 pl-3">
-                            <div className="h-fit w-2/3">
+                    <nav className="grid grid-cols-12 w-screen px-6 sm:px-0 pt-1 sm:pt-0">
+                        <div className="sm:col-span-9 sm:col-start-4 col-span-12 col-start-1 sm:pl-3">
+                            <div className="h-fit w-full sm:w-2/3">
                                 {years.map((year, index) => (
                                     <Link
                                         href={`#${year}`}

@@ -1,6 +1,5 @@
 import { useLiveQuery } from 'next-sanity/preview'
 import { Client } from 'react-hydration-provider'
-import { Desktop, TabletAndBelow } from 'utils/breakpoints'
 
 import TableView from '@/components/Common/Table/TableView'
 import ExhibitionsHeader from '@/components/ExhibitionsPage/ExhibitionsHeader'
@@ -14,13 +13,8 @@ export default function Exhibitions(props) {
     return (
         <main className="animate-fade-in h-screen w-screen">
             <Client>
-                <Desktop>
-                    <ExhibitionsHeader exhibitions={exhibitions} />
-                    <TableView exhibitions={exhibitions} />
-                </Desktop>
-                <TabletAndBelow>
-                    <section></section>
-                </TabletAndBelow>
+                <ExhibitionsHeader exhibitions={exhibitions} />
+                <TableView exhibitions={exhibitions} />
             </Client>
         </main>
     )
