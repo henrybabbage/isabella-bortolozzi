@@ -19,7 +19,7 @@ export default function TableView({ exhibitions }) {
 
 	return (
 		<div className="grid w-full grid-cols-12 items-start px-6">
-			<div className="sticky top-0 col-span-3 col-start-1 flex h-screen w-full items-center">
+			<div className="hidden sm:flex sticky top-0 col-span-3 col-start-1 h-screen w-full items-center">
 				<div className="relative h-[22.5vw] w-[22.5vw] bg-background p-6">
 					{exhibitions &&
 						exhibitions.map((exhibition) => (
@@ -31,7 +31,7 @@ export default function TableView({ exhibitions }) {
 						))}
 				</div>
 			</div>
-			<div className="col-span-9 col-start-4 w-full py-[24vh]">
+			<div className="sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[24vh]">
 				<ul>
 					{exhibitions &&
 						exhibitions.map((exhibition) => (

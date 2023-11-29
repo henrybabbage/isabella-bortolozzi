@@ -8,6 +8,7 @@ import { useActiveItemStore } from '@/context/useActiveItemStore'
 import { useActiveYearStore } from '@/context/useActiveYearStore'
 import { cn } from '@/utils/cn'
 
+import StandardImage from '../Media/StandardImage'
 import { CustomPortableText } from '../Text/CustomPortableText'
 
 export default function TableItem({ exhibition, id, year }) {
@@ -58,22 +59,28 @@ export default function TableItem({ exhibition, id, year }) {
 			<div
 				ref={ref}
 				className={cn(
-					'group relative grid h-[calc(26vw-48px)] max-h-[26vw] cursor-pointer grid-flow-dense grid-cols-9 content-start border-t border-solid border-inactive-200 pb-6 text-left font-serif',
+					'group relative flex flex-col sm:grid h-[40rem] sm:h-[calc(26vw-48px)] sm:max-h-[26vw] cursor-pointer sm:grid-flow-dense sm:grid-cols-9 content-start border-t border-solid border-inactive-200 pb-6 text-left font-serif',
 					inView ? 'text-primary' : 'text-secondary'
 				)}
 			>
-				<div className="col-span-5 col-start-1 flex flex-col">
-					<div className="flex w-full flex-col pt-3">
-						{exhibition.title && <h1 className="">{exhibition.title}</h1>}
+                <div className="sm:hidden relative h-[22rem] w-full overflow-hidden pb-6">
+                    <StandardImage
+                        key={exhibition._id}
+                        currentImage={exhibition.mainImage ?? ''}
+                    />
+                </div>
+				<div className="sm:col-span-5 sm:col-start-1 flex flex-col">
+					<div className="flex w-full flex-col pt-6 sm:pt-3">
+						{exhibition.title && <h1 className="uppercase">{exhibition.title}</h1>}
 						{exhibition.subtitle && <h2 className="">{exhibition.subtitle}</h2>}
-                        {router.pathname.startsWith('/news') && exhibition.heading && <CustomPortableText value={exhibition.heading} paragraphClasses={inView ? 'text-primary' : 'text-secondary'} />}
-                        {router.pathname.startsWith('/news') && exhibition.text && <CustomPortableText value={exhibition.text} paragraphClasses={inView ? 'text-primary' : 'text-secondary'} />}
+                        {router.pathname.startsWith('/news') && exhibition.heading && <CustomPortableText value={exhibition.heading} paragraphClasses={cn("", inView ? 'text-primary' : 'text-secondary')} />}
+                        {router.pathname.startsWith('/news') && exhibition.text && <CustomPortableText value={exhibition.text} paragraphClasses={cn("uppercase", inView ? 'text-primary' : 'text-secondary')} />}
 					</div>
-					<div className="col-span-5 col-start-1">
+					<div className="sm:col-span-5 sm:col-start-1 pt-4 sm:pt-0">
 						<h2 className="pl-8">{artistList}</h2>
 					</div>
 				</div>
-				<div className="col-span-2 col-start-6 flex flex-col pt-3">
+				<div className="sm:col-span-2 sm:col-start-6 flex flex-col pt-3">
 					<h3 className="pr-6">
 						{exhibition.venue && exhibition.venue.name && (
 							<span>
@@ -92,8 +99,8 @@ export default function TableItem({ exhibition, id, year }) {
                         )}
 					</h3>
 				</div>
-				<div className="col-span-2 col-start-8 flex justify-end pt-3">
-					<div className="flex">
+				<div className="sm:col-span-2 sm:col-start-8 flex justify-end pt-3">
+					<div className="flex w-full sm:w-auto justify-between sm:justify-normal">
 						{exhibition.startDate && exhibition.endDate && (
 							<h3 className="">
 								{formatDateWithoutYear(exhibition.startDate)}—
