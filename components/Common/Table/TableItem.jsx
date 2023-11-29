@@ -66,7 +66,7 @@ export default function TableItem({ exhibition, id, year }) {
                 <div className="sm:hidden relative h-[22rem] w-full overflow-hidden pb-6">
                     <StandardImage
                         key={exhibition._id}
-                        currentImage={exhibition.mainImage ?? ''}
+                        image={exhibition.mainImage ?? ''}
                     />
                 </div>
 				<div className="sm:col-span-5 sm:col-start-1 flex flex-col">

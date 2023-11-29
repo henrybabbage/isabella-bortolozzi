@@ -26,7 +26,7 @@ export default function TableView({ exhibitions }) {
 							<TableImage
 								key={exhibition._id}
 								id={exhibition._id}
-								currentImage={exhibition.mainImage ?? ''}
+								image={exhibition.mainImage ?? ''}
 							/>
 						))}
 				</div>

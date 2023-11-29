@@ -8,7 +8,7 @@ import { getYear } from '@/utils/dateHelpers'
 
 export default function YearsPopover({ exhibitions }) {
     const [years, setYears] = useState([])
-    const [open, setOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
 	useEffect(() => {
 		let years = exhibitions.map((exhibition) => getYear(exhibition.endDate))
@@ -20,10 +20,10 @@ export default function YearsPopover({ exhibitions }) {
     const inViewYear = useActiveYearStore((state) => state.inViewYear)
 
     return (
-        <Popover.Root open={open} onOpenChange={setOpen} className='bg-background h-fit'>
+        <Popover.Root open={isOpen} onOpenChange={setIsOpen} className='bg-background h-fit'>
             <Popover.Trigger asChild className='shadow-transparent shadow-none focus:shadow-none outline-none focus:outline-none'>
                 <button type="button" aria-label="Open menu to select chosen year" className="h-fit">
-                    <h3 className="text-secondary hover:text-primary">{open ? 'Close' : 'Select Year'}</h3>
+                    <h3 className="text-secondary hover:text-primary">{isOpen ? 'Close' : 'Select Year'}</h3>
                 </button>
             </Popover.Trigger>
             <Popover.Portal className="shadow-transparent shadow-none focus:shadow-none">
