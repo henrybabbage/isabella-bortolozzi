@@ -17,7 +17,7 @@ export default function LoadingScreen({ exhibition, isLoading }) {
 						<LoadingCounter totalImages={exhibition.totalImages} />
 					</div>
 					<div className="flex-wrap pt-6 pr-6 lg:col-span-5 lg:col-start-4 lg:pt-0">
-						{exhibition.title && <h1 className="">{exhibition.title}</h1>}
+						{exhibition.title && <h1 className="uppercase">{exhibition.title}</h1>}
 						<div className="pl-6">
 							{exhibition.artists &&
 								exhibition.artists.map((artist, i) => (

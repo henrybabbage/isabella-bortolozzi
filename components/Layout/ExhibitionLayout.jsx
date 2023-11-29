@@ -1,7 +1,7 @@
 
 export default function ExhibitionLayout({children}) {
     return (
-        <div className="overflow-auto h-screen overscroll-none">
+        <div className="min-h-screen w-full overscroll-none">
             {children}
         </div>
     )

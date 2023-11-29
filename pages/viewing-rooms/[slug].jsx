@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'next-sanity/preview'
-import { Client } from 'react-hydration-provider'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
+import ExhibitionLayout from '@/components/Layout/ExhibitionLayout'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getViewingRoom } from '@/lib/sanity.fetch'
@@ -9,9 +9,8 @@ import {
     viewingRoomBySlugQuery,
     viewingRoomSlugsQuery
 } from '@/lib/sanity.queries'
-import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
-export default function ExhibitionSlugRoute(
+export default function ViewingRoomSlugRoute(
   props
 ) {
     const [viewingRoom] = useLiveQuery(props.viewingRoom, viewingRoomBySlugQuery, {
@@ -20,17 +19,12 @@ export default function ExhibitionSlugRoute(
 
     return (
         <main className='animate-fade-in'>
-            <Client>
-                <Desktop>
-                    <ExhibitionPage exhibition={viewingRoom} />
-                </Desktop>
-                <TabletAndBelow>
-                    <div></div>
-                </TabletAndBelow>
-            </Client>
+            <ExhibitionPage exhibition={viewingRoom} />
         </main>
     )
 }
+
+ViewingRoomSlugRoute.layout = ExhibitionLayout
 
 export const getStaticPaths = async () => {
     const client = getClient()

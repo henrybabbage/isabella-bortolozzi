@@ -3,7 +3,7 @@ import SvgBortolozziLogo from "@/public/components/BortolozziLogo";
 export default function MobileFooter({ gallery, featuredExhibition, override }) {
     const dominantColor = featuredExhibition.mainImage.asset.metadata.palette.dominant.background
 	return (
-		<div className="flex w-screen h-screen flex-col justify-end md:hidden">
+		<div className="flex w-screen h-screen flex-col justify-end md:hidden pb-6">
 			<div className="flex flex-col space-y-7 p-6">
 				<div className="flex flex-col">
 					<a href={gallery.footer.googleMaps || 'https://www.google.com/maps/'} target="_blank" rel="noreferrer" className="font-serif">

@@ -15,7 +15,7 @@ export default function ArrowRightButton({ nextSlide }) {
             onMouseLeave={handleMouseLeave}
             className="w-7 h-7 flex justify-center items-center relative"
         >
-            <ArrowRightIcon color={iconColor} className="absolute w-full h-full" />
+            <ArrowRightIcon color={iconColor} className="absolute w-full h-full mix-blend-difference" />
         </button>
     )
 }

@@ -1,7 +1,5 @@
 import { useRouter } from "next/router"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { Client } from "react-hydration-provider"
-import { Desktop, TabletAndBelow } from "utils/breakpoints"
 import { cn } from 'utils/cn'
 
 import BackButton from "../Common/Buttons/BackButton"
@@ -13,6 +11,8 @@ export default function ExhibitionPage({exhibition}) {
     const [isLoading, setIsLoading] = useState(true)
     const [currentScrollElement, setCurrentScrollElement] = useState(0)
 
+    console.log('currentScrollElement:', currentScrollElement)
+
     useEffect(() => {
 		setTimeout(() => {
 			setIsLoading(false)
@@ -23,6 +23,8 @@ export default function ExhibitionPage({exhibition}) {
     
     const scrollToSections = useRef(new Set())
     const scrollViewRef = useRef(null)
+
+    console.log('number of scrollToSections:', scrollToSections)
 
     const handleScroll = useCallback(() => {
 		let offset = Math.abs(scrollViewRef.current.children[0].getBoundingClientRect().top)
@@ -48,7 +50,7 @@ export default function ExhibitionPage({exhibition}) {
 
     const didClickPrevious = () => {
 		let goToRef = currentScrollElement - 1
-		if (goToRef < 0 || goToRef > scrollToSections.current.size) {
+		if (goToRef <= 0 || goToRef > scrollToSections.current.size) {
 			return
 		}
 		scrollToSection(goToRef)
@@ -56,15 +58,15 @@ export default function ExhibitionPage({exhibition}) {
 
 	const didClickNext = () => {
 		let goToRef = currentScrollElement + 1
-		if (goToRef < 0 || goToRef > scrollToSections.current.size) {
+		if (goToRef <= 0 || goToRef > scrollToSections.current.size) {
 			return
 		}
 		scrollToSection(goToRef)
 	}
 
 	const scrollToSection = (idx) => {
-        if(!idx) return
-		Array.from(scrollToSections.current)[idx].scrollIntoView({
+        if (!idx) return
+		Array.from(scrollToSections.current)[idx]?.scrollIntoView({
 			behavior: 'smooth',
 			block: 'center',
 		})
@@ -85,12 +87,6 @@ export default function ExhibitionPage({exhibition}) {
                     className="flex flex-col h-screen w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
                 >
                     <SnapSection exhibition={exhibition} scrollToSections={scrollToSections} index={currentScrollElement} />
-                    <section className="relative flex flex-col w-screen h-screen snap-start">
-                        <Client>
-                            <Desktop><div></div></Desktop>
-                            <TabletAndBelow></TabletAndBelow>
-                        </Client>
-                    </section>
                 </div>
             </div>
         </>

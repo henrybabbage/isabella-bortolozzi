@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { useHydrated } from "react-hydration-provider"
-import { useMediaQuery } from "react-responsive"
+import { useHydrated } from 'react-hydration-provider'
+import { useMediaQuery } from 'react-responsive'
 
 import { cn } from "@/utils/cn"
 
@@ -15,10 +15,6 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
 
     const router = useRouter()
 
-    const hydrated = useHydrated()
-	const tabletOrMobile = useMediaQuery({ query: '(max-width: 991px)' }, hydrated ? undefined : { deviceWidth: 991 })
-	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
-
 	const togglePressRelease = (event) => {
 		setPressReleaseSelected((pressReleaseSelected) => !pressReleaseSelected)
         event.stopPropagation()
@@ -31,6 +27,9 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
 
 	const inViewImage = content?.imageGallery?.[index]
 
+    const hydrated = useHydrated()
+	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
+
     if(!content) return null
 
     return (
@@ -38,7 +37,7 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
             <SheetTrigger asChild>
                 <PlusButton didPressButton={handleDrawerOpen} />
             </SheetTrigger>
-            <SheetContent side='right' onCloseAutoFocus={(event) => event.preventDefault()} className="z-[999] h-full max-h-full flex flex-col justify-between">
+            <SheetContent side={desktopOrLaptop ? 'right' : 'bottom'} onCloseAutoFocus={(event) => event.preventDefault()} className="z-[999] h-2/4 sm:h-full sm:max-h-full flex flex-col justify-between">
                 <div className='w-full h-full flex flex-col justify-end overflow-scroll scrollbar-hide'>
                     <div className={cn(
                         "flex flex-col",
@@ -58,10 +57,10 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
                         <div className="w-full h-fit">
                             <button type="button" aria-label="Enquire with the gallery via email" className="group flex h-12 w-full items-center justify-center border-secondary hover:border-primary border-solid border rounded-[2px] bg-none transition">
                                 <a
-                                    className="text-center pointer-events-auto transition group-hover:text-primary text-secondary"
+                                    className="small-caps text-center pointer-events-auto transition group-hover:text-primary text-secondary"
                                     href={`mailto:${email}?subject=Enquiry`}
                                 >
-                                    Enquire
+                                    {'Enquire'}
                                 </a>
                             </button>
                         </div>
@@ -69,13 +68,13 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
                     <div className="w-full justify-start flex">
                         <div className='inline-flex gap-2.5'>
                             <button type="button" aria-label='Scroll to previous section' onClick={didClickPrevious}>
-                                <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
+                                <h3 className="small-caps pointer-events-auto text-secondary transition hover:text-primary">
                                     {'Prev'}
                                 </h3>
                             </button>
                             <span className="text-primary">|</span>
                             <button type="button" aria-label='Scroll to next section' onClick={didClickNext}>
-                                <h3 className="pointer-events-auto text-secondary transition hover:text-primary">
+                                <h3 className="small-caps pointer-events-auto text-secondary transition hover:text-primary">
                                     {'Next'}
                                 </h3>
                             </button>
@@ -83,7 +82,7 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
                         <div className='w-full flex justify-end'>
                             {pressRelease ? (
                                 <button type="button" aria-label="Toggle to view the caption or the press release" onClick={togglePressRelease}>
-                                    <h3 className="text-secondary transition hover:text-primary">
+                                    <h3 className="small-caps text-secondary transition hover:text-primary">
                                         {pressReleaseSelected ? 'Caption' : 'Press Release'}
                                     </h3>
                                 </button>
