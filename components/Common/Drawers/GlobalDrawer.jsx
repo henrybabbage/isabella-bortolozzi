@@ -60,7 +60,7 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
                                     className="small-caps text-center pointer-events-auto transition group-hover:text-primary text-secondary"
                                     href={`mailto:${email}?subject=Enquiry`}
                                 >
-                                    Enquire
+                                    {'Enquire'}
                                 </a>
                             </button>
                         </div>

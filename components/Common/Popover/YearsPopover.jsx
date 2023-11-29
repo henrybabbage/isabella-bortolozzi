@@ -11,7 +11,7 @@ export default function YearsPopover({ exhibitions }) {
     const [isOpen, setIsOpen] = useState(false)
 
 	useEffect(() => {
-		let years = exhibitions.map((exhibition) => getYear(exhibition.endDate))
+		let years = exhibitions.map((exhibition) => getYear(exhibition.year))
 		years = Array.from([...new Set(years)])
 		setYears(years)
 	}, [exhibitions])

@@ -44,14 +44,14 @@ const SnapSection = forwardRef(function SnapSection({ exhibition, scrollToSectio
 							/>
 						) : (
 							<AspectImage
-								ref={(element) => scrollToSections.current.add(element)}
+                                ref={(element) => scrollToSections.current.add(element)}
+                                key={idx}
 								image={image}
 								alt={image.alt}
 								priority={true}
 								fill={true}
 								mode="contain"
 								sizes="100vw"
-								key={idx}
 							/>
 						)
 				)}
