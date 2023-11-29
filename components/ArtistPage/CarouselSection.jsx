@@ -1,6 +1,8 @@
 import { easeExpInOut } from 'd3-ease'
 import Carousel from "nuka-carousel"
 import { useState } from "react"
+import { useHydrated } from 'react-hydration-provider'
+import { useMediaQuery } from 'react-responsive'
 
 import { useSectionInView } from '@/hooks/useSectionInView'
 
@@ -24,10 +26,13 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
 
     const imageGallery = artist?.imageGallery ?? []
 
+    const hydrated = useHydrated()
+	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
+
 	return (
         <>
-            <section ref={ref} id="works" className="relative h-screen w-screen flex flex-col items-center justify-center">
-                <div ref={worksRef} className="h-full w-full">
+            <section ref={ref} id="works" className="relative h-screen w-full flex flex-col items-center justify-center overflow-x-hidden">
+                <div ref={worksRef} className="sm:h-full w-full">
                     {imageGallery.length > 0 &&
                         <Carousel
                             animation="fade"
@@ -41,7 +46,7 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                             renderCenterLeftControls={renderCenterLeftControls}
                             renderCenterRightControls={renderCenterRightControls}
                             renderBottomCenterControls={false}
-                            renderBottomLeftControls={paginationCounter}
+                            renderBottomLeftControls={desktopOrLaptop ? paginationCounter : false}
                         >
                             {imageGallery.length > 0 && imageGallery.map((image, idx) => (
                                 <SlideImage image={image.asset} key={idx} />
@@ -49,7 +54,7 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                         </Carousel>
                     }
                 </div>
-                <div className="absolute bottom-6 right-6">
+                <div className="absolute bottom-6 right-6 sm:bottom-6 sm:right-6">
                     {imageGallery.length > 0 && <GlobalDrawer content={artist} index={index} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />}
                 </div>
             </section>

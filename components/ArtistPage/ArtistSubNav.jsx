@@ -8,9 +8,8 @@ export default function ArtistSubNav({ artist, isLoading, scrollIntoViewWorks, s
     const setInViewSection = useActiveSectionStore((state) => state.setInViewSection)
 
 	if (!artist) return null
-
 	return (
-		<aside className="fixed top-0 grid w-screen grid-cols-12 px-4 sm:px-6 z-100">
+		<aside className="fixed top-0 grid w-full grid-cols-12 px-4 sm:px-6 z-100">
 			<div className="absolute col-span-3 col-start-1 flex h-[4rem] pt-6 w-full items-baseline bg-background"></div>
 			<div className="absolute col-span-9 col-start-4 flex h-[4rem] pt-6 w-full items-baseline space-x-12 bg-background">
 				<h1 className="text-primary">

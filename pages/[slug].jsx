@@ -7,6 +7,7 @@ import ArtistSubNav from '@/components/ArtistPage/ArtistSubNav'
 import CarouselSection from '@/components/ArtistPage/CarouselSection'
 import CVSection from '@/components/ArtistPage/CVSection'
 import ExhibitionsSection from '@/components/ArtistPage/ExhibitionsSection'
+import MobileArtistSubNav from '@/components/Mobile/MobileArtistSubNav'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getArtist } from '@/lib/sanity.fetch'
@@ -29,7 +30,7 @@ export default function ArtistSlugRoute(props) {
     })
 
     const { scrollIntoView: scrollIntoViewBiography, targetRef: biographyRef } = useScrollIntoView({
-        offset: 72
+        offset: 0
     })
 
     useEffect(() => {
@@ -50,7 +51,7 @@ export default function ArtistSlugRoute(props) {
     })
 
     return (
-        <main className='flex flex-col h-full w-screen relative gap-24 animate-fade-in'>
+        <main className='flex flex-col h-full w-screen relative animate-fade-in'>
             <Client>
                 <Desktop>
                     <ArtistSubNav
@@ -60,15 +61,26 @@ export default function ArtistSlugRoute(props) {
                         scrollIntoViewExhibitions={scrollIntoViewExhibitions}
                         scrollIntoViewBiography={scrollIntoViewBiography}
                     />
-                    <div className={cn(isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100', 'relative')}>
+                </Desktop>
+                <TabletAndBelow>
+                    <MobileArtistSubNav
+                        artist={artist}
+                        isLoading={isLoading}
+                        scrollIntoViewWorks={scrollIntoViewWorks}
+                        scrollIntoViewExhibitions={scrollIntoViewExhibitions}
+                        scrollIntoViewBiography={scrollIntoViewBiography}
+                    />
+                </TabletAndBelow>
+                    <div
+                        className={cn(
+                            isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100',
+                            'relative flex flex-col gap-24 sm:gap-0'
+                        )}
+                    >
                         <CarouselSection worksRef={worksRef} artist={artist} isLoading={isLoading} />
                         <ExhibitionsSection exhibitionsRef={exhibitionsRef} artist={artist} />
                         <CVSection biographyRef={biographyRef} artist={artist} />
                     </div>
-                </Desktop>
-                <TabletAndBelow>
-                    <div></div>
-                </TabletAndBelow>
             </Client>
         </main>
     )
