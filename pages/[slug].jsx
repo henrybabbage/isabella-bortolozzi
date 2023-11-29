@@ -2,6 +2,8 @@ import { useScrollIntoView } from '@mantine/hooks'
 import { useLiveQuery } from 'next-sanity/preview'
 import { useEffect, useState } from 'react'
 import { Client } from 'react-hydration-provider'
+import { useHydrated } from 'react-hydration-provider'
+import { useMediaQuery } from 'react-responsive'
 
 import ArtistSubNav from '@/components/ArtistPage/ArtistSubNav'
 import CarouselSection from '@/components/ArtistPage/CarouselSection'
@@ -20,6 +22,9 @@ import { cn } from '@/utils/cn'
 
 export default function ArtistSlugRoute(props) {
     const [isLoading, setIsLoading] = useState(true)
+
+    const hydrated = useHydrated()
+	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
 
     const { scrollIntoView: scrollIntoViewWorks, targetRef: worksRef } = useScrollIntoView({
         offset: 0
@@ -40,10 +45,10 @@ export default function ArtistSlugRoute(props) {
 	}, [])
 
     useEffect(() => {
-        isLoading
+        isLoading && desktopOrLaptop
           ? (document.body.style.overflow = 'hidden')
           : (document.body.style.overflow = 'auto')
-    }, [isLoading])
+    }, [isLoading, desktopOrLaptop])
 
     const [artist] = useLiveQuery(props.artist, artistBySlugQuery, {
         _type: props.artist._type,
@@ -73,7 +78,7 @@ export default function ArtistSlugRoute(props) {
                 </TabletAndBelow>
                     <div
                         className={cn(
-                            isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100',
+                            isLoading && desktopOrLaptop ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100',
                             'relative flex flex-col gap-24 sm:gap-0'
                         )}
                     >
