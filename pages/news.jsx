@@ -1,5 +1,4 @@
 import { useLiveQuery } from 'next-sanity/preview'
-import { Client } from 'react-hydration-provider'
 
 import TableView from '@/components/Common/Table/TableView'
 import NewsHeader from '@/components/NewsPage/NewsHeader'
@@ -12,10 +11,8 @@ export default function News(props) {
     const [news] = useLiveQuery(props.news, newsQuery)
     return (
         <main className="animate-fade-in h-screen w-screen">
-            <Client>
-                <NewsHeader news={news} />
-                <TableView exhibitions={news} />
-            </Client>
+            <NewsHeader news={news} />
+            <TableView exhibitions={news} />
         </main>
     )
 }

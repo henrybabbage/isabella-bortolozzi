@@ -1,5 +1,4 @@
 import { useLiveQuery } from 'next-sanity/preview'
-import { Client } from 'react-hydration-provider'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
 import { readToken } from '@/lib/sanity.api'
@@ -19,9 +18,7 @@ export default function ExhibitionSlugRoute(
 
     return (
         <main className='animate-fade-in'>
-            <Client>
-                <ExhibitionPage exhibition={exhibition} />
-            </Client>
+            <ExhibitionPage exhibition={exhibition} />
         </main>
     )
 }
