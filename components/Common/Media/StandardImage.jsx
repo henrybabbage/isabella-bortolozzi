@@ -16,6 +16,8 @@ export default function StandardImage({ image }) {
                 alt=""
                 fill
                 sizes="100vw"
+                placeholder='blur'
+                blurDataURL={image.asset.metadata.lqip}
                 priority
                 style={{ objectFit: 'cover', objectPosition: 'center' }}
             />
