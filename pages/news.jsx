@@ -7,20 +7,14 @@ import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getNews } from '@/lib/sanity.fetch'
 import { newsQuery } from '@/lib/sanity.queries'
-import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 export default function News(props) {
     const [news] = useLiveQuery(props.news, newsQuery)
     return (
         <main className="animate-fade-in h-screen w-screen">
             <Client>
-                <Desktop>
-                    <NewsHeader news={props.news} />
-                    <TableView exhibitions={props.news} />
-                </Desktop>
-                <TabletAndBelow>
-                    <section></section>
-                </TabletAndBelow>
+                <NewsHeader news={news} />
+                <TableView exhibitions={news} />
             </Client>
         </main>
     )

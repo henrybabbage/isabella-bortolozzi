@@ -14,7 +14,7 @@ export default function IndexPage(props) {
   const [home] = useLiveQuery(props.home, homeQuery)
   const [gallery] = useLiveQuery(props.gallery, galleryQuery)
   return (
-        <main className="animate-fade-in h-screen snap-y snap-mandatory w-full overflow-x-hidden scrollbar-hide">
+        <main className="animate-fade-in h-screen snap-y snap-mandatory w-full overflow-x-hidden scrollbar-hide overscroll-none">
             <Client>
                 <Desktop>
                     <section className="h-screen snap-start">
