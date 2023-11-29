@@ -14,13 +14,13 @@ export default function IndexPage(props) {
   const [home] = useLiveQuery(props.home, homeQuery)
   const [gallery] = useLiveQuery(props.gallery, galleryQuery)
   return (
-        <main className="animate-fade-in h-screen snap-y snap-mandatory w-full overflow-x-hidden scrollbar-hide overscroll-none">
+        <main className="animate-fade-in h-[100dvh] snap-y snap-mandatory w-full overflow-x-hidden scrollbar-hide overscroll-none">
             <Client>
                 <Desktop>
-                    <section className="h-screen snap-start">
+                    <section className="h-[100dvh] snap-start">
                         <ExhibitionSection exhibition={home.publicisedExhibitions[0]} />
                     </section>
-                    <section className="h-screen snap-start">
+                    <section className="h-[100dvh] snap-start">
                         <Footer featuredExhibition={home.publicisedExhibitions[0]} override={home.logoControl} gallery={props.gallery} />
                     </section>
                 </Desktop>

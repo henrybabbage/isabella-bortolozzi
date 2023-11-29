@@ -56,7 +56,7 @@ export default function ArtistSlugRoute(props) {
     })
 
     return (
-        <main className='flex flex-col h-full w-screen relative animate-fade-in'>
+        <main className='flex flex-col h-[100dvh] w-screen relative animate-fade-in'>
             <Client>
                 <Desktop>
                     <ArtistSubNav
