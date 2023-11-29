@@ -1,6 +1,7 @@
 import { useLiveQuery } from 'next-sanity/preview'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
+import ExhibitionLayout from '@/components/Layout/ExhibitionLayout'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getExhibition } from '@/lib/sanity.fetch'
@@ -22,6 +23,8 @@ export default function ExhibitionSlugRoute(
         </main>
     )
 }
+
+ExhibitionSlugRoute.layout = ExhibitionLayout
 
 export const getStaticPaths = async () => {
     const client = getClient()

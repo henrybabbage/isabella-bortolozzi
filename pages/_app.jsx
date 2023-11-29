@@ -109,6 +109,9 @@ export default function App({ Component, pageProps }) {
         }
     }, [router])
 
+    // Use the layout defined at the page level, if available
+    const Layout = Component.layout || (({ children }) => (<RootLayout>{children}</RootLayout>))
+
 	return (
 		<>
 		<Head>
@@ -127,14 +130,14 @@ export default function App({ Component, pageProps }) {
 			</style>
 			{draftMode ? (
                 <PreviewProvider token={token}>
-                     <RootLayout>
+                     <Layout>
                         <Component {...pageProps} key={key} />
-                     </RootLayout>
+                     </Layout>
                 </PreviewProvider>
                 ) : (
-                    <RootLayout>
+                    <Layout>
                         <Component {...pageProps} key={key} />
-                    </RootLayout>
+                    </Layout>
             )}
 		</HydrationProvider>
 		</>

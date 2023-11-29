@@ -1,6 +1,7 @@
 import { useLiveQuery } from 'next-sanity/preview'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
+import ExhibitionLayout from '@/components/Layout/ExhibitionLayout'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getViewingRoom } from '@/lib/sanity.fetch'
@@ -9,7 +10,7 @@ import {
     viewingRoomSlugsQuery
 } from '@/lib/sanity.queries'
 
-export default function ExhibitionSlugRoute(
+export default function ViewingRoomSlugRoute(
   props
 ) {
     const [viewingRoom] = useLiveQuery(props.viewingRoom, viewingRoomBySlugQuery, {
@@ -22,6 +23,8 @@ export default function ExhibitionSlugRoute(
         </main>
     )
 }
+
+ViewingRoomSlugRoute.layout = ExhibitionLayout
 
 export const getStaticPaths = async () => {
     const client = getClient()
