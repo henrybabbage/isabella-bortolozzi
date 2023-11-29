@@ -9,7 +9,6 @@ import {
     viewingRoomBySlugQuery,
     viewingRoomSlugsQuery
 } from '@/lib/sanity.queries'
-import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 export default function ExhibitionSlugRoute(
   props
@@ -21,12 +20,7 @@ export default function ExhibitionSlugRoute(
     return (
         <main className='animate-fade-in'>
             <Client>
-                <Desktop>
-                    <ExhibitionPage exhibition={viewingRoom} />
-                </Desktop>
-                <TabletAndBelow>
-                    <div></div>
-                </TabletAndBelow>
+                <ExhibitionPage exhibition={viewingRoom} />
             </Client>
         </main>
     )
