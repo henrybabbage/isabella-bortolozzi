@@ -1,5 +1,4 @@
 import { useLiveQuery } from 'next-sanity/preview'
-import { Client } from 'react-hydration-provider'
 
 import TableView from '@/components/Common/Table/TableView'
 import ViewingRoomsHeader from '@/components/ViewingRoomsPage/ViewingRoomsHeader'
@@ -12,10 +11,8 @@ export default function ViewingRooms(props) {
     const [viewingRooms] = useLiveQuery(props.viewingRooms, viewingRoomsQuery)
     return (
         <main className="animate-fade-in h-[100dvh] w-screen">
-            <Client>
-                <ViewingRoomsHeader />
-                <TableView exhibitions={viewingRooms} />
-            </Client>
+            <ViewingRoomsHeader />
+            <TableView exhibitions={viewingRooms} />
         </main>
     )
 }

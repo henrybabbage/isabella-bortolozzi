@@ -79,17 +79,17 @@ export default function ArtistSlugRoute(props) {
                         scrollIntoViewBiography={scrollIntoViewBiography}
                     />
                 </TabletAndBelow>
-                    <div
-                        className={cn(
-                            isLoading && desktopOrLaptop ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100',
-                            'relative flex flex-col gap-24 sm:gap-0'
-                        )}
-                    >
-                        <CarouselSection worksRef={worksRef} artist={artist} isLoading={isLoading} />
-                        <ExhibitionsSection exhibitionsRef={exhibitionsRef} artist={artist} />
-                        <CVSection biographyRef={biographyRef} artist={artist} />
-                    </div>
             </Client>
+            <div
+                className={cn(
+                    isLoading && desktopOrLaptop ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100',
+                    'relative flex flex-col gap-24 sm:gap-0'
+                )}
+            >
+                <CarouselSection worksRef={worksRef} artist={artist} isLoading={isLoading} />
+                <ExhibitionsSection exhibitionsRef={exhibitionsRef} artist={artist} />
+                <CVSection biographyRef={biographyRef} artist={artist} />
+            </div>
         </main>
     )
 }

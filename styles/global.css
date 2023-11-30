@@ -24,6 +24,7 @@
 
     body { 
         @apply text-xl;
+        @apply overscroll-none;
     }
 }
 

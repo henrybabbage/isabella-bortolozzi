@@ -2,6 +2,8 @@ import { useRouter } from "next/router"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { cn } from 'utils/cn'
 
+import { removeHash } from "@/utils/removeHash"
+
 import BackButton from "../Common/Buttons/BackButton"
 import GlobalDrawer from "../Common/Drawers/GlobalDrawer"
 import LoadingScreen from "../Common/Loading/LoadingScreen"
@@ -11,20 +13,19 @@ export default function ExhibitionPage({exhibition}) {
     const [isLoading, setIsLoading] = useState(true)
     const [currentScrollElement, setCurrentScrollElement] = useState(0)
 
+    const router = useRouter()
+    
+    const scrollToSections = useRef(new Set())
+    const scrollViewRef = useRef(null)
+
     console.log('currentScrollElement:', currentScrollElement)
+    console.log('scrollToSections:', scrollToSections)
 
     useEffect(() => {
 		setTimeout(() => {
 			setIsLoading(false)
 		}, 3400)
 	}, [])
-
-    const router = useRouter()
-    
-    const scrollToSections = useRef(new Set())
-    const scrollViewRef = useRef(null)
-
-    console.log('number of scrollToSections:', scrollToSections)
 
     const handleScroll = useCallback(() => {
 		let offset = Math.abs(scrollViewRef.current.children[0].getBoundingClientRect().top)

@@ -1,13 +1,13 @@
 import '@/styles/global.css'
 
+import { useAsPathWithoutHash } from '@madeinhaus/nextjs-page-transition'
 import localFont from 'next/font/local'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { lazy, useEffect, useMemo, useRef } from 'react'
+import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 
 import RootLayout from '@/components/Layout/RootLayout'
-import useFoucFix from '@/hooks/useFoucFix'
 
 const PreviewProvider = lazy(() => import('@/components/Previews/PreviewProvider'))
 
@@ -29,16 +29,9 @@ const serif = localFont({
 
 export default function App({ Component, pageProps }) {
 	const { draftMode, token } = pageProps
-	
-	useFoucFix()
 
 	const router = useRouter()
-
-    const key = useMemo(() => {
-        const { pathname, query } = router
-        const slug = query.slug || ''
-        return `${pathname}-${slug}`
-    }, [router])
+    const key = useAsPathWithoutHash()
 
 	const scrollCache = useRef({})
 	const activeRestorePath = useRef()
@@ -134,10 +127,10 @@ export default function App({ Component, pageProps }) {
                             <Component {...pageProps} key={key} />
                         </RootLayout>
                     </PreviewProvider>
-                    ) : (
-                        <RootLayout>
-                            <Component {...pageProps} key={key} />
-                        </RootLayout>
+                ) : (
+                    <RootLayout>
+                        <Component {...pageProps} key={key} />
+                    </RootLayout>
                 )}
             </HydrationProvider>
 		</>
