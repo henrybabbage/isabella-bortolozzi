@@ -1,8 +1,16 @@
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/router'
-import { forwardRef, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
+
+import { cn } from '@/utils/cn'
 
 const BackButton = forwardRef(function BackButton(props, ref) {
+    const [pageReady, setpageReady] = useState(false)
+    useEffect(() => {
+		setTimeout(() => {
+			setpageReady(true)
+		}, 4000)
+	}, [])
     const { backPathname } = props
     const router = useRouter()
     const [isHovered, setIsHovered] = useState(false)
@@ -17,7 +25,7 @@ const BackButton = forwardRef(function BackButton(props, ref) {
             onClick={() => router.back()}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="animate-fade-in animation-delay-[4000ms] w-6 h-6 flex justify-center items-center relative"
+            className={cn(pageReady ? "opacity-100" : "opacity-0", "transition w-6 h-6 flex justify-center items-center relative")}
         >
             <Cross1Icon color={iconColor} className="absolute w-full h-full" />
         </button>

@@ -40,7 +40,7 @@ export default function TableView({ exhibitions }) {
 				<ul ref={tableContentRef}>
 					{exhibitions &&
 						exhibitions.map((exhibition) => (
-							<li key={exhibition._id} id={exhibition.year} className='scroll-mt-[calc(50vh-11vw)]'>
+							<li key={exhibition._id} id={exhibition.year} className="scroll-mt-[calc(50vh-11vw)]">
 								<TableItem id={exhibition._id} year={exhibition.year} exhibition={exhibition} />
 							</li>
 						))}

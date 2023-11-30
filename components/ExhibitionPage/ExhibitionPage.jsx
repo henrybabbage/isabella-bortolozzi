@@ -2,8 +2,6 @@ import { useRouter } from "next/router"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { cn } from 'utils/cn'
 
-import { removeHash } from "@/utils/removeHash"
-
 import BackButton from "../Common/Buttons/BackButton"
 import GlobalDrawer from "../Common/Drawers/GlobalDrawer"
 import LoadingScreen from "../Common/Loading/LoadingScreen"
@@ -76,8 +74,8 @@ export default function ExhibitionPage({exhibition}) {
     return (
         <>
             <LoadingScreen exhibition={exhibition} isLoading={isLoading} />
-            <div className={cn(isLoading ? '!overflow-hidden opacity-0' : 'animate-slide-in opacity-100', 'relative snap-y h-[100dvh] w-screen scrollbar-hide')}>
-                <div className="fixed top-6 right-6 z-50">
+            <div className={cn(isLoading ? "!overflow-hidden opacity-0" : "animate-slide-in opacity-100", "relative snap-y h-[100dvh] w-screen scrollbar-hide")}>
+                <div className="transition fixed top-6 right-6 z-50">
                     <BackButton backPathname={router.pathname.split('/')[1]} />
                 </div>
                 <div className="fixed bottom-6 right-6 z-50">
