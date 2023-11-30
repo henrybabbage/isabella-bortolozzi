@@ -19,14 +19,13 @@ export default function ExhibitionPage({exhibition}) {
     const scrollViewRef = useRef(null)
 
     console.log('currentScrollElement:', currentScrollElement)
+    console.log('scrollToSections:', scrollToSections)
 
     useEffect(() => {
 		setTimeout(() => {
 			setIsLoading(false)
 		}, 3400)
 	}, [])
-
-    console.log('scrollToSections:', scrollToSections)
 
     const handleScroll = useCallback(() => {
 		let offset = Math.abs(scrollViewRef.current.children[0].getBoundingClientRect().top)
