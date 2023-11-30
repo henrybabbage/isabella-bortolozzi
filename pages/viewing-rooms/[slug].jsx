@@ -18,10 +18,13 @@ export default function ViewingRoomSlugRoute(
         slug: props.viewingRoom.slug,
     })
 
+    // above the fold image to preload
+    const image = props.image
+
     return (
         <>
             <Head>
-                <link rel="preload" as="image" href={props.image.url} />
+                {image && <link rel="preload" as="image" href={image.url} />}
             </Head>
             <main className='animate-fade-in'>
                 <ExhibitionPage exhibition={viewingRoom} />

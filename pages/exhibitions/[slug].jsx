@@ -17,11 +17,14 @@ export default function ExhibitionSlugRoute(
     const [exhibition] = useLiveQuery(props.exhibition, exhibitionBySlugQuery, {
         slug: props.exhibition.slug,
     })
+
+    // above the fold image to preload
+    const image = props.image
     
     return (
         <>
             <Head>
-                <link rel="preload" as="image" href={props.image.url} />
+                {image && <link rel="preload" as="image" href={image.url} />}
             </Head>
             <main className='animate-fade-in'>
                 <ExhibitionPage exhibition={exhibition} />
