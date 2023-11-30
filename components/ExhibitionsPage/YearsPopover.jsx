@@ -1,8 +1,8 @@
 import * as Popover from '@radix-ui/react-popover'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { useActiveYearStore } from '@/context/useActiveYearStore'
+import { useSelectedYearStore } from '@/context/useSelectedYearStore'
 import { cn } from '@/utils/cn'
 import { getYear } from '@/utils/dateHelpers'
 
@@ -19,6 +19,16 @@ export default function YearsPopover({ exhibitions }) {
     const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
     const inViewYear = useActiveYearStore((state) => state.inViewYear)
 
+    const setSelectedYearIndex = useSelectedYearStore((state) => state.setSelectedYearIndex)
+
+    const didClickYear = (year) => {
+		const firstExhibitionWithYear = exhibitions.find((exhibition) => exhibition.year == year)
+        console.log({ firstExhibitionWithYear })
+		const idx = exhibitions.indexOf(firstExhibitionWithYear)
+        console.log({ idx })
+        setSelectedYearIndex(idx)
+	}
+
     return (
         <Popover.Root open={isOpen} onOpenChange={setIsOpen} className='bg-background h-fit'>
             <Popover.Trigger asChild className='shadow-transparent shadow-none focus:shadow-none outline-none focus:outline-none'>
@@ -32,9 +42,10 @@ export default function YearsPopover({ exhibitions }) {
                         <div className="sm:col-span-9 sm:col-start-4 col-span-12 col-start-1 sm:pl-3">
                             <div className="h-fit w-full sm:w-2/3">
                                 {years.map((year, index) => (
-                                    <Link
-                                        href={`#${year}`}
-                                        onClick={() => setInViewYear(year)}
+                                    <button
+                                        onClick={() => {
+                                            didClickYear(year)
+                                        }}
                                         aria-label='Select year'
                                         key={index}
                                         className="h-fit"
@@ -48,7 +59,7 @@ export default function YearsPopover({ exhibitions }) {
                                         >
                                             {index != years.length - 1 ? year + ',' : year}
                                         </h3>
-                                    </Link>
+                                    </button>
                                 ))}
                             </div>
                         </div>

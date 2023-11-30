@@ -1,19 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
-import { useActiveItemStore } from '@/context/useActiveItemStore'
+import { useSelectedYearStore } from '@/context/useSelectedYearStore'
 
 import TableImage from './TableImage'
 import TableItem from './TableItem'
 
 export default function TableView({ exhibitions }) {
 
-    const inViewItem = useActiveItemStore((state) => state.inViewItem)
+    const tableContentRef = useRef()
+
+    const selectedYearIndex = useSelectedYearStore((state) => state.selectedYearIndex)
+    console.log({ selectedYearIndex })
 
     useEffect(() => {
-        if (inViewItem) {
-            console.log(inViewItem)
+        if(selectedYearIndex) {
+            tableContentRef.current.children[selectedYearIndex].scrollIntoView({
+                behavior: 'smooth', 
+                block: 'start'
+            })
         }
-    }, [inViewItem])
+    }, [selectedYearIndex])
 
 	if (!exhibitions) return null
 
@@ -32,7 +38,7 @@ export default function TableView({ exhibitions }) {
 				</div>
 			</div>
 			<div className="sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[calc(50vh-13vh-48px)]">
-				<ul>
+				<ul ref={tableContentRef}>
 					{exhibitions &&
 						exhibitions.map((exhibition) => (
 							<li key={exhibition._id} id={exhibition.year} className='scroll-mt-[calc(-13vh+12px)]'>
