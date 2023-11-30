@@ -28,17 +28,17 @@ export default function ArtistSlugRoute(props) {
 
     const { scrollIntoView: scrollIntoViewWorks, targetRef: worksRef } = useScrollIntoView({
         offset: 0,
-        duration: 800
+        duration: 400
     })
 
     const { scrollIntoView: scrollIntoViewExhibitions, targetRef: exhibitionsRef } = useScrollIntoView({
         offset: 0,
-        duration: 800
+        duration: 400
     })
 
     const { scrollIntoView: scrollIntoViewBiography, targetRef: biographyRef } = useScrollIntoView({
         offset: 0,
-        duration: 800
+        duration: 400
     })
 
     useEffect(() => {
