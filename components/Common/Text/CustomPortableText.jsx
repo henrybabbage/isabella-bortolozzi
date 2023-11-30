@@ -9,14 +9,13 @@ const InlineImage = ({ value }) => {
     const image = value.asset ?? {}
 	const imageProps = useNextSanityImage(sanityClient, image)
 	return (
-		<div className="my-6 space-y-2 relative">
+		<div className="my-6 space-y-2 w-96 h-96 overflow-hidden relative">
             {value.asset && 
                 <Image
                     imageProps={imageProps.src}
                     loader={imageProps.loader}
                     alt={''}
-                    width={434}
-                    height={434}
+                    fill
                     priority
                     style={{ objectFit: 'contain' }}
                 />

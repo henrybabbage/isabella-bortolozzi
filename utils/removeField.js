@@ -9,7 +9,6 @@
  * 5. Run `sanity exec removeField.js --with-user-token` in your terminal to delete the field from all matched documents
  */
 
-// This works!
 
 import { sanityClient } from "@/lib/sanity.client"
 
