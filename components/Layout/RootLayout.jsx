@@ -10,7 +10,7 @@ import MobileHeader from '../Mobile/MobileHeader'
 export default function RootLayout({children}) {
     const router = useRouter()
     return (
-        <div className="min-h-screen w-full -z-0 overscroll-none">
+        <div className="-z-0 overscroll-none">
             <Client>
 				<Desktop>
 					{!router.pathname.startsWith('/studio')
