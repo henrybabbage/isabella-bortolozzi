@@ -10,7 +10,7 @@ import { exhibitionsQuery } from '@/lib/sanity.queries'
 export default function Exhibitions(props) {
     const [exhibitions] = useLiveQuery(props.exhibitions, exhibitionsQuery)
     return (
-        <main className="animate-fade-in h-[100dvh] w-screen">
+        <main className="animate-fade-in h-[100dvh] w-screen overscroll-none">
             <ExhibitionsHeader exhibitions={exhibitions} />
             <TableView exhibitions={exhibitions} />
         </main>
