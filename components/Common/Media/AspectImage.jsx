@@ -57,7 +57,6 @@ const AspectImage = forwardRef(function AspectImage({
 
     const hydrated = useHydrated()
 	const tabletAndBelow = useMediaQuery({ query: '(max-width: 991px)' }, hydrated ? undefined : { deviceWidth: 991 })
-	const desktopAndAbove = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
     
     return tabletAndBelow ? (
         <div ref={ref} className='flex flex-col items-center h-screen justify-center w-full snap-start'>

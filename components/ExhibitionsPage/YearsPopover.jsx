@@ -17,7 +17,6 @@ export default function YearsPopover({ exhibitions }) {
 		setYears(years)
 	}, [exhibitions])
 
-    const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
     const inViewYear = useActiveYearStore((state) => state.inViewYear)
 
     const setSelectedYearIndex = useSelectedYearStore((state) => state.setSelectedYearIndex)
