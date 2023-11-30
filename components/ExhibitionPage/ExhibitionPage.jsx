@@ -24,7 +24,7 @@ export default function ExhibitionPage({exhibition}) {
     const scrollToSections = useRef(new Set())
     const scrollViewRef = useRef(null)
 
-    console.log('number of scrollToSections:', scrollToSections)
+    console.log('scrollToSections:', scrollToSections)
 
     const handleScroll = useCallback(() => {
 		let offset = Math.abs(scrollViewRef.current.children[0].getBoundingClientRect().top)

@@ -1,4 +1,4 @@
-import YearsPopover from '../Common/Popover/YearsPopover'
+import YearsPopover from './YearsPopover'
 
 export default function ExhibitionsHeader({ exhibitions }) {
     return (

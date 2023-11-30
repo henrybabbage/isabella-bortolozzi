@@ -1,10 +1,11 @@
+import Head from 'next/head'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
 import ExhibitionLayout from '@/components/Layout/ExhibitionLayout'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
-import { getViewingRoom } from '@/lib/sanity.fetch'
+import { getAboveTheFoldImage, getViewingRoom } from '@/lib/sanity.fetch'
 import {
     viewingRoomBySlugQuery,
     viewingRoomSlugsQuery
@@ -18,9 +19,14 @@ export default function ViewingRoomSlugRoute(
     })
 
     return (
-        <main className='animate-fade-in'>
-            <ExhibitionPage exhibition={viewingRoom} />
-        </main>
+        <>
+            <Head>
+                <link rel="preload" as="image" href={props.image.url} />
+            </Head>
+            <main className='animate-fade-in'>
+                <ExhibitionPage exhibition={viewingRoom} />
+            </main>
+        </>
     )
 }
 
@@ -38,8 +44,11 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ draftMode = false, params = {} }) => {
     const client = getClient(draftMode ? { token: readToken } : undefined)
-    const viewingRoom = await getViewingRoom(client, params.slug)
-  
+    const [viewingRoom, image] = await Promise.all([
+        getViewingRoom(client, params.slug),
+        getAboveTheFoldImage(client, params.slug, "viewingRoom")
+    ])
+
     if (!viewingRoom) {
         return {
             notFound: true,
@@ -51,6 +60,7 @@ export const getStaticProps = async ({ draftMode = false, params = {} }) => {
             draftMode,
             token: draftMode ? readToken : '',
             viewingRoom,
+            image,
         },
     }
 }

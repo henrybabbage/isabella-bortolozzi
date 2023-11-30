@@ -1,10 +1,11 @@
+import Head from 'next/head'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
 import ExhibitionLayout from '@/components/Layout/ExhibitionLayout'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
-import { getExhibition } from '@/lib/sanity.fetch'
+import { getAboveTheFoldImage, getExhibition } from '@/lib/sanity.fetch'
 import {
     exhibitionBySlugQuery,
     exhibitionSlugsQuery,
@@ -16,11 +17,16 @@ export default function ExhibitionSlugRoute(
     const [exhibition] = useLiveQuery(props.exhibition, exhibitionBySlugQuery, {
         slug: props.exhibition.slug,
     })
-
+    
     return (
-        <main className='animate-fade-in'>
-            <ExhibitionPage exhibition={exhibition} />
-        </main>
+        <>
+            <Head>
+                <link rel="preload" as="image" href={props.image.url} />
+            </Head>
+            <main className='animate-fade-in'>
+                <ExhibitionPage exhibition={exhibition} />
+            </main>
+        </>
     )
 }
 
@@ -38,8 +44,11 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ draftMode = false, params = {} }) => {
     const client = getClient(draftMode ? { token: readToken } : undefined)
-    const exhibition = await getExhibition(client, params.slug)
-  
+    const [exhibition, image] = await Promise.all([
+        getExhibition(client, params.slug),
+        getAboveTheFoldImage(client, params.slug, "exhibition")
+    ])
+    
     if (!exhibition) {
         return {
             notFound: true,
@@ -51,6 +60,7 @@ export const getStaticProps = async ({ draftMode = false, params = {} }) => {
             draftMode,
             token: draftMode ? readToken : '',
             exhibition,
+            image,
         },
     }
 }
