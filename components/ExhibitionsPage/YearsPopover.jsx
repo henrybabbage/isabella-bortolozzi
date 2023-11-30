@@ -1,4 +1,5 @@
 import * as Popover from '@radix-ui/react-popover'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { useActiveYearStore } from '@/context/useActiveYearStore'
@@ -40,7 +41,8 @@ export default function YearsPopover({ exhibitions }) {
                         <div className="sm:col-span-9 sm:col-start-4 col-span-12 col-start-1 sm:pl-3">
                             <div className="h-fit w-full sm:w-2/3">
                                 {years.map((year, index) => (
-                                    <button
+                                    <Link
+                                        href={`#${year}`}
                                         onClick={() => {
                                             didClickYear(year)
                                         }}
@@ -57,7 +59,7 @@ export default function YearsPopover({ exhibitions }) {
                                         >
                                             {index != years.length - 1 ? year + ',' : year}
                                         </h3>
-                                    </button>
+                                    </Link>
                                 ))}
                             </div>
                         </div>
