@@ -23,9 +23,7 @@ export default function YearsPopover({ exhibitions }) {
 
     const didClickYear = (year) => {
 		const firstExhibitionWithYear = exhibitions.find((exhibition) => exhibition.year == year)
-        console.log({ firstExhibitionWithYear })
 		const idx = exhibitions.indexOf(firstExhibitionWithYear)
-        console.log({ idx })
         setSelectedYearIndex(idx)
 	}
 
