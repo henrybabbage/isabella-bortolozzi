@@ -3,8 +3,8 @@ import SvgBortolozziLogo from "@/public/components/BortolozziLogo";
 export default function MobileFooter({ gallery, featuredExhibition, override }) {
     const dominantColor = featuredExhibition.mainImage.asset.metadata.palette.dominant.background
 	return (
-		<div className="flex w-screen h-screen flex-col justify-end md:hidden pb-6">
-			<div className="flex flex-col space-y-7 p-6">
+		<div className="flex w-screen h-[100svh] sm:h-screen flex-col justify-end md:hidden">
+			<div className="flex flex-col space-y-6 p-6">
 				<div className="flex flex-col">
 					<a href={gallery.footer.googleMaps || 'https://www.google.com/maps/'} target="_blank" rel="noreferrer" className="font-serif">
 						{gallery.footer.address}
@@ -21,7 +21,7 @@ export default function MobileFooter({ gallery, featuredExhibition, override }) 
 					<p className="font-serif">{gallery?.footer?.phoneNumber}</p>
 					<p className="font-serif">{gallery?.footer?.email}</p>
 				</div>
-				<div className="flex flex-col pb-9">
+				<div className="flex flex-col pb-6">
 					<div className="flex">
 						<a href="https://www.facebook.com/GalerieIsabellaBortolozzi/" target="_blank" rel="noreferrer" className="font-serif">
 							Facebook
@@ -33,7 +33,7 @@ export default function MobileFooter({ gallery, featuredExhibition, override }) 
 					</div>
 				</div>
 			</div>
-			<div className="relative bottom-4 h-16 w-full p-4">
+			<div className="relative bottom-4 h-auto w-full p-4">
                 <div className="h-auto w-full">
                     <SvgBortolozziLogo
                         fill={override?.overrideColor === true ? override?.logoColor.value : dominantColor}
