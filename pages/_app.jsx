@@ -124,12 +124,12 @@ export default function App({ Component, pageProps }) {
                 {draftMode ? (
                     <PreviewProvider token={token}>
                         <RootLayout>
-                                <Component {...pageProps} key={key} />
+                            <Component {...pageProps} key={key} />
                         </RootLayout>
                     </PreviewProvider>
                 ) : (
                     <RootLayout>
-                            <Component {...pageProps} key={key} />
+                        <Component {...pageProps} key={key} />
                     </RootLayout>
                 )}
             </HydrationProvider>
