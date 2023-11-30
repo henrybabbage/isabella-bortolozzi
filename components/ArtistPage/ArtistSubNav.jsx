@@ -28,6 +28,7 @@ export default function ArtistSubNav({ artist, isLoading, scrollIntoViewWorks, s
                             scrollIntoViewWorks({
                                 alignment: 'start'
                             })
+                            
                         }}
                     >
                         {'Works'}
