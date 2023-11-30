@@ -1,6 +1,6 @@
 import { sanityClient } from '@/lib/sanity.client'
 
-export default async function submitEmail(req, res) {
+export default async function submit(req, res) {
 	const { email } = JSON.parse(req.body)
 	try {
 		await sanityClient.create({

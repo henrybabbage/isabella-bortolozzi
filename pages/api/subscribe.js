@@ -1,5 +1,5 @@
 
-export default async function subscribe (req, res) {
+export default async function subscribe(req, res) {
 	const { email } = req.body
 
 	if (!email || !email.length) {
