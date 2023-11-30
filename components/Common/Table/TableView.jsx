@@ -26,7 +26,7 @@ export default function TableView({ exhibitions }) {
 	return (
 		<div className="grid w-full grid-cols-12 items-start px-6">
 			<div className="hidden sm:visible sm:flex sticky top-0 col-span-3 col-start-1 h-screen w-full items-center">
-				<div className="relative h-[22.5vw] w-[22.5vw] bg-background p-6">
+				<div className="relative h-[22vw] w-[22vw] bg-background">
 					{exhibitions &&
 						exhibitions.map((exhibition) => (
 							<TableImage
@@ -37,11 +37,11 @@ export default function TableView({ exhibitions }) {
 						))}
 				</div>
 			</div>
-			<div className="sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[calc(50vh-13vh-48px)]">
+			<div className="sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]">
 				<ul ref={tableContentRef}>
 					{exhibitions &&
 						exhibitions.map((exhibition) => (
-							<li key={exhibition._id} id={exhibition.year} className='scroll-mt-[calc(-13vh+12px)]'>
+							<li key={exhibition._id} id={exhibition.year} className='scroll-mt-[calc(50vh-11vw)]'>
 								<TableItem id={exhibition._id} year={exhibition.year} exhibition={exhibition} />
 							</li>
 						))}

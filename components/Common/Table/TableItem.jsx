@@ -59,7 +59,7 @@ export default function TableItem({ exhibition, id, year }) {
 			<div
 				ref={ref}
 				className={cn(
-					'group relative flex flex-col sm:grid h-[40rem] sm:h-[calc(26vw-48px)] sm:max-h-[26vw] cursor-pointer sm:grid-flow-dense sm:grid-cols-9 content-start sm:border-t pt-1 sm:pt-0 sm:border-solid sm:border-border sm:pb-6 text-left font-serif',
+					'group relative flex flex-col sm:grid h-[40rem] sm:h-[calc(22vw)] sm:max-h-[22vw] cursor-pointer sm:grid-flow-dense sm:grid-cols-9 content-start sm:border-t pt-1 sm:pt-0 sm:border-solid sm:border-border sm:pb-6 text-left font-serif',
 					inView ? 'text-primary' : 'text-secondary'
 				)}
 			>
