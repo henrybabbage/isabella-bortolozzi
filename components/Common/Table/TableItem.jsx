@@ -1,9 +1,9 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { formatDateWithoutYear, getYear } from 'utils/dateHelpers'
 
+import DynamicLink from '@/components/Primitives/DynamicLink'
 import { useActiveItemStore } from '@/context/useActiveItemStore'
 import { useActiveYearStore } from '@/context/useActiveYearStore'
 import { cn } from '@/utils/cn'
@@ -46,16 +46,7 @@ export default function TableItem({ exhibition, id, year }) {
     if (!exhibition) return null
 
 	return (
-		<Link
-            scroll={false}
-            shallow={false}
-			href={{
-				pathname: `${page}/[slug]`,
-				query: {
-					slug: slug,
-				},
-			}}
-		>
+		<DynamicLink link={exhibition}>
 			<div
 				ref={ref}
 				className={cn(
@@ -111,6 +102,6 @@ export default function TableItem({ exhibition, id, year }) {
 					</div>
 				</div>
 			</div>
-		</Link>
+		</DynamicLink>
 	)
 }
