@@ -40,11 +40,7 @@ export default function YearsPopover({ exhibitions }) {
                         <div className="sm:col-span-9 sm:col-start-4 col-span-12 col-start-1 sm:pl-3">
                             <div className="h-fit w-full sm:w-2/3">
                                 {years.map((year, index) => (
-                                    <Link
-                                        shallow
-                                        replace
-                                        scroll={false}
-                                        href={`#${year}`}
+                                    <button
                                         onClick={() => {
                                             didClickYear(year)
                                         }}
@@ -61,7 +57,7 @@ export default function YearsPopover({ exhibitions }) {
                                         >
                                             {index != years.length - 1 ? year + ',' : year}
                                         </h3>
-                                    </Link>
+                                    </button>
                                 ))}
                             </div>
                         </div>

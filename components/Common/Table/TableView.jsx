@@ -11,14 +11,14 @@ export default function TableView({ exhibitions }) {
 
     const selectedYearIndex = useSelectedYearStore((state) => state.selectedYearIndex)
 
-    // useEffect(() => {
-    //     if(selectedYearIndex) {
-    //         tableContentRef.current.children[selectedYearIndex].scrollIntoView({
-    //             behavior: 'smooth', 
-    //             block: 'start'
-    //         })
-    //     }
-    // }, [selectedYearIndex])
+    useEffect(() => {
+        if(selectedYearIndex) {
+            tableContentRef.current.children[selectedYearIndex].scrollIntoView({
+                behavior: 'smooth', 
+                block: 'start'
+            })
+        }
+    }, [selectedYearIndex])
 
 	if (!exhibitions) return null
 
