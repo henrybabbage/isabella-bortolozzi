@@ -41,6 +41,8 @@ export default function YearsPopover({ exhibitions }) {
                             <div className="h-fit w-full sm:w-2/3">
                                 {years.map((year, index) => (
                                     <Link
+                                        shallow={true}
+                                        scroll={false}
                                         href={`#${year}`}
                                         onClick={() => {
                                             didClickYear(year)
