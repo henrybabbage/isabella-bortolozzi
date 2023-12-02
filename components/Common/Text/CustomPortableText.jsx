@@ -9,20 +9,19 @@ const InlineImage = ({ value }) => {
     const image = value.asset ?? {}
 	const imageProps = useNextSanityImage(sanityClient, image)
 	return (
-		<div className="my-6 space-y-2 w-96 h-96 overflow-hidden relative">
-            {value.asset && 
+		<div className="my-4 space-y-2 w-full h-full overflow-hidden relative">
+            {imageProps && 
                 <Image
-                    imageProps={imageProps.src}
+                    src={imageProps.src}
                     loader={imageProps.loader}
                     alt={''}
                     fill
-                    priority
                     style={{ objectFit: 'contain' }}
                 />
             }
             {value.caption && (
                 <div className="text-sm text-primary">
-                    {value.caption}
+                    <p>{value.caption}</p>
                 </div>
             )}
         </div>
