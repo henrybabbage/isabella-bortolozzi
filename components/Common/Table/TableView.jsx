@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 
 import { useSelectedYearStore } from '@/context/useSelectedYearStore'
+import { useScrollToSelectedYear } from '@/hooks/useScrollToSelectedYear'
 
 import TableImage from './TableImage'
 import TableItem from './TableItem'
@@ -11,14 +12,7 @@ export default function TableView({ exhibitions }) {
 
     const selectedYearIndex = useSelectedYearStore((state) => state.selectedYearIndex)
 
-    useEffect(() => {
-        if(selectedYearIndex) {
-            tableContentRef.current.children[selectedYearIndex].scrollIntoView({
-                behavior: 'smooth', 
-                block: 'start'
-            })
-        }
-    }, [selectedYearIndex])
+    useScrollToSelectedYear(selectedYearIndex, tableContentRef)
 
 	if (!exhibitions) return null
 
