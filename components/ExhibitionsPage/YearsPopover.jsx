@@ -1,5 +1,4 @@
 import * as Popover from '@radix-ui/react-popover'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { useActiveYearStore } from '@/context/useActiveYearStore'
@@ -22,7 +21,7 @@ export default function YearsPopover({ exhibitions }) {
     const setSelectedYearIndex = useSelectedYearStore((state) => state.setSelectedYearIndex)
 
     const didClickYear = (year) => {
-		const firstExhibitionWithYear = exhibitions.find((exhibition) => exhibition.year == year)
+		const firstExhibitionWithYear = exhibitions.find((exhibition) => getYear(exhibition.endDate) == year)
 		const idx = exhibitions.indexOf(firstExhibitionWithYear)
         setSelectedYearIndex(idx)
 	}

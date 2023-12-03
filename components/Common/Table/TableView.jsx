@@ -31,14 +31,14 @@ export default function TableView({ exhibitions }) {
 				</div>
 			</div>
 			<div className="sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]">
-				<ul ref={tableContentRef}>
+				<ol ref={tableContentRef}>
 					{exhibitions &&
 						exhibitions.map((exhibition) => (
 							<li key={exhibition._id} id={exhibition.year} className="scroll-mt-[calc(50vh-11vw)]">
 								<TableItem id={exhibition._id} year={exhibition.year} exhibition={exhibition} />
 							</li>
 						))}
-				</ul>
+				</ol>
 			</div>
 		</div>
 	)

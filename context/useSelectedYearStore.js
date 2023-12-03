@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
 export const useSelectedYearStore = create((set) => ({
-    selectedYearIndex: null,
-    setSelectedYearIndex: (year) => set({ selectedYearIndex: year })
+    selectedYearIndex: 0,
+    setSelectedYearIndex: (idx) => set({ selectedYearIndex: idx })
 }))
