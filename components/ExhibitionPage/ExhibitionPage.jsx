@@ -16,9 +16,6 @@ export default function ExhibitionPage({exhibition}) {
     const scrollToSections = useRef(new Set())
     const scrollViewRef = useRef(null)
 
-    console.log('currentScrollElement:', currentScrollElement)
-    console.log('scrollToSections:', scrollToSections)
-
     useEffect(() => {
 		setTimeout(() => {
 			setIsLoading(false)
@@ -64,7 +61,7 @@ export default function ExhibitionPage({exhibition}) {
 	}
 
 	const scrollToSection = (idx) => {
-        if (!idx) return
+        if (idx === null || idx === undefined) return
 		Array.from(scrollToSections.current)[idx]?.scrollIntoView({
 			behavior: 'smooth',
 			block: 'center',
