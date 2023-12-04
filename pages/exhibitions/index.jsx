@@ -1,4 +1,5 @@
 import { useLiveQuery } from 'next-sanity/preview'
+import { Suspense } from 'react'
 
 import TableView from '@/components/Common/Table/TableView'
 import ExhibitionsHeader from '@/components/ExhibitionsPage/ExhibitionsHeader'
@@ -12,7 +13,9 @@ export default function Exhibitions(props) {
     return (
         <main className="animate-fade-in min-h-full w-screen">
             <ExhibitionsHeader exhibitions={exhibitions} />
-            <TableView exhibitions={exhibitions} />
+            <Suspense>
+                <TableView exhibitions={exhibitions} />
+            </Suspense>
         </main>
     )
 }
