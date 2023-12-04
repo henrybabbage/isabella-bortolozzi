@@ -1,19 +1,21 @@
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
 import { cn } from "@/utils/cn"
 
+import CloseButton from "../Buttons/CloseButton"
 import PlusButton from "../Buttons/PlusButton"
 import { CustomPortableText } from "../Text/CustomPortableText"
-import { Sheet, SheetContent, SheetFooter, SheetTrigger } from "./Sheet"
+import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTrigger } from "./Sheet"
 
 export default function GlobalDrawer({ content, pressRelease, index, email = 'info@bortolozzi.com', didClickPrevious, didClickNext }) {
     const [isOpen, setIsOpen] = useState(false)
     const [pressReleaseSelected, setPressReleaseSelected] = useState(false)
 
     const router = useRouter()
+    console.log(router)
 
 	const togglePressRelease = (event) => {
 		setPressReleaseSelected((pressReleaseSelected) => !pressReleaseSelected)
@@ -21,9 +23,25 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
 	}
 
     const handleDrawerOpen = (event) => {
-        setIsOpen(true)
+        setIsOpen(!isOpen)
         event.stopPropagation()
     }
+
+    useEffect(() => {
+        isOpen
+            ? (document.body.style.overflow = 'hidden')
+            : (document.body.style.overflow = 'auto')
+
+        // only scroll to top on the artist pages to center the carousel 
+        if (router.query.slug && isOpen) {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+            })
+        }
+
+    }, [isOpen, router.query.slug])
 
 	const inViewImage = content?.imageGallery?.[index]
 
@@ -38,6 +56,13 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
                 <PlusButton didPressButton={handleDrawerOpen} />
             </SheetTrigger>
             <SheetContent side={desktopOrLaptop ? 'right' : 'bottom'} onCloseAutoFocus={(event) => event.preventDefault()} className="z-[999] h-2/4 sm:h-full sm:max-h-full flex flex-col justify-between">
+                <SheetHeader className="p-0 m-0 w-full">
+                    <SheetClose asChild>
+                        <div className="m-0 p-0 relative flex justify-end">
+                            <CloseButton didPressButton={handleDrawerOpen} />
+                        </div>
+                    </SheetClose>
+                </SheetHeader>
                 <div className='w-full h-full flex flex-col justify-end overflow-scroll scrollbar-hide'>
                     <div className={cn(
                         "flex flex-col",
