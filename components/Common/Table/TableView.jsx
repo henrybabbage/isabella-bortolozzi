@@ -1,4 +1,3 @@
-import { useVirtualizer } from '@tanstack/react-virtual'
 import { useRef } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
@@ -10,27 +9,17 @@ import { cn } from '@/utils/cn'
 import TableImage from './TableImage'
 import TableItem from './TableItem'
 
-export default function TableView({ exhibitions, fullPage = true }) {
+export default function TableView({ exhibitions, fullPage = false }) {
 
     const parentRef = useRef(null)
     const tableContentRef = useRef()
 
     const hydrated = useHydrated()
 	const tabletOrMobile = useMediaQuery({ query: '(max-width: 991px)' }, hydrated ? undefined : { deviceWidth: 991 })
-    const rowSize = tabletOrMobile ? 640 : 312
 
     const selectedYearIndex = useSelectedYearStore((state) => state.selectedYearIndex)
 
     useScrollToSelectedYear(selectedYearIndex, tableContentRef)
-
-    const rowVirtualizer = useVirtualizer({
-        count: exhibitions.length,
-        getScrollElement: () => parentRef.current,
-        estimateSize: () => rowSize,
-        overscan: 12,
-    })
-
-    const virtualItems = rowVirtualizer.getVirtualItems()
 
 	if (!exhibitions) return null
 
@@ -49,25 +38,14 @@ export default function TableView({ exhibitions, fullPage = true }) {
 				</div>
 			</div>
 			<div className={cn(fullPage ? "h-screen" : "", "scrollbar-hide sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]")}>
-				<ol
-                    ref={tableContentRef}
-                    style={{ height: `${rowVirtualizer.getTotalSize()}px`, }}
-                >
-                    {virtualItems.map(virtualItem => {
-                        return (
-							<li
-                                key={virtualItem.key}
-                                ref={rowVirtualizer.measureElement}
-                                className="scroll-mt-[calc(50vh-11vw)]"
-                                style={{
-                                    height: `${virtualItem.size}px`,
-                                }}
-                            >
-								<TableItem exhibition={exhibitions[virtualItem.index]} />
-							</li>
-						)
-                    })}
-				</ol>
+                <ol ref={tableContentRef}>
+                    {exhibitions &&
+                        exhibitions.map((exhibition) => (
+                            <li key={exhibition._id} id={exhibition.year} className="scroll-mt-[calc(50vh-11vw)]">
+                                <TableItem id={exhibition._id} year={exhibition.year} exhibition={exhibition} />
+                            </li>
+                        ))}
+                </ol>
 			</div>
 		</div>
 	)
