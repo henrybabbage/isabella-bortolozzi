@@ -19,7 +19,7 @@ export default function ArtistSubNav({ artist, isLoading, scrollIntoViewWorks, s
                     <button
                         type="button"
                         className={cn(
-                            'z-100 w-fit cursor-pointer transition hover:text-primary',
+                            'z-100 w-fit cursor-pointer transition hover:text-primary small-caps',
                             isLoading ? 'hidden' : 'block',
                             inViewSection === 'works' ? 'text-primary' : 'text-secondary'
                         )}
@@ -39,7 +39,7 @@ export default function ArtistSubNav({ artist, isLoading, scrollIntoViewWorks, s
 					<button
                         type="button"
                         className={cn(
-                            'z-100 w-fit cursor-pointer transition hover:text-primary',
+                            'z-100 w-fit cursor-pointer transition hover:text-primary small-caps',
                             isLoading ? 'hidden' : 'block',
                             inViewSection === 'exhibitions' ? 'text-primary' : 'text-secondary'
                         )}
@@ -55,7 +55,7 @@ export default function ArtistSubNav({ artist, isLoading, scrollIntoViewWorks, s
 					<button
                         type="button"
                         className={cn(
-                            'z-100 w-fit cursor-pointer transition hover:text-primary',
+                            'z-100 w-fit cursor-pointer transition hover:text-primary small-caps',
                             isLoading ? 'hidden' : 'block',
                             inViewSection === 'biography' ? 'text-primary' : 'text-secondary'
                         )}
