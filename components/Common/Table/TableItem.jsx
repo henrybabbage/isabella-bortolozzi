@@ -11,8 +11,10 @@ import { cn } from '@/utils/cn'
 import StandardImage from '../Media/StandardImage'
 import { CustomPortableText } from '../Text/CustomPortableText'
 
-export default function TableItem({ exhibition, id, year }) {
+export default function TableItem({ exhibition }) {
     const router = useRouter()
+
+    const { _id: id, year } = exhibition
 
 	const { ref, inView } = useInView({ rootMargin: '-50% 0px -50% 0px' })
 	const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
