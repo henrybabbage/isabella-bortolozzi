@@ -5,11 +5,12 @@ import { useMediaQuery } from 'react-responsive'
 
 import { useSelectedYearStore } from '@/context/useSelectedYearStore'
 import { useScrollToSelectedYear } from '@/hooks/useScrollToSelectedYear'
+import { cn } from '@/utils/cn'
 
 import TableImage from './TableImage'
 import TableItem from './TableItem'
 
-export default function TableView({ exhibitions }) {
+export default function TableView({ exhibitions, fullPage = true }) {
 
     const parentRef = useRef(null)
     const tableContentRef = useRef()
@@ -34,7 +35,7 @@ export default function TableView({ exhibitions }) {
 	if (!exhibitions) return null
 
 	return (
-		<div ref={parentRef} className="overflow-auto grid w-full grid-cols-12 h-screen items-start px-6">
+		<div ref={parentRef} className={cn(fullPage ? "overflow-auto" : "", "grid w-full grid-cols-12 items-start px-6")}>
 			<div className="hidden sm:visible sm:flex sticky top-0 col-span-3 col-start-1 h-screen w-full items-center">
 				<div className="relative h-[22vw] w-[22vw] bg-background">
 					{exhibitions &&
@@ -47,10 +48,9 @@ export default function TableView({ exhibitions }) {
 						))}
 				</div>
 			</div>
-			<div className="scrollbar-hide sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full h-screen py-[calc(50vh-11vw)]">
+			<div className={cn(fullPage ? "h-screen" : "", "scrollbar-hide sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]")}>
 				<ol
                     ref={tableContentRef}
-                    className='relative'
                     style={{ height: `${rowVirtualizer.getTotalSize()}px`, }}
                 >
                     {virtualItems.map(virtualItem => {
@@ -60,7 +60,6 @@ export default function TableView({ exhibitions }) {
                                 ref={rowVirtualizer.measureElement}
                                 className="scroll-mt-[calc(50vh-11vw)]"
                                 style={{
-                                    transform: `translateY(${virtualItems[0].start}px)`,
                                     height: `${virtualItem.size}px`,
                                 }}
                             >
