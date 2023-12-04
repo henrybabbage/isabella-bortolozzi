@@ -1,5 +1,4 @@
 import '@/styles/global.css'
-import '@madeinhaus/nextjs-page-transition/dist/index.css'
 
 import { useAsPathWithoutHash } from '@madeinhaus/nextjs-page-transition'
 import localFont from 'next/font/local'

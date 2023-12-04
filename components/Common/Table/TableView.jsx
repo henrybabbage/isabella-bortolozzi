@@ -1,17 +1,18 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
 import { useSelectedYearStore } from '@/context/useSelectedYearStore'
 import { useScrollToSelectedYear } from '@/hooks/useScrollToSelectedYear'
+import { cn } from '@/utils/cn'
 
 import TableImage from './TableImage'
 import TableItem from './TableItem'
 
-export default function TableView({ exhibitions }) {
-    const [listItems, setListItems] = useState(exhibitions)
+export default function TableView({ exhibitions, fullPage = true }) {
 
+    const parentRef = useRef(null)
     const tableContentRef = useRef()
 
     const hydrated = useHydrated()
@@ -24,7 +25,7 @@ export default function TableView({ exhibitions }) {
 
     const rowVirtualizer = useVirtualizer({
         count: exhibitions.length,
-        getScrollElement: () => tableContentRef.current,
+        getScrollElement: () => parentRef.current,
         estimateSize: () => rowSize,
         overscan: 12,
     })
@@ -34,7 +35,7 @@ export default function TableView({ exhibitions }) {
 	if (!exhibitions) return null
 
 	return (
-		<div className="grid w-full grid-cols-12 items-start px-6">
+		<div ref={parentRef} className={cn(fullPage ? "overflow-auto" : "", "grid w-full grid-cols-12 items-start px-6")}>
 			<div className="hidden sm:visible sm:flex sticky top-0 col-span-3 col-start-1 h-screen w-full items-center">
 				<div className="relative h-[22vw] w-[22vw] bg-background">
 					{exhibitions &&
@@ -47,22 +48,22 @@ export default function TableView({ exhibitions }) {
 						))}
 				</div>
 			</div>
-			<div className="sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]">
+			<div className={cn(fullPage ? "h-screen" : "", "scrollbar-hide sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]")}>
 				<ol
                     ref={tableContentRef}
                     style={{ height: `${rowVirtualizer.getTotalSize()}px`, }}
                 >
                     {virtualItems.map(virtualItem => {
-                        const listItem = listItems[virtualItem.index]
                         return (
 							<li
                                 key={virtualItem.key}
+                                ref={rowVirtualizer.measureElement}
                                 className="scroll-mt-[calc(50vh-11vw)]"
                                 style={{
                                     height: `${virtualItem.size}px`,
                                 }}
                             >
-								<TableItem exhibition={listItem} />
+								<TableItem exhibition={exhibitions[virtualItem.index]} />
 							</li>
 						)
                     })}

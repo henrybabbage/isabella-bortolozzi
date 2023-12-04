@@ -63,7 +63,7 @@ const SheetHeader = ({
 }) => (
   <div
     className={cn(
-      "flex flex-col gap-2 text-left",
+      "flex flex-col",
       className
     )}
     {...props}

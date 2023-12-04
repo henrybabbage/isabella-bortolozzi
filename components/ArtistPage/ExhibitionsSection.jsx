@@ -8,7 +8,7 @@ export default function ExhibitionsSection({ artist, exhibitionsRef }) {
     return (
         <section ref={ref} id="exhibitions" className="relative h-full min-h-screen flex flex-col">
             <div ref={exhibitionsRef} className="h-full w-full">
-                <TableView exhibitions={artist.selectedExhibitions} />
+                <TableView exhibitions={artist.selectedExhibitions} fullPage={false} />
             </div>
         </section>
     )
