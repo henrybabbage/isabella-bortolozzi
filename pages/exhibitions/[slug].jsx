@@ -24,7 +24,7 @@ export default function ExhibitionSlugRoute(
     return (
         <>
             <Head>
-                {image && <link rel="preload" as="image" href={image.url} />}
+                {image && <link rel="preload" as="image" href={image.asset.url} sizes="100vw" alt={image.alt ?? 'Hero'} />}
             </Head>
             <main className='animate-fade-in'>
                 <ExhibitionPage exhibition={exhibition} />
