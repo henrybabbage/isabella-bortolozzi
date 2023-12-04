@@ -10,7 +10,7 @@ export default function LoadingScreen({ exhibition, isLoading }) {
 			<div className="invisible relative h-[calc(50vh-13vw+24px)] w-full" />
 			<section className="flex h-full w-full flex-col">
 				<div className="hidden w-full grid-cols-12 px-6 sm:grid">
-					<span className="border-t border-solid border-inactive-200 lg:col-span-12 lg:col-start-1"></span>
+					<span className="border-t border-solid border-inactive-200 lg:col-span-9 lg:col-start-4"></span>
 				</div>
 				<div className="flex w-full flex-col px-4 lg:grid lg:grid-cols-12 lg:grid-rows-1 lg:px-6 lg:pt-[12px]">
 					<div className="lg:col-span-2 lg:col-start-1">
