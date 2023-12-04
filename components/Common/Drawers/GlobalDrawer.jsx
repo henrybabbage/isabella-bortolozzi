@@ -15,7 +15,6 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
     const [pressReleaseSelected, setPressReleaseSelected] = useState(false)
 
     const router = useRouter()
-    console.log(router)
 
 	const togglePressRelease = (event) => {
 		setPressReleaseSelected((pressReleaseSelected) => !pressReleaseSelected)
