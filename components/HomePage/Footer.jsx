@@ -68,13 +68,13 @@ export default function Footer({ gallery, featuredExhibition, override }) {
 					width="100%"
 				/>
 			</div>
-			<div className="mt-6 flex w-full justify-between h-12 items-start">
-                <div className="w-auto flex gap-6">
-                    <h3 className="h-fit">{gallery?.footer?.phoneNumber}</h3>
-                    <h3 className="h-fit">{gallery?.footer?.email}</h3>
+			<div className="hidden mt-6 lg:flex w-full justify-between h-12 items-start">
+                <div className="w-auto flex gap-4 md:gap-6">
+                    <h3 className="h-fit whitespace-nowrap">{gallery?.footer?.phoneNumber}</h3>
+                    <h3 className="h-fit whitespace-nowrap">{gallery?.footer?.email}</h3>
                 </div>
-                <div className="w-auto flex gap-6">
-                    <h3 className="h-fit">{gallery?.footer?.newsletterHeading}</h3>
+                <div className="w-auto flex gap-4 md:gap-6 px-2 md:px-4">
+                    <h3 className="h-fit whitespace-nowrap md:visible">{gallery?.footer?.newsletterHeading}</h3>
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col h-auto">
                         <div className='flex'>
                             <label htmlFor="email" className="h-fit">
@@ -95,7 +95,7 @@ export default function Footer({ gallery, featuredExhibition, override }) {
                             />
                             <button
                                 type="submit"
-                                className="h-fit flex flex-col justify-start text-primary transition hover:text-secondary"
+                                className="h-fit flex flex-col justify-start small-caps hover:text-primary transition text-secondary"
                             >
                                 Submit
                             </button>
@@ -128,7 +128,7 @@ export default function Footer({ gallery, featuredExhibition, override }) {
                         </div>
                     </form>
                 </div>
-                <div className="w-auto flex gap-6">
+                <div className="w-auto flex gap-4 md:gap-6">
                     <Link href="/imprint" className="cursor-pointer">
                         <h3 className="text-primary transition hover:text-secondary">Imprint</h3>
                     </Link>

@@ -15,7 +15,7 @@ export default function LoadingCounter({ totalImages }) {
             ) : (
                 <div className="z-[999] flex w-full">
                     <h3 className="text-primary w-fit">
-                        {router.pathname.startsWith('/exhibitions') ? 'Loading images...' : 'Loading works...'}
+                        {router.pathname.startsWith('/exhibitions') ? 'Attempting to load images...' : 'Attempting to load works...'}
                     </h3>
                 </div>
             )}

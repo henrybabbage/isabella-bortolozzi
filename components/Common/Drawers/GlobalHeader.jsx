@@ -49,6 +49,12 @@ export default function GlobalHeader({ isFixed = true }) {
 		setIsOpen(false)
 	}, [pathname, router.query.slug])
 
+    useEffect(() => {
+        isOpen
+            ? (document.body.style.overflow = 'hidden')
+            : (document.body.style.overflow = 'auto')
+    }, [isOpen])
+
 	return (
 		<header
 			onClick={closeHeaderMenu}
