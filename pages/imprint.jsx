@@ -1,7 +1,7 @@
 import { useLiveQuery } from "next-sanity/preview"
 
+import PageHeader from "@/components/Common/Header/PageHeader"
 import { CustomPortableText } from "@/components/Common/Text/CustomPortableText"
-import ImprintHeader from "@/components/ImprintPage/ImprintHeader"
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getImprint } from "@/lib/sanity.fetch"
@@ -11,7 +11,7 @@ export default function Imprint(props) {
     const [imprint] = useLiveQuery(props.imprint, imprintQuery)
     return (
         <main className="h-screen w-screen py-6 animate-fade-in">
-            <ImprintHeader imprint={imprint} />
+            <PageHeader title={'Imprint'} />
             <section className="flex flex-col sm:grid sm:grid-cols-12 px-6 py-6">
                 {imprint.heading && (
                     <div className="sm:col-span-5 sm:col-start-9">

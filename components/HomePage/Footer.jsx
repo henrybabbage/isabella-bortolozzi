@@ -45,28 +45,40 @@ export default function Footer({ gallery, featuredExhibition, override }) {
 		}
 	}
 
-    const dominantColor = featuredExhibition.mainImage.asset.metadata.palette.dominant.background
+    const dominantColor = featuredExhibition?.mainImage?.asset?.metadata?.palette?.dominant?.background
+
+    const getLogoFillColor = (override, dominantColor) => {
+        if (override?.overrideColor === true) {
+            return override?.logoColor?.value
+        }
+      
+        if (dominantColor) {
+            return dominantColor
+        }
+      
+        return '#222222'
+    }
 
 	return (
 		<div className="relative flex h-screen w-screen flex-col justify-end px-6 pt-6 pb-4">
             <div className="h-auto w-full">
 				<SvgBortolozziLogo
-					fill={override?.overrideColor === true ? override?.logoColor.value : dominantColor}
+					fill={getLogoFillColor(override, dominantColor)}
 					height="100%"
 					width="100%"
 				/>
 			</div>
 			<div className="mt-6 flex w-full justify-between h-12 items-start">
                 <div className="w-auto flex gap-6">
-                    <h3 className="h-fit">{gallery.footer.phoneNumber}</h3>
-                    <h3 className="h-fit">{gallery.footer.email}</h3>
+                    <h3 className="h-fit">{gallery?.footer?.phoneNumber}</h3>
+                    <h3 className="h-fit">{gallery?.footer?.email}</h3>
                 </div>
                 <div className="w-auto flex gap-6">
-                    <h3 className="h-fit">{gallery.footer.newsletterHeading}</h3>
+                    <h3 className="h-fit">{gallery?.footer?.newsletterHeading}</h3>
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col h-auto">
                         <div className='flex'>
                             <label htmlFor="email" className="h-fit">
-                                {gallery.footer.newsletterPrompt}
+                                {gallery?.footer?.newsletterPrompt}
                             </label>
                             <input
                                 placeholder="Email address"

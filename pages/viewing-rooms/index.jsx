@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'next-sanity/preview'
 
+import PageHeader from '@/components/Common/Header/PageHeader'
 import TableView from '@/components/Common/Table/TableView'
-import ViewingRoomsHeader from '@/components/ViewingRoomsPage/ViewingRoomsHeader'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getViewingRooms } from '@/lib/sanity.fetch'
@@ -11,7 +11,7 @@ export default function ViewingRooms(props) {
     const [viewingRooms] = useLiveQuery(props.viewingRooms, viewingRoomsQuery)
     return (
         <main className="animate-fade-in h-[100dvh] w-screen">
-            <ViewingRoomsHeader />
+            <PageHeader title={'Viewing Rooms'} />
             <TableView exhibitions={viewingRooms} />
         </main>
     )

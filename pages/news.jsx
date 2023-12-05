@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'next-sanity/preview'
 
+import PageHeader from '@/components/Common/Header/PageHeader'
 import TableView from '@/components/Common/Table/TableView'
-import NewsHeader from '@/components/NewsPage/NewsHeader'
 import { readToken } from '@/lib/sanity.api'
 import { getClient } from '@/lib/sanity.client'
 import { getNews } from '@/lib/sanity.fetch'
@@ -11,7 +11,7 @@ export default function News(props) {
     const [news] = useLiveQuery(props.news, newsQuery)
     return (
         <main className="animate-fade-in h-[100dvh] w-screen">
-            <NewsHeader news={news} />
+            <PageHeader title={'News'} />
             <TableView exhibitions={news} />
         </main>
     )
