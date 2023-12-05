@@ -15,6 +15,7 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
     const [pressReleaseSelected, setPressReleaseSelected] = useState(false)
 
     const router = useRouter()
+    const pageType = content._type
 
 	const togglePressRelease = (event) => {
 		setPressReleaseSelected((pressReleaseSelected) => !pressReleaseSelected)
@@ -32,15 +33,15 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
             : (document.body.style.overflow = 'auto')
 
         // only scroll to top on the artist pages to center the carousel 
-        /* if (router.query.slug && isOpen) {
+        if (pageType === 'artist' && isOpen) {
             window.scrollTo({
                 top: 0,
                 left: 0,
                 behavior: "smooth",
             })
-        }*/
+        }
 
-    }, [isOpen])
+    }, [isOpen, pageType])
 
 	const inViewImage = content?.imageGallery?.[index]
 
