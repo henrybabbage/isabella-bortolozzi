@@ -9,12 +9,12 @@ export default function LoadingCounter({ totalImages }) {
         <>
             {totalImages ? (
                 <div className="z-[999] flex space-x-1 w-full">
-                    <h3 className="text-primary w-fit">{router.pathname.startsWith('/exhibitions') ? 'Loading image ' : 'Loading work '}</h3>
-                    <h3 className="text-primary w-fit"><NumberCounter n={totalImages} />&nbsp;{`of ${totalImages}`}</h3>
+                    <h3 className="text-secondary w-fit">{router.pathname.startsWith('/exhibitions') ? 'Loading image ' : 'Loading work '}</h3>
+                    <h3 className="text-secondary w-fit"><NumberCounter n={totalImages} />&nbsp;{`of ${totalImages}`}</h3>
                 </div>
             ) : (
                 <div className="z-[999] flex w-full">
-                    <h3 className="text-primary w-fit">
+                    <h3 className="text-secondary w-fit">
                         {router.pathname.startsWith('/exhibitions') ? 'Attempting to load images...' : 'Attempting to load works...'}
                     </h3>
                 </div>
