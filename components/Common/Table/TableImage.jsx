@@ -20,7 +20,7 @@ export default function TableImage({ currentImage, id }) {
                     loader={imageProps.loader}
                     alt=""
                     fill
-                    sizes="(max-width: 768px) 25vw, (max-width: 1200px) 25vw, 50vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 25vw"
                     priority
                     style={{ objectFit: 'cover', objectPosition: 'center' }}
                 />
