@@ -35,7 +35,7 @@ export default function YearsPopover({ exhibitions }) {
             </Popover.Trigger>
             <Popover.Portal className="shadow-transparent shadow-none focus:shadow-none">
                 <Popover.Content onCloseAutoFocus={(event) => event.preventDefault()} className="shadow-transparent shadow-none focus:shadow-none outline-none focus:outline-none h-fit bg-background">
-                    <nav className="grid grid-cols-12 w-screen px-6 sm:px-0 pt-1 pb-2 sm:pt-0">
+                    <nav className="grid grid-cols-12 w-screen px-6 sm:px-0 pt-1 pb-2 sm:pt-1">
                         <div className="sm:col-span-9 sm:col-start-4 col-span-12 col-start-1 sm:pl-3">
                             <div className="h-fit w-full sm:w-2/3">
                                 {years.map((year, index) => (
@@ -45,7 +45,7 @@ export default function YearsPopover({ exhibitions }) {
                                                 didClickYear(year)
                                             }}
                                             aria-label={`Scroll to exhibitions from the year ${year}`}
-                                            className="h-fit"
+                                            className="h-fit focus-visible:outline-1 focus-visible:ring-secondary focus-visible:ring-offset-1"
                                         >
                                             <h3
                                                 className={cn(
