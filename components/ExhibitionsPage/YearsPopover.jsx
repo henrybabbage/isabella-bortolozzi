@@ -39,24 +39,26 @@ export default function YearsPopover({ exhibitions }) {
                         <div className="sm:col-span-9 sm:col-start-4 col-span-12 col-start-1 sm:pl-3">
                             <div className="h-fit w-full sm:w-2/3">
                                 {years.map((year, index) => (
-                                    <button
-                                        onClick={() => {
-                                            didClickYear(year)
-                                        }}
-                                        aria-label='Select year'
-                                        key={index}
-                                        className="h-fit"
-                                    >
-                                        <h3
-                                            className={cn(
-                                                "mr-1 cursor-pointer inline-flex shrink-0 text-secondary hover:text-primary",
-                                                inViewYear === year ? 'text-primary' : 'text-secondary'
-                                            )}
-                                            key={index}
+                                    <span key={index} className="h-fit inline-flex">
+                                        <button
+                                            onClick={() => {
+                                                didClickYear(year)
+                                            }}
+                                            aria-label={`Scroll to exhibitions from the year ${year}`}
+                                            className="h-fit"
                                         >
-                                            {index != years.length - 1 ? year + ',' : year}
-                                        </h3>
-                                    </button>
+                                            <h3
+                                                className={cn(
+                                                    "cursor-pointer h-fit inline-flex shrink-0 text-secondary hover:text-primary",
+                                                    inViewYear === year ? 'text-primary' : 'text-secondary'
+                                                )}
+                                                key={index}
+                                            >
+                                                {year}
+                                            </h3>
+                                        </button>
+                                        <span className="text-secondary mr-1 h-fit w-fit">{index < years.length - 1 ? ',' : ''}</span>
+                                    </span>
                                 ))}
                             </div>
                         </div>
