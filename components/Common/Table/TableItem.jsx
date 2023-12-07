@@ -48,7 +48,7 @@ export default function TableItem({ exhibition }) {
     if (!exhibition) return null
 
 	return (
-		<DynamicLink link={exhibition}>
+		<DynamicLink link={exhibition} prefetch={false} scroll={false}>
 			<div
 				ref={ref}
 				className={cn(

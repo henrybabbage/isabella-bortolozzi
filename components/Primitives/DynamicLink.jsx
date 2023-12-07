@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function DynamicLink({ link, children, attributes = {}, ...rest }) {
+export default function DynamicLink({ link, children, scroll = false, prefetch = true, replace = false, shallow = false, attributes = {}, ...rest }) {
 	if (!link) return null
 
 	const getDynamicRoute = (route) => {
@@ -70,9 +70,10 @@ export default function DynamicLink({ link, children, attributes = {}, ...rest }
 						slug: slug,
 					},
 				}}
-                scroll={false}
-                passHref
-                legacyBehavior
+                prefetch={prefetch}
+                scroll={scroll}
+                shallow={shallow}
+                replace={replace}
 				className="cursor-pointer"
 				{...rest}
 			>
