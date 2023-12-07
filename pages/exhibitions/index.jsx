@@ -30,7 +30,7 @@ export default function Exhibitions(props) {
 export const getStaticProps = async ({ draftMode = false }) => {
     const client = getClient(draftMode ? { token: readToken } : undefined)
     const exhibitions = await getExhibitions(client)
-  
+
     return {
         props: {
             draftMode,
