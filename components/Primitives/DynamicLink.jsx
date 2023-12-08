@@ -70,6 +70,7 @@ export default function DynamicLink({ link, children, scroll = false, prefetch =
 						slug: slug,
 					},
 				}}
+                legacyBehavior
                 prefetch={prefetch}
                 scroll={scroll}
                 shallow={shallow}
