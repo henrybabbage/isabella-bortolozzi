@@ -6,7 +6,7 @@ import LoadingCounter from "./LoadingCounter"
 export default function LoadingScreen({ exhibition, isLoading }) {
     if(!exhibition) return null
     return (
-        <div className={cn(isLoading? 'opacity-100' : 'opacity-0', "pointer-events-none scrollbar-hide fixed top-0 left-0 z-1000 h-screen max-h-screen w-screen !overflow-hidden bg-background animate-fade-in")}>
+        <div className={cn(isLoading? 'opacity-100' : 'opacity-0', "pointer-events-none scrollbar-hide fixed top-0 left-0 z-1000 h-[100svh] max-h-screen w-screen !overflow-hidden bg-background animate-fade-in")}>
 			<div className="invisible relative h-[calc(50vh-13vw+24px)] w-full" />
 			<section className="flex h-full w-full flex-col">
 				<div className="hidden w-full grid-cols-12 px-6 sm:grid">

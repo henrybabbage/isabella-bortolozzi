@@ -47,7 +47,7 @@ export default function ExhibitionPage({exhibition}) {
     const didClickPrevious = () => {
         if (!scrollToSections) return
 		let goToRef = currentScrollElement - 1
-		if (goToRef <= 0 || goToRef > scrollToSections.current.size) {
+		if (goToRef < 0 || goToRef > scrollToSections.current.size) {
 			return
 		}
 		scrollToSection(goToRef)
@@ -56,7 +56,7 @@ export default function ExhibitionPage({exhibition}) {
 	const didClickNext = () => {
         if (!scrollToSections) return
 		let goToRef = currentScrollElement + 1
-		if (goToRef <= 0 || goToRef > scrollToSections.current.size) {
+		if (goToRef < 0 || goToRef > scrollToSections.current.size) {
 			return
 		}
 		scrollToSection(goToRef)
