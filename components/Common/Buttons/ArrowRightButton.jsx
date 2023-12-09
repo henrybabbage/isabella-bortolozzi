@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
 
-export default function ArrowRightButton({ nextSlide }) {
+export default function ArrowRightButton({ didClickNext }) {
     const [isHovered, setIsHovered] = useState(false)
     const handleMouseEnter = () => setIsHovered(true)
     const handleMouseLeave = () => setIsHovered(false)
@@ -10,7 +10,7 @@ export default function ArrowRightButton({ nextSlide }) {
         <button
             type="button"
             aria-label='Click the right arrow to go to the next item'
-            onClick={nextSlide}
+            onClick={didClickNext}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             className="w-7 h-7 flex justify-center items-center relative"
