@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { forwardRef, useEffect, useState } from "react"
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
@@ -10,7 +10,7 @@ import PlusButton from "../Buttons/PlusButton"
 import { CustomPortableText } from "../Text/CustomPortableText"
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTrigger } from "./Sheet"
 
-export default function GlobalDrawer({ content, pressRelease, index, email = 'info@bortolozzi.com', didClickPrevious, didClickNext }) {
+const GlobalDrawer = forwardRef(function GlobalDrawer({ content, pressRelease, index, email = 'info@bortolozzi.com', didClickPrevious, didClickNext },  ref) {
     const [isOpen, setIsOpen] = useState(false)
     const [pressReleaseSelected, setPressReleaseSelected] = useState(false)
 
@@ -120,4 +120,6 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
             </SheetContent>
         </Sheet>
     )
-}
+})
+
+export default GlobalDrawer

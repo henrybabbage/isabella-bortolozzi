@@ -8,6 +8,7 @@ import { useSectionInView } from '@/hooks/useSectionInView';
 import ArrowLeftButton from "../Common/Buttons/ArrowLeftButton";
 import ArrowRightButton from "../Common/Buttons/ArrowRightButton";
 import GlobalDrawer from "../Common/Drawers/GlobalDrawer";
+import PaginationCounter from './PaginationCounter';
 import SlideImage from "./SlideImage";
 
 export default function CarouselSection({ artist, isLoading, worksRef }) {
@@ -47,17 +48,21 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                                 pagination: false,
                                 autoplay: true,
                                 rewind: true,
+                                width: '100vw',
+                                height: '90vh'
+                                // autoWidth: true
                             }}
                             onArrowsMounted={( splide, prev, next ) => {console.log('prev, next', prev, next )}}
                             onMoved={( splide, newIndex ) => {
                                 console.log('moved', newIndex)
                                 console.log('length', splide.length)
                             }}
+                            className="flex justify-center items-center"
                         >
                             <div id="wrapper" className="w-screen h-screen items-center flex justify-center">
-                                <SplideTrack className="max-w-6xl flex flex-col justify-center items-center">
+                                <SplideTrack>
                                     {imageGallery.length > 0 && imageGallery.map((image, idx) => (
-                                        <SplideSlide key={idx} className="h-full w-full">
+                                        <SplideSlide key={idx} className="relative w-screen h-screen">
                                             <SlideImage image={image} priority={idx === 0 ? true : false} />
                                         </SplideSlide>
                                     ))}
@@ -78,24 +83,11 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                         </Splide>
                     }
                 </div>
+                <PaginationCounter ref={splideRef} isLoading={isLoading} />
                 <div className="absolute bottom-6 right-6 sm:bottom-6 sm:right-6">
-                    {imageGallery.length > 0 && <GlobalDrawer content={artist} index={index} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />}
+                    {imageGallery.length > 0 && <GlobalDrawer ref={splideRef} content={artist} index={index} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />}
                 </div>
             </section>
         </>
 	)
-}
-
-const paginationCounter = ({ splideRef }) => {
-    const currentSlide = splideRef?.current?.splide.index
-    const slideCount = splideRef?.current?.splide.length
-    return  (
-        <div className="absolute left-6 bottom-6">
-            <h3 className="inline-flex gap-2.5 w-auto justify-start">
-                <span className='w-5 text-center'>{currentSlide + 1}</span>
-                <span className='w-2 text-center'>{'|'}</span>
-                <span className='w-5 text-center'>{slideCount}</span>
-            </h3>
-        </div>
-    )
 }

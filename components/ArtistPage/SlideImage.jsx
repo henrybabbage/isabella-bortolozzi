@@ -6,7 +6,7 @@ import { sanityClient } from "@/lib/sanity.client";
 export default function SlideImage({ image, priority }) {
     const imageProps = useNextSanityImage(sanityClient, image.asset)
     return (
-        <section className="relative h-[80vh]">
+        <section className="absolute inset-x-10 overflow-hidden h-auto max-w-full">
             {imageProps && 
                 <Image
                     src={imageProps.src}
