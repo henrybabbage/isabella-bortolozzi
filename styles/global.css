@@ -212,15 +212,3 @@ Splide carousel
     counter-increment: pagination-num;
     content: counter( pagination-num );
 }
-
-.splide--fade .splide__slide:first-of-type ,
-.splide--fade .is-prev {
-  opacity: 1!important; 
-}
-
-/* splide__slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-} */
-

@@ -1,7 +1,7 @@
 import '@splidejs/react-splide/css/core';
 
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 import { useSectionInView } from '@/hooks/useSectionInView';
 
@@ -12,18 +12,22 @@ import PaginationCounter from './PaginationCounter';
 import SlideImage from "./SlideImage";
 
 export default function CarouselSection({ artist, isLoading, worksRef }) {
-    const [index, setIndex] = useState(0)
 
     const splideRef = useRef(null)
 
 	const { ref } = useSectionInView("works", 0.1)
 
     const didClickPrevious = () => {
-        setIndex(index - 1)
+        if (splideRef.current) {
+            console.log(splideRef.current.move(newIndex))
+            splideRef.current.move(newIndex)
+        }
     }
     
     const didClickNext = () => {
-        setIndex(index + 1)
+        // if (splideRef.current) {
+        //     console.log(splideRef.current)
+        // }
     }
 
     const imageGallery = artist?.imageGallery ?? []
@@ -49,8 +53,7 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                                 autoplay: true,
                                 rewind: true,
                                 width: '100vw',
-                                height: '90vh'
-                                // autoWidth: true
+                                height: '100vh',
                             }}
                             onArrowsMounted={( splide, prev, next ) => {console.log('prev, next', prev, next )}}
                             onMoved={( splide, newIndex ) => {
@@ -60,9 +63,9 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                             className="flex justify-center items-center"
                         >
                             <div id="wrapper" className="w-screen h-screen items-center flex justify-center">
-                                <SplideTrack>
+                                <SplideTrack className="">
                                     {imageGallery.length > 0 && imageGallery.map((image, idx) => (
-                                        <SplideSlide key={idx} className="relative w-screen h-screen">
+                                        <SplideSlide key={idx} className="flex flex-col justify-center items-center">
                                             <SlideImage image={image} priority={idx === 0 ? true : false} />
                                         </SplideSlide>
                                     ))}
@@ -85,7 +88,7 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                 </div>
                 <PaginationCounter ref={splideRef} isLoading={isLoading} />
                 <div className="absolute bottom-6 right-6 sm:bottom-6 sm:right-6">
-                    {imageGallery.length > 0 && <GlobalDrawer ref={splideRef} content={artist} index={index} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />}
+                    {imageGallery.length > 0 && <GlobalDrawer ref={splideRef} content={artist} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />}
                 </div>
             </section>
         </>
