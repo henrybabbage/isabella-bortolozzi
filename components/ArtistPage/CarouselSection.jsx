@@ -58,7 +58,7 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                                 keyboard: "global",
                                 arrows: true,
                                 pagination: false,
-                                autoplay: true,
+                                autoplay: false,
                                 rewind: true,
                                 width: '100vw',
                                 height: '100vh',
