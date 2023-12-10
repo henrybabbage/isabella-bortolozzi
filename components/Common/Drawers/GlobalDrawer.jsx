@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { forwardRef, useEffect, useState } from "react"
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
@@ -10,7 +10,7 @@ import PlusButton from "../Buttons/PlusButton"
 import { CustomPortableText } from "../Text/CustomPortableText"
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTrigger } from "./Sheet"
 
-export default function GlobalDrawer({ content, pressRelease, index, email = 'info@bortolozzi.com', didClickPrevious, didClickNext }) {
+const GlobalDrawer = forwardRef(function GlobalDrawer({ content, pressRelease, index, email = 'info@bortolozzi.com', didClickPrevious, didClickNext },  ref) {
     const [isOpen, setIsOpen] = useState(false)
     const [pressReleaseSelected, setPressReleaseSelected] = useState(false)
 
@@ -92,13 +92,13 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
                     )}
                     <div className="w-full justify-start flex">
                         <div className='inline-flex gap-2.5'>
-                            <button type="button" aria-label='Scroll to previous section' onClick={didClickPrevious}>
+                            <button type="button" aria-label='Previous' onClick={didClickPrevious}>
                                 <h3 className="small-caps pointer-events-auto text-secondary transition hover:text-primary">
                                     {'Prev'}
                                 </h3>
                             </button>
                             <span className="text-primary">|</span>
-                            <button type="button" aria-label='Scroll to next section' onClick={didClickNext}>
+                            <button type="button" aria-label='Next' onClick={didClickNext}>
                                 <h3 className="small-caps pointer-events-auto text-secondary transition hover:text-primary">
                                     {'Next'}
                                 </h3>
@@ -120,4 +120,6 @@ export default function GlobalDrawer({ content, pressRelease, index, email = 'in
             </SheetContent>
         </Sheet>
     )
-}
+})
+
+export default GlobalDrawer

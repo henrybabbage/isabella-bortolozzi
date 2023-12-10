@@ -1,91 +1,116 @@
-import { easeExpInOut } from 'd3-ease'
-import Carousel from "nuka-carousel"
-import { useState } from "react"
-import { useHydrated } from 'react-hydration-provider'
-import { useMediaQuery } from 'react-responsive'
+import '@splidejs/react-splide/css/core';
 
-import { useSectionInView } from '@/hooks/useSectionInView'
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+import { useRef, useState } from "react";
 
-import ArrowLeftButton from "../Common/Buttons/ArrowLeftButton"
-import ArrowRightButton from "../Common/Buttons/ArrowRightButton"
-import GlobalDrawer from "../Common/Drawers/GlobalDrawer"
-import SlideImage from "./SlideImage"
+import { useSectionInView } from '@/hooks/useSectionInView';
+
+import ArrowLeftButton from "../Common/Buttons/ArrowLeftButton";
+import ArrowRightButton from "../Common/Buttons/ArrowRightButton";
+import GlobalDrawer from "../Common/Drawers/GlobalDrawer";
+import PaginationCounter from './PaginationCounter';
+import SlideImage from "./SlideImage";
 
 export default function CarouselSection({ artist, isLoading, worksRef }) {
-    const [index, setIndex] = useState(0)
+
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [totalSlides, setTotalSlides] = useState(artist?.imageGallery?.length)
+
+    const splideRef = useRef(null)
 
 	const { ref } = useSectionInView("works", 0.1)
 
     const didClickPrevious = () => {
-        setIndex(index - 1)
+        if (splideRef.current) {
+            splideRef.current.splide.go('>')
+        }
     }
     
     const didClickNext = () => {
-        setIndex(index + 1)
+        if (splideRef.current) {
+            splideRef.current.splide.go('<')
+        }
+    }
+
+    const centerCarousel = () => {
+        if (typeof window !== "undefined") {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" })  
+        }           
     }
 
     const imageGallery = artist?.imageGallery ?? []
 
-    const hydrated = useHydrated()
-	const desktopOrLaptop = useMediaQuery({ query: '(min-width: 992px)' }, hydrated ? undefined : { deviceWidth: 992 })
-
+    if (!artist || !imageGallery) return null
+    
 	return (
         <>
             <section ref={ref} id="works" className="relative h-screen w-full flex flex-col items-center justify-center overflow-x-hidden">
-                <div ref={worksRef} className="sm:h-full w-full">
+                <div ref={worksRef} className="h-full w-full flex justify-center items-center">
                     {imageGallery.length > 0 &&
-                        <Carousel
-                            animation="fade"
-                            speed={100}
-                            enableKeyboardControls
-                            swiping
-                            wrapAround
-                            easing={easeExpInOut}
-                            slideIndex={index}
-                            beforeSlide={(_, v) => setIndex(v)}
-                            renderCenterLeftControls={renderCenterLeftControls}
-                            renderCenterRightControls={renderCenterRightControls}
-                            renderBottomCenterControls={false}
-                            renderBottomLeftControls={desktopOrLaptop ? paginationCounter : false}
+                        <Splide
+                            hasTrack={false}
+                            tag="section"
+                            ref={splideRef}
+                            aria-label={`${artist.name} artworks`}
+                            options={{
+                                type: "fade",
+                                speed: 400,
+                                keyboard: "global",
+                                arrows: true,
+                                pagination: false,
+                                autoplay: true,
+                                rewind: true,
+                                width: '100vw',
+                                height: '100vh',
+                            }}
+                            onMoved={( splide, newIndex ) => {
+                                setCurrentIndex(newIndex)
+                                setTotalSlides(splide.length)
+                            }}
+
+                            className="flex justify-center items-center"
                         >
-                            {imageGallery.length > 0 && imageGallery.map((image, idx) => (
-                                <SlideImage image={image.asset} key={idx} />
-                            ))}
-                        </Carousel>
+                            <div id="wrapper" className="w-screen h-screen items-center flex justify-center">
+                                <SplideTrack className="">
+                                    {imageGallery.length > 0 && imageGallery.map((image, idx) => (
+                                        <SplideSlide key={idx} className="flex flex-col justify-center items-center">
+                                            <SlideImage image={image} priority={idx === 0 ? true : false} />
+                                        </SplideSlide>
+                                    ))}
+                                </SplideTrack>
+                                <div className="splide__arrows">
+                                    <div className="splide__arrow splide__arrow--prev">
+                                        <div className="absolute left-6">
+                                            <ArrowLeftButton didClickPrevious={centerCarousel} />
+                                        </div>
+                                    </div>
+                                    <div className="splide__arrow splide__arrow--next">
+                                        <div className="absolute right-6">
+                                            <ArrowRightButton didClickNext={centerCarousel} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Splide>
                     }
                 </div>
+                <PaginationCounter
+                    ref={splideRef}
+                    currentIndex={currentIndex}
+                    totalSlides={totalSlides}
+                    isLoading={isLoading}
+                />
                 <div className="absolute bottom-6 right-6 sm:bottom-6 sm:right-6">
-                    {imageGallery.length > 0 && <GlobalDrawer content={artist} index={index} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />}
+                    {imageGallery.length > 0 && 
+                        <GlobalDrawer
+                            ref={splideRef}
+                            content={artist}    
+                            didClickPrevious={() => splideRef.current.splide.go('<')}
+                            didClickNext={() => splideRef.current.splide.go('>')}
+                        />
+                    }
                 </div>
             </section>
         </>
 	)
-}
-
-const renderCenterRightControls = ({ nextSlide }) => {
-    return (
-        <div className="absolute right-6">
-            <ArrowRightButton nextSlide={nextSlide} />       
-        </div>
-    )
-}
-
-const renderCenterLeftControls = ({ previousSlide }) => {
-    return (
-        <div className="absolute left-6">
-            <ArrowLeftButton previousSlide={previousSlide} />       
-        </div>
-    )
-}
-
-const paginationCounter = ({ slideCount, currentSlide }) => {
-    return  (
-        <div className="absolute left-6 bottom-6">
-            <h3 className="inline-flex gap-2.5 w-auto justify-start">
-                <span className='w-5 text-center'>{currentSlide + 1}</span>
-                <span className='w-2 text-center'>{'|'}</span>
-                <span className='w-5 text-center'>{slideCount}</span>
-            </h3>
-        </div>
-    )
 }

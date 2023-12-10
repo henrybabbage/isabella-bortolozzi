@@ -1,27 +1,31 @@
-import Image from "next/image";
-import { useNextSanityImage } from "next-sanity-image";
+import Image from "next/image"
+import { useNextSanityImage } from "next-sanity-image"
 
-import { sanityClient } from "@/lib/sanity.client";
+import { sanityClient } from "@/lib/sanity.client"
 
-export default function SlideImage({ image }) {
-    const imageProps = useNextSanityImage(sanityClient, image)
+export default function SlideImage({ image, priority }) {
+    const imageProps = useNextSanityImage(sanityClient, image.asset)
     return (
-        <section className="h-auto w-full overflow-hidden sm:h-screen sm:overflow-auto flex flex-col justify-center">
-			<div className="relative h-[80vh]">
-                {imageProps && 
-                    <Image
-                        src={imageProps.src}
-                        loader={imageProps.loader}
-                        alt={''}
-                        fill
-                        sizes="100vw"
-                        priority
-                        style={{
-                            objectFit: 'contain',
-                        }}
-                    />
-                }
-            </div>
+        <section className="relative h-[80vh] w-screen">
+            {imageProps && 
+                <Image
+                    src={imageProps.src}
+                    loader={imageProps.loader}
+                    alt={image.asset.alt}
+                    // width={image.asset.metadata.dimensions.width}
+                    // height={image.asset.metadata.dimensions.height}
+                    // placeholder='blur'
+                    // blurDataURL={image.asset.metadata.lqip}
+                    fill
+                    sizes="100vw"
+                    priority={priority}
+                    style={{
+                        // width: '100%',
+                        // height: 'auto',
+                        objectFit: 'contain',
+                    }}
+                />
+            }
         </section>
     )
 }

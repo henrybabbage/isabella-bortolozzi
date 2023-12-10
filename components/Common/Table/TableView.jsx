@@ -4,6 +4,7 @@ import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
 import { useSelectedYearStore } from '@/context/useSelectedYearStore'
+import { useScrollToSelectedYear } from '@/hooks/useScrollToSelectedYear'
 import { cn } from '@/utils/cn'
 
 import TableImage from './TableImage'
@@ -33,6 +34,10 @@ export default function TableView({ exhibitions }) {
 		}
 	}, [selectedYearIndex, virtualizer])
 
+    // for mobile version
+    // TODO separate mobile table component for mobile only logic
+    useScrollToSelectedYear(selectedYearIndex, tableContentRef)
+
 	if (!exhibitions) return null
 
 	return (
@@ -50,33 +55,44 @@ export default function TableView({ exhibitions }) {
 				</div>
 			</div>
 			<div ref={listRef} className={cn("", "scrollbar-hide sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]")}>
-                <ol
-                    ref={tableContentRef}
-                    style={{
-                        height: `${virtualizer.getTotalSize()}px`,
-                        width: '100%',
-                        position: 'relative',
-                    }}
-                >
-                    {virtualizer.getVirtualItems().map((item) => {
-                        return (
-                            <div
-                                key={item.key}
-                                style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    width: '100%',
-                                    height: `${item.size}px`,
-                                    transform: `translateY(${item.start - virtualizer.options.scrollMargin}px)`,
-                                }}
-                            >
-                                <li className='scroll-mt-[calc(50vh-11vw)]'>
-                                    <TableItem exhibition={exhibitions[item.index]} />
+                {tabletOrMobile ? (
+                    <ol ref={tableContentRef}>
+                        {exhibitions &&
+                            exhibitions.map((exhibition) => (
+                                <li key={exhibition._id} id={exhibition.year} className="scroll-mt-[calc(50vh-11vw)]">
+                                    <TableItem id={exhibition._id} year={exhibition.year} exhibition={exhibition} />
                                 </li>
-                            </div>
-                    )})}
-                </ol>
+                            ))}
+                    </ol>
+                ) : (
+                    <ol
+                        ref={tableContentRef}
+                        style={{
+                            height: `${virtualizer.getTotalSize()}px`,
+                            width: '100%',
+                            position: 'relative',
+                        }}
+                    >
+                        {virtualizer.getVirtualItems().map((item) => {
+                            return (
+                                <div
+                                    key={item.key}
+                                    style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        width: '100%',
+                                        height: `${item.size}px`,
+                                        transform: `translateY(${item.start - virtualizer.options.scrollMargin}px)`,
+                                    }}
+                                >
+                                    <li className='scroll-mt-[calc(50vh-11vw)]'>
+                                        <TableItem exhibition={exhibitions[item.index]} />
+                                    </li>
+                                </div>
+                        )})}
+                    </ol>
+                )}
 			</div>
 		</div>
 	)
