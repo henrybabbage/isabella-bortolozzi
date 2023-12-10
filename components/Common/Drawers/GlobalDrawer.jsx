@@ -92,13 +92,13 @@ const GlobalDrawer = forwardRef(function GlobalDrawer({ content, pressRelease, i
                     )}
                     <div className="w-full justify-start flex">
                         <div className='inline-flex gap-2.5'>
-                            <button type="button" aria-label='Scroll to previous section' onClick={didClickPrevious}>
+                            <button type="button" aria-label='Previous' onClick={didClickPrevious}>
                                 <h3 className="small-caps pointer-events-auto text-secondary transition hover:text-primary">
                                     {'Prev'}
                                 </h3>
                             </button>
                             <span className="text-primary">|</span>
-                            <button type="button" aria-label='Scroll to next section' onClick={didClickNext}>
+                            <button type="button" aria-label='Next' onClick={didClickNext}>
                                 <h3 className="small-caps pointer-events-auto text-secondary transition hover:text-primary">
                                     {'Next'}
                                 </h3>

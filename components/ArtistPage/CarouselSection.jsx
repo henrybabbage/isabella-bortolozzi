@@ -1,7 +1,7 @@
 import '@splidejs/react-splide/css/core';
 
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { useSectionInView } from '@/hooks/useSectionInView';
 
@@ -13,21 +13,29 @@ import SlideImage from "./SlideImage";
 
 export default function CarouselSection({ artist, isLoading, worksRef }) {
 
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [totalSlides, setTotalSlides] = useState(artist?.imageGallery?.length)
+
     const splideRef = useRef(null)
 
 	const { ref } = useSectionInView("works", 0.1)
 
     const didClickPrevious = () => {
         if (splideRef.current) {
-            console.log(splideRef.current.move(newIndex))
-            splideRef.current.move(newIndex)
+            splideRef.current.splide.go('>')
         }
     }
     
     const didClickNext = () => {
-        // if (splideRef.current) {
-        //     console.log(splideRef.current)
-        // }
+        if (splideRef.current) {
+            splideRef.current.splide.go('<')
+        }
+    }
+
+    const centerCarousel = () => {
+        if (typeof window !== "undefined") {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" })  
+        }           
     }
 
     const imageGallery = artist?.imageGallery ?? []
@@ -55,11 +63,11 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                                 width: '100vw',
                                 height: '100vh',
                             }}
-                            onArrowsMounted={( splide, prev, next ) => {console.log('prev, next', prev, next )}}
                             onMoved={( splide, newIndex ) => {
-                                console.log('moved', newIndex)
-                                console.log('length', splide.length)
+                                setCurrentIndex(newIndex)
+                                setTotalSlides(splide.length)
                             }}
+
                             className="flex justify-center items-center"
                         >
                             <div id="wrapper" className="w-screen h-screen items-center flex justify-center">
@@ -73,12 +81,12 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                                 <div className="splide__arrows">
                                     <div className="splide__arrow splide__arrow--prev">
                                         <div className="absolute left-6">
-                                            <ArrowLeftButton didClickPrevious={didClickPrevious} />
+                                            <ArrowLeftButton didClickPrevious={centerCarousel} />
                                         </div>
                                     </div>
                                     <div className="splide__arrow splide__arrow--next">
                                         <div className="absolute right-6">
-                                            <ArrowRightButton didClickNext={didClickNext} />
+                                            <ArrowRightButton didClickNext={centerCarousel} />
                                         </div>
                                     </div>
                                 </div>
@@ -86,9 +94,21 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                         </Splide>
                     }
                 </div>
-                <PaginationCounter ref={splideRef} isLoading={isLoading} />
+                <PaginationCounter
+                    ref={splideRef}
+                    currentIndex={currentIndex}
+                    totalSlides={totalSlides}
+                    isLoading={isLoading}
+                />
                 <div className="absolute bottom-6 right-6 sm:bottom-6 sm:right-6">
-                    {imageGallery.length > 0 && <GlobalDrawer ref={splideRef} content={artist} didClickPrevious={didClickPrevious} didClickNext={didClickNext} />}
+                    {imageGallery.length > 0 && 
+                        <GlobalDrawer
+                            ref={splideRef}
+                            content={artist}    
+                            didClickPrevious={() => splideRef.current.splide.go('<')}
+                            didClickNext={() => splideRef.current.splide.go('>')}
+                        />
+                    }
                 </div>
             </section>
         </>
