@@ -16,10 +16,10 @@ const FullBleedImage = forwardRef(function FullBleedImage({ image = {}, alt = ''
                         src={imageProps.src}
                         loader={imageProps.loader}
                         alt={alt ?? ''}
-                        quality={100}
                         fill
-                        priority={priority}
+                        quality={75}
                         sizes={tabletOrMobile ? "300vw" : "100vw"}
+                        priority={priority}
                         style={{
                             objectFit: 'cover',
                             objectPosition: 'bottom',

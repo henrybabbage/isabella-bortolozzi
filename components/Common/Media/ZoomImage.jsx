@@ -36,6 +36,7 @@ export default function ZoomImage({
                     sizes={sizes}
                     fill={fill}
                     priority={priority}
+                    quality={100}
                     style={{
                         objectFit: `${mode}`,
                         objectPosition: 'top'

@@ -27,6 +27,7 @@ export default function TableImage({ exhibition }) {
                         alt=""
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 25vw"
+                        quality={75}
                         priority
                         style={{ objectFit: 'cover', objectPosition: 'center' }}
                     />

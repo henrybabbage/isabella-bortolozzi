@@ -9,13 +9,14 @@ export default function StandardImage({ image }) {
     if (!image) return null
 
     return (
-        <div className={cn('absolute inset-0 h-full w-full')}>
+        <div className={cn('relative h-full w-full')}>
             <Image
                 src={imageProps.src}
                 loader={imageProps.loader}
                 alt=""
                 fill
                 sizes="100vw"
+                quality={75}
                 placeholder='blur'
                 blurDataURL={image.asset.metadata.lqip}
                 priority

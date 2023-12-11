@@ -19,6 +19,7 @@ export default function SlideImage({ image, priority }) {
                     fill
                     sizes="100vw"
                     priority={priority}
+                    quality={75}
                     style={{
                         // width: '100%',
                         // height: 'auto',

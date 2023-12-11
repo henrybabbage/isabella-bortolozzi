@@ -1,4 +1,3 @@
-
 import Modal from 'components/Common/Dialog/Modal'
 import { sanityClient } from 'lib/sanity.client'
 import Image from 'next/image'
@@ -65,12 +64,13 @@ const AspectImage = forwardRef(function AspectImage({
                     <Image
                         src={imageProps.src}
                         loader={imageProps.loader}
-                        alt={alt}
+                        alt={alt ?? ''}
                         sizes={sizes}
                         blurDataURL={image.asset.metadata.lqip}
                         placeholder='blur'
                         fill={fill}
                         priority={false}
+                        quality={75}
                         style={{
                             objectFit: 'cover',
                             objectPosition: 'top'
@@ -96,6 +96,7 @@ const AspectImage = forwardRef(function AspectImage({
                                 placeholder='blur'
                                 fill={fill}
                                 priority={priority}
+                                quality={75}
                                 style={{
                                     objectFit: `${mode}`,
                                     objectPosition: 'top'
