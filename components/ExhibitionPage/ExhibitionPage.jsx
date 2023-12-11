@@ -84,7 +84,7 @@ export default function ExhibitionPage({exhibition}) {
                     ref={scrollViewRef}
                     className="flex flex-col h-[100dvh] w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
                 >
-                    <SnapSection exhibition={exhibition} scrollToSections={scrollToSections} index={currentScrollElement} />
+                    <SnapSection exhibition={exhibition} isLoading={isLoading} scrollToSections={scrollToSections} index={currentScrollElement} />
                 </div>
             </div>
         </>

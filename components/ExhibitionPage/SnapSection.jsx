@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer'
 import AspectImage from '../Common/Media/AspectImage'
 import FullBleedImage from '../Common/Media/FullBleedImage'
 
-const SnapSection = forwardRef(function SnapSection({ exhibition, scrollToSections, index }, ref) {
+const SnapSection = forwardRef(function SnapSection({ exhibition, scrollToSections, isLoading, index }, ref) {
 	const { ref: inViewRef, inView } = useInView()
   	return (
 		<Fragment ref={ref}>
@@ -29,7 +29,7 @@ const SnapSection = forwardRef(function SnapSection({ exhibition, scrollToSectio
 								key={idx}
 								image={image}
 								alt={image.alt}
-								priority={true}
+								priority={isLoading ? false : true}
 							/>
 						) : (
 							<AspectImage
@@ -37,7 +37,7 @@ const SnapSection = forwardRef(function SnapSection({ exhibition, scrollToSectio
                                 key={idx}
 								image={image}
 								alt={image.alt}
-								priority={true}
+								priority={isLoading ? false : true}
 								fill={true}
 								mode="contain"
 								sizes="100vw"
