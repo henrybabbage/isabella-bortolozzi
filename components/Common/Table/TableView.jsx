@@ -4,7 +4,6 @@ import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
 import { useSelectedYearStore } from '@/context/useSelectedYearStore'
-import { useScrollToSelectedYear } from '@/hooks/useScrollToSelectedYear'
 import { cn } from '@/utils/cn'
 
 import TableImage from './TableImage'
@@ -34,9 +33,7 @@ export default function TableView({ exhibitions }) {
 		}
 	}, [selectedYearIndex, virtualizer])
 
-    // for mobile version
     // TODO separate mobile table component for mobile only logic
-    useScrollToSelectedYear(selectedYearIndex, tableContentRef)
 
 	if (!exhibitions) return null
 
@@ -48,8 +45,7 @@ export default function TableView({ exhibitions }) {
 						exhibitions.map((exhibition) => (
 							<TableImage
 								key={exhibition._id}
-								id={exhibition._id}
-								currentImage={exhibition.mainImage ?? ''}
+                                exhibition={exhibition}
 							/>
 						))}
 				</div>
@@ -60,7 +56,7 @@ export default function TableView({ exhibitions }) {
                         {exhibitions &&
                             exhibitions.map((exhibition) => (
                                 <li key={exhibition._id} id={exhibition.year} className="scroll-mt-[calc(50vh-11vw)]">
-                                    <TableItem id={exhibition._id} year={exhibition.year} exhibition={exhibition} />
+                                    <TableItem exhibition={exhibition} />
                                 </li>
                             ))}
                     </ol>
