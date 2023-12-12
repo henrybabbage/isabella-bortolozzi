@@ -105,7 +105,7 @@ export default defineType({
 					type: 'string',
 				}),
 			],
-		}),
+		} as const),
 		defineField({
 			name: 'logo',
 			title: 'Logo',

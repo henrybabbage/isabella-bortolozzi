@@ -1,6 +1,5 @@
 import { TrendUpwardIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
-
 import { decodeAssetUrl } from 'utils/decodeAssetUrl'
 
 const TITLE = 'SEO'
@@ -79,7 +78,7 @@ export default defineType({
                 'Longer descriptions may be truncated by social sites'
                 ),
             group: 'social'
-        }),
+        } as const),
         defineField({
             title: 'Default Share Graphic',
             name: 'shareGraphic',
