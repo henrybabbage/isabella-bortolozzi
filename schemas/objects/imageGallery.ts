@@ -1,5 +1,5 @@
 import { getExtension, getImageDimensions } from '@sanity/asset-utils'
-import { defineField, defineType } from 'sanity'
+import { defineField, defineType,type Image } from 'sanity'
 
 export default defineType({
 	name: 'imageGallery',
@@ -20,15 +20,15 @@ export default defineType({
         },
       },
       validation: (Rule) =>
-        Rule.custom((value, context) => {
+        Rule.custom((value: Image, context) => {
           if (!value) {
             return true
           }
-          const filetype = getExtension(value.asset._ref || '')
+          const filetype = getExtension(value?.asset?._ref)
           if (filetype !== 'jpg' && filetype !== 'png') {
             return 'Image must be a JPG or PNG'
           }
-          const { width, height } = getImageDimensions(value.asset._ref)
+          const { width, height } = getImageDimensions(value?.asset?._ref)
           if (width < 1200 || height < 680) {
             return 'Image must be at least 1200x680 pixels'
           }
@@ -111,7 +111,7 @@ export default defineType({
           ],
         }),
       ],
-    }),
+    }, {strict: false }),
   ],
 
 

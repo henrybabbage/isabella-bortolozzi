@@ -39,20 +39,20 @@ export default defineType({
           },
         ],
       },
-    }),
-    defineArrayMember({
-        type: 'image',
-        options: {
-            storeOriginalFilename: true,
-            hotspot: true,
-        },
-        fields: [
+    }, {strict: false }),
+        defineArrayMember({
+            type: 'image',
+            options: {
+                storeOriginalFilename: true,
+                hotspot: true,
+            },
+            fields: [
                 {
                     name: 'alt',
                     type: 'string',
                     title: 'Alternative Text',
                 }
             ]
-        }),
+        }, {strict: false }),
     ],
 })

@@ -69,7 +69,7 @@ export default defineType({
                 description: 'City + Country ONLY',
             },
         ],
-    }),
+    }, {strict: false }),
     defineField({
         name: 'artistBio2',
         title: 'Artist bio',
@@ -100,7 +100,7 @@ export default defineType({
                 description: 'City + Country ONLY',
             }),
         ],
-    }),
+    }, {strict: false }),
     defineField({
         name: 'selectedExhibitions',
         title: 'Selected exhibitions',
@@ -124,7 +124,7 @@ export default defineType({
                 },
             },
         ],
-    }),
+    }, {strict: false }),
     defineField({
         name: 'soloExhibitionHistory',
         title: 'Solo exhibition history',
@@ -132,7 +132,7 @@ export default defineType({
         of: [{ type: 'exhibitionRecord' }],
         description: 'List',
         group: 'cv',
-    }),
+    }, {strict: false }),
     defineField({
         name: 'groupExhibitionHistory',
         title: 'Group exhibition history',
@@ -140,7 +140,7 @@ export default defineType({
         of: [{ type: 'exhibitionRecord' }],
         description: 'List',
         group: 'cv',
-    }),
+    }, {strict: false }),
   ],
   preview: {
     select: {

@@ -17,7 +17,7 @@ export default defineType({
       title: 'Artist',
       type: 'reference',
       to: [{ type: 'artist' }],
-    }),
+    }, {strict: false }),
     defineField({
       name: 'mainImage',
       title: 'Main image',
@@ -81,7 +81,7 @@ export default defineType({
           type: 'string',
         }),
       ],
-    }),
+    }, {strict: false }),
     defineField({
       name: 'framed',
       title: 'Framed',
@@ -123,7 +123,7 @@ export default defineType({
           type: 'string',
         }),
       ],
-    }),
+    }, {strict: false }),
     defineField({
       name: 'price',
       title: 'Price',
@@ -160,7 +160,7 @@ export default defineType({
           description: 'Option to note excluding VAT or including VAT',
         }),
       ],
-    }),
+    }, {strict: false }),
     defineField({
       name: 'enquire',
       title: 'Enquire',
@@ -183,7 +183,7 @@ export default defineType({
             }),
         }),
       ],
-    }),
+    }, {strict: false }),
   ],
   orderings: [
     {

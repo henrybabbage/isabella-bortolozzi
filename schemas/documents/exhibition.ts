@@ -3,7 +3,7 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
 	name: 'exhibition',
-	title: 'Exhibition',
+	title: 'Exhibitions',
 	type: 'document',
 	icon: StackCompactIcon,
 	fields: [
@@ -82,7 +82,7 @@ export default defineType({
                   to: [{ type: 'artist' }],
                 }),
             ],
-		}),
+		}, {strict: false }),
 		defineField({
 			name: 'type',
 			title: 'Type',
@@ -149,7 +149,7 @@ export default defineType({
 			type: 'reference',
 			description: 'Location of the exhibition.',
 			to: [{ type: 'venue' }],
-		}),
+		}, {strict: false }),
 		defineField({
 			name: 'body',
 			title: 'Body',

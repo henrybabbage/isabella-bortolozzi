@@ -1,5 +1,5 @@
-import { CaseIcon } from '@sanity/icons';
-import { defineField, defineType } from 'sanity';
+import { CaseIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'imprint',

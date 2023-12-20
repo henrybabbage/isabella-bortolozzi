@@ -60,7 +60,7 @@ export default defineType({
                   to: [{ type: 'artist' }],
                 }),
             ],
-		}),
+		}, {strict: false }),
 		defineField({
 			name: 'artworks',
 			title: 'Artworks',
@@ -72,7 +72,7 @@ export default defineType({
                 }),
             ],
 			description: 'For slider in footer section',
-		}),
+		}, {strict: false }),
 		defineField({
 			name: 'imageGallery',
 			title: 'Image gallery',
@@ -135,7 +135,7 @@ export default defineType({
 						}),
 				}),
 			],
-		}),
+		}, {strict: false }),
 	],
 	orderings: [
 		{
