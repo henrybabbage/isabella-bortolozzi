@@ -18,6 +18,6 @@ export default defineType({
 			title: 'Acknowledgements',
 			type: 'array',
 			of: [{ type: 'block' }],
-		} as const),
+		}, {strict: false }),
 	],
 })

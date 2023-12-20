@@ -82,7 +82,7 @@ export default defineType({
                   to: [{ type: 'artist' }],
                 }),
             ],
-		} as const),
+		}, {strict: false }),
 		defineField({
 			name: 'type',
 			title: 'Type',
@@ -149,7 +149,7 @@ export default defineType({
 			type: 'reference',
 			description: 'Location of the exhibition.',
 			to: [{ type: 'venue' }],
-		} as const),
+		}, {strict: false }),
 		defineField({
 			name: 'body',
 			title: 'Body',

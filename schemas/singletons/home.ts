@@ -36,7 +36,7 @@ export default defineType({
             ],
 			validation: (Rule) => Rule.unique().max(2),
 			description: 'Order in preference of appearance',
-		} as const),
+		}, {strict: false }),
 		defineField({
 			name: 'logoControl',
 			title: 'Logo control',
@@ -63,7 +63,7 @@ export default defineType({
 					description: 'Choose a colour for the logo to override the automatically generated colour',
 				}),
 			],
-		} as const),
+		}, {strict: false }),
 		defineField({
 			name: 'banner',
 			title: 'Banner',
@@ -90,7 +90,7 @@ export default defineType({
 					to: [{ type: 'exhibition' }],
 				}),
 			],
-		} as const),
+		}, {strict: false }),
 		defineField({
 			name: 'footer',
 			title: 'Footer',
@@ -149,6 +149,6 @@ export default defineType({
 					type: 'string',
 				}),
 			],
-		} as const),
+		}, {strict: false }),
 	],
 })

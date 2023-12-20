@@ -44,7 +44,7 @@ export default defineType({
 			title: 'Artist(s)',
 			type: 'array',
 			of: [{ type: 'reference', to: { type: 'artist' } }],
-		} as const),
+		}, {strict: false }),
 		defineField({
 			title: 'Link type',
 			name: 'linkType',
@@ -73,7 +73,7 @@ export default defineType({
 					return true
 				}),
 			hidden: ({ document }) => document?.linkType !== 'internal',
-		} as const),
+		}, {strict: false }),
 		defineField({
 			title: 'External link',
 			name: 'externalLink',
@@ -129,7 +129,7 @@ export default defineType({
 			title: 'Venue',
 			type: 'reference',
 			to: [{ type: 'venue' }],
-		} as const),
+		}, {strict: false }),
 	],
 	orderings: [
 		{

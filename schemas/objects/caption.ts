@@ -35,6 +35,6 @@ export default defineType({
           }
         ]
       }
-    } as const),
+    }, {strict: false }),
   ]
 })

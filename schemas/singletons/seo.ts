@@ -1,5 +1,5 @@
 import { TrendUpwardIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import { defineField, defineType, type Image } from 'sanity'
 import { decodeAssetUrl } from 'utils/decodeAssetUrl'
 
 const TITLE = 'SEO'
@@ -49,7 +49,7 @@ export default defineType({
             group: 'seo',
             validation: Rule =>
                 Rule.max(150).warning('Longer descriptions may be truncated by search engines')
-        }),
+        }, {strict: false }),
         defineField({
             name: 'keywords',
             title: 'Keywords',
@@ -57,7 +57,7 @@ export default defineType({
             of: [{ type: 'string' }],
             options: { layout: 'tags' },
             group: 'seo'
-        }),
+        }, {strict: false }),
         defineField({
             title: 'Default Share Title',
             name: 'shareTitle',
@@ -78,7 +78,7 @@ export default defineType({
                 'Longer descriptions may be truncated by social sites'
                 ),
             group: 'social'
-        } as const),
+        }, {strict: false }),
         defineField({
             title: 'Default Share Graphic',
             name: 'shareGraphic',
@@ -95,10 +95,10 @@ export default defineType({
               accept: 'image/svg+xml'
             },
             validation: Rule => {
-              return Rule.custom(field => {
+              return Rule.custom((field: Image) => {
                 if (!field) return true
         
-                const { dimensions } = decodeAssetUrl(field.asset._ref)
+                const { dimensions } = decodeAssetUrl(field?.asset?._ref)
         
                 if (dimensions.width !== 16 || dimensions.height !== 16) {
                   return 'Favicon must be a 16x16 SVG'
@@ -115,10 +115,10 @@ export default defineType({
             type: 'file',
             description: 'Upload a 32 x 32 .ico file for older browsers',
             validation: Rule => {
-              return Rule.custom(field => {
+              return Rule.custom((field: Image) => {
                 if (!field) return true
         
-                const { format } = decodeAssetUrl(field.asset._ref)
+                const { format } = decodeAssetUrl(field?.asset?._ref)
         
                 if (format !== 'ico') {
                   return 'Legacy Favicon must be a 32x32 ICO file'

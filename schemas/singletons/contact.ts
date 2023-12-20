@@ -26,7 +26,7 @@ export default defineType({
 			title: 'Email',
 			type: 'string',
 			validation: (Rule) =>
-				Rule.custom((email) => {
+				Rule.custom((email: string) => {
 					if (typeof email === 'undefined') {
 						return true // Allow undefined values
 					}
@@ -105,7 +105,7 @@ export default defineType({
 					type: 'string',
 				}),
 			],
-		} as const),
+		}, {strict: false }),
 		defineField({
 			name: 'logo',
 			title: 'Logo',

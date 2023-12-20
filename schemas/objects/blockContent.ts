@@ -39,7 +39,7 @@ export default defineType({
           },
         ],
       },
-    } as const),
+    }, {strict: false }),
         defineArrayMember({
             type: 'image',
             options: {
@@ -53,6 +53,6 @@ export default defineType({
                     title: 'Alternative Text',
                 }
             ]
-        } as const),
+        }, {strict: false }),
     ],
 })
