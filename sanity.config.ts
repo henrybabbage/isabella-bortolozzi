@@ -2,6 +2,7 @@
  * This config is used to set up Sanity Studio that's mounted on the `/pages/studio/[[...index]].tsx` route
  */
 
+// import { deDELocale } from '@sanity/locale-de-de'
 import { visionTool } from '@sanity/vision'
 import { defineConfig, SanityDocument } from 'sanity'
 import { DefaultDocumentNodeResolver, deskTool } from 'sanity/desk'
@@ -15,7 +16,6 @@ import { media } from 'sanity-plugin-media'
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input'
 import { schema } from 'schemas'
 
-import deskStructure from '@/lib/deskStructure'
 // see https://www.sanity.io/docs/api-versioning for how versioning works
 import {
     apiVersion,
@@ -23,6 +23,7 @@ import {
     previewSecretId,
     projectId,
 } from '@/lib/sanity.api'
+import structure from '@/lib/sanity.structure'
 
 const iframeOptions = {
   url: defineUrlResolver({
@@ -67,7 +68,7 @@ export default defineConfig({
   schema,
   plugins: [
     deskTool({
-        structure: deskStructure,
+        structure: structure,
         // `defaultDocumentNode` is responsible for adding a “Preview” tab to the document pane
         // You can add any React component to `S.view.component` and it will be rendered in the pane
         // and have access to content in the form in real-time.
@@ -93,5 +94,8 @@ export default defineConfig({
     visionTool({ defaultApiVersion: apiVersion }),
     media(),
     simplerColorInput(),
+    // deDELocale({
+    //     title: 'German',
+    // }),
   ],
 })
