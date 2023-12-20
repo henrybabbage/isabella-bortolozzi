@@ -100,7 +100,7 @@ export default defineType({
                 description: 'City + Country ONLY',
             }),
         ],
-    } as const),
+    }, {strict: false }),
     defineField({
         name: 'selectedExhibitions',
         title: 'Selected exhibitions',

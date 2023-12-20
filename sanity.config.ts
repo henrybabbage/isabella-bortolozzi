@@ -58,6 +58,33 @@ const defaultDocumentNode: DefaultDocumentNodeResolver = (S, {schemaType}) => {
     }
 }
 
+export const singletonTypes = ['home', 'colophon', 'contact', 'imprint', 'seo']
+
+const newDocumentOptions = (newDocumentOptions: any) => {  
+    const filteredNewDocumentOptions = newDocumentOptions.filter((documentOption: any) => {
+      // return only the documentTypes that are not singletons
+      return !singletonTypes.includes(documentOption.templateId)
+    })
+    return filteredNewDocumentOptions
+}
+
+// Determines the actions that appear in the Publish button
+const actions = (actions: any, {schemaType}: any) => {
+    // destructure all actions so we can order them if required
+    const [publish, discardChanges, unPublish, duplicate, deleteDocument] = actions
+  
+    if (singletonTypes.includes(schemaType)) {
+      return [publish]
+    }
+  
+    return [
+      discardChanges,
+      unPublish,
+      duplicate,
+      deleteDocument,
+    ]
+  }
+
 export default defineConfig({
   basePath: '/studio',
   name: 'isabella-bortolozzi',
@@ -98,4 +125,11 @@ export default defineConfig({
     //     title: 'German',
     // }),
   ],
+  document: {
+    newDocumentOptions: newDocumentOptions,
+    actions: actions,
+    // For singleton types, filter out actions that are not explicitly included
+    // in the `singletonActions` list defined above
+    // actions: (input, context) => (singletonTypes.has(context.schemaType) ? input.filter(({ action }) => action && singletonActions.has(action)) : input)
+    }
 })
