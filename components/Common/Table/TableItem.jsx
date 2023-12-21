@@ -74,23 +74,25 @@ export default function TableItem({ exhibition }) {
 					</div>
 				</div>
 				<div className="sm:col-span-2 sm:col-start-6 flex flex-col pt-3 h-fit sm:h-auto">
-					<h3 className="pr-6">
-						{exhibition.venue && exhibition.venue.name && (
-							<span>
-								{exhibition.venue.city || exhibition.venue.country
-									? exhibition.venue.name + ', '
-									: exhibition.venue.name}
-							</span>
-						)}
-						{exhibition.venue && exhibition.venue.city && (
-							<span>
-								{exhibition.venue.country ? exhibition.venue.city + ', ' : exhibition.venue.city}
-							</span>
-						)}
-						{exhibition.venue && exhibition.venue.country && (
-                            <span>{exhibition.venue.country}</span>
-                        )}
-					</h3>
+					{!router.pathname.startsWith('/exhibitions') && (
+                        <h3 className="pr-6">
+                            {exhibition.venue && exhibition.venue.name && (
+                                <span>
+                                    {exhibition.venue.city || exhibition.venue.country
+                                        ? exhibition.venue.name + ', '
+                                        : exhibition.venue.name}
+                                </span>
+                            )}
+                            {exhibition.venue && exhibition.venue.city && (
+                                <span>
+                                    {exhibition.venue.country ? exhibition.venue.city + ', ' : exhibition.venue.city}
+                                </span>
+                            )}
+                            {exhibition.venue && exhibition.venue.country && (
+                                <span>{exhibition.venue.country}</span>
+                            )}
+                        </h3>
+                    )}
 				</div>
 				<div className="sm:col-span-2 sm:col-start-8 flex justify-end pt-3 h-fit sm:h-auto">
 					<div className="flex w-full sm:w-auto justify-between sm:justify-normal">
