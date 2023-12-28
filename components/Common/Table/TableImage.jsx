@@ -33,7 +33,7 @@ export default function TableImage({ exhibition }) {
             loader={imageProps.loader}
             alt=""
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 54vw, 54vw"
             quality={75}
             priority
             style={{ objectFit: 'cover', objectPosition: 'center' }}

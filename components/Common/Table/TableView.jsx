@@ -18,6 +18,7 @@ export default function TableView({ exhibitions }) {
 
   const parentRef = useRef(null)
   const listRef = useRef(null)
+  const listItemsRef = useRef(null)
   const virtualItemSize = tabletOrMobile ? 640 : 228
 
   const virtualizer = useWindowVirtualizer({
@@ -65,7 +66,7 @@ export default function TableView({ exhibitions }) {
         )}
       >
         {tabletOrMobile ? (
-          <ol>
+          <ol ref={listItemsRef}>
             {exhibitions &&
               exhibitions.map((exhibition) => (
                 <li
@@ -79,6 +80,7 @@ export default function TableView({ exhibitions }) {
           </ol>
         ) : (
           <ol
+            ref={listItemsRef}
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
@@ -101,7 +103,7 @@ export default function TableView({ exhibitions }) {
                   }}
                 >
                   <li className="scroll-mt-[calc(50vh-11vw)]">
-                    <TableItem exhibition={exhibitions[item.index]} />
+                    <TableItem exhibition={exhibitions[item.index]} ref={listItemsRef} />
                   </li>
                 </div>
               )

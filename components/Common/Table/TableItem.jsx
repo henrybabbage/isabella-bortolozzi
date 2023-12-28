@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useEffect, useRef } from 'react'
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import DynamicLink from '@/components/Primitives/DynamicLink'
@@ -11,26 +11,51 @@ import { formatDateWithoutYear, getYear } from '@/utils/dateHelpers'
 import StandardImage from '../Media/StandardImage'
 import { CustomPortableText } from '../Text/CustomPortableText'
 
-export default function TableItem({ exhibition }) {
+const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
+  const [currentMouseYPos, setCurrentMouseYPos] = useState(0)
+  console.log({ currentMouseYPos })
+  const tableCellRef = useRef(null)
+
   const router = useRouter()
 
   const { _id: id, year } = exhibition
 
-  const { ref, inView } = useInView({
+  const { ref: inViewRef, inView } = useInView({
     rootMargin: '-50% 0px -50% 0px',
   })
-
-  const tableCellRef = useRef(null)
 
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
   const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
 
   useEffect(() => {
+    const tableCellYOffset = tableCellRef.current.getBoundingClientRect().y
+    const mousePosWithinCell = Math.abs(tableCellYOffset - currentMouseYPos)
+    const tableElements = Array.from(ref.current.children)
+
+    tableElements.map((cell) => {
+      const top = cell.offsetTop
+      const bottom = cell.offsetTop + cell.offsetHeight
+      if (mousePosWithinCell > top && mousePosWithinCell < bottom) {
+        console.log('cell', cell)
+      }
+    })
+
     if (inView) {
       setInViewItem(id)
       setInViewYear(year)
     }
-  }, [id, year, inView, setInViewItem, setInViewYear])
+  }, [id, year, inView, setInViewItem, setInViewYear, currentMouseYPos, ref])
+
+  const handleMouseMovement = useCallback((e) => {
+    setCurrentMouseYPos(e.clientY)
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMovement)
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMovement)
+    }
+  }, [currentMouseYPos, handleMouseMovement])
 
   const artistNames = exhibition?.artists?.map((a) => a.name)
   const artistList = artistNames?.join(', ')
@@ -39,9 +64,9 @@ export default function TableItem({ exhibition }) {
 
   return (
     <DynamicLink link={exhibition} prefetch={true} scroll={false}>
-      <div ref={tableCellRef} className="relative">
+      <div ref={tableCellRef}>
         <div
-          ref={ref}
+          ref={inViewRef}
           className={cn(
             'group relative flex flex-col sm:grid h-[40rem] sm:h-[16vw] sm:max-h-[16vw] cursor-pointer sm:grid-flow-dense sm:grid-cols-9 content-start sm:border-t pt-1 sm:pt-0 sm:border-solid sm:border-border sm:pb-6 text-left font-serif',
             inView ? 'text-primary' : 'text-secondary',
@@ -124,4 +149,6 @@ export default function TableItem({ exhibition }) {
       </div>
     </DynamicLink>
   )
-}
+})
+
+export default TableItem
