@@ -17,7 +17,6 @@ export default function TableView({ exhibitions }) {
   )
 
   const parentRef = useRef(null)
-  const tableContentRef = useRef(null)
   const listRef = useRef(null)
   const virtualItemSize = tabletOrMobile ? 640 : 228
 
@@ -66,7 +65,7 @@ export default function TableView({ exhibitions }) {
         )}
       >
         {tabletOrMobile ? (
-          <ol ref={tableContentRef}>
+          <ol>
             {exhibitions &&
               exhibitions.map((exhibition) => (
                 <li
@@ -80,7 +79,6 @@ export default function TableView({ exhibitions }) {
           </ol>
         ) : (
           <ol
-            ref={tableContentRef}
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',

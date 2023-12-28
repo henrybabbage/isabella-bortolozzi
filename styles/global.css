@@ -17,7 +17,7 @@
     } */
 
     body { 
-        @apply text-sm;
+        @apply text-base;
         @apply overscroll-none;
     }
 }

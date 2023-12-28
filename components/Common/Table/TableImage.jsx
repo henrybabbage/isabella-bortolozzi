@@ -1,6 +1,6 @@
 import { sanityClient } from 'lib/sanity.client'
-import { useNextSanityImage } from 'next-sanity-image'
 import Image from 'next/image'
+import { useNextSanityImage } from 'next-sanity-image'
 import { cn } from 'utils/cn'
 
 import DynamicLink from '@/components/Primitives/DynamicLink'
