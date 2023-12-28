@@ -8,12 +8,6 @@
     --white: #fff;
     --black: #222;
     --background: #f4f3ef;
-
-    --font-line-height: 24px;
-    --font-letter-spacing: 5%;
-
-    --max-width-0: 320px;
-    --max-width-1: 768px;
 }
 
 @layer base {
@@ -23,7 +17,7 @@
     } */
 
     body { 
-        @apply text-xl;
+        @apply text-sm;
         @apply overscroll-none;
     }
 }
@@ -45,7 +39,7 @@
 }
 
 html {
-    font-family: var(--font-serif), sans-serif;
+    font-family: var(--font-serif), serif;
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-size-adjust: 100%;

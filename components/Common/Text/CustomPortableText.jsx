@@ -35,7 +35,7 @@ export function CustomPortableText({
 	const components = {
 		block: {
 			normal: ({ children }) => {
-				return <p className={cn(paragraphClasses, "break-normal")}>{children}</p>
+				return <p className={cn(paragraphClasses, "break-normal whitespace-normal")}>{children}</p>
 			},
 		},
 		marks: {

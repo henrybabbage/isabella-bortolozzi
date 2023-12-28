@@ -19,7 +19,7 @@ export default function TableView({ exhibitions }) {
   const parentRef = useRef(null)
   const tableContentRef = useRef(null)
   const listRef = useRef(null)
-  const virtualItemSize = tabletOrMobile ? 640 : 312
+  const virtualItemSize = tabletOrMobile ? 640 : 228
 
   const virtualizer = useWindowVirtualizer({
     count: exhibitions.length,
@@ -50,8 +50,8 @@ export default function TableView({ exhibitions }) {
       ref={parentRef}
       className={cn('', 'grid w-full grid-cols-12 items-start px-6')}
     >
-      <div className="hidden sm:visible sm:flex sticky top-0 col-span-3 col-start-1 h-screen w-full items-center">
-        <div className="relative h-[22vw] w-[22vw] bg-background">
+      <div className="hidden sm:visible sm:flex sticky top-0 sm:col-span-7 sm:col-start-1 h-screen w-full items-center">
+        <div className="relative h-[54vw] w-[54vw] bg-background">
           {exhibitions &&
             exhibitions.map((exhibition) => (
               <TableImage key={exhibition._id} exhibition={exhibition} />
@@ -62,7 +62,7 @@ export default function TableView({ exhibitions }) {
         ref={listRef}
         className={cn(
           '',
-          'scrollbar-hide sm:col-span-9 sm:col-start-4 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]',
+          'scrollbar-hide sm:col-span-9 sm:col-start-8 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]',
         )}
       >
         {tabletOrMobile ? (
