@@ -22,10 +22,10 @@ export default function TableView({ exhibitions }) {
   const virtualItemSize = tabletOrMobile ? 640 : 228
 
   const virtualizer = useWindowVirtualizer({
-    count: exhibitions.length,
+    count: exhibitions?.length,
     estimateSize: () => virtualItemSize,
     overscan: 8,
-    scrollMargin: listRef.current?.offsetTop ?? 0,
+    scrollMargin: listRef?.current?.offsetTop ?? 0,
   })
 
   const selectedYearIndex = useSelectedYearStore(
