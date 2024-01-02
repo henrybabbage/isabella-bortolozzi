@@ -27,26 +27,31 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
   const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
 
+  // selection algorithm:
+  // 1. if mouse is over an item then set that item active item
+  // 2. if mouse is not over an item, or in event of scroll, then set item in center of view as active item
+
   useEffect(() => {
+    // ref for individual row
     if (tableRowRef) {
-        const tableRowYOffset = tableRowRef.current.getBoundingClientRect().y
-        const mousePosWithinRow = Math.abs(tableRowYOffset - currentMouseYPos)
-        if (ref) {
-                const tableRows = Array.from(ref.current.children)
+      const tableRowYOffset = tableRowRef.current.getBoundingClientRect().y
+      const mousePosWithinRow = Math.abs(tableRowYOffset - currentMouseYPos)
 
-                tableRows.map((row) => {
-                const top = row.offsetTop
-                const bottom = row.offsetTop + row.offsetHeight
-                if (mousePosWithinRow > top && mousePosWithinRow < bottom) {
-                    // console.log('row', row)
-                }
-            })
-        }
-    }
+      // ref for list of rows
+      if (ref) {
+        const tableRows = Array.from(ref.current.children)
 
-    if (inView) {
-      setInViewItem(id)
-      setInViewYear(year)
+        tableRows.map((row) => {
+          const top = row.offsetTop
+          const bottom = row.offsetTop + row.offsetHeight
+          if (mousePosWithinRow > top && mousePosWithinRow < bottom) {
+            setInViewItem(id)
+          } else if (inView) {
+            setInViewItem(id)
+            setInViewYear(year)
+          }
+        })
+      }
     }
   }, [id, year, inView, setInViewItem, setInViewYear, currentMouseYPos, ref])
 
@@ -85,7 +90,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
           <div className="sm:col-span-4 sm:col-start-1 flex flex-col h-fit sm:h-auto">
             <div className="flex w-full flex-col pt-6 sm:pt-3">
               {exhibition.title && (
-                <h1 className="uppercase pr-2">{exhibition.title}</h1>
+                <h1 className="uppercase pr-2 group">{exhibition.title}</h1>
               )}
               {exhibition.subtitle && (
                 <h2 className="">{exhibition.subtitle}</h2>
