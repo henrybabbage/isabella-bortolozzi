@@ -13,8 +13,8 @@ import { CustomPortableText } from '../Text/CustomPortableText'
 
 const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
   const [currentMouseYPos, setCurrentMouseYPos] = useState(0)
-  console.log({ currentMouseYPos })
-  const tableCellRef = useRef(null)
+
+  const tableRowRef = useRef(null)
 
   const router = useRouter()
 
@@ -28,17 +28,21 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
   const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
 
   useEffect(() => {
-    const tableCellYOffset = tableCellRef.current.getBoundingClientRect().y
-    const mousePosWithinCell = Math.abs(tableCellYOffset - currentMouseYPos)
-    const tableElements = Array.from(ref.current.children)
+    if (tableRowRef) {
+        const tableRowYOffset = tableRowRef.current.getBoundingClientRect().y
+        const mousePosWithinRow = Math.abs(tableRowYOffset - currentMouseYPos)
+        if (ref) {
+                const tableRows = Array.from(ref.current.children)
 
-    tableElements.map((cell) => {
-      const top = cell.offsetTop
-      const bottom = cell.offsetTop + cell.offsetHeight
-      if (mousePosWithinCell > top && mousePosWithinCell < bottom) {
-        console.log('cell', cell)
-      }
-    })
+                tableRows.map((row) => {
+                const top = row.offsetTop
+                const bottom = row.offsetTop + row.offsetHeight
+                if (mousePosWithinRow > top && mousePosWithinRow < bottom) {
+                    // console.log('row', row)
+                }
+            })
+        }
+    }
 
     if (inView) {
       setInViewItem(id)
@@ -64,7 +68,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
 
   return (
     <DynamicLink link={exhibition} prefetch={true} scroll={false}>
-      <div ref={tableCellRef}>
+      <div ref={tableRowRef}>
         <div
           ref={inViewRef}
           className={cn(

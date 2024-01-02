@@ -18,7 +18,7 @@ export default function TableImage({ exhibition }) {
   if (!currentImage) return null
 
   return (
-    <DynamicLink link={exhibition} prefetch={false} scroll={false}>
+    <DynamicLink link={exhibition} prefetch={true} scroll={false}>
       <div
         className={cn(
           'cursor-pointer absolute inset-0 h-full w-full',
