@@ -11,9 +11,11 @@ import { formatDateWithoutYear, getYear } from '@/utils/dateHelpers'
 import StandardImage from '../Media/StandardImage'
 import { CustomPortableText } from '../Text/CustomPortableText'
 
+// TableItem.jsx is each row of the table composed from TableView.jsx
 const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
   const [currentMouseYPos, setCurrentMouseYPos] = useState(0)
 
+  // ref for each row this component represents
   const tableRowRef = useRef(null)
 
   const router = useRouter()
@@ -24,6 +26,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
     rootMargin: '-50% 0px -50% 0px',
   })
 
+  const inViewItem = useActiveItemStore((state) => state.inViewItem)
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
   const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
 
@@ -32,28 +35,35 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
   // 2. if mouse is not over an item, or in event of scroll, then set item in center of view as active item
 
   useEffect(() => {
-    // ref for individual row
-    if (tableRowRef) {
-      const tableRowYOffset = tableRowRef.current.getBoundingClientRect().top
-      const mousePosWithinRow = Math.abs(tableRowYOffset - currentMouseYPos)
+    // ref for table of rows
+    if (ref) {
+      const tableYOffset = ref.current.getBoundingClientRect().top
+      const mousePosWithinTable = Math.abs(currentMouseYPos - tableYOffset)
 
-      // ref for list of rows
-      if (ref) {
-        const tableRows = Array.from(ref.current.children)
+      // array from ref for table of rows
+      const tableRows = Array.from(ref.current.children)
 
-        tableRows.map((row) => {
-          const top = row.offsetTop
-          const bottom = row.offsetTop + row.offsetHeight
-          if (mousePosWithinRow > top && mousePosWithinRow < bottom) {
-            console.log('Mouse is inside row')
-            setInViewItem(id)
-            setInViewYear(year)
-          } else if (inView) {
-            setInViewItem(id)
-            setInViewYear(year)
-          }
-        })
-      }
+      tableRows.map((row) => {
+        // top of element
+        // const top = row.offsetTop
+        // bottom of element
+        // const bottom = row.offsetTop + row.offsetHeight
+
+        const rowYOffsetTop = row.getBoundingClientRect().top
+        const rowYOffsetBottom = row.getBoundingClientRect().bottom
+
+        // mouse position relative to top and bottom of element
+        if (
+          mousePosWithinTable > rowYOffsetTop &&
+          mousePosWithinTable < rowYOffsetBottom
+        ) {
+        //   setInViewItem(id)
+        //   setInViewYear(year)
+        } else if (inView) {
+          setInViewItem(id)
+          setInViewYear(year)
+        }
+      })
     }
   }, [id, year, inView, setInViewItem, setInViewYear, currentMouseYPos, ref])
 
@@ -80,7 +90,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
           ref={inViewRef}
           className={cn(
             'group relative flex flex-col sm:grid h-[40rem] sm:h-[14.25rem] sm:max-h-[14.25rem] cursor-pointer sm:grid-flow-dense sm:grid-cols-9 content-start sm:border-t pt-1 sm:pt-0 sm:border-solid sm:border-border sm:pb-6 text-left font-serif',
-            inView ? 'text-primary' : 'text-secondary',
+            inViewItem === id ? 'text-primary' : 'text-secondary',
           )}
         >
           <div className="sm:hidden h-[22rem] max-h-full w-full overflow-hidden pb-6">
@@ -102,7 +112,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
                   value={exhibition.heading}
                   paragraphClasses={cn(
                     '',
-                    inView ? 'text-primary' : 'text-secondary',
+                    inViewItem === id ? 'text-primary' : 'text-secondary',
                   )}
                 />
               )}
@@ -111,7 +121,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
                   value={exhibition.text}
                   paragraphClasses={cn(
                     'uppercase',
-                    inView ? 'text-primary' : 'text-secondary',
+                    inViewItem === id ? 'text-primary' : 'text-secondary',
                   )}
                 />
               )}
