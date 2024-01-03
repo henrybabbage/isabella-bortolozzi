@@ -34,7 +34,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
   useEffect(() => {
     // ref for individual row
     if (tableRowRef) {
-      const tableRowYOffset = tableRowRef.current.getBoundingClientRect().y
+      const tableRowYOffset = tableRowRef.current.getBoundingClientRect().top
       const mousePosWithinRow = Math.abs(tableRowYOffset - currentMouseYPos)
 
       // ref for list of rows
@@ -45,7 +45,9 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
           const top = row.offsetTop
           const bottom = row.offsetTop + row.offsetHeight
           if (mousePosWithinRow > top && mousePosWithinRow < bottom) {
+            console.log('Mouse is inside row')
             setInViewItem(id)
+            setInViewYear(year)
           } else if (inView) {
             setInViewItem(id)
             setInViewYear(year)
