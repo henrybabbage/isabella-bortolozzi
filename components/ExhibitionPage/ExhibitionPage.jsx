@@ -4,7 +4,6 @@ import { cn } from 'utils/cn'
 
 import BackButton from "../Common/Buttons/BackButton"
 import GlobalDrawer from "../Common/Drawers/GlobalDrawer"
-import LoadingScreen from "../Common/Loading/LoadingScreen"
 import SnapSection from "./SnapSection"
 
 export default function ExhibitionPage({exhibition}) {
@@ -72,8 +71,7 @@ export default function ExhibitionPage({exhibition}) {
 
     return (
         <>
-            <LoadingScreen exhibition={exhibition} isLoading={isLoading} />
-            <div className={cn(isLoading ? "!overflow-hidden opacity-0" : "animate-slide-in opacity-100", "relative snap-y h-[100dvh] w-screen scrollbar-hide")}>
+            <div className="relative snap-y h-[100svh] w-screen scrollbar-hide">
                 <div className="transition fixed top-6 right-6 z-50">
                     <BackButton backPathname={router.pathname.split('/')[1]} />
                 </div>
@@ -82,7 +80,7 @@ export default function ExhibitionPage({exhibition}) {
                 </div>
                 <div
                     ref={scrollViewRef}
-                    className="flex flex-col h-[100dvh] w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
+                    className="flex flex-col h-[100svh] w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
                 >
                     <SnapSection exhibition={exhibition} isLoading={isLoading} scrollToSections={scrollToSections} index={currentScrollElement} />
                 </div>
