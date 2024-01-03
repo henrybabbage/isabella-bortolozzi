@@ -21,7 +21,7 @@ export default function ExhibitionPage({ exhibition }) {
   useGSAP(
     () => {
       gsap.from(pageRef.current, { scale: 0.7, y: 100, opacity: 0 })
-      gsap.to(pageRef.current, { scale: 1, y: 0, opacity: 1, duration: 1 })
+      gsap.to(pageRef.current, { scale: 1, y: 0, opacity: 1, duration: 0.7 })
     },
     { scope: pageRef },
   )
