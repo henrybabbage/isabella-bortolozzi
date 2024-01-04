@@ -77,6 +77,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
     }
   }, [currentMouseYPos, handleMouseMovement])
 
+  // format list of artist names for this row item
   const artistNames = exhibition?.artists?.map((a) => a.name)
   const artistList = artistNames?.join(', ')
 
