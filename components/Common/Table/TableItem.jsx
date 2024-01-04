@@ -22,6 +22,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
 
   const router = useRouter()
 
+  // for checking if this row is in the center of the viewport
   const { ref: inViewRef, inView } = useInView({
     rootMargin: '-50% 0px -50% 0px',
   })
