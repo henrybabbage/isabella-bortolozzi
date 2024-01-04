@@ -27,6 +27,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
     rootMargin: '-50% 0px -50% 0px',
   })
 
+  // zustand store to update if row is in center of viewport and to update active year
   const inViewItem = useActiveItemStore((state) => state.inViewItem)
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
   const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
