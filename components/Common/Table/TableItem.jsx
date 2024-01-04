@@ -66,10 +66,12 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
     }
   }, [id, year, inView, setInViewItem, setInViewYear, currentMouseYPos, ref])
 
+  // set mouse position in state
   const handleMouseMovement = useCallback((e) => {
     setCurrentMouseYPos(e.clientY)
   }, [])
 
+  // listen for mouse movement to invoke callback to update mouse position
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMovement)
     return () => {
