@@ -15,12 +15,12 @@ import { CustomPortableText } from '../Text/CustomPortableText'
 const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
   const [currentMouseYPos, setCurrentMouseYPos] = useState(0)
 
-  // ref for each row this component represents
+  // ref for this row
   const tableRowRef = useRef(null)
 
-  const router = useRouter()
-
   const { _id: id, year } = exhibition
+
+  const router = useRouter()
 
   const { ref: inViewRef, inView } = useInView({
     rootMargin: '-50% 0px -50% 0px',
@@ -37,18 +37,14 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
   useEffect(() => {
     // ref for table of rows
     if (ref) {
-      const tableYOffset = ref.current.getBoundingClientRect().top
-      const mousePosWithinTable = Math.abs(currentMouseYPos - tableYOffset)
+      // top of the table (which is not top of the viewport)
+      const tableYOffsetTop = ref.current.getBoundingClientRect().top
+      const mousePosWithinTable = Math.abs(tableYOffsetTop - currentMouseYPos)
 
       // array from ref for table of rows
       const tableRows = Array.from(ref.current.children)
 
       tableRows.map((row) => {
-        // top of element
-        // const top = row.offsetTop
-        // bottom of element
-        // const bottom = row.offsetTop + row.offsetHeight
-
         const rowYOffsetTop = row.getBoundingClientRect().top
         const rowYOffsetBottom = row.getBoundingClientRect().bottom
 
@@ -57,8 +53,9 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
           mousePosWithinTable > rowYOffsetTop &&
           mousePosWithinTable < rowYOffsetBottom
         ) {
-        //   setInViewItem(id)
-        //   setInViewYear(year)
+          // set the id of this table row
+          // setInViewItem(id)
+          // setInViewYear(year)
         } else if (inView) {
           setInViewItem(id)
           setInViewYear(year)
