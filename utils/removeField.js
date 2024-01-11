@@ -9,42 +9,53 @@
  * 5. Run `sanity exec removeField.js --with-user-token` in your terminal to delete the field from all matched documents
  */
 
-
-import { sanityClient } from "@/lib/sanity.client"
+import { sanityClient } from '@/sanity/lib/sanity.client'
 
 const FIELD_TO_REMOVE = 'country'
 
-const fetchDocuments = () => sanityClient.fetch(`*[_type == 'exhibition' && country != null][0...10]{_id, _rev}`)
+const fetchDocuments = () =>
+  sanityClient.fetch(
+    `*[_type == 'exhibition' && country != null][0...10]{_id, _rev}`,
+  )
 
 const buildPatches = (docs) =>
-	docs.map((doc) => ({
-		id: doc._id,
-		patch: {
-			unset: [FIELD_TO_REMOVE],
-			ifRevisionID: doc._rev,
-		},
-	}))
+  docs.map((doc) => ({
+    id: doc._id,
+    patch: {
+      unset: [FIELD_TO_REMOVE],
+      ifRevisionID: doc._rev,
+    },
+  }))
 
-const createTransaction = (patches) => patches.reduce((tx, patch) => tx.patch(patch.id, patch.patch), sanityClient.transaction())
+const createTransaction = (patches) =>
+  patches.reduce(
+    (tx, patch) => tx.patch(patch.id, patch.patch),
+    sanityClient.transaction(),
+  )
 
 const commitTransaction = (tx) => tx.commit()
 
 const editNextBatch = async () => {
-	const documents = await fetchDocuments()
-	const patches = buildPatches(documents)
+  const documents = await fetchDocuments()
+  const patches = buildPatches(documents)
 
-	if (patches.length === 0) {
-		console.log('No more documents to unset!')
-		return null
-	}
+  if (patches.length === 0) {
+    console.log('No more documents to unset!')
+    return null
+  }
 
-	console.log(`Editing batch:\n %s`, patches.map((patch) => `${patch.id} => ${JSON.stringify(patch.patch)}`).join('\n'))
-	const transaction = createTransaction(patches)
-	await commitTransaction(transaction)
-	return editNextBatch()
+  console.log(
+    `Editing batch:\n %s`,
+    patches
+      .map((patch) => `${patch.id} => ${JSON.stringify(patch.patch)}`)
+      .join('\n'),
+  )
+  const transaction = createTransaction(patches)
+  await commitTransaction(transaction)
+  return editNextBatch()
 }
 
 editNextBatch().catch((err) => {
-	console.error(err)
-	process.exit(1)
+  console.error(err)
+  process.exit(1)
 })
