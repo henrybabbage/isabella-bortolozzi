@@ -86,7 +86,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
   if (!exhibition) return null
 
   return (
-    <DynamicLink link={exhibition} prefetch={true} scroll={false}>
+    <DynamicLink link={exhibition} scroll={false}>
       <div ref={tableRowRef}>
         <div
           ref={inViewRef}

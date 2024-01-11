@@ -1,9 +1,9 @@
-import { sanityClient } from 'lib/sanity.client'
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
 import { cn } from 'utils/cn'
 
 import DynamicLink from '@/components/Primitives/DynamicLink'
+import { sanityClient } from '@/sanity/lib/sanity.client'
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 
 export default function TableImage({ exhibition }) {
@@ -18,7 +18,7 @@ export default function TableImage({ exhibition }) {
   if (!currentImage) return null
 
   return (
-    <DynamicLink link={exhibition} prefetch={true} scroll={false}>
+    <DynamicLink link={exhibition} scroll={false}>
       <div
         className={cn(
           'cursor-pointer absolute inset-0 h-full w-full',

@@ -1,5 +1,5 @@
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
-import { useLayoutEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
@@ -32,7 +32,7 @@ export default function TableView({ exhibitions }) {
     (state) => state.selectedYearIndex,
   )
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (selectedYearIndex !== undefined && selectedYearIndex !== null) {
       virtualizer.scrollToIndex(selectedYearIndex, {
         align: 'start',
