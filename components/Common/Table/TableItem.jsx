@@ -41,7 +41,7 @@ const TableItem = forwardRef(function TableItem({ exhibition }, ref) {
     if (ref) {
       // top of the table (which is not top of the viewport)
       const tableYOffsetTop = ref.current.getBoundingClientRect().top
-      const mousePosWithinTable = Math.abs(tableYOffsetTop - currentMouseYPos)
+      const mousePosWithinTable = Math.abs(currentMouseYPos - tableYOffsetTop)
 
       // array from ref for table of rows
       const tableRows = Array.from(ref.current.children)

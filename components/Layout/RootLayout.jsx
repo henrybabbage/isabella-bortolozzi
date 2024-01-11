@@ -6,6 +6,7 @@ import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 import GlobalHeader from '../Common/Drawers/GlobalHeader'
 import MobileHeader from '../Mobile/MobileHeader'
+import ReferenceGrid from '../Utilities/ReferenceGrid'
 
 export default function RootLayout({children}) {
     const router = useRouter()
@@ -28,6 +29,7 @@ export default function RootLayout({children}) {
                             : null
                     }
                 </TabletAndBelow>
+                <ReferenceGrid />
 			</Client>
             {children}
         </div>

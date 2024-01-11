@@ -11,11 +11,6 @@
 }
 
 @layer base {
-    /* Apply after route transitions from ._app instead */
-    /* html {
-        @apply scroll-smooth;
-    } */
-
     body { 
         @apply text-base;
         @apply overscroll-none;
