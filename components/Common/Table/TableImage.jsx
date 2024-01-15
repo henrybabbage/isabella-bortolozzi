@@ -6,8 +6,8 @@ import DynamicLink from '@/components/Primitives/DynamicLink'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 
-export default function TableImage({ exhibition }) {
-  const { _id: id, mainImage } = exhibition
+export default function TableImage({ exhibition, index }) {
+  const { mainImage } = exhibition
 
   const currentImage = mainImage?.asset ?? ''
 
@@ -22,7 +22,7 @@ export default function TableImage({ exhibition }) {
       <div
         className={cn(
           'cursor-pointer absolute inset-0 h-full w-full',
-          inViewItem === id
+          inViewItem === index
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none',
         )}

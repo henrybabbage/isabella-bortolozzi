@@ -1,8 +1,10 @@
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
+import { useActiveItemStore } from '@/stores/useActiveItemStore'
+import { useActiveYearStore } from '@/stores/useActiveYearStore'
 import { useSelectedYearStore } from '@/stores/useSelectedYearStore'
 import { cn } from '@/utils/cn'
 
@@ -21,8 +23,12 @@ export default function TableView({ exhibitions }) {
   const listItemsRef = useRef(null)
   const virtualItemSize = tabletOrMobile ? 640 : 228
 
+  // zustand store
+  const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
+  const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
+
   const virtualizer = useWindowVirtualizer({
-    count: exhibitions?.length,
+    count: exhibitions.length ?? 0,
     estimateSize: () => virtualItemSize,
     overscan: 8,
     scrollMargin: listRef?.current?.offsetTop ?? 0,
@@ -41,6 +47,31 @@ export default function TableView({ exhibitions }) {
     }
   }, [selectedYearIndex, virtualizer])
 
+  // selection algorithm:
+  // 1. if mouse is over an item then set that item active item
+  // 2. if mouse is not over an item, or in event of scroll, then set item in center of view as active item
+
+  const handleScroll = useCallback(() => {
+    exhibitions.map((_, index) => {
+      const element = document.getElementById(index)
+      if (element) {
+        const itemRect = element.getBoundingClientRect()
+        if (
+          itemRect.top < window.innerHeight / 2 &&
+          itemRect.bottom > window.innerHeight / 2
+        ) {
+          setInViewItem(index)
+          setInViewYear(exhibitions[index].year)
+        }
+      }
+    })
+  }, [exhibitions, setInViewItem, setInViewYear])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
+
   // TODO separate mobile table component for mobile only logic
 
   if (!exhibitions) return null
@@ -53,17 +84,18 @@ export default function TableView({ exhibitions }) {
       <div className="hidden sm:visible sm:flex sticky top-0 sm:col-span-7 sm:col-start-1 h-screen w-full items-center">
         <div className="relative h-[54vw] w-[54vw] bg-background">
           {exhibitions &&
-            exhibitions.map((exhibition) => (
-              <TableImage key={exhibition._id} exhibition={exhibition} />
+            exhibitions.map((exhibition, index) => (
+              <TableImage
+                key={exhibition._id}
+                index={index}
+                exhibition={exhibition}
+              />
             ))}
         </div>
       </div>
       <div
         ref={listRef}
-        className={cn(
-          '',
-          'scrollbar-hide sm:col-span-9 sm:col-start-8 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]',
-        )}
+        className="scrollbar-hide sm:col-span-9 sm:col-start-8 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]"
       >
         {tabletOrMobile ? (
           <ol ref={listItemsRef}>
@@ -87,7 +119,7 @@ export default function TableView({ exhibitions }) {
               position: 'relative',
             }}
           >
-            {virtualizer.getVirtualItems().map((item) => {
+            {virtualizer.getVirtualItems().map((item, index) => {
               return (
                 <div
                   key={item.key}
@@ -101,9 +133,13 @@ export default function TableView({ exhibitions }) {
                       item.start - virtualizer.options.scrollMargin
                     }px)`,
                   }}
+                  className="scroll-mt-[calc(50vh-11vw)]"
                 >
-                  <li className="scroll-mt-[calc(50vh-11vw)]">
-                    <TableItem exhibition={exhibitions[item.index]} ref={listItemsRef} />
+                  <li id={index} onMouseEnter={() => setInViewItem(index)}>
+                    <TableItem
+                      exhibition={exhibitions[item.index]}
+                      index={index}
+                    />
                   </li>
                 </div>
               )
