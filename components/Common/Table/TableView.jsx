@@ -52,10 +52,8 @@ export default function TableView({ exhibitions }) {
   // 2. if mouse is not over an item, or in event of scroll, then set item in center of view as active item
 
   const handleScroll = useCallback(() => {
-    exhibitions.map((_, index) => {
-      const element = document.getElementById(index)
-      if (element) {
-        const itemRect = element.getBoundingClientRect()
+    Array.from(listItemsRef.current.children).map((item, index) => {
+        const itemRect = item.getBoundingClientRect()
         if (
           itemRect.top < window.innerHeight / 2 &&
           itemRect.bottom > window.innerHeight / 2
@@ -63,7 +61,6 @@ export default function TableView({ exhibitions }) {
           setInViewItem(index)
           setInViewYear(exhibitions[index].year)
         }
-      }
     })
   }, [exhibitions, setInViewItem, setInViewYear])
 
