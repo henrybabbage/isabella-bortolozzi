@@ -1,13 +1,6 @@
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 import { useHydrated } from 'react-hydration-provider'
-import { useInView } from 'react-intersection-observer'
 import { useMediaQuery } from 'react-responsive'
 
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
@@ -34,10 +27,6 @@ export default function TableView({ exhibitions }) {
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
   const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
 
-//   const { ref, inView } = useInView({
-//     rootMargin: '-50% 0px -50% 0px',
-//   })
-
   const virtualizer = useWindowVirtualizer({
     count: exhibitions.length ?? 0,
     estimateSize: () => virtualItemSize,
@@ -62,23 +51,8 @@ export default function TableView({ exhibitions }) {
   // 1. if mouse is over an item then set that item active item
   // 2. if mouse is not over an item, or in event of scroll, then set item in center of view as active item
 
-  //   useEffect(() => {
-  //     // ref for table of rows
-  //     if (listItemsRef) {
-  //       // array from ref for table of rows
-  //       const tableRows = Array.from(listItemsRef.current.children)
-
-  //       tableRows.map((_, index) => {
-  //         // mouse position relative to top and bottom of element
-  //         if (inView) {
-  //           setInViewItem(index)
-  //         }
-  //       })
-  //     }
-  //   }, [inView, setInViewItem, setInViewYear, currentMouseYPos])
-
   const handleScroll = useCallback(() => {
-    exhibitions.forEach((_, index) => {
+    exhibitions.map((_, index) => {
       const element = document.getElementById(index)
       if (element) {
         const itemRect = element.getBoundingClientRect()
@@ -87,10 +61,11 @@ export default function TableView({ exhibitions }) {
           itemRect.bottom > window.innerHeight / 2
         ) {
           setInViewItem(index)
+          setInViewYear(exhibitions[index].year)
         }
       }
     })
-  }, [exhibitions, setInViewItem])
+  }, [exhibitions, setInViewItem, setInViewYear])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -146,10 +121,8 @@ export default function TableView({ exhibitions }) {
           >
             {virtualizer.getVirtualItems().map((item, index) => {
               return (
-                <li
-                  id={index}
+                <div
                   key={item.key}
-                  onMouseEnter={() => setInViewItem(index)}
                   style={{
                     position: 'absolute',
                     top: 0,
@@ -162,12 +135,13 @@ export default function TableView({ exhibitions }) {
                   }}
                   className="scroll-mt-[calc(50vh-11vw)]"
                 >
-                  <TableItem
-                    exhibition={exhibitions[item.index]}
-                    index={index}
-                    // ref={ref}
-                  />
-                </li>
+                  <li id={index} onMouseEnter={() => setInViewItem(index)}>
+                    <TableItem
+                      exhibition={exhibitions[item.index]}
+                      index={index}
+                    />
+                  </li>
+                </div>
               )
             })}
           </ol>
