@@ -95,7 +95,7 @@ export default function TableView({ exhibitions }) {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [exhibitions, handleScroll])
+  }, [handleScroll])
 
   // TODO separate mobile table component for mobile only logic
 
@@ -149,7 +149,7 @@ export default function TableView({ exhibitions }) {
                 <li
                   id={index}
                   key={item.key}
-                //   onMouseEnter={() => setInViewItem(index)}
+                  onMouseEnter={() => setInViewItem(index)}
                   style={{
                     position: 'absolute',
                     top: 0,
