@@ -19,8 +19,6 @@ import TableImage from './TableImage'
 import TableItem from './TableItem'
 
 export default function TableView({ exhibitions }) {
-  const [currentMouseYPos, setCurrentMouseYPos] = useState(0)
-
   const hydrated = useHydrated()
   const tabletOrMobile = useMediaQuery(
     { query: '(max-width: 991px)' },
@@ -36,9 +34,9 @@ export default function TableView({ exhibitions }) {
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
   const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
 
-  const { ref, inView } = useInView({
-    rootMargin: '-50% 0px -50% 0px',
-  })
+//   const { ref, inView } = useInView({
+//     rootMargin: '-50% 0px -50% 0px',
+//   })
 
   const virtualizer = useWindowVirtualizer({
     count: exhibitions.length ?? 0,
@@ -64,48 +62,42 @@ export default function TableView({ exhibitions }) {
   // 1. if mouse is over an item then set that item active item
   // 2. if mouse is not over an item, or in event of scroll, then set item in center of view as active item
 
-  useEffect(() => {
-    // ref for table of rows
-    if (listItemsRef) {
-      // top of the table (which is not top of the viewport)
-      const tableYOffsetTop = listItemsRef.current.getBoundingClientRect().top
-      const mousePosWithinTable = Math.abs(tableYOffsetTop - currentMouseYPos)
+  //   useEffect(() => {
+  //     // ref for table of rows
+  //     if (listItemsRef) {
+  //       // array from ref for table of rows
+  //       const tableRows = Array.from(listItemsRef.current.children)
 
-      // array from ref for table of rows
-      const tableRows = Array.from(listItemsRef.current.children)
+  //       tableRows.map((_, index) => {
+  //         // mouse position relative to top and bottom of element
+  //         if (inView) {
+  //           setInViewItem(index)
+  //         }
+  //       })
+  //     }
+  //   }, [inView, setInViewItem, setInViewYear, currentMouseYPos])
 
-      tableRows.map((row, index) => {
-        const rowYOffsetTop = row.getBoundingClientRect().top
-        const rowYOffsetBottom = row.getBoundingClientRect().bottom
-
-        // mouse position relative to top and bottom of element
+  const handleScroll = useCallback(() => {
+    exhibitions.forEach((_, index) => {
+      const element = document.getElementById(index)
+      if (element) {
+        const itemRect = element.getBoundingClientRect()
         if (
-          mousePosWithinTable > rowYOffsetTop &&
-          mousePosWithinTable < rowYOffsetBottom
+          itemRect.top < window.innerHeight / 2 &&
+          itemRect.bottom > window.innerHeight / 2
         ) {
-          // set the index of this table row
-          setInViewItem(index)
-        } else if (inView) {
           setInViewItem(index)
         }
-      })
-    }
-  }, [inView, setInViewItem, setInViewYear, currentMouseYPos])
-
-  const handleMouseMovement = useCallback((e) => {
-    setCurrentMouseYPos(e.clientY)
-  }, [])
+      }
+    })
+  }, [exhibitions, setInViewItem])
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMovement)
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMovement)
-    }
-  }, [currentMouseYPos, handleMouseMovement])
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [exhibitions, handleScroll])
 
   // TODO separate mobile table component for mobile only logic
-
-  console.log({ inView })
 
   if (!exhibitions) return null
 
@@ -128,10 +120,7 @@ export default function TableView({ exhibitions }) {
       </div>
       <div
         ref={listRef}
-        className={cn(
-          '',
-          'scrollbar-hide sm:col-span-9 sm:col-start-8 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]',
-        )}
+        className="scrollbar-hide sm:col-span-9 sm:col-start-8 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]"
       >
         {tabletOrMobile ? (
           <ol ref={listItemsRef}>
@@ -157,8 +146,10 @@ export default function TableView({ exhibitions }) {
           >
             {virtualizer.getVirtualItems().map((item, index) => {
               return (
-                <div
+                <li
+                  id={index}
                   key={item.key}
+                //   onMouseEnter={() => setInViewItem(index)}
                   style={{
                     position: 'absolute',
                     top: 0,
@@ -169,15 +160,14 @@ export default function TableView({ exhibitions }) {
                       item.start - virtualizer.options.scrollMargin
                     }px)`,
                   }}
+                  className="scroll-mt-[calc(50vh-11vw)]"
                 >
-                  <li className="scroll-mt-[calc(50vh-11vw)]">
-                    <TableItem
-                      exhibition={exhibitions[item.index]}
-                      index={index}
-                      ref={ref}
-                    />
-                  </li>
-                </div>
+                  <TableItem
+                    exhibition={exhibitions[item.index]}
+                    index={index}
+                    // ref={ref}
+                  />
+                </li>
               )
             })}
           </ol>
