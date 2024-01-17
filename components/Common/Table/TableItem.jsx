@@ -15,6 +15,10 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
 
   // get inViewItem from zustand store
   const inViewItem = useActiveItemStore((state) => state.inViewItem)
+  // get currently hovered item from zustand store if any
+  const currentlyHoveredItem = useActiveItemStore(
+    (state) => state.currentlyHoveredItem,
+  )
 
   // format list of artist names for this row item
   const artistNames = exhibition?.artists?.map((a) => a.name)
@@ -28,7 +32,9 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
         ref={ref}
         className={cn(
           'group relative flex flex-col sm:grid h-[40rem] sm:h-[14.25rem] sm:max-h-[14.25rem] cursor-pointer sm:grid-flow-dense sm:grid-cols-9 content-start sm:border-t pt-1 sm:pt-0 sm:border-solid sm:border-border sm:pb-6 text-left font-serif',
-          inViewItem === index ? 'text-primary' : 'text-secondary',
+          (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
+            ? 'text-primary'
+            : 'text-secondary',
         )}
       >
         <div className="sm:hidden h-[22rem] max-h-full w-full overflow-hidden pb-6">
@@ -48,7 +54,10 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
                 value={exhibition.heading}
                 paragraphClasses={cn(
                   '',
-                  inViewItem === index ? 'text-primary' : 'text-secondary',
+                  (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) ===
+                    index
+                    ? 'text-primary'
+                    : 'text-secondary',
                 )}
               />
             )}
@@ -57,7 +66,10 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
                 value={exhibition.text}
                 paragraphClasses={cn(
                   'uppercase',
-                  inViewItem === index ? 'text-primary' : 'text-secondary',
+                  (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) ===
+                    index
+                    ? 'text-primary'
+                    : 'text-secondary',
                 )}
               />
             )}

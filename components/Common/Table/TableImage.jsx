@@ -14,6 +14,10 @@ export default function TableImage({ exhibition, index }) {
   const imageProps = useNextSanityImage(sanityClient, currentImage)
 
   const inViewItem = useActiveItemStore((state) => state.inViewItem)
+  // get currently hovered item from zustand store if any
+  const currentlyHoveredItem = useActiveItemStore(
+    (state) => state.currentlyHoveredItem,
+  )
 
   if (!currentImage) return null
 
@@ -22,7 +26,7 @@ export default function TableImage({ exhibition, index }) {
       <div
         className={cn(
           'cursor-pointer absolute inset-0 h-full w-full',
-          inViewItem === index
+          (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none',
         )}

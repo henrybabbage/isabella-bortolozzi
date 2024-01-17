@@ -1,6 +1,6 @@
 import { PortableText } from '@portabletext/react'
-import { useNextSanityImage } from 'next-sanity-image'
 import Image from 'next/image'
+import { useNextSanityImage } from 'next-sanity-image'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { cn } from '@/utils/cn'

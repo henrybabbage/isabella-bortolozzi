@@ -28,6 +28,9 @@ export default function TableView({ exhibitions }) {
   const selectedYearIndex = useSelectedYearStore(
     (state) => state.selectedYearIndex,
   )
+  const setCurrentlyHoveredItem = useActiveItemStore(
+    (state) => state.setCurrentlyHoveredItem,
+  )
 
   // react-virtual
   const virtualizer = useWindowVirtualizer({
@@ -48,6 +51,8 @@ export default function TableView({ exhibitions }) {
 
   const handleScroll = useCallback(() => {
     Array.from(listItemsRef.current.children).map((item, index) => {
+      // changing length children log
+      console.log(listItemsRef.current.children)
       // get each list item container
       const itemRect = item.getBoundingClientRect()
       // if container is within center of viewport update stores
@@ -55,8 +60,12 @@ export default function TableView({ exhibitions }) {
         itemRect.top < window.innerHeight / 2 &&
         itemRect.bottom > window.innerHeight / 2
       ) {
-        setInViewItem(index)
-        setInViewYear(exhibitions[index].year)
+        const exhibitionId = item.getAttribute('dataexhibitionid')
+        const exhibitionIndex = exhibitions.findIndex(
+          (item) => item._id == exhibitionId,
+        )
+        setInViewItem(exhibitionIndex)
+        setInViewYear(exhibitions[exhibitionIndex].year)
       }
     })
   }, [exhibitions, setInViewItem, setInViewYear])
@@ -115,7 +124,11 @@ export default function TableView({ exhibitions }) {
                 <li
                   id={index}
                   key={item.key}
-                  onMouseEnter={() => setInViewItem(index)}
+                  dataExhibitionId={exhibitions[item.index]._id}
+                  onMouseEnter={() => {
+                    setCurrentlyHoveredItem(item.index)
+                  }}
+                  onMouseLeave={() => setCurrentlyHoveredItem(null)}
                   style={{
                     position: 'absolute',
                     top: 0,
@@ -130,7 +143,7 @@ export default function TableView({ exhibitions }) {
                 >
                   <TableItem
                     exhibition={exhibitions[item.index]}
-                    index={index}
+                    index={item.index}
                   />
                 </li>
               )
