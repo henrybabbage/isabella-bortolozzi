@@ -50,9 +50,10 @@ export default function TableView({ exhibitions }) {
   }, [selectedYearIndex, virtualizer])
 
   const handleScroll = useCallback(() => {
-    Array.from(listItemsRef.current.children).map((item, index) => {
-      // changing length children log
-      console.log(listItemsRef.current.children)
+    Array.from(listItemsRef.current.children).map((item) => {
+      // index of map array is not the same as index of virtualizer index
+      // see changing length of array of children console.log
+      // console.log(listItemsRef.current.children)
       // get each list item container
       const itemRect = item.getBoundingClientRect()
       // if container is within center of viewport update stores
