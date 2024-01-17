@@ -1,12 +1,11 @@
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
-import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 import { useActiveYearStore } from '@/stores/useActiveYearStore'
 import { useSelectedYearStore } from '@/stores/useSelectedYearStore'
-import { cn } from '@/utils/cn'
 
 import TableImage from './TableImage'
 import TableItem from './TableItem'
@@ -27,6 +26,7 @@ export default function TableView({ exhibitions }) {
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
   const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
 
+  // react-virtual
   const virtualizer = useWindowVirtualizer({
     count: exhibitions.length ?? 0,
     estimateSize: () => virtualItemSize,
@@ -47,20 +47,16 @@ export default function TableView({ exhibitions }) {
     }
   }, [selectedYearIndex, virtualizer])
 
-  // selection algorithm:
-  // 1. if mouse is over an item then set that item active item
-  // 2. if mouse is not over an item, or in event of scroll, then set item in center of view as active item
-
   const handleScroll = useCallback(() => {
     Array.from(listItemsRef.current.children).map((item, index) => {
-        const itemRect = item.getBoundingClientRect()
-        if (
-          itemRect.top < window.innerHeight / 2 &&
-          itemRect.bottom > window.innerHeight / 2
-        ) {
-          setInViewItem(index)
-          setInViewYear(exhibitions[index].year)
-        }
+      const itemRect = item.getBoundingClientRect()
+      if (
+        itemRect.top < window.innerHeight / 2 &&
+        itemRect.bottom > window.innerHeight / 2
+      ) {
+        setInViewItem(index)
+        setInViewYear(exhibitions[index].year)
+      }
     })
   }, [exhibitions, setInViewItem, setInViewYear])
 
@@ -74,10 +70,7 @@ export default function TableView({ exhibitions }) {
   if (!exhibitions) return null
 
   return (
-    <div
-      ref={parentRef}
-      className={cn('', 'grid w-full grid-cols-12 items-start px-6')}
-    >
+    <div ref={parentRef} className="grid w-full grid-cols-12 items-start px-6">
       <div className="hidden sm:visible sm:flex sticky top-0 sm:col-span-7 sm:col-start-1 h-screen w-full items-center">
         <div className="relative h-[54vw] w-[54vw] bg-background">
           {exhibitions &&
@@ -118,8 +111,10 @@ export default function TableView({ exhibitions }) {
           >
             {virtualizer.getVirtualItems().map((item, index) => {
               return (
-                <div
+                <li
+                  id={index}
                   key={item.key}
+                  onMouseEnter={() => setInViewItem(index)}
                   style={{
                     position: 'absolute',
                     top: 0,
@@ -132,13 +127,11 @@ export default function TableView({ exhibitions }) {
                   }}
                   className="scroll-mt-[calc(50vh-11vw)]"
                 >
-                  <li id={index} onMouseEnter={() => setInViewItem(index)}>
-                    <TableItem
-                      exhibition={exhibitions[item.index]}
-                      index={index}
-                    />
-                  </li>
-                </div>
+                  <TableItem
+                    exhibition={exhibitions[item.index]}
+                    index={index}
+                  />
+                </li>
               )
             })}
           </ol>
