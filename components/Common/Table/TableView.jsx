@@ -25,6 +25,9 @@ export default function TableView({ exhibitions }) {
   // zustand store
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
   const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
+  const selectedYearIndex = useSelectedYearStore(
+    (state) => state.selectedYearIndex,
+  )
 
   // react-virtual
   const virtualizer = useWindowVirtualizer({
@@ -33,10 +36,6 @@ export default function TableView({ exhibitions }) {
     overscan: 8,
     scrollMargin: listRef?.current?.offsetTop ?? 0,
   })
-
-  const selectedYearIndex = useSelectedYearStore(
-    (state) => state.selectedYearIndex,
-  )
 
   useEffect(() => {
     if (selectedYearIndex !== undefined && selectedYearIndex !== null) {
@@ -49,7 +48,9 @@ export default function TableView({ exhibitions }) {
 
   const handleScroll = useCallback(() => {
     Array.from(listItemsRef.current.children).map((item, index) => {
+      // get each list item container
       const itemRect = item.getBoundingClientRect()
+      // if container is within center of viewport update stores
       if (
         itemRect.top < window.innerHeight / 2 &&
         itemRect.bottom > window.innerHeight / 2
