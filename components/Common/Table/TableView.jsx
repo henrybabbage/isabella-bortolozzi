@@ -10,6 +10,7 @@ import { useSelectedYearStore } from '@/stores/useSelectedYearStore'
 import TableImage from './TableImage'
 import TableItem from './TableItem'
 
+// Credit to dataexcess (https://github.com/dataexcess) for the initial architecture that informed this feature
 export default function TableView({ exhibitions }) {
   const hydrated = useHydrated()
   const tabletOrMobile = useMediaQuery(
@@ -20,9 +21,8 @@ export default function TableView({ exhibitions }) {
   const parentRef = useRef(null)
   const listRef = useRef(null)
   const listItemsRef = useRef(null)
-  const virtualItemSize = tabletOrMobile ? 640 : 228
 
-  // zustand store
+  // zustand stores
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
   const setInViewYear = useActiveYearStore((state) => state.setInViewYear)
   const selectedYearIndex = useSelectedYearStore(
@@ -33,6 +33,8 @@ export default function TableView({ exhibitions }) {
   )
 
   // react-virtual
+  const virtualItemSize = tabletOrMobile ? 640 : 228
+
   const virtualizer = useWindowVirtualizer({
     count: exhibitions.length ?? 0,
     estimateSize: () => virtualItemSize,
@@ -51,8 +53,8 @@ export default function TableView({ exhibitions }) {
 
   const handleScroll = useCallback(() => {
     Array.from(listItemsRef.current.children).map((item) => {
-      // index of map array is not the same as index of virtualizer index
-      // see changing length of array of children console.log
+      // index of map array is not the same as index of virtualizer
+      // to illustrate see changing length of array of children in console.log
       // console.log(listItemsRef.current.children)
       // get each list item container
       const itemRect = item.getBoundingClientRect()
@@ -130,6 +132,7 @@ export default function TableView({ exhibitions }) {
                     setCurrentlyHoveredItem(item.index)
                   }}
                   onMouseLeave={() => setCurrentlyHoveredItem(null)}
+                  // virtualizer styles
                   style={{
                     position: 'absolute',
                     top: 0,
