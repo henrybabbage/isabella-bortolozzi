@@ -1,6 +1,6 @@
 import { TrendUpwardIcon } from '@sanity/icons'
 import { defineField, defineType, type Image } from 'sanity'
-import { decodeAssetUrl } from 'utils/decodeAssetUrl'
+import { decodeAssetUrl } from '@/sanity/utils/decodeAssetUrl'
 
 const TITLE = 'SEO'
 

@@ -44,6 +44,26 @@ module.exports = {
 				1000: '1000',
 			},
             keyframes: {
+                'dialog-show': {
+                    from: {
+                        opacity: 0,
+                        transform: 'scale(0.95)',
+                    },
+                    to: {
+                        opacity: 1,
+                        transform: 'scale(1)',
+                    }
+                },
+                'dialog-hide': {
+                    from: {
+                        opacity: 1,
+                        transform: 'translate(-50%, -50%) scale(1)',
+                    },
+                    to: {
+                        opacity: 0,
+                        transform: 'translate(-50%, -50%) scale(0.95)',
+                    }
+                },
 				'accordion-down': {
 					from: { height: 0 },
 					to: { height: 'var(--radix-accordion-content-height)' },
@@ -88,6 +108,8 @@ module.exports = {
 				},
 			},
 			animation: {
+                'dialog-show': 'dialog-show 0.3s ease-in-out',
+                'dialog-hide': 'dialog-hide 0.3s ease-in-out',
 				'accordion-down': 'accordion-down 0.3s ease-out',
 				'accordion-up': 'accordion-up 0.3s ease-out',
 				'scale-in': 'scale-in 0.3s ease-out',
