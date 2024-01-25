@@ -131,7 +131,7 @@ export default function TableView({ exhibitions }) {
                   onMouseEnter={() => {
                     setCurrentlyHoveredItem(item.index)
                   }}
-                  onMouseLeave={() => setCurrentlyHoveredItem(null)}
+                  // onMouseLeave={() => setCurrentlyHoveredItem(null)}
                   // virtualizer styles
                   style={{
                     position: 'absolute',
