@@ -72,7 +72,7 @@ const AspectImage = forwardRef(function AspectImage(
   return tabletAndBelow ? (
     <div
       ref={ref}
-      className="flex flex-col items-center h-screen justify-center w-full snap-start"
+      className="flex flex-col items-center h-screen justify-center w-full"
     >
       <div style={aspectRatioValuesMobile} className="relative">
         {imageProps && (
@@ -99,7 +99,7 @@ const AspectImage = forwardRef(function AspectImage(
       <Modal.Button className="cursor-pointer">
         <div
           ref={ref}
-          className="flex flex-col items-center h-screen justify-center w-full snap-start"
+          className="flex flex-col items-center h-screen justify-center w-full"
         >
           <div style={aspectRatioValuesDesktop} className="relative">
             {imageProps && (

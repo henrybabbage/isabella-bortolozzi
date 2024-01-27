@@ -19,7 +19,7 @@ const FullBleedImage = forwardRef(function FullBleedImage(
   return (
     <div
       ref={ref}
-      className="-z-10 h-screen w-screen cursor-pointer overflow-hidden relative snap-start"
+      className="-z-10 h-screen w-screen cursor-pointer overflow-hidden relative"
     >
       {image && (
         <Image

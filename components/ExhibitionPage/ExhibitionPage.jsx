@@ -88,23 +88,14 @@ export default function ExhibitionPage({ exhibition }) {
     <>
       <div
         ref={pageRef}
-        className="relative snap-y h-[100svh] w-screen scrollbar-hide"
+        className="relative h-[100svh] w-screen scrollbar-hide"
       >
         <div className="fixed top-6 right-6 z-50">
           <BackButton backPathname={router.pathname.split('/')[1]} />
         </div>
-        <div className="fixed bottom-6 right-6 z-50">
-          <GlobalDrawer
-            content={exhibition}
-            pressRelease={exhibition.body}
-            index={currentScrollElement}
-            didClickPrevious={didClickPrevious}
-            didClickNext={didClickNext}
-          />
-        </div>
         <div
           ref={scrollViewRef}
-          className="flex flex-col h-[100svh] w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
+          className="flex flex-col h-[100svh] sm:h-full w-screen overflow-y-auto overflow-x-hidden"
         >
           <SnapSection
             exhibition={exhibition}
