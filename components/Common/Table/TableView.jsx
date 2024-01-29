@@ -81,10 +81,13 @@ export default function TableView({ exhibitions }) {
   // TODO separate mobile table component for mobile only logic
 
   if (!exhibitions) return null
-
   return (
-    <div ref={parentRef} className="grid w-full grid-cols-12 items-start px-6">
-      <div className="hidden sm:visible sm:flex sticky top-0 sm:col-span-7 sm:col-start-1 h-screen w-full items-center">
+    <div
+      ref={parentRef}
+      onMouseLeave={() => setCurrentlyHoveredItem(null)}
+      className="grid w-full grid-cols-12 items-start px-6"
+    >
+      <div className="hidden sm:visible sm:flex sticky top-0 sm:col-span-7 sm:col-start-1 h-full w-full items-center">
         <div className="relative h-[54vw] w-[54vw] bg-background">
           {exhibitions &&
             exhibitions.map((exhibition, index) => (
@@ -98,7 +101,7 @@ export default function TableView({ exhibitions }) {
       </div>
       <div
         ref={listRef}
-        className="scrollbar-hide sm:col-span-9 sm:col-start-8 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]"
+        className="scrollbar-hide sm:col-span-12 sm:col-start-1 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]"
       >
         {tabletOrMobile ? (
           <ol ref={listItemsRef}>
@@ -119,7 +122,7 @@ export default function TableView({ exhibitions }) {
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
-              position: 'relative',
+              // position: 'relative',
             }}
           >
             {virtualizer.getVirtualItems().map((item, index) => {

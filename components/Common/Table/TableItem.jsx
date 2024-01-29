@@ -25,13 +25,12 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
   const artistList = artistNames?.join(', ')
 
   if (!exhibition) return null
-
   return (
     <DynamicLink link={exhibition} prefetch={true} scroll={false}>
       <div
         ref={ref}
         className={cn(
-          'group relative flex flex-col sm:grid h-[40rem] sm:h-[14.25rem] sm:max-h-[14.25rem] cursor-pointer sm:grid-flow-dense sm:grid-cols-9 content-start sm:border-t pt-1 sm:pt-0 sm:border-solid sm:border-border sm:pb-6 text-left font-serif',
+          'group relative flex flex-col sm:grid h-[40rem] sm:h-[14.25rem] sm:max-h-[14.25rem] cursor-pointer sm:grid-flow-dense sm:grid-cols-12 content-start pt-1 sm:pt-0 sm:pb-6 text-left font-serif',
           (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
             ? 'text-primary'
             : 'text-secondary',
@@ -43,7 +42,8 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
             image={exhibition.mainImage ?? ''}
           />
         </div>
-        <div className="sm:col-span-5 sm:col-start-1 flex flex-col h-fit sm:h-auto">
+        <div id="divider" className="sm:col-span-5 sm:col-start-8 sm:border-t sm:border-solid sm:border-border"></div>
+        <div className="sm:col-span-3 sm:col-start-8 flex flex-col h-fit sm:h-auto">
           <div className="flex w-full flex-col pt-6 sm:pt-3">
             {exhibition.title && (
               <h1 className="uppercase pr-2 group">{exhibition.title}</h1>
@@ -74,11 +74,11 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
               />
             )}
           </div>
-          <div className="sm:col-span-4 sm:col-start-1 pt-4 sm:pt-0">
+          <div className="sm:col-span-3 sm:col-start-2 pt-4 sm:pt-0">
             <h2 className="pl-8">{artistList}</h2>
           </div>
         </div>
-        <div className="sm:col-span-2 sm:col-start-5 flex flex-col pt-3 h-fit sm:h-auto">
+        <div className="sm:col-span-2 sm:col-start-9 flex flex-col pt-3 h-fit sm:h-auto">
           {!router.pathname.startsWith('/exhibitions') && (
             <h3 className="pr-0">
               {exhibition.venue && exhibition.venue.name && (
@@ -101,7 +101,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
             </h3>
           )}
         </div>
-        <div className="sm:col-span-3 sm:col-start-7 flex justify-end pt-3 h-fit sm:h-auto">
+        <div className="sm:col-span-2 sm:col-start-11 flex justify-end pt-3 h-fit sm:h-auto">
           <div className="flex w-full sm:w-auto justify-between sm:justify-normal">
             {exhibition.startDate && exhibition.endDate && (
               <h3 className="">
