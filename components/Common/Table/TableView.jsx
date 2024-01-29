@@ -107,7 +107,7 @@ export default function TableView({ exhibitions }) {
       </div>
       <div
         ref={listRef}
-        className="scrollbar-hide sm:col-span-12 sm:col-start-1 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]"
+        className="scrollbar-hide col-start-1 col-span-12 w-full pb-[50vh]"
       >
         {tabletOrMobile ? (
           <ol ref={listItemsRef}>
@@ -128,7 +128,7 @@ export default function TableView({ exhibitions }) {
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
-              // position: 'relative',
+            //   position: 'relative',
             }}
           >
             {virtualizer.getVirtualItems().map((item, index) => {
@@ -140,7 +140,6 @@ export default function TableView({ exhibitions }) {
                   onMouseEnter={() => {
                     setCurrentlyHoveredItem(item.index)
                   }}
-                  // onMouseLeave={() => setCurrentlyHoveredItem(null)}
                   // virtualizer styles
                   style={{
                     position: 'absolute',

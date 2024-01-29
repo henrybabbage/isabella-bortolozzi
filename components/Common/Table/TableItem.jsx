@@ -30,7 +30,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
       <div
         ref={ref}
         className={cn(
-          'group relative flex flex-col sm:grid h-[40rem] sm:h-[14.25rem] sm:max-h-[14.25rem] cursor-pointer sm:grid-flow-dense sm:grid-cols-12 content-start pt-1 sm:pt-0 sm:pb-6 text-left font-serif',
+          'group relative flex flex-col sm:grid h-[40rem] sm:h-[14.25rem] sm:max-h-[14.25rem] cursor-pointer sm:grid-flow-dense sm:grid-cols-12 px-6 content-start pt-1 sm:pt-0 sm:pb-6 text-left font-serif',
           (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
             ? 'text-primary'
             : 'text-secondary',
