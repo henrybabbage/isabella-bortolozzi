@@ -11,6 +11,7 @@ import TableImage from './TableImage'
 import TableItem from './TableItem'
 
 // Credit to dataexcess (https://github.com/dataexcess) for the initial architecture that informed this feature
+// and to Kesorn Dokphikul for solving the integration with react-virtual
 export default function TableView({ exhibitions }) {
   const hydrated = useHydrated()
   const tabletOrMobile = useMediaQuery(
