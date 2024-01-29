@@ -78,6 +78,11 @@ export default function TableView({ exhibitions }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
+  // on every page load or route change reset the currentlyHoveredItem
+  useEffect(() => {
+    setCurrentlyHoveredItem(null)
+  }, [setCurrentlyHoveredItem])
+
   // TODO separate mobile table component for mobile only logic
 
   if (!exhibitions) return null
