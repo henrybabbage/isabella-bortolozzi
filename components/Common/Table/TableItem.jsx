@@ -48,7 +48,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
             {exhibition.title && (
               <h1 className="uppercase pr-2 group">{exhibition.title}</h1>
             )}
-            {exhibition.subtitle && <h2 className="">{exhibition.subtitle}</h2>}
+            {exhibition.subtitle && <h2 className="h-auto">{exhibition.subtitle}</h2>}
             {router.pathname.startsWith('/news') && exhibition.heading && (
               <CustomPortableText
                 value={exhibition.heading}

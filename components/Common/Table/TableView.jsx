@@ -85,6 +85,7 @@ export default function TableView({ exhibitions }) {
   }, [setCurrentlyHoveredItem])
 
   // TODO separate mobile table component for mobile only logic
+  // TODO replace class "sticky" with class "fixed" on archive page image and uncomment "relative" on <ol> to fix effect on position of grid list
 
   if (!exhibitions) return null
   return (
@@ -107,7 +108,7 @@ export default function TableView({ exhibitions }) {
       </div>
       <div
         ref={listRef}
-        className="scrollbar-hide col-start-1 col-span-12 w-full pb-[50vh]"
+        className="scrollbar-hide col-start-1 col-span-12 w-full h-fit pb-[50vh]"
       >
         {tabletOrMobile ? (
           <ol ref={listItemsRef}>
@@ -128,7 +129,7 @@ export default function TableView({ exhibitions }) {
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
-            //   position: 'relative',
+              // position: 'relative',
             }}
           >
             {virtualizer.getVirtualItems().map((item, index) => {
