@@ -4,8 +4,7 @@ import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import BackButton from '../Common/Buttons/BackButton'
-import GlobalDrawer from '../Common/Drawers/GlobalDrawer'
-import SnapSection from './SnapSection'
+import ImageSection from './ImageSection'
 
 export default function ExhibitionPage({ exhibition }) {
   const [isLoading, setIsLoading] = useState(true)
@@ -88,27 +87,17 @@ export default function ExhibitionPage({ exhibition }) {
     <>
       <div
         ref={pageRef}
-        className="relative snap-y h-[100svh] w-screen scrollbar-hide"
+        className="relative min-h-[100svh] w-screen scrollbar-hide"
       >
         <div className="fixed top-6 right-6 z-50">
           <BackButton backPathname={router.pathname.split('/')[1]} />
         </div>
-        <div className="fixed bottom-6 right-6 z-50">
-          <GlobalDrawer
-            content={exhibition}
-            pressRelease={exhibition.body}
-            index={currentScrollElement}
-            didClickPrevious={didClickPrevious}
-            didClickNext={didClickNext}
-          />
-        </div>
         <div
           ref={scrollViewRef}
-          className="flex flex-col h-[100svh] w-screen snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
+          className="flex flex-col h-[100svh] sm:h-full w-screen overflow-y-auto overflow-x-hidden"
         >
-          <SnapSection
+          <ImageSection
             exhibition={exhibition}
-            isLoading={isLoading}
             scrollToSections={scrollToSections}
             index={currentScrollElement}
           />
