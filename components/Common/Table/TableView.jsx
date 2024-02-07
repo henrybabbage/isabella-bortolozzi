@@ -79,13 +79,22 @@ export default function TableView({ exhibitions }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
+  // on every page load or route change reset the currentlyHoveredItem
+  useEffect(() => {
+    setCurrentlyHoveredItem(null)
+  }, [setCurrentlyHoveredItem])
+
   // TODO separate mobile table component for mobile only logic
+  // TODO replace class "sticky" with class "fixed" on archive page image and uncomment "relative" on <ol> to fix effect on position of grid list
 
   if (!exhibitions) return null
-
   return (
-    <div ref={parentRef} className="grid w-full grid-cols-12 items-start px-6">
-      <div className="hidden sm:visible sm:flex sticky top-0 sm:col-span-7 sm:col-start-1 h-screen w-full items-center">
+    <div
+      ref={parentRef}
+      onMouseLeave={() => setCurrentlyHoveredItem(null)}
+      className="grid w-full grid-cols-12 items-start px-6"
+    >
+      <div className="hidden sm:visible sm:flex sticky top-0 sm:col-span-7 sm:col-start-1 h-full w-full items-center">
         <div className="relative h-[54vw] w-[54vw] bg-background">
           {exhibitions &&
             exhibitions.map((exhibition, index) => (
@@ -99,7 +108,7 @@ export default function TableView({ exhibitions }) {
       </div>
       <div
         ref={listRef}
-        className="scrollbar-hide sm:col-span-9 sm:col-start-8 col-start-1 col-span-12 w-full py-[calc(50vh-11vw)]"
+        className="scrollbar-hide col-start-1 col-span-12 w-full h-fit pb-[50vh]"
       >
         {tabletOrMobile ? (
           <ol ref={listItemsRef}>
@@ -120,7 +129,7 @@ export default function TableView({ exhibitions }) {
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
-              position: 'relative',
+              // position: 'relative',
             }}
           >
             {virtualizer.getVirtualItems().map((item, index) => {
@@ -132,7 +141,6 @@ export default function TableView({ exhibitions }) {
                   onMouseEnter={() => {
                     setCurrentlyHoveredItem(item.index)
                   }}
-                  onMouseLeave={() => setCurrentlyHoveredItem(null)}
                   // virtualizer styles
                   style={{
                     position: 'absolute',

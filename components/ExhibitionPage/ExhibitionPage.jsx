@@ -25,6 +25,12 @@ export default function ExhibitionPage({ exhibition }) {
     { scope: pageRef },
   )
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3400)
+  }, [])
+
   const handleScroll = useCallback(() => {
     let offset = Math.abs(
       scrollViewRef.current.children[0].getBoundingClientRect().top,
