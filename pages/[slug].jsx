@@ -9,6 +9,7 @@ import CarouselSection from '@/components/ArtistPage/CarouselSection'
 import CVSection from '@/components/ArtistPage/CVSection'
 import ExhibitionsSection from '@/components/ArtistPage/ExhibitionsSection'
 import MobileArtistSubNav from '@/components/Mobile/MobileArtistSubNav'
+import SmoothScroll from '@/components/Utilities/SmoothScroll'
 import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
 import { getArtist } from '@/sanity/lib/sanity.fetch'
@@ -66,44 +67,51 @@ export default function ArtistSlugRoute(props) {
   })
 
   return (
-    <main className="flex flex-col h-full w-screen relative animate-fade-in">
-      <Client>
-        <Desktop>
-          <ArtistSubNav
-            artist={artist}
-            isLoading={isLoading}
-            scrollIntoViewWorks={scrollIntoViewWorks}
-            scrollIntoViewExhibitions={scrollIntoViewExhibitions}
-            scrollIntoViewBiography={scrollIntoViewBiography}
-          />
-        </Desktop>
-        <TabletAndBelow>
-          <MobileArtistSubNav
-            artist={artist}
-            isLoading={isLoading}
-            scrollIntoViewWorks={scrollIntoViewWorks}
-            scrollIntoViewExhibitions={scrollIntoViewExhibitions}
-            scrollIntoViewBiography={scrollIntoViewBiography}
-          />
-        </TabletAndBelow>
-      </Client>
-      <div
-        className={cn(
-          isLoading && desktopOrLaptop
-            ? '!overflow-hidden opacity-0'
-            : 'animate-slide-in opacity-100',
-          'relative flex flex-col gap-24 sm:gap-0',
-        )}
-      >
-        <CarouselSection
-          worksRef={worksRef}
-          artist={artist}
-          isLoading={isLoading}
-        />
-        <ExhibitionsSection exhibitionsRef={exhibitionsRef} artist={artist} />
-        <CVSection biographyRef={biographyRef} artist={artist} />
-      </div>
-    </main>
+    <SmoothScroll>
+      <main className="w-screen animate-fade-in">
+        <div className="flex flex-col w-full relative">
+          <Client>
+            <Desktop>
+              <ArtistSubNav
+                artist={artist}
+                isLoading={isLoading}
+                scrollIntoViewWorks={scrollIntoViewWorks}
+                scrollIntoViewExhibitions={scrollIntoViewExhibitions}
+                scrollIntoViewBiography={scrollIntoViewBiography}
+              />
+            </Desktop>
+            <TabletAndBelow>
+              <MobileArtistSubNav
+                artist={artist}
+                isLoading={isLoading}
+                scrollIntoViewWorks={scrollIntoViewWorks}
+                scrollIntoViewExhibitions={scrollIntoViewExhibitions}
+                scrollIntoViewBiography={scrollIntoViewBiography}
+              />
+            </TabletAndBelow>
+          </Client>
+          <div
+            className={cn(
+              isLoading && desktopOrLaptop
+                ? '!overflow-hidden opacity-0'
+                : 'opacity-100',
+              'relative flex flex-col gap-24 sm:gap-0 h-full',
+            )}
+          >
+            <CarouselSection
+              worksRef={worksRef}
+              artist={artist}
+              isLoading={isLoading}
+            />
+            <ExhibitionsSection
+              exhibitionsRef={exhibitionsRef}
+              artist={artist}
+            />
+            <CVSection biographyRef={biographyRef} artist={artist} />
+          </div>
+        </div>
+      </main>
+    </SmoothScroll>
   )
 }
 

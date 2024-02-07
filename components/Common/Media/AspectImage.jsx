@@ -1,4 +1,3 @@
-import Modal from 'components/Common/Dialog/Modal'
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
 import { forwardRef, useState } from 'react'
@@ -6,8 +5,6 @@ import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
-
-import ZoomImage from './ZoomImage'
 
 const LANDSCAPE_WIDTH_DESKTOP = '66vw'
 const PORTRAIT_HEIGHT_DESKTOP = '96vh'
@@ -72,7 +69,7 @@ const AspectImage = forwardRef(function AspectImage(
   return tabletAndBelow ? (
     <div
       ref={ref}
-      className="flex flex-col items-center h-screen justify-center w-full snap-start"
+      className="flex flex-col items-center h-screen justify-center w-full"
     >
       <div style={aspectRatioValuesMobile} className="relative">
         {imageProps && (
@@ -95,44 +92,32 @@ const AspectImage = forwardRef(function AspectImage(
       </div>
     </div>
   ) : (
-    <Modal open={open} onOpenChange={setOpen}>
-      <Modal.Button className="cursor-pointer">
-        <div
-          ref={ref}
-          className="flex flex-col items-center h-screen justify-center w-full snap-start"
-        >
-          <div style={aspectRatioValuesDesktop} className="relative">
-            {imageProps && (
-              <Image
-                src={imageProps.src}
-                loader={imageProps.loader}
-                alt={alt ?? ''}
-                width={width}
-                height={height}
-                sizes={sizes}
-                blurDataURL={image.asset.metadata.lqip}
-                placeholder="blur"
-                fill={fill}
-                priority={priority}
-                quality={75}
-                style={{
-                  objectFit: `${mode}`,
-                  objectPosition: 'top',
-                }}
-              />
-            )}
-          </div>
-        </div>
-      </Modal.Button>
-      <Modal.Content>
-        <ZoomImage
-          image={image}
-          ratio={ratioMultiplier}
-          open={open}
-          setOpen={setOpen}
-        />
-      </Modal.Content>
-    </Modal>
+    <div
+      ref={ref}
+      className="flex flex-col items-center h-screen justify-center w-full"
+    >
+      <div style={aspectRatioValuesDesktop} className="relative">
+        {imageProps && (
+          <Image
+            src={imageProps.src}
+            loader={imageProps.loader}
+            alt={alt ?? ''}
+            width={width}
+            height={height}
+            sizes={sizes}
+            blurDataURL={image.asset.metadata.lqip}
+            placeholder="blur"
+            fill={fill}
+            priority={priority}
+            quality={75}
+            style={{
+              objectFit: `${mode}`,
+              objectPosition: 'top',
+            }}
+          />
+        )}
+      </div>
+    </div>
   )
 })
 
