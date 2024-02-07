@@ -4,6 +4,7 @@ import { Client } from 'react-hydration-provider'
 import ExhibitionSection from '@/components/HomePage/ExhibitionSection'
 import Footer from '@/components/HomePage/Footer'
 import MobileFooter from '@/components/Mobile/MobileFooter'
+import SmoothScroll from '@/components/Utilities/SmoothScroll'
 import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
 import { getGallery, getHome } from '@/sanity/lib/sanity.fetch'
@@ -14,6 +15,7 @@ export default function IndexPage(props) {
   const [home] = useLiveQuery(props.home, homeQuery)
   const [gallery] = useLiveQuery(props.gallery, galleryQuery)
   return (
+    <SmoothScroll>
     <main className="animate-fade-in w-full overflow-x-hidden scrollbar-hide overscroll-none">
       <Client>
         <Desktop>
@@ -42,6 +44,7 @@ export default function IndexPage(props) {
         </TabletAndBelow>
       </Client>
     </main>
+    </SmoothScroll>
   )
 }
 

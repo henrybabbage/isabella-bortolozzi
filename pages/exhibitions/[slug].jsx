@@ -1,8 +1,9 @@
-import { useLiveQuery } from 'next-sanity/preview'
 import Head from 'next/head'
+import { useLiveQuery } from 'next-sanity/preview'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
 import ExhibitionLayout from '@/components/Layout/ExhibitionLayout'
+import SmoothScroll from '@/components/Utilities/SmoothScroll'
 import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
 import { getAboveTheFoldImage, getExhibition } from '@/sanity/lib/sanity.fetch'
@@ -32,9 +33,11 @@ export default function ExhibitionSlugRoute(props) {
           />
         )}
       </Head>
-      <main className="animate-fade-in">
-        <ExhibitionPage exhibition={exhibition} />
-      </main>
+      <SmoothScroll>
+        <main className="animate-fade-in">
+          <ExhibitionPage exhibition={exhibition} />
+        </main>
+      </SmoothScroll>
     </>
   )
 }
