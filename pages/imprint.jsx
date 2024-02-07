@@ -12,7 +12,7 @@ export default function Imprint(props) {
   const [imprint] = useLiveQuery(props.imprint, imprintQuery)
   return (
     <SmoothScroll>
-      <main className="h-screen w-screen py-6 animate-fade-in">
+      <main className="w-screen py-8 animate-fade-in">
         <PageHeader title={'Imprint'} />
         <section className="flex flex-col sm:grid sm:grid-cols-12 px-6 py-6">
           {imprint.heading && (
