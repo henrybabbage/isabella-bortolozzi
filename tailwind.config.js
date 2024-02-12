@@ -24,6 +24,7 @@ module.exports = {
 			},
             fontFamily: {
 				serif: ['var(--font-serif)', ...fontFamily.serif],
+				mono: ['var(--font-mono)', ...fontFamily.mono],
 			},
             fontSize: {
                 sm: ['14px', '20px'],

@@ -73,7 +73,7 @@ const SectionsPopover = ({
             <button
               type="button"
               className={cn(
-                'small-caps z-100 w-fit cursor-pointer transition hover:text-primary',
+                'uppercase z-100 w-fit cursor-pointer transition hover:text-primary',
                 isLoading ? 'hidden' : 'block',
                 inViewSection === 'works' ? 'text-primary' : 'text-secondary',
               )}
@@ -90,7 +90,7 @@ const SectionsPopover = ({
             <button
               type="button"
               className={cn(
-                'small-caps z-100 w-fit cursor-pointer transition hover:text-primary',
+                'uppercase z-100 w-fit cursor-pointer transition hover:text-primary',
                 isLoading ? 'hidden' : 'block',
                 inViewSection === 'exhibitions'
                   ? 'text-primary'
@@ -109,7 +109,7 @@ const SectionsPopover = ({
             <button
               type="button"
               className={cn(
-                'small-caps z-100 w-fit cursor-pointer transition hover:text-primary',
+                'uppercase z-100 w-fit cursor-pointer transition hover:text-primary',
                 isLoading ? 'hidden' : 'block',
                 inViewSection === 'biography'
                   ? 'text-primary'

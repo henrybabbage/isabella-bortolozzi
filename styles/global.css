@@ -34,7 +34,8 @@
 }
 
 html {
-    font-family: var(--font-serif), serif;
+    /* font-family: var(--font-serif), serif; */
+    font-family: var(--font-mono), serif;
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-size-adjust: 100%;

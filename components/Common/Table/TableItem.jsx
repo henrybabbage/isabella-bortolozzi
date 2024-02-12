@@ -30,7 +30,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
       <div
         ref={ref}
         className={cn(
-          'group relative flex flex-col sm:grid h-[40rem] sm:h-[14.25rem] sm:max-h-[14.25rem] cursor-pointer sm:grid-flow-dense sm:grid-cols-12 px-6 content-start pt-1 sm:pt-0 sm:pb-6 text-left font-serif',
+          'group relative flex flex-col sm:grid h-[40rem] sm:h-[14.25rem] sm:max-h-[14.25rem] cursor-pointer sm:grid-flow-dense sm:grid-cols-12 px-6 content-start pt-1 sm:pt-0 sm:pb-6 text-left font-mono',
           (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
             ? 'text-primary'
             : 'text-secondary',
@@ -42,13 +42,18 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
             image={exhibition.mainImage ?? ''}
           />
         </div>
-        <div id="divider" className="sm:col-span-5 sm:col-start-8 sm:border-t sm:border-solid sm:border-border"></div>
+        <div
+          id="divider"
+          className="sm:col-span-5 sm:col-start-8 sm:border-t sm:border-solid sm:border-border"
+        ></div>
         <div className="sm:col-span-3 sm:col-start-8 flex flex-col h-fit sm:h-auto">
           <div className="flex w-full flex-col pt-6 sm:pt-3">
             {exhibition.title && (
               <h1 className="uppercase pr-2 group">{exhibition.title}</h1>
             )}
-            {exhibition.subtitle && <h2 className="h-auto">{exhibition.subtitle}</h2>}
+            {exhibition.subtitle && (
+              <h2 className="h-auto">{exhibition.subtitle}</h2>
+            )}
             {router.pathname.startsWith('/news') && exhibition.heading && (
               <CustomPortableText
                 value={exhibition.heading}
