@@ -34,6 +34,17 @@ const serif = localFont({
   variable: '--font-serif',
 })
 
+const mono = localFont({
+  src: [
+    {
+      path: '../public/fonts/QuadrantTextMono/Quadrant_Text_Mono.woff2',
+      weight: '400',
+      style: 'regular',
+    },
+  ],
+  variable: '--font-mono',
+})
+
 export default function App({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient())
 
@@ -142,6 +153,7 @@ export default function App({ Component, pageProps }) {
           {`
             :root {
               --font-serif: ${serif.style.fontFamily};
+              --font-mono: ${mono.style.fontFamily};
             }
           `}
         </style>

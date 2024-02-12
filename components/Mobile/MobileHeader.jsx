@@ -110,7 +110,7 @@ const ArtistsAccordion = ({ artists, toggleHeaderMenu }) => {
       <Accordion.Item value="item-1">
         <Accordion.Header>
           <Accordion.Trigger>
-            <h3 className="text-primary font-serif">Artists</h3>
+            <h3 className="text-primary font-mono">Artists</h3>
           </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Content className="overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
@@ -121,7 +121,7 @@ const ArtistsAccordion = ({ artists, toggleHeaderMenu }) => {
                   key={index}
                   onClick={toggleHeaderMenu}
                   href={`/${artist.slug}`}
-                  className="hover:text-secondary text-primary font-serif mr-1 inline-flex shrink-0 cursor-pointer transition"
+                  className="hover:text-secondary text-primary font-mono mr-1 inline-flex shrink-0 cursor-pointer transition"
                   aria-label="Artist page links"
                 >
                   {index != artists.length - 1

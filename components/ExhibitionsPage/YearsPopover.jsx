@@ -46,7 +46,7 @@ export default function YearsPopover({ exhibitions }) {
           aria-label="Open menu to select chosen year"
           className="h-fit"
         >
-          <h3 className="text-secondary hover:text-primary small-caps">
+          <h3 className="text-secondary hover:text-primary uppercase">
             {isOpen ? 'Close' : 'Select Year'}
           </h3>
         </button>

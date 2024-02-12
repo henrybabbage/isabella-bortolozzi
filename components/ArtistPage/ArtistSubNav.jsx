@@ -25,7 +25,7 @@ export default function ArtistSubNav({
           <button
             type="button"
             className={cn(
-              'z-100 w-fit cursor-pointer transition hover:text-primary small-caps',
+              'z-100 w-fit cursor-pointer transition hover:text-primary uppercase',
               isLoading ? 'hidden' : 'block',
               inViewSection === 'works' ? 'text-primary' : 'text-secondary',
             )}
@@ -44,7 +44,7 @@ export default function ArtistSubNav({
           <button
             type="button"
             className={cn(
-              'z-100 w-fit cursor-pointer transition hover:text-primary small-caps',
+              'z-100 w-fit cursor-pointer transition hover:text-primary uppercase',
               isLoading ? 'hidden' : 'block',
               inViewSection === 'exhibitions'
                 ? 'text-primary'
@@ -62,7 +62,7 @@ export default function ArtistSubNav({
           <button
             type="button"
             className={cn(
-              'z-100 w-fit cursor-pointer transition hover:text-primary small-caps',
+              'z-100 w-fit cursor-pointer transition hover:text-primary uppercase',
               isLoading ? 'hidden' : 'block',
               inViewSection === 'biography' ? 'text-primary' : 'text-secondary',
             )}
