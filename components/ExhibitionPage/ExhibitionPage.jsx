@@ -1,10 +1,10 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import BackButton from '../Common/Buttons/BackButton'
-import ImageSection from './ImageSection'
+import AspectImage from '../Common/Media/AspectImage'
 
 export default function ExhibitionPage({ exhibition }) {
   const [isLoading, setIsLoading] = useState(true)
@@ -31,50 +31,6 @@ export default function ExhibitionPage({ exhibition }) {
     }, 3400)
   }, [])
 
-  const handleScroll = useCallback(() => {
-    let offset = Math.abs(
-      scrollViewRef.current.children[0].getBoundingClientRect().top,
-    )
-
-    Array.from(scrollToSections.current).map((section, idx) => {
-      if (!section) return
-
-      const sectionCenter = section.offsetTop + section.offsetHeight / 2
-      if (
-        sectionCenter > offset &&
-        sectionCenter < offset + window.innerHeight
-      ) {
-        setCurrentScrollElement(idx)
-      }
-    })
-  }, [scrollViewRef])
-
-  useEffect(() => {
-    const scrollView = scrollViewRef.current
-    scrollView.addEventListener('scroll', handleScroll)
-    return () => {
-      scrollView.removeEventListener('scroll', handleScroll)
-    }
-  }, [scrollViewRef, handleScroll])
-
-  const didClickPrevious = () => {
-    if (!scrollToSections) return
-    let goToRef = currentScrollElement - 1
-    if (goToRef < 0 || goToRef > scrollToSections.current.size) {
-      return
-    }
-    scrollToSection(goToRef)
-  }
-
-  const didClickNext = () => {
-    if (!scrollToSections) return
-    let goToRef = currentScrollElement + 1
-    if (goToRef < 0 || goToRef > scrollToSections.current.size) {
-      return
-    }
-    scrollToSection(goToRef)
-  }
-
   const scrollToSection = (idx) => {
     if (idx === null || idx === undefined) return
     Array.from(scrollToSections.current)[idx]?.scrollIntoView({
@@ -94,13 +50,26 @@ export default function ExhibitionPage({ exhibition }) {
         </div>
         <div
           ref={scrollViewRef}
-          className="flex flex-col h-[100svh] sm:h-full w-screen overflow-y-auto overflow-x-hidden pb-32"
+          className="h-full w-screen overflow-y-auto overflow-x-hidden py-24"
         >
-          <ImageSection
-            exhibition={exhibition}
-            scrollToSections={scrollToSections}
-            index={currentScrollElement}
-          />
+          <div className="relative grid grid-cols-1 w-screen items-center gap-2">
+            <div className="flex flex-col">
+              {exhibition &&
+                exhibition.imageGallery &&
+                exhibition.imageGallery.map((image) => (
+                  <AspectImage
+                    key={image._key}
+                    image={image}
+                    ref={(element) => scrollToSections.current.add(element)}
+                    alt={image.alt}
+                    priority={isLoading ? false : true}
+                    fill={true}
+                    mode="contain"
+                    sizes="100vw"
+                  />
+                ))}
+            </div>
+          </div>
         </div>
       </div>
     </>
