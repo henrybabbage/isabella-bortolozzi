@@ -94,7 +94,7 @@ const AspectImage = forwardRef(function AspectImage(
   ) : (
     <div
       ref={ref}
-      className="flex flex-col items-center h-screen justify-center w-full"
+      className="flex flex-col items-center h-full justify-center w-full"
     >
       <div style={aspectRatioValuesDesktop} className="relative">
         {imageProps && (
