@@ -52,23 +52,21 @@ export default function ExhibitionPage({ exhibition }) {
           ref={scrollViewRef}
           className="h-full w-screen overflow-y-auto overflow-x-hidden py-24"
         >
-          <div className="relative grid grid-cols-1 w-screen items-center gap-2">
-            <div className="flex flex-col">
-              {exhibition &&
-                exhibition.imageGallery &&
-                exhibition.imageGallery.map((image) => (
-                  <AspectImage
-                    key={image._key}
-                    image={image}
-                    ref={(element) => scrollToSections.current.add(element)}
-                    alt={image.alt}
-                    priority={isLoading ? false : true}
-                    fill={true}
-                    mode="contain"
-                    sizes="100vw"
-                  />
-                ))}
-            </div>
+          <div className="relative grid grid-cols-1 w-screen items-center gap-32">
+            {exhibition &&
+              exhibition.imageGallery &&
+              exhibition.imageGallery.map((image) => (
+                <AspectImage
+                  key={image._key}
+                  image={image}
+                  ref={(element) => scrollToSections.current.add(element)}
+                  alt={image.alt}
+                  priority={isLoading ? false : true}
+                  fill={true}
+                  mode="contain"
+                  sizes="100vw"
+                />
+              ))}
           </div>
         </div>
       </div>
