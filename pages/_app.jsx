@@ -1,6 +1,7 @@
 import '@/styles/global.css'
 
 import { useAsPathWithoutHash } from '@madeinhaus/nextjs-page-transition'
+import { useLenis } from '@studio-freight/react-lenis'
 import {
   HydrationBoundary,
   QueryClient,
@@ -13,6 +14,7 @@ import { lazy, useEffect, useRef, useState } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 
 import RootLayout from '@/components/Layout/RootLayout'
+import { useNavOpenStore } from '@/stores/useNavOpenStore'
 
 const PreviewProvider = lazy(() =>
   import('@/components/Previews/PreviewProvider'),
@@ -118,24 +120,17 @@ export default function App({ Component, pageProps }) {
     })
   }, [])
 
-  // add "scroll-smooth" class for navigation within a page but do not apply the class during page transitions
-  //   useEffect(() => {
-  //     const html = document.querySelector('html')
-  //     const addSmoothScrollClass = () => {
-  //       html.classList.add('scroll-smooth')
-  //     }
-  //     const removeSmoothScrollClass = () => {
-  //       html.classList.remove('scroll-smooth')
-  //     }
-  //     router.events.on('routeChangeStart', removeSmoothScrollClass)
-  //     router.events.on('routeChangeComplete', addSmoothScrollClass)
-  //     router.events.on('routeChangeError', addSmoothScrollClass)
-  //     return () => {
-  //       router.events.off('routeChangeStart', removeSmoothScrollClass)
-  //       router.events.off('routeChangeComplete', addSmoothScrollClass)
-  //       router.events.off('routeChangeError', addSmoothScrollClass)
-  //     }
-  //   }, [router])
+  const lenis = useLenis()
+  
+  const isNavOpened = useNavOpenStore(({ isNavOpened }) => isNavOpened)
+
+  useEffect(() => {
+    if (isNavOpened) {
+      lenis?.stop()
+    } else {
+      lenis?.start()
+    }
+  }, [lenis, isNavOpened])
 
   // Use the layout defined at the page level, if available
   // const Layout = Component.layout || (({ children }) => (<RootLayout>{children}</RootLayout>))

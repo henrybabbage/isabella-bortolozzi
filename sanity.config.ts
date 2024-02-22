@@ -5,6 +5,7 @@
 // import { deDELocale } from '@sanity/locale-de-de'
 import { visionTool } from '@sanity/vision'
 import { defineConfig, SanityDocument } from 'sanity'
+import { DefaultDocumentNodeResolver, deskTool } from 'sanity/desk'
 import {
     defineUrlResolver,
     Iframe,
@@ -13,7 +14,6 @@ import {
 import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
 import { media } from 'sanity-plugin-media'
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input'
-import { DefaultDocumentNodeResolver, deskTool } from 'sanity/desk'
 
 // see https://www.sanity.io/docs/api-versioning for how versioning works
 import {

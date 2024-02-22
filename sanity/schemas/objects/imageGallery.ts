@@ -1,5 +1,5 @@
 import { getExtension, getImageDimensions } from '@sanity/asset-utils'
-import { defineField, defineType,type Image } from 'sanity'
+import { defineField, defineType, type Image } from 'sanity'
 
 export default defineType({
 	name: 'imageGallery',
