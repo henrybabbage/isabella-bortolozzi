@@ -94,7 +94,7 @@ export default function ExhibitionPage({ exhibition }) {
         </div>
         <div
           ref={scrollViewRef}
-          className="flex flex-col h-[100svh] sm:h-full w-screen overflow-y-auto overflow-x-hidden"
+          className="flex flex-col h-[100svh] sm:h-full w-screen overflow-y-auto overflow-x-hidden pb-32"
         >
           <ImageSection
             exhibition={exhibition}
