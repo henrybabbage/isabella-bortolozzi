@@ -11,18 +11,20 @@ export default function StandardImage({ image }) {
 
   return (
     <div className={cn('relative h-full w-full')}>
-      <Image
-        src={imageProps.src}
-        loader={imageProps.loader}
-        alt=""
-        fill
-        sizes="100vw"
-        quality={75}
-        placeholder="blur"
-        blurDataURL={image.asset.metadata.lqip}
-        priority
-        style={{ objectFit: 'cover', objectPosition: 'center' }}
-      />
+      {imageProps && (
+        <Image
+          src={imageProps.src}
+          loader={imageProps.loader}
+          alt=""
+          fill
+          sizes="100vw"
+          quality={75}
+          placeholder="blur"
+          blurDataURL={image?.asset?.metadata?.lqip}
+          priority
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+        />
+      )}
     </div>
   )
 }
