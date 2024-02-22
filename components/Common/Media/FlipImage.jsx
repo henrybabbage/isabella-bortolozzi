@@ -38,12 +38,8 @@ export default function FlipImage({
     ? `calc(${DESKTOP_LANDSCAPE_WIDTH}*(1/${IMAGE_ASPECT_RATIO}))`
     : `${DESKTOP_PORTRAIT_HEIGHT}`
 
-  const MAX_DESKTOP_WIDTH = `${DESKTOP_LANDSCAPE_WIDTH}`
-  const MAX_DESKTOP_HEIGHT = `${DESKTOP_PORTRAIT_HEIGHT}`
-
   // Flip states
   const GRID_COLS_4_STYLES = {}
-
   const GRID_COLS_1_STYLES = {}
 
   if (!image) return null
