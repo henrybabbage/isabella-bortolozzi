@@ -62,7 +62,7 @@ export default function ExhibitionPage({ exhibition }) {
                   width={image.asset.metadata.dimensions.width}
                   height={image.asset.metadata.dimensions.height}
                   aspectRatio={image.asset.metadata.dimensions.aspectRatio}
-                  priority={isLoading ? false : true}
+                  priority={image[0] ? true : false}
                   ref={(element) => scrollToSections.current.add(element)}
                 />
               ))}
