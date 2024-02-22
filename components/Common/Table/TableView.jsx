@@ -53,8 +53,8 @@ export default function TableView({ exhibitions }) {
   }, [selectedYearIndex, virtualizer])
 
   const handleScroll = useCallback(() => {
-    if (!listItemsRef) return
-    Array.from(listItemsRef.current.children).map((item) => {
+    if (!listItemsRef.current) return
+    Array.from(listItemsRef?.current?.children).map((item) => {
       // index of map array is not the same as index of virtualizer
       // to illustrate see changing length of array of children in console.log
       // console.log(listItemsRef.current.children)

@@ -50,7 +50,7 @@ export default function ExhibitionPage({ exhibition }) {
           ref={scrollViewRef}
           className="h-full w-full px-12 overflow-y-auto overflow-x-hidden py-24"
         >
-          <div className="relative grid grid-cols-1 w-full items-center gap-4 gap-y-32">
+          <div className="relative grid grid-cols-4 w-full items-center gap-4 gap-y-32">
             {exhibition &&
               exhibition.imageGallery &&
               exhibition.imageGallery.map((image) => (

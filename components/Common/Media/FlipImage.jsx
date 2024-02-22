@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import { useState } from 'react'
 import { cn } from 'utils/cn'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
@@ -14,6 +15,7 @@ export default function FlipImage({
   fill = false,
   mode = 'contain',
 }) {
+  const [gridView, setGridView] = useState(true)
   const imageProps = useNextSanityImage(sanityClient, image?.asset)
 
   // Get aspect ratio
@@ -29,7 +31,7 @@ export default function FlipImage({
   const DESKTOP_LANDSCAPE_WIDTH = '64vw'
 
   const DESKTOP_WIDTH = isLandscape
-    ? DESKTOP_LANDSCAPE_WIDTH
+    ? `${DESKTOP_LANDSCAPE_WIDTH}`
     : `calc(${DESKTOP_PORTRAIT_HEIGHT}*${IMAGE_ASPECT_RATIO})`
 
   // height = width / ratio
@@ -38,22 +40,23 @@ export default function FlipImage({
     ? `calc(${DESKTOP_LANDSCAPE_WIDTH}*(1/${IMAGE_ASPECT_RATIO}))`
     : `${DESKTOP_PORTRAIT_HEIGHT}`
 
+  const DESKTOP_MAX_WIDTH = `${DESKTOP_WIDTH}`
+  const DESKTOP_MAX_HEIGHT = `${DESKTOP_HEIGHT}`
+
   // Flip states
   const GRID_COLS_4_STYLES = {}
-  const GRID_COLS_1_STYLES = {}
+  const GRID_COLS_1_STYLES = {
+    width: `${DESKTOP_WIDTH}`,
+    maxWidth: `${DESKTOP_MAX_WIDTH}`,
+    height: `${DESKTOP_HEIGHT}`,
+    maxHeight: `${DESKTOP_MAX_HEIGHT}`,
+  }
 
   if (!image) return null
   return (
     <div
-      style={{
-        width: DESKTOP_WIDTH,
-        height: DESKTOP_HEIGHT,
-        maxWidth: DESKTOP_WIDTH,
-        maxHeight: DESKTOP_HEIGHT,
-      }}
-      className={cn(
-        'relative',
-      )}
+      style={gridView ? GRID_COLS_4_STYLES : GRID_COLS_1_STYLES}
+      className={cn('relative')}
     >
       {imageProps && (
         <Image
