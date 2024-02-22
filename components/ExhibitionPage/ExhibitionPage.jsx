@@ -1,10 +1,9 @@
 import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 
 import BackButton from '../Common/Buttons/BackButton'
-import AspectImage from '../Common/Media/AspectImage'
+import StandardImage from '../Common/Media/StandardImage'
 
 export default function ExhibitionPage({ exhibition }) {
   const [isLoading, setIsLoading] = useState(true)
@@ -19,8 +18,7 @@ export default function ExhibitionPage({ exhibition }) {
 
   useGSAP(
     () => {
-      gsap.from(pageRef.current, { scale: 0.7, y: 100, opacity: 0 })
-      gsap.to(pageRef.current, { scale: 1, y: 0, opacity: 1, duration: 0.7 })
+      // animations
     },
     { scope: pageRef },
   )
@@ -43,28 +41,28 @@ export default function ExhibitionPage({ exhibition }) {
     <>
       <div
         ref={pageRef}
-        className="relative min-h-[100svh] w-screen scrollbar-hide"
+        className="relative min-h-[100svh] w-full scrollbar-hide"
       >
         <div className="fixed top-6 right-6 z-50">
           <BackButton backPathname={router.pathname.split('/')[1]} />
         </div>
         <div
           ref={scrollViewRef}
-          className="h-full w-screen overflow-y-auto overflow-x-hidden py-24"
+          className="h-full w-full px-12 overflow-y-auto overflow-x-hidden py-24"
         >
-          <div className="relative grid grid-cols-1 w-screen items-center gap-32">
+          <div className="relative grid grid-cols-4 w-full items-center gap-4 gap-y-32">
             {exhibition &&
               exhibition.imageGallery &&
               exhibition.imageGallery.map((image) => (
-                <AspectImage
+                <StandardImage
                   key={image._key}
                   image={image}
-                  ref={(element) => scrollToSections.current.add(element)}
-                  alt={image.alt}
-                  priority={isLoading ? false : true}
-                  fill={true}
+                  fill={false}
                   mode="contain"
-                  sizes="100vw"
+                  width={image.asset.metadata.dimensions.width}
+                  height={image.asset.metadata.dimensions.height}
+                  priority={isLoading ? false : true}
+                  ref={(element) => scrollToSections.current.add(element)}
                 />
               ))}
           </div>

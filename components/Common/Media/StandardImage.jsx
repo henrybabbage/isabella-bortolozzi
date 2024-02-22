@@ -4,7 +4,16 @@ import { cn } from 'utils/cn'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
 
-export default function StandardImage({ image }) {
+export default function StandardImage({
+    image = {},
+    alt = '',
+    width = 0,
+    height = 0,
+    sizes = '100vw',
+    priority = true,
+    fill = false,
+    mode = 'contain',
+}) {
   const imageProps = useNextSanityImage(sanityClient, image?.asset)
 
   if (!image) return null
@@ -15,14 +24,16 @@ export default function StandardImage({ image }) {
         <Image
           src={imageProps.src}
           loader={imageProps.loader}
-          alt=""
-          fill
-          sizes="100vw"
+          alt={alt ?? ""}
+          fill={fill}
+          sizes={sizes}
+          width={width}
+          height={height}
           quality={75}
           placeholder="blur"
           blurDataURL={image?.asset?.metadata?.lqip}
-          priority
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          priority={priority}
+          style={{ objectFit: `${mode}`, objectPosition: 'center' }}
         />
       )}
     </div>
