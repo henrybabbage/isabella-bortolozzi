@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 
 import BackButton from '../Common/Buttons/BackButton'
-import StandardImage from '../Common/Media/StandardImage'
+import FlipImage from '../Common/Media/FlipImage'
 
 export default function ExhibitionPage({ exhibition }) {
   const [isLoading, setIsLoading] = useState(true)
@@ -50,17 +50,18 @@ export default function ExhibitionPage({ exhibition }) {
           ref={scrollViewRef}
           className="h-full w-full px-12 overflow-y-auto overflow-x-hidden py-24"
         >
-          <div className="relative grid grid-cols-4 w-full items-center gap-4 gap-y-32">
+          <div className="relative grid grid-cols-1 w-full items-center gap-4 gap-y-32">
             {exhibition &&
               exhibition.imageGallery &&
               exhibition.imageGallery.map((image) => (
-                <StandardImage
+                <FlipImage
                   key={image._key}
                   image={image}
                   fill={false}
                   mode="contain"
                   width={image.asset.metadata.dimensions.width}
                   height={image.asset.metadata.dimensions.height}
+                  aspectRatio={image.asset.metadata.dimensions.aspectRatio}
                   priority={isLoading ? false : true}
                   ref={(element) => scrollToSections.current.add(element)}
                 />

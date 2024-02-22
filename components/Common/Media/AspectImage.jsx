@@ -6,10 +6,10 @@ import { useMediaQuery } from 'react-responsive'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
 
-const LANDSCAPE_WIDTH_DESKTOP = '66vw'
-const PORTRAIT_HEIGHT_DESKTOP = '96vh'
-const LANDSCAPE_WIDTH_MOBILE = '90vw'
-const PORTRAIT_HEIGHT_MOBILE = '90vh'
+const DESKTOP_LANDSCAPE_WIDTH = '64vw'
+const DESKTOP_PORTRAIT_HEIGHT = '96vh'
+const MOBILE_LANDSCAPE_WIDTH = '90vw'
+const MOBILE_PORTRAIT_HEIGHT = '90vh'
 
 const AspectImage = forwardRef(function AspectImage(
   {
@@ -17,6 +17,7 @@ const AspectImage = forwardRef(function AspectImage(
     alt = '',
     width = 0,
     height = 0,
+    aspectRatio = 1,
     sizes = '100vw',
     priority = true,
     fill = false,
@@ -30,34 +31,30 @@ const AspectImage = forwardRef(function AspectImage(
 
   const ratioMultiplier =
     1 / image?.asset?.metadata?.dimensions?.aspectRatio ?? 1
-  const landscape = ratioMultiplier < 1
+  const isLandscape = ratioMultiplier < 1
 
-  const desktopLandscapeWidth = LANDSCAPE_WIDTH_DESKTOP
-  const desktopPortraitHeight = PORTRAIT_HEIGHT_DESKTOP
-  const calcDesktopPortraitWidth = `calc((${desktopPortraitHeight})*(${
+  const DESKTOP_PORTRAIT_WIDTH = `calc((${DESKTOP_PORTRAIT_HEIGHT})*(${
     1 / ratioMultiplier
   }))`
-  const calcDesktopLandscapeHeight = `calc((${desktopLandscapeWidth})*(${ratioMultiplier}))`
+  const DESKTOP_LANDSCAPE_HEIGHT = `calc((${DESKTOP_LANDSCAPE_WIDTH})*(${ratioMultiplier}))`
 
-  const mobileLandscapeWidth = LANDSCAPE_WIDTH_MOBILE
-  const mobilePortraitHeight = PORTRAIT_HEIGHT_MOBILE
-  const calcMobilePortraitWidth = `calc((${mobilePortraitHeight})*(${
+  const MOBILE_PORTRAIT_WIDTH = `calc((${MOBILE_PORTRAIT_HEIGHT})*(${
     1 / ratioMultiplier
   }))`
-  const calcMobileLandscapeHeight = `calc((${mobileLandscapeWidth})*(${ratioMultiplier}))`
+  const MOBILE_LANDSCAPE_HEIGHT = `calc((${MOBILE_LANDSCAPE_WIDTH})*(${ratioMultiplier}))`
 
-  const aspectRatioValuesDesktop = {
-    width: landscape ? desktopLandscapeWidth : calcDesktopPortraitWidth,
-    height: landscape ? calcDesktopLandscapeHeight : desktopPortraitHeight,
-    maxWidth: desktopLandscapeWidth,
-    maxHeight: desktopPortraitHeight,
+  const DESKTOP_ASPECT_RATIO_VALUES = {
+    width: isLandscape ? DESKTOP_LANDSCAPE_WIDTH : DESKTOP_PORTRAIT_WIDTH,
+    height: isLandscape ? DESKTOP_LANDSCAPE_HEIGHT : DESKTOP_PORTRAIT_HEIGHT,
+    maxWidth: DESKTOP_LANDSCAPE_WIDTH,
+    maxHeight: DESKTOP_PORTRAIT_HEIGHT,
   }
 
-  const aspectRatioValuesMobile = {
-    width: landscape ? mobileLandscapeWidth : calcMobilePortraitWidth,
-    height: landscape ? calcMobileLandscapeHeight : mobilePortraitHeight,
-    maxWidth: mobileLandscapeWidth,
-    maxHeight: mobilePortraitHeight,
+  const MOBILE_ASPECT_RATIO_VALUES = {
+    width: isLandscape ? MOBILE_LANDSCAPE_WIDTH : MOBILE_PORTRAIT_WIDTH,
+    height: isLandscape ? MOBILE_LANDSCAPE_HEIGHT : MOBILE_PORTRAIT_HEIGHT,
+    maxWidth: MOBILE_LANDSCAPE_WIDTH,
+    maxHeight: MOBILE_PORTRAIT_HEIGHT,
   }
 
   const hydrated = useHydrated()
@@ -71,7 +68,7 @@ const AspectImage = forwardRef(function AspectImage(
       ref={ref}
       className="flex flex-col items-center h-screen justify-center w-full"
     >
-      <div style={aspectRatioValuesMobile} className="relative">
+      <div style={MOBILE_ASPECT_RATIO_VALUES} className="relative">
         {imageProps && (
           <Image
             src={imageProps.src}
@@ -96,7 +93,7 @@ const AspectImage = forwardRef(function AspectImage(
       ref={ref}
       className="flex flex-col items-center h-full justify-center w-full"
     >
-      <div style={aspectRatioValuesDesktop} className="relative">
+      <div style={DESKTOP_ASPECT_RATIO_VALUES} className="relative">
         {imageProps && (
           <Image
             src={imageProps.src}
