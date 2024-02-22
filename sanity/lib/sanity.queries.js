@@ -56,6 +56,7 @@ export const imageMeta = groq`
 `
 
 export const imageComplete = groq`
+    _key,
     "id": asset._ref,
     alt,
     asset->{
@@ -78,7 +79,6 @@ export const imageComplete = groq`
             }
         }
     },
-    _key,
     hotspot{ x, y },
     crop{
         bottom,
