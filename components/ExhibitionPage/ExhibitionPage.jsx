@@ -1,10 +1,9 @@
 import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import BackButton from '../Common/Buttons/BackButton'
-import ImageSection from './ImageSection'
+import FlipImage from '../Common/Media/FlipImage'
 
 export default function ExhibitionPage({ exhibition }) {
   const [isLoading, setIsLoading] = useState(true)
@@ -19,8 +18,7 @@ export default function ExhibitionPage({ exhibition }) {
 
   useGSAP(
     () => {
-      gsap.from(pageRef.current, { scale: 0.7, y: 100, opacity: 0 })
-      gsap.to(pageRef.current, { scale: 1, y: 0, opacity: 1, duration: 0.7 })
+      // animations
     },
     { scope: pageRef },
   )
@@ -30,50 +28,6 @@ export default function ExhibitionPage({ exhibition }) {
       setIsLoading(false)
     }, 3400)
   }, [])
-
-  const handleScroll = useCallback(() => {
-    let offset = Math.abs(
-      scrollViewRef.current.children[0].getBoundingClientRect().top,
-    )
-
-    Array.from(scrollToSections.current).map((section, idx) => {
-      if (!section) return
-
-      const sectionCenter = section.offsetTop + section.offsetHeight / 2
-      if (
-        sectionCenter > offset &&
-        sectionCenter < offset + window.innerHeight
-      ) {
-        setCurrentScrollElement(idx)
-      }
-    })
-  }, [scrollViewRef])
-
-  useEffect(() => {
-    const scrollView = scrollViewRef.current
-    scrollView.addEventListener('scroll', handleScroll)
-    return () => {
-      scrollView.removeEventListener('scroll', handleScroll)
-    }
-  }, [scrollViewRef, handleScroll])
-
-  const didClickPrevious = () => {
-    if (!scrollToSections) return
-    let goToRef = currentScrollElement - 1
-    if (goToRef < 0 || goToRef > scrollToSections.current.size) {
-      return
-    }
-    scrollToSection(goToRef)
-  }
-
-  const didClickNext = () => {
-    if (!scrollToSections) return
-    let goToRef = currentScrollElement + 1
-    if (goToRef < 0 || goToRef > scrollToSections.current.size) {
-      return
-    }
-    scrollToSection(goToRef)
-  }
 
   const scrollToSection = (idx) => {
     if (idx === null || idx === undefined) return
@@ -87,20 +41,32 @@ export default function ExhibitionPage({ exhibition }) {
     <>
       <div
         ref={pageRef}
-        className="relative min-h-[100svh] w-screen scrollbar-hide"
+        className="relative min-h-[100svh] w-full scrollbar-hide"
       >
         <div className="fixed top-6 right-6 z-50">
           <BackButton backPathname={router.pathname.split('/')[1]} />
         </div>
         <div
           ref={scrollViewRef}
-          className="flex flex-col h-[100svh] sm:h-full w-screen overflow-y-auto overflow-x-hidden pb-32"
+          className="h-full w-full px-12 overflow-y-auto overflow-x-hidden py-24"
         >
-          <ImageSection
-            exhibition={exhibition}
-            scrollToSections={scrollToSections}
-            index={currentScrollElement}
-          />
+          <div className="relative grid grid-cols-4 w-full items-center gap-4 gap-y-32">
+            {exhibition &&
+              exhibition.imageGallery &&
+              exhibition.imageGallery.map((image) => (
+                <FlipImage
+                  key={image._key}
+                  image={image}
+                  fill={false}
+                  mode="contain"
+                  width={image.asset.metadata.dimensions.width}
+                  height={image.asset.metadata.dimensions.height}
+                  aspectRatio={image.asset.metadata.dimensions.aspectRatio}
+                  priority={isLoading ? false : true}
+                  ref={(element) => scrollToSections.current.add(element)}
+                />
+              ))}
+          </div>
         </div>
       </div>
     </>
