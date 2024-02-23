@@ -1,41 +1,33 @@
 import { useGSAP } from '@gsap/react'
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+
+import { gsap } from '@/lib/gsap'
 
 import BackButton from '../Common/Buttons/BackButton'
 import FlipImage from '../Common/Media/FlipImage'
 
 export default function ExhibitionPage({ exhibition }) {
-  const [isLoading, setIsLoading] = useState(true)
-  const [currentScrollElement, setCurrentScrollElement] = useState(0)
+  const [isGridView, setIsGridView] = useState(true)
 
   const router = useRouter()
 
-  const scrollToSections = useRef(new Set())
-  const scrollViewRef = useRef(null)
-
   const pageRef = useRef()
+  const imagesRef = useRef()
 
   useGSAP(
     () => {
       // animations
+      gsap.from(".gridItem", {opacity: 0, stagger: 0.1})
     },
     { scope: pageRef },
   )
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3400)
-  }, [])
+  const { contextSafe } = useGSAP()
+  const clickHandler = contextSafe((e) => {
+    const { target } = e
 
-  const scrollToSection = (idx) => {
-    if (idx === null || idx === undefined) return
-    Array.from(scrollToSections.current)[idx]?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-    })
-  }
+  })
 
   return (
     <>
@@ -47,10 +39,11 @@ export default function ExhibitionPage({ exhibition }) {
           <BackButton backPathname={router.pathname.split('/')[1]} />
         </div>
         <div
-          ref={scrollViewRef}
           className="h-full w-full px-12 overflow-y-auto overflow-x-hidden py-24"
         >
-          <div className="relative grid grid-cols-4 w-full items-center gap-4 gap-y-32">
+          <div
+          ref={imagesRef}
+          className="relative grid grid-cols-4 w-full items-center gap-4 gap-y-32">
             {exhibition &&
               exhibition.imageGallery &&
               exhibition.imageGallery.map((image) => (
@@ -63,7 +56,8 @@ export default function ExhibitionPage({ exhibition }) {
                   height={image.asset.metadata.dimensions.height}
                   aspectRatio={image.asset.metadata.dimensions.aspectRatio}
                   priority={image[0] ? true : false}
-                  ref={(element) => scrollToSections.current.add(element)}
+                  clickHandler={clickHandler}
+                  isGridView={isGridView}
                 />
               ))}
           </div>

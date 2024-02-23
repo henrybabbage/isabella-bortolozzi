@@ -1,8 +1,8 @@
 import gsap from 'gsap'
 import { CustomEase } from 'gsap/dist/CustomEase'
-import { SplitText } from 'gsap/dist/SplitText'
+import { Flip } from 'gsap/dist/Flip'
 
-gsap.registerPlugin(CustomEase, SplitText)
+gsap.registerPlugin(CustomEase, Flip)
 
 const GOLDEN_RATIO = (1 + Math.sqrt(5)) / 2
 const RECIPROCAL_GR = 1 / GOLDEN_RATIO
@@ -22,4 +22,4 @@ gsap.defaults({
 })
 
 // Once the desired configurations are set, we simply export what we need to work with in the future.
-export { CustomEase, DURATION, EASE, GOLDEN_RATIO, gsap,SplitText }
+export { CustomEase, DURATION, EASE, Flip, GOLDEN_RATIO, gsap }
