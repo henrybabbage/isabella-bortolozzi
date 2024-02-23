@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
-import { useState } from 'react'
 import { cn } from 'utils/cn'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
@@ -14,8 +13,9 @@ export default function FlipImage({
   priority = true,
   fill = false,
   mode = 'contain',
+  clickHandler,
+  isGridView,
 }) {
-  const [gridView, setGridView] = useState(true)
   const imageProps = useNextSanityImage(sanityClient, image?.asset)
 
   // Get aspect ratio
@@ -55,8 +55,8 @@ export default function FlipImage({
   if (!image) return null
   return (
     <div
-      style={gridView ? GRID_COLS_4_STYLES : GRID_COLS_1_STYLES}
-      className={cn('relative')}
+      style={isGridView ? GRID_COLS_4_STYLES : GRID_COLS_1_STYLES}
+      className={cn('relative gridItem')}
     >
       {imageProps && (
         <Image
@@ -72,6 +72,7 @@ export default function FlipImage({
           blurDataURL={image?.asset?.metadata?.lqip}
           priority={priority}
           style={{ objectFit: `${mode}`, objectPosition: 'center' }}
+          onClick={clickHandler}
         />
       )}
     </div>
