@@ -49,7 +49,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
         <div className="sm:col-span-3 sm:col-start-8 flex flex-col h-fit sm:h-auto">
           <div className="flex w-full flex-col pt-6 sm:pt-3">
             {exhibition.title && (
-              <h1 className="uppercase pr-2 group">{exhibition.title}</h1>
+              <h1 className="uppercase pr-2">{exhibition.title}</h1>
             )}
             {exhibition.subtitle && (
               <h2 className="h-auto">{exhibition.subtitle}</h2>
