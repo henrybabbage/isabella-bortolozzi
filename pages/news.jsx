@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'next-sanity/preview'
 
 import PageHeader from '@/components/Common/Header/PageHeader'
-import TableView from '@/components/Common/Table/TableView'
+import Marquee from '@/components/Common/Marquee/Marquee'
 import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
 import { getNews } from '@/sanity/lib/sanity.fetch'
@@ -12,7 +12,7 @@ export default function News(props) {
   return (
     <main className="animate-fade-in h-[100dvh] w-screen">
       <PageHeader title={'News'} />
-      <TableView exhibitions={news} />
+      <Marquee items={news} />
     </main>
   )
 }
