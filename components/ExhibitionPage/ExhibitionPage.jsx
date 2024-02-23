@@ -2,32 +2,50 @@ import { useGSAP } from '@gsap/react'
 import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 
-import { gsap } from '@/lib/gsap'
+import { Flip, gsap } from '@/lib/gsap'
 
 import BackButton from '../Common/Buttons/BackButton'
 import FlipImage from '../Common/Media/FlipImage'
 
 export default function ExhibitionPage({ exhibition }) {
   const [isGridView, setIsGridView] = useState(true)
+  const [targetId, setTargetId] = useState(null)
 
   const router = useRouter()
 
   const pageRef = useRef()
   const imagesRef = useRef()
+  const eventsRef = useRef([])
 
   useGSAP(
     () => {
+      eventsRef.current = gsap.utils.toArray('.event')
       // animations
-      gsap.from(".gridItem", {opacity: 0, stagger: 0.1})
+      gsap.from('.grid-container', { opacity: 0, stagger: 0.1 })
     },
-    { scope: pageRef },
+    { dependencies: [isGridView], scope: pageRef },
   )
 
   const { contextSafe } = useGSAP()
+
   const clickHandler = contextSafe((e) => {
     const { target } = e
 
+    // const switchingFromGridView = container.classList.contains("grid-cols-4")
+
+    performLayoutFlip(imagesRef)
   })
+
+  function performLayoutFlip(ref) {
+    const state = Flip.getState('.grid-container img')
+    ref.current.classList.toggle('grid-cols-4')
+
+    Flip.from(state, {
+      duration: 0.7,
+      ease: 'power4.inOut',
+      scale: true,
+    })
+  }
 
   return (
     <>
@@ -38,15 +56,14 @@ export default function ExhibitionPage({ exhibition }) {
         <div className="fixed top-6 right-6 z-50">
           <BackButton backPathname={router.pathname.split('/')[1]} />
         </div>
-        <div
-          className="h-full w-full px-12 overflow-y-auto overflow-x-hidden py-24"
-        >
+        <div className="h-full w-full px-12 overflow-y-auto overflow-x-hidden py-24">
           <div
-          ref={imagesRef}
-          className="relative grid grid-cols-4 w-full items-center gap-4 gap-y-32">
+            ref={imagesRef}
+            className="grid-container relative grid w-full items-center gap-4 gap-y-32"
+          >
             {exhibition &&
               exhibition.imageGallery &&
-              exhibition.imageGallery.map((image) => (
+              exhibition.imageGallery.map((image, index) => (
                 <FlipImage
                   key={image._key}
                   image={image}
@@ -58,6 +75,7 @@ export default function ExhibitionPage({ exhibition }) {
                   priority={image[0] ? true : false}
                   clickHandler={clickHandler}
                   isGridView={isGridView}
+                  index={index}
                 />
               ))}
           </div>

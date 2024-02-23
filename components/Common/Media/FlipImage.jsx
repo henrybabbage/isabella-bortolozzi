@@ -15,6 +15,7 @@ export default function FlipImage({
   mode = 'contain',
   clickHandler,
   isGridView,
+  index,
 }) {
   const imageProps = useNextSanityImage(sanityClient, image?.asset)
 
@@ -55,8 +56,8 @@ export default function FlipImage({
   if (!image) return null
   return (
     <div
-      style={isGridView ? GRID_COLS_4_STYLES : GRID_COLS_1_STYLES}
-      className={cn('relative gridItem')}
+        style={isGridView ? GRID_COLS_4_STYLES : GRID_COLS_1_STYLES}
+      className={cn('relative grid-item event')}
     >
       {imageProps && (
         <Image
@@ -73,6 +74,7 @@ export default function FlipImage({
           priority={priority}
           style={{ objectFit: `${mode}`, objectPosition: 'center' }}
           onClick={clickHandler}
+          dataImageId={index}
         />
       )}
     </div>
