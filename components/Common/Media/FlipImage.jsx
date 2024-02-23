@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import Image from 'next/image'
 import { cn } from 'utils/cn'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
@@ -56,8 +56,9 @@ export default function FlipImage({
   if (!image) return null
   return (
     <div
-        style={isGridView ? GRID_COLS_4_STYLES : GRID_COLS_1_STYLES}
+      style={isGridView ? GRID_COLS_4_STYLES : GRID_COLS_1_STYLES}
       className={cn('relative grid-item event')}
+      data-image-id={index}
     >
       {imageProps && (
         <Image
@@ -74,7 +75,6 @@ export default function FlipImage({
           priority={priority}
           style={{ objectFit: `${mode}`, objectPosition: 'center' }}
           onClick={clickHandler}
-          dataImageId={index}
         />
       )}
     </div>
