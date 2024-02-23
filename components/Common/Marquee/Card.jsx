@@ -5,6 +5,7 @@ import StandardImage from '../Media/StandardImage'
 import { CustomPortableText } from '../Text/CustomPortableText'
 
 export default function Card({ item }) {
+  console.log(item)
   const {
     mainImage,
     title,
@@ -23,30 +24,37 @@ export default function Card({ item }) {
 
   return (
     <DynamicLink link={item} prefetch={true} scroll={false}>
-      <div className="h-[800px] w-[800px] flex flex-col gap-4 group text-secondary">
-        <StandardImage image={mainImage} fill={true} mode="cover" />
+      <div className="w-full h-full overflow-hidden flex flex-col gap-4 group text-secondary cursor-pointer">
+        <div className="h-[550px] w-[550px] relative">
+          <StandardImage
+            image={mainImage}
+            fill={true}
+            mode="cover"
+            classNames="aspect-square"
+          />
+        </div>
         <div className="flex flex-col">
-          {title && (
-            <h1 className="uppercase group-hover:text-primary">{title}</h1>
-          )}
+          {title && <h1 className="group-hover:text-primary">{title}</h1>}
           {subtitle && <h2 className="group-hover:text-primary">{subtitle}</h2>}
           {heading && (
             <CustomPortableText
               value={heading}
-              paragraphClasses="text-secondary group-hover:text-primary"
+              classNames="text-secondary group-hover:text-primary"
             />
           )}
           {text && (
             <CustomPortableText
               value={text}
-              paragraphClasses="text-secondary group-hover:text-primary"
+              classNames="!uppercase text-secondary group-hover:text-primary"
             />
           )}
-          {artistList && <h2 className="pl-8 group-hover:text-primary">{artistList}</h2>}
+          {artistList && (
+            <h2 className="pl-8 group-hover:text-primary">{artistList}</h2>
+          )}
         </div>
-        <div className="flex flex-col pt-3 group-hover:text-primary">
+        <div className="flex flex-col group-hover:text-primary">
           {venue && (
-            <h3 className="pr-0">
+            <h3 className="">
               {venue && venue.name && (
                 <span>
                   {venue.city || venue.country ? venue.name + ', ' : venue.name}
@@ -66,7 +74,7 @@ export default function Card({ item }) {
               {formatDateWithoutYear(endDate)}
             </h3>
           )}
-          {endDate && <h3 className="pl-6">{getYear(endDate)}</h3>}
+          {endDate && <h3 className="ml-1">{getYear(endDate)}</h3>}
         </div>
       </div>
     </DynamicLink>

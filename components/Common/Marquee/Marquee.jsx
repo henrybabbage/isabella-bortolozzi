@@ -1,12 +1,13 @@
 import Card from './Card'
 
 export default function Marquee({ items }) {
-  console.log(items)
   return (
-    <div className="h-[100svh] w-screen flex gap-8 overflow-x-auto">
-      {items.map((item, index) => (
-        <Card key={index} item={item} />
-      ))}
+    <div className="h-[100svh] w-screen flex flex-col pt-16 overflow-x-auto">
+      <div className="h-full flex gap-8">
+        {items.map((item, index) => (
+          <Card key={index} item={item} />
+        ))}
+      </div>
     </div>
   )
 }

@@ -57,7 +57,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
             {router.pathname.startsWith('/news') && exhibition.heading && (
               <CustomPortableText
                 value={exhibition.heading}
-                paragraphClasses={cn(
+                classNames={cn(
                   '',
                   (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) ===
                     index
@@ -69,7 +69,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
             {router.pathname.startsWith('/news') && exhibition.text && (
               <CustomPortableText
                 value={exhibition.text}
-                paragraphClasses={cn(
+                classNames={cn(
                   'uppercase',
                   (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) ===
                     index
