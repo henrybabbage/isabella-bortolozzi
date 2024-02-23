@@ -1,8 +1,10 @@
+import { useGSAP } from '@gsap/react'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useCallback, useEffect, useRef } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
+import { gsap } from '@/lib/gsap'
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 import { useActiveYearStore } from '@/stores/useActiveYearStore'
 import { useSelectedYearStore } from '@/stores/useSelectedYearStore'
@@ -22,6 +24,14 @@ export default function TableView({ exhibitions }) {
   const parentRef = useRef(null)
   const listRef = useRef(null)
   const listItemsRef = useRef(null)
+
+  useGSAP(
+    () => {
+      // animations
+      gsap.from('.list-container', { opacity: 0, stagger: 0.25 })
+    },
+    { scope: parentRef },
+  )
 
   // zustand stores
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
@@ -132,6 +142,7 @@ export default function TableView({ exhibitions }) {
               width: '100%',
               // position: 'relative',
             }}
+            className=""
           >
             {virtualizer.getVirtualItems().map((item, index) => {
               return (
@@ -153,7 +164,7 @@ export default function TableView({ exhibitions }) {
                       item.start - virtualizer.options.scrollMargin
                     }px)`,
                   }}
-                  className="scroll-mt-[calc(50vh-11vw)]"
+                  className="list-container scroll-mt-[calc(50vh-11vw)]"
                 >
                   <TableItem
                     exhibition={exhibitions[item.index]}
