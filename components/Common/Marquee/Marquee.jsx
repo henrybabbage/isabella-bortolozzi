@@ -8,6 +8,7 @@ import Card from './Card'
 
 export default function Marquee({ items }) {
   const containerRef = useRef()
+
   // TODO Delay start by setting paused to false after an interval
   useGSAP(
     () => {
@@ -15,7 +16,7 @@ export default function Marquee({ items }) {
       const horizontalLoopConfig = {
         draggable: true,
         paused: false,
-        repeat: true,
+        repeat: '-1',
         paddingRight: '32px',
       }
       horizontalLoop(cards, horizontalLoopConfig)

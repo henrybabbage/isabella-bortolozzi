@@ -1,8 +1,9 @@
 import gsap from 'gsap'
 import { CustomEase } from 'gsap/dist/CustomEase'
+import { Draggable } from 'gsap/dist/Draggable'
 import { Flip } from 'gsap/dist/Flip'
 
-gsap.registerPlugin(CustomEase, Flip)
+gsap.registerPlugin(CustomEase, Flip, Draggable)
 
 const GOLDEN_RATIO = (1 + Math.sqrt(5)) / 2
 const RECIPROCAL_GR = 1 / GOLDEN_RATIO
@@ -22,4 +23,4 @@ gsap.defaults({
 })
 
 // Once the desired configurations are set, we simply export what we need to work with in the future.
-export { CustomEase, DURATION, EASE, Flip, GOLDEN_RATIO, gsap }
+export { CustomEase, Draggable, DURATION, EASE, Flip, GOLDEN_RATIO, gsap }
