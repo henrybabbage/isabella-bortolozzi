@@ -9,19 +9,17 @@ export default function StandardImage({
     alt = '',
     width = 0,
     height = 0,
-    aspectRatio = 1,
     sizes = '100vw',
     priority = true,
     fill = false,
     mode = 'contain',
+    classNames,
 }) {
   const imageProps = useNextSanityImage(sanityClient, image?.asset)
-  
-  const ASPECT_RATIO = `aspect-[${aspectRatio}]`
 
   if (!image) return null
   return (
-    <div className={cn(ASPECT_RATIO, 'relative h-full w-full')}>
+    <div className={cn(classNames, 'relative h-full w-full')}>
       {imageProps && (
         <Image
           src={imageProps.src}

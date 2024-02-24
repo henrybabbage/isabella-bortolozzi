@@ -28,14 +28,21 @@ const InlineImage = ({ value }) => {
   )
 }
 
-export function CustomPortableText({ paragraphClasses, value }) {
+export function CustomPortableText({ classNames, value }) {
   const components = {
     block: {
       normal: ({ children }) => {
         return (
-          <p className={cn(paragraphClasses, 'break-normal whitespace-normal')}>
+          <p className={cn(classNames, 'break-normal whitespace-normal')}>
             {children}
           </p>
+        )
+      },
+      heading: ({ children }) => {
+        return (
+          <h2 className={cn(classNames, 'break-normal whitespace-normal')}>
+            {children}
+          </h2>
         )
       },
     },
@@ -46,7 +53,7 @@ export function CustomPortableText({ paragraphClasses, value }) {
       link: ({ children, value }) => {
         return (
           <a
-            className={cn(paragraphClasses, 'underline')}
+            className={cn(classNames, 'underline')}
             href={value?.href}
             target="_blank"
             rel="noreferrer noopener"
