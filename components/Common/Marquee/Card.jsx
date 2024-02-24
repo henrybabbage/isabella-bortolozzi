@@ -5,7 +5,6 @@ import StandardImage from '../Media/StandardImage'
 import { CustomPortableText } from '../Text/CustomPortableText'
 
 export default function Card({ item }) {
-  console.log(item)
   const {
     mainImage,
     title,
@@ -24,7 +23,7 @@ export default function Card({ item }) {
 
   return (
     <DynamicLink link={item} prefetch={true} scroll={false}>
-      <div className="w-full h-full overflow-hidden flex flex-col gap-4 group text-secondary cursor-pointer">
+      <div className="card w-full h-full overflow-hidden flex flex-col gap-4 group text-secondary cursor-pointer">
         <div className="h-[550px] w-[550px] relative">
           <StandardImage
             image={mainImage}
