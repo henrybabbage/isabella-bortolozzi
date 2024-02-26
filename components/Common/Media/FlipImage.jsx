@@ -1,5 +1,5 @@
-import { useNextSanityImage } from 'next-sanity-image'
 import Image from 'next/image'
+import { useNextSanityImage } from 'next-sanity-image'
 import { cn } from 'utils/cn'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
@@ -45,8 +45,8 @@ export default function FlipImage({
   const DESKTOP_MAX_HEIGHT = `${DESKTOP_HEIGHT}`
 
   // Flip states
-  const GRID_COLS_4_STYLES = {}
-  const GRID_COLS_1_STYLES = {
+  const GRID_RATIO_STYLES = {}
+  const FLEX_RATIO_STYLES = {
     width: `${DESKTOP_WIDTH}`,
     maxWidth: `${DESKTOP_MAX_WIDTH}`,
     height: `${DESKTOP_HEIGHT}`,
@@ -56,7 +56,7 @@ export default function FlipImage({
   if (!image) return null
   return (
     <div
-      style={isGridView ? GRID_COLS_4_STYLES : GRID_COLS_1_STYLES}
+      style={isGridView ? GRID_RATIO_STYLES : FLEX_RATIO_STYLES}
       className={cn('relative grid-item event')}
       data-image-id={index}
     >

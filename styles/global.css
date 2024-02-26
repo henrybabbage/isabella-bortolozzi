@@ -21,6 +21,18 @@
     .small-caps {
       font-variant: all-small-caps;
     }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        place-items: center;
+    }
+
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 
