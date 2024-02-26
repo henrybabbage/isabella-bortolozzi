@@ -31,12 +31,12 @@ export default function FlipImage({
   const DESKTOP_PORTRAIT_HEIGHT = '90vh'
   const DESKTOP_LANDSCAPE_WIDTH = '64vw'
 
+  // height = width / ratio
+  // width = height * ratio
   const DESKTOP_WIDTH = isLandscape
     ? `${DESKTOP_LANDSCAPE_WIDTH}`
     : `calc(${DESKTOP_PORTRAIT_HEIGHT}*${IMAGE_ASPECT_RATIO})`
 
-  // height = width / ratio
-  // width = height * ratio
   const DESKTOP_HEIGHT = isLandscape
     ? `calc(${DESKTOP_LANDSCAPE_WIDTH}*(1/${IMAGE_ASPECT_RATIO}))`
     : `${DESKTOP_PORTRAIT_HEIGHT}`
@@ -45,8 +45,8 @@ export default function FlipImage({
   const DESKTOP_MAX_HEIGHT = `${DESKTOP_HEIGHT}`
 
   // Flip states
-  const GRID_COLS_4_STYLES = {}
-  const GRID_COLS_1_STYLES = {
+  const GRID_RATIO_STYLES = {}
+  const FLEX_RATIO_STYLES = {
     width: `${DESKTOP_WIDTH}`,
     maxWidth: `${DESKTOP_MAX_WIDTH}`,
     height: `${DESKTOP_HEIGHT}`,
@@ -56,7 +56,7 @@ export default function FlipImage({
   if (!image) return null
   return (
     <div
-      style={isGridView ? GRID_COLS_4_STYLES : GRID_COLS_1_STYLES}
+      style={isGridView ? GRID_RATIO_STYLES : FLEX_RATIO_STYLES}
       className={cn('relative grid-item event')}
       data-image-id={index}
     >

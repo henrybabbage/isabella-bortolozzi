@@ -2,10 +2,17 @@ import { useGSAP } from '@gsap/react'
 import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 
-import { Flip, gsap } from '@/lib/gsap'
+import { Flip } from '@/lib/gsap'
 
 import BackButton from '../Common/Buttons/BackButton'
 import FlipImage from '../Common/Media/FlipImage'
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
+}
 
 export default function ExhibitionPage({ exhibition }) {
   const [isGridView, setIsGridView] = useState(true)
@@ -17,30 +24,23 @@ export default function ExhibitionPage({ exhibition }) {
   const imagesRef = useRef()
   const eventsRef = useRef([])
 
-  useGSAP(
-    () => {
-      eventsRef.current = gsap.utils.toArray('.event')
-      // animations
-      gsap.from('.grid-container', { opacity: 0, stagger: 0.1 })
-    },
-    { dependencies: [isGridView], scope: pageRef },
-  )
-
   const { contextSafe } = useGSAP()
 
   const clickHandler = contextSafe((e) => {
     const { target } = e
 
-    // const switchingFromGridView = container.classList.contains("grid-cols-4")
-
     performLayoutFlip(imagesRef)
   })
 
   function performLayoutFlip(ref) {
-    const state = Flip.getState('.grid-container img')
-    ref.current.classList.toggle('grid-cols-4')
+    const state = Flip.getState('.grid-container img, .flex-container img')
+    ref.current.classList.toggle('grid-container')
+    ref.current.classList.toggle('flex-container')
+
+    scrollToTop()
 
     Flip.from(state, {
+      delay: 0.3,
       duration: 0.7,
       ease: 'power4.inOut',
       scale: true,
@@ -59,7 +59,7 @@ export default function ExhibitionPage({ exhibition }) {
         <div className="h-full w-full px-12 overflow-y-auto overflow-x-hidden py-24">
           <div
             ref={imagesRef}
-            className="grid-container relative grid w-full items-center gap-4 gap-y-32"
+            className="grid-container relative w-full gap-x-4 gap-y-32"
           >
             {exhibition &&
               exhibition.imageGallery &&
@@ -72,7 +72,7 @@ export default function ExhibitionPage({ exhibition }) {
                   width={image.asset.metadata.dimensions.width}
                   height={image.asset.metadata.dimensions.height}
                   aspectRatio={image.asset.metadata.dimensions.aspectRatio}
-                  priority={image[0] ? true : false}
+                  priority={true}
                   clickHandler={clickHandler}
                   isGridView={isGridView}
                   index={index}
