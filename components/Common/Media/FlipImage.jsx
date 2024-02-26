@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import Image from 'next/image'
 import { cn } from 'utils/cn'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
@@ -31,12 +31,12 @@ export default function FlipImage({
   const DESKTOP_PORTRAIT_HEIGHT = '90vh'
   const DESKTOP_LANDSCAPE_WIDTH = '64vw'
 
+  // height = width / ratio
+  // width = height * ratio
   const DESKTOP_WIDTH = isLandscape
     ? `${DESKTOP_LANDSCAPE_WIDTH}`
     : `calc(${DESKTOP_PORTRAIT_HEIGHT}*${IMAGE_ASPECT_RATIO})`
 
-  // height = width / ratio
-  // width = height * ratio
   const DESKTOP_HEIGHT = isLandscape
     ? `calc(${DESKTOP_LANDSCAPE_WIDTH}*(1/${IMAGE_ASPECT_RATIO}))`
     : `${DESKTOP_PORTRAIT_HEIGHT}`
