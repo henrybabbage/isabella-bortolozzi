@@ -10,6 +10,10 @@ import ArrowRightButton from '../Common/Buttons/ArrowRightButton'
 import GlobalDrawer from '../Common/Drawers/GlobalDrawer'
 import SlideImage from './SlideImage'
 
+const OPTIONS = { loop: true }
+const SLIDE_COUNT = 8
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+
 export default function CarouselSection({ artist, isLoading, worksRef }) {
   const [index, setIndex] = useState(0)
 

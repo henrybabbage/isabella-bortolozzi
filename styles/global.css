@@ -208,15 +208,17 @@ textarea {
 	background-color: var(--bg-background);
 }
 
-/*
-Splide carousel 
-*/
+/* Embla carousel */
 
-.splide__pagination {
-    counter-reset: pagination-num;
+.embla {
+    overflow: hidden;
 }
 
-.splide__pagination__page:before {
-    counter-increment: pagination-num;
-    content: counter( pagination-num );
+.embla__container {
+    display: flex;
+}
+
+.embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
 }
