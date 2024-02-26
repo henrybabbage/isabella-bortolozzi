@@ -37,10 +37,9 @@ export default function ExhibitionPage({ exhibition }) {
     ref.current.classList.toggle('grid-container')
     ref.current.classList.toggle('flex-container')
 
-    scrollToTop()
+    // scrollToTop()
 
     Flip.from(state, {
-      delay: 0.3,
       duration: 0.7,
       ease: 'power4.inOut',
       scale: true,
