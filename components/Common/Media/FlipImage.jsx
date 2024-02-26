@@ -57,7 +57,7 @@ export default function FlipImage({
   return (
     <div
       style={isGridView ? GRID_RATIO_STYLES : FLEX_RATIO_STYLES}
-      className={cn('relative grid-item event')}
+      className={cn('relative grid-item event cursor-pointer')}
       data-image-id={index}
     >
       {imageProps && (
