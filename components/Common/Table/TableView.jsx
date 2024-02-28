@@ -77,7 +77,7 @@ export default function TableView({ exhibitions }) {
   const virtualizer = useWindowVirtualizer({
     count: exhibitions.length ?? 0,
     estimateSize: () => virtualItemSize,
-    overscan: 16,
+    overscan: 12,
     scrollMargin: listRef?.current?.offsetTop ?? 0,
   })
 
