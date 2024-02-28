@@ -34,7 +34,7 @@ export default function ExhibitionSlugRoute(props) {
           />
         )} */}
       </Head>
-      <main className="animate-fade-in">
+      <main className="animate-fade-in h-full w-full">
         <ExhibitionPage exhibition={exhibition} />
       </main>
     </>

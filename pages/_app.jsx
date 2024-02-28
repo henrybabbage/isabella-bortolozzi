@@ -131,7 +131,8 @@ export default function App({ Component, pageProps }) {
   //   }, [lenis, isNavOpened])
 
   // Use the layout defined at the page level, if available
-  // const Layout = Component.layout || (({ children }) => (<RootLayout>{children}</RootLayout>))
+  const Layout =
+    Component.layout || (({ children }) => <RootLayout>{children}</RootLayout>)
 
   return (
     <>
@@ -152,22 +153,22 @@ export default function App({ Component, pageProps }) {
         </style>
         {draftMode ? (
           <PreviewProvider token={token}>
-            <RootLayout>
-              <QueryClientProvider client={queryClient}>
-                <HydrationBoundary state={pageProps.dehydratedState}>
-                  <Component {...pageProps} key={key} />
-                </HydrationBoundary>
-              </QueryClientProvider>
-            </RootLayout>
-          </PreviewProvider>
-        ) : (
-          <RootLayout>
             <QueryClientProvider client={queryClient}>
               <HydrationBoundary state={pageProps.dehydratedState}>
-                <Component {...pageProps} key={key} />
+                <Layout>
+                  <Component {...pageProps} key={key} />
+                </Layout>
               </HydrationBoundary>
             </QueryClientProvider>
-          </RootLayout>
+          </PreviewProvider>
+        ) : (
+          <QueryClientProvider client={queryClient}>
+            <HydrationBoundary state={pageProps.dehydratedState}>
+              <Layout>
+                <Component {...pageProps} key={key} />
+              </Layout>
+            </HydrationBoundary>
+          </QueryClientProvider>
         )}
       </HydrationProvider>
     </>

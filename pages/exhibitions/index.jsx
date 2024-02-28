@@ -6,6 +6,7 @@ import PageHeader from '@/components/Common/Header/PageHeader'
 import TableView from '@/components/Common/Table/TableView'
 import LoadingMessage from '@/components/ExhibitionsPage/LoadingMessage'
 import YearsPopover from '@/components/ExhibitionsPage/YearsPopover'
+import ExhibitionsLayout from '@/components/Layout/ExhibitionsLayout'
 import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
 import { getExhibitions } from '@/sanity/lib/sanity.fetch'
@@ -26,6 +27,8 @@ export default function Exhibitions(props) {
     </main>
   )
 }
+
+Exhibitions.layout = ExhibitionsLayout
 
 export const getStaticProps = async ({ draftMode = false }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
