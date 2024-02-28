@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const config = {
-    reactStrictMode: false,
+    reactStrictMode: true,
     images: { remotePatterns: [{ hostname: 'cdn.sanity.io' }] },
 }
 
