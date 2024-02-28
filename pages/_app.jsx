@@ -1,7 +1,6 @@
 import '@/styles/global.css'
 
 import { useAsPathWithoutHash } from '@madeinhaus/nextjs-page-transition'
-import { useLenis } from '@studio-freight/react-lenis'
 import {
   HydrationBoundary,
   QueryClient,
@@ -14,7 +13,6 @@ import { lazy, useEffect, useRef, useState } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 
 import RootLayout from '@/components/Layout/RootLayout'
-import { useNavOpenStore } from '@/stores/useNavOpenStore'
 
 const PreviewProvider = lazy(() =>
   import('@/components/Previews/PreviewProvider'),
@@ -106,31 +104,31 @@ export default function App({ Component, pageProps }) {
   }, [router])
 
   // fix for id links
-  useEffect(() => {
-    document.querySelectorAll('a[href^="#"]').forEach((el) => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault()
-        const id = el.getAttribute('href')?.slice(1)
-        if (!id) return
-        const target = document.getElementById(id)
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' })
-        }
-      })
-    })
-  }, [])
+  //   useEffect(() => {
+  //     document.querySelectorAll('a[href^="#"]').forEach((el) => {
+  //       el.addEventListener('click', (e) => {
+  //         e.preventDefault()
+  //         const id = el.getAttribute('href')?.slice(1)
+  //         if (!id) return
+  //         const target = document.getElementById(id)
+  //         if (target) {
+  //           target.scrollIntoView({ behavior: 'smooth' })
+  //         }
+  //       })
+  //     })
+  //   }, [])
 
-  const lenis = useLenis()
-  
-  const isNavOpened = useNavOpenStore(({ isNavOpened }) => isNavOpened)
+  //   const lenis = useLenis()
 
-  useEffect(() => {
-    if (isNavOpened) {
-      lenis?.stop()
-    } else {
-      lenis?.start()
-    }
-  }, [lenis, isNavOpened])
+  //   const isNavOpened = useNavOpenStore(({ isNavOpened }) => isNavOpened)
+
+  //   useEffect(() => {
+  //     if (isNavOpened) {
+  //       lenis?.stop()
+  //     } else {
+  //       lenis?.start()
+  //     }
+  //   }, [lenis, isNavOpened])
 
   // Use the layout defined at the page level, if available
   // const Layout = Component.layout || (({ children }) => (<RootLayout>{children}</RootLayout>))
