@@ -6,6 +6,7 @@ import { Flip } from '@/lib/gsap'
 
 import BackButton from '../Common/Buttons/BackButton'
 import FlipImage from '../Common/Media/FlipImage'
+import SmoothScroll from '../Utilities/SmoothScroll'
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -47,15 +48,12 @@ export default function ExhibitionPage({ exhibition }) {
   }
 
   return (
-    <>
-      <div
-        ref={pageRef}
-        className="relative min-h-[100svh] w-full scrollbar-hide"
-      >
+    <SmoothScroll>
+      <div ref={pageRef} className="relative h-full w-full scrollbar-hide">
         <div className="fixed top-6 right-6 z-50">
           <BackButton backPathname={router.pathname.split('/')[1]} />
         </div>
-        <div className="h-full w-full px-12 overflow-y-auto overflow-x-hidden py-24">
+        <div className="h-full w-full px-12 overflow-x-hidden py-24">
           <div
             ref={imagesRef}
             className="grid-container relative w-full gap-x-4 gap-y-32"
@@ -80,6 +78,6 @@ export default function ExhibitionPage({ exhibition }) {
           </div>
         </div>
       </div>
-    </>
+    </SmoothScroll>
   )
 }

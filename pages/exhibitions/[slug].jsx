@@ -3,7 +3,6 @@ import { useLiveQuery } from 'next-sanity/preview'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
 import ExhibitionLayout from '@/components/Layout/ExhibitionLayout'
-import SmoothScroll from '@/components/Utilities/SmoothScroll'
 import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
 import { getAboveTheFoldImage, getExhibition } from '@/sanity/lib/sanity.fetch'
@@ -23,7 +22,9 @@ export default function ExhibitionSlugRoute(props) {
   return (
     <>
       <Head>
-        {image && (
+        {/* Currently this image is not optimized as webp format so preloading is ineffective */}
+        {/* Use the Sanity url builder to optimize */}
+        {/* {image && (
           <link
             rel="preload"
             as="image"
@@ -31,13 +32,11 @@ export default function ExhibitionSlugRoute(props) {
             sizes="100vw"
             alt={image.alt ?? 'Hero'}
           />
-        )}
+        )} */}
       </Head>
-      <SmoothScroll>
-        <main className="animate-fade-in">
-          <ExhibitionPage exhibition={exhibition} />
-        </main>
-      </SmoothScroll>
+      <main className="animate-fade-in">
+        <ExhibitionPage exhibition={exhibition} />
+      </main>
     </>
   )
 }

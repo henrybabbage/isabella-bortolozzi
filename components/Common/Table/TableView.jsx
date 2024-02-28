@@ -1,5 +1,5 @@
 import { useGSAP } from '@gsap/react'
-import { useWindowVirtualizer } from '@tanstack/react-virtual'
+import { elementScroll, useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useCallback, useEffect, useRef } from 'react'
 import { useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
@@ -11,6 +11,10 @@ import { useSelectedYearStore } from '@/stores/useSelectedYearStore'
 
 import TableImage from './TableImage'
 import TableItem from './TableItem'
+
+function easeInOutQuint(t) {
+  return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t
+}
 
 // Credit to dataexcess (https://github.com/dataexcess) for the initial architecture that informed this feature
 // and to Kesorn Dokphikul for solving the integration with react-virtual
@@ -24,6 +28,7 @@ export default function TableView({ exhibitions }) {
   const parentRef = useRef(null)
   const listRef = useRef(null)
   const listItemsRef = useRef(null)
+  const scrollingRef = useRef()
 
   useGSAP(
     () => {
@@ -44,12 +49,35 @@ export default function TableView({ exhibitions }) {
   )
 
   // react-virtual
+  const scrollToFn = useCallback((offset, canSmooth, instance) => {
+    const duration = 1000
+    const start = parentRef.current.scrollTop
+    const startTime = (scrollingRef.current = Date.now())
+
+    const run = () => {
+      if (scrollingRef.current !== startTime) return
+      const now = Date.now()
+      const elapsed = now - startTime
+      const progress = easeInOutQuint(Math.min(elapsed / duration, 1))
+      const interpolated = start + (offset - start) * progress
+
+      if (elapsed < duration) {
+        elementScroll(interpolated, canSmooth, instance)
+        requestAnimationFrame(run)
+      } else {
+        elementScroll(interpolated, canSmooth, instance)
+      }
+    }
+
+    requestAnimationFrame(run)
+  }, [])
+
   const virtualItemSize = tabletOrMobile ? 640 : 228
 
   const virtualizer = useWindowVirtualizer({
     count: exhibitions.length ?? 0,
     estimateSize: () => virtualItemSize,
-    overscan: 8,
+    overscan: 16,
     scrollMargin: listRef?.current?.offsetTop ?? 0,
   })
 
