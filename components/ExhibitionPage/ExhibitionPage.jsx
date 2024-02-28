@@ -48,7 +48,7 @@ export default function ExhibitionPage({ exhibition }) {
   return (
     <div
       ref={pageRef}
-      className="relative h-full w-full px-12 overflow-x-hidden py-24"
+      className="relative h-full w-full px-12 py-24"
     >
       <div
         ref={imagesRef}
@@ -57,7 +57,7 @@ export default function ExhibitionPage({ exhibition }) {
         {exhibition &&
           exhibition.imageGallery &&
           exhibition.imageGallery
-            .splice(0, 4)
+            .splice(0, 8)
             .map((image, index) => (
               <FlipImage
                 key={index}
