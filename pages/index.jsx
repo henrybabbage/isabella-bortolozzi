@@ -15,8 +15,7 @@ export default function IndexPage(props) {
   const [home] = useLiveQuery(props.home, homeQuery)
   const [gallery] = useLiveQuery(props.gallery, galleryQuery)
   return (
-    <SmoothScroll>
-    <main className="animate-fade-in w-full overflow-x-hidden scrollbar-hide overscroll-none">
+    <main className="animate-fade-in w-screen h-full">
       <Client>
         <Desktop>
           <section className="h-[100dvh]">
@@ -44,7 +43,6 @@ export default function IndexPage(props) {
         </TabletAndBelow>
       </Client>
     </main>
-    </SmoothScroll>
   )
 }
 
