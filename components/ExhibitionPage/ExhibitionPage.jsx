@@ -39,17 +39,15 @@ export default function ExhibitionPage({ exhibition }) {
     // scrollToTop()
 
     Flip.from(state, {
-      duration: 0.7,
+      duration: 0.5,
       ease: 'power4.inOut',
       scale: true,
+      fade: true,
     })
   }
 
   return (
-    <div
-      ref={pageRef}
-      className="relative h-full w-full px-12 py-24"
-    >
+    <div ref={pageRef} className="relative h-full w-full px-12 py-24">
       <div
         ref={imagesRef}
         className="grid-container relative w-full gap-x-4 gap-y-32"

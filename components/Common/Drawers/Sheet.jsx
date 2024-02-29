@@ -88,7 +88,7 @@ SheetFooter.displayName = "SheetFooter"
 const SheetTitle = React.forwardRef(({ className, ...props }, ref) => (
     <SheetPrimitive.Title
         ref={ref}
-        className={cn("text-base text-primary", className)}
+        className={cn("text-primary", className)}
         {...props}
     />
 ))
@@ -97,7 +97,7 @@ SheetTitle.displayName = SheetPrimitive.Title.displayName
 const SheetDescription = React.forwardRef(({ className, ...props }, ref) => (
     <SheetPrimitive.Description
         ref={ref}
-        className={cn("text-base text-primary", className)}
+        className={cn("text-primary", className)}
         {...props}
     />
 ))

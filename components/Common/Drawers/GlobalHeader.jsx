@@ -29,10 +29,10 @@ export default function GlobalHeader({ isFixed = true }) {
   }, [])
 
   const menu = [
+    { title: 'Current', path: '/current' },
+    { title: 'Archive', path: '/exhibitions' },
     { title: 'News', path: '/news' },
-    { title: 'Exhibitions', path: '/exhibitions' },
-    { title: 'Viewing Rooms', path: '/viewing-rooms' },
-    { title: 'Imprint', path: '/imprint' },
+    { title: 'Contact', path: '/contact' },
   ]
 
   const closeHeaderMenu = (event) => {
@@ -71,8 +71,8 @@ export default function GlobalHeader({ isFixed = true }) {
         onMouseEnter={openHeaderMenu}
         aria-label="Click to return to home page or hover to view nav"
       >
-        <h1 className="text-primary transition-colors hover:text-secondary cursor-pointer">
-          Isabella Bortolozzi
+        <h1 className="text-primary transition hover:text-secondary cursor-pointer mix-blend-exclusion">
+          Menu
         </h1>
       </Link>
       <nav
@@ -120,7 +120,7 @@ export default function GlobalHeader({ isFixed = true }) {
           </div>
           <div className="col-span-3 col-start-10">
             <div className="right-6 top-6 absolute h-fit">
-              <CloseButton didPressButton={closeHeaderMenu} />
+              {/* <CloseButton didPressButton={closeHeaderMenu} /> */}
             </div>
           </div>
         </div>

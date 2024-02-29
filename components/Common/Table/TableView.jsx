@@ -133,8 +133,8 @@ export default function TableView({ exhibitions }) {
       onMouseLeave={() => setCurrentlyHoveredItem(null)}
       className="grid w-full grid-cols-12 items-start px-6"
     >
-      <div className="hidden sm:visible sm:flex sticky top-0 sm:col-span-7 sm:col-start-1 h-full w-full items-center">
-        <div className="relative h-[54vw] w-[54vw] bg-background">
+      <div className="hidden sm:visible sm:flex sticky top-16 sm:col-span-6 sm:col-start-1 h-full w-full items-center">
+        <div className="relative aspect-square h-full w-full bg-background">
           {exhibitions &&
             exhibitions.map((exhibition, index) => (
               <TableImage
@@ -147,17 +147,13 @@ export default function TableView({ exhibitions }) {
       </div>
       <div
         ref={listRef}
-        className="scrollbar-hide col-start-1 col-span-12 w-full h-fit pb-[50vh]"
+        className="scrollbar-hide col-start-1 col-span-12 w-full h-fit"
       >
         {tabletOrMobile ? (
           <ol ref={listItemsRef}>
             {exhibitions &&
               exhibitions.map((exhibition) => (
-                <li
-                  key={exhibition._id}
-                  id={exhibition.year}
-                  className="scroll-mt-[calc(50vh-11vw)]"
-                >
+                <li key={exhibition._id} id={exhibition.year} className="">
                   <TableItem exhibition={exhibition} />
                 </li>
               ))}
@@ -192,7 +188,7 @@ export default function TableView({ exhibitions }) {
                       item.start - virtualizer.options.scrollMargin
                     }px)`,
                   }}
-                  className="list-container scroll-mt-[calc(50vh-11vw)]"
+                  className="list-container"
                 >
                   <TableItem
                     exhibition={exhibitions[item.index]}

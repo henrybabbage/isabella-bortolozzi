@@ -7,7 +7,6 @@ import { useSectionInView } from '@/hooks/useSectionInView'
 
 import ArrowLeftButton from '../Common/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../Common/Buttons/ArrowRightButton'
-import GlobalDrawer from '../Common/Drawers/GlobalDrawer'
 import SlideImage from './SlideImage'
 
 const OPTIONS = { loop: true }
@@ -66,16 +65,6 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
                   <SlideImage image={image.asset} key={idx} />
                 ))}
             </Carousel>
-          )}
-        </div>
-        <div className="absolute bottom-6 right-6 sm:bottom-6 sm:right-6">
-          {imageGallery.length > 0 && (
-            <GlobalDrawer
-              content={artist}
-              index={index}
-              didClickPrevious={didClickPrevious}
-              didClickNext={didClickNext}
-            />
           )}
         </div>
       </section>

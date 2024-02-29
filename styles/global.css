@@ -3,16 +3,12 @@
 @tailwind utilities;
 
 :root {
-    --font-serif: 'Marist', serif;
-
-    --white: #fff;
-    --black: #222;
     --background: #f4f3ef;
 }
 
 @layer base {
     body { 
-        @apply text-base;
+        @apply text-sm;
         @apply overscroll-none;
     }
 }
@@ -53,7 +49,7 @@ html {
     text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* scroll-behavior: initial !important; */
+    scroll-behavior: initial !important;
 }
 
 html, body {

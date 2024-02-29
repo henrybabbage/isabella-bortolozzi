@@ -70,7 +70,7 @@ export default function FlipImage({
           width={width}
           height={height}
           quality={75}
-          placeholder="blur"
+          placeholder="empty"
           blurDataURL={image?.asset?.metadata?.lqip}
           priority={priority}
           style={{ objectFit: `${mode}`, objectPosition: 'center' }}
