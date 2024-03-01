@@ -108,7 +108,7 @@ export default function TableView({ exhibitions }) {
           (item) => item._id == exhibitionId,
         )
         setInViewItem(exhibitionIndex)
-        setInViewYear(exhibitions[exhibitionIndex].year)
+        setInViewYear(exhibitions[exhibitionIndex]?.year)
       }
     })
   }, [exhibitions, setInViewItem, setInViewYear])
