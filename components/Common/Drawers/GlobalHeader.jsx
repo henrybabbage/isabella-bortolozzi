@@ -114,9 +114,7 @@ export default function GlobalHeader({ isFixed = true }) {
                     // onClick={closeHeaderMenu}
                     aria-label="Artist page links"
                   >
-                    {index != artists.length - 1
-                      ? artist.name + ','
-                      : artist.name}
+                    {artist.name}
                   </Link>
                 )
               })}
