@@ -1,15 +1,10 @@
 import '@/styles/global.css'
 
 import { useAsPathWithoutHash } from '@madeinhaus/nextjs-page-transition'
-import {
-  HydrationBoundary,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
 import localFont from 'next/font/local'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { lazy, useEffect, useRef, useState } from 'react'
+import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 
 import RootLayout from '@/components/Layout/RootLayout'
@@ -46,8 +41,6 @@ const mono = localFont({
 })
 
 export default function App({ Component, pageProps }) {
-  const [queryClient] = useState(() => new QueryClient())
-
   const { draftMode, token } = pageProps
 
   const router = useRouter()
@@ -151,22 +144,14 @@ export default function App({ Component, pageProps }) {
         </style>
         {draftMode ? (
           <PreviewProvider token={token}>
-            <QueryClientProvider client={queryClient}>
-              <HydrationBoundary state={pageProps.dehydratedState}>
-                <Layout>
-                  <Component {...pageProps} key={key} />
-                </Layout>
-              </HydrationBoundary>
-            </QueryClientProvider>
+            <Layout>
+              <Component {...pageProps} key={key} />
+            </Layout>
           </PreviewProvider>
         ) : (
-          <QueryClientProvider client={queryClient}>
-            <HydrationBoundary state={pageProps.dehydratedState}>
-              <Layout>
-                <Component {...pageProps} key={key} />
-              </Layout>
-            </HydrationBoundary>
-          </QueryClientProvider>
+          <Layout>
+            <Component {...pageProps} key={key} />
+          </Layout>
         )}
       </HydrationProvider>
     </>
