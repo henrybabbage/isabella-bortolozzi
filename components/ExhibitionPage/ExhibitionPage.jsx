@@ -58,7 +58,7 @@ export default function ExhibitionPage({ exhibition }) {
             // .splice(0, 8)
             .map((image, index) => (
               <FlipImage
-                key={index}
+                key={image._key}
                 image={image}
                 fill={false}
                 sizes="80vw"
