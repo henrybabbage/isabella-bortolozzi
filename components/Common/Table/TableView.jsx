@@ -173,7 +173,7 @@ export default function TableView({ exhibitions }) {
                 <li
                   id={index}
                   key={item.key}
-                  data-exhibition-id={exhibitions[item.index]._id}
+                  dataexhibitionid={exhibitions[item.index]._id}
                   onMouseEnter={() => {
                     setCurrentlyHoveredItem(item.index)
                   }}
