@@ -8,6 +8,7 @@ import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 
 import RootLayout from '@/components/Layout/RootLayout'
+import { useNavOpenStore } from '@/stores/useNavOpenStore'
 
 const PreviewProvider = lazy(() =>
   import('@/components/Previews/PreviewProvider'),
@@ -96,7 +97,7 @@ export default function App({ Component, pageProps }) {
     }
   }, [router])
 
-  //   const lenis = useLenis()
+  // const lenis = useLenis()
 
   //   useEffect(() => {
   //     function onHashChangeStart(url) {
@@ -111,7 +112,7 @@ export default function App({ Component, pageProps }) {
   //     }
   //   }, [lenis, router])
 
-  //   const isNavOpened = useNavOpenStore(({ isNavOpened }) => isNavOpened)
+  const isNavOpened = useNavOpenStore(({ isNavOpened }) => isNavOpened)
 
   //   useEffect(() => {
   //     if (isNavOpened) {
