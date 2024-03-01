@@ -62,17 +62,15 @@ export default function GlobalHeader({ isFixed = true }) {
         'z-500 transition-colors',
       )}
     >
-      <Link
-        href="/"
+      <div
         className="absolute w-fit whitespace-nowrap px-6 pt-6 z-500"
-        onClick={closeHeaderMenu}
-        onMouseEnter={openHeaderMenu}
-        aria-label="Click to return to home page or hover to view nav"
+        onClick={openHeaderMenu}
+        aria-label="Click to view navigation menu"
       >
         <h1 className="text-primary transition hover:text-secondary cursor-pointer mix-blend-exclusion">
           Menu
         </h1>
-      </Link>
+      </div>
       <nav
         aria-label="Website menu nav"
         className={cn(

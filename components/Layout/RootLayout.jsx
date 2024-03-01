@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { Client } from 'react-hydration-provider'
 
+import { useNavOpenStore } from '@/stores/useNavOpenStore'
 import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 import GlobalHeader from '../Common/Drawers/GlobalHeader'
