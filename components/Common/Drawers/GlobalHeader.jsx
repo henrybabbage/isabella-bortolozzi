@@ -6,8 +6,6 @@ import { sanityClient } from '@/sanity/lib/sanity.client'
 import { artistsQuery } from '@/sanity/lib/sanity.queries'
 import { cn } from '@/utils/cn'
 
-import CloseButton from '../Buttons/CloseButton'
-
 export default function GlobalHeader({ isFixed = true }) {
   const [artists, setArtists] = useState([])
   const [isOpen, setIsOpen] = useState(false)

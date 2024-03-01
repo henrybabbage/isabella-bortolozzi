@@ -21,19 +21,6 @@ export default function ExhibitionSlugRoute(props) {
 
   return (
     <>
-      <Head>
-        {/* Currently this image is not optimized as webp format so preloading is ineffective */}
-        {/* Use the Sanity url builder to optimize */}
-        {/* {image && (
-          <link
-            rel="preload"
-            as="image"
-            href={image.asset.url}
-            sizes="100vw"
-            alt={image.alt ?? 'Hero'}
-          />
-        )} */}
-      </Head>
       <main className="animate-fade-in h-full w-full">
         <ExhibitionPage exhibition={exhibition} />
       </main>

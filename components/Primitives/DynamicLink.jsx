@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function DynamicLink({ link, children, scroll = false, prefetch = undefined, replace = false, shallow = false, attributes = {}, ...rest }) {
+export default function DynamicLink({ link, children, scroll = false, replace = false, shallow = false, attributes = {}, ...rest }) {
 	if (!link) return null
 
 	const getDynamicRoute = (route) => {
@@ -71,7 +71,6 @@ export default function DynamicLink({ link, children, scroll = false, prefetch =
 					},
 				}}
                 legacyBehavior
-                prefetch={prefetch}
                 scroll={scroll}
                 shallow={shallow}
                 replace={replace}

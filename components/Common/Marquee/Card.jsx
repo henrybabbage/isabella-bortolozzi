@@ -22,7 +22,7 @@ export default function Card({ item }) {
   const artistList = artistNames?.join(', ')
 
   return (
-    <DynamicLink link={item} prefetch={true} scroll={false}>
+    <DynamicLink link={item} scroll={false}>
       <div className="card w-full h-full overflow-hidden flex flex-col gap-4 group text-secondary cursor-pointer">
         <div className="h-[550px] w-[550px] relative">
           <StandardImage

@@ -108,7 +108,7 @@ export default function TableView({ exhibitions }) {
           (item) => item._id == exhibitionId,
         )
         setInViewItem(exhibitionIndex)
-        setInViewYear(exhibitions[exhibitionIndex].year)
+        setInViewYear(exhibitions[exhibitionIndex]?.year)
       }
     })
   }, [exhibitions, setInViewItem, setInViewYear])
@@ -173,7 +173,7 @@ export default function TableView({ exhibitions }) {
                 <li
                   id={index}
                   key={item.key}
-                  dataExhibitionId={exhibitions[item.index]._id}
+                  dataexhibitionid={exhibitions[item.index]._id}
                   onMouseEnter={() => {
                     setCurrentlyHoveredItem(item.index)
                   }}

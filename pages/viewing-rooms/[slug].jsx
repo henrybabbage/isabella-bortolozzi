@@ -1,5 +1,5 @@
-import { useLiveQuery } from 'next-sanity/preview'
 import Head from 'next/head'
+import { useLiveQuery } from 'next-sanity/preview'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
 import ExhibitionLayout from '@/components/Layout/ExhibitionLayout'

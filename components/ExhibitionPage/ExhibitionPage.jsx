@@ -36,8 +36,6 @@ export default function ExhibitionPage({ exhibition }) {
     ref.current.classList.toggle('grid-container')
     ref.current.classList.toggle('flex-container')
 
-    // scrollToTop()
-
     Flip.from(state, {
       duration: 0.5,
       ease: 'power4.inOut',
@@ -58,7 +56,7 @@ export default function ExhibitionPage({ exhibition }) {
             // .splice(0, 8)
             .map((image, index) => (
               <FlipImage
-                key={index}
+                key={image._key}
                 image={image}
                 fill={false}
                 sizes="80vw"
