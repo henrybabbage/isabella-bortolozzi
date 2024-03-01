@@ -55,7 +55,7 @@ export default function ExhibitionPage({ exhibition }) {
         {exhibition &&
           exhibition.imageGallery &&
           exhibition.imageGallery
-            .splice(0, 8)
+            // .splice(0, 8)
             .map((image, index) => (
               <FlipImage
                 key={index}
