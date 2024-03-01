@@ -4,16 +4,14 @@ import { useEffect, useState } from 'react'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { artistsQuery } from '@/sanity/lib/sanity.queries'
-import { useNavOpenStore } from '@/stores/useNavOpenStore'
 import { cn } from '@/utils/cn'
 
 export default function GlobalHeader({ isFixed = true }) {
   const [artists, setArtists] = useState([])
-  const [isNavOpened, setIsNavOpened] = useNavOpenStore(
-    ({ isNavOpened, setIsNavOpened }) => [isNavOpened, setIsNavOpened],
-  )
+  const [isOpen, setIsOpen] = useState(false)
 
   const router = useRouter()
+  const { pathname } = useRouter()
 
   useEffect(() => {
     const initialiseArtists = async () => {
@@ -22,8 +20,8 @@ export default function GlobalHeader({ isFixed = true }) {
         return !galleryArtists.length ? [] : galleryArtists
       }
       const currentArtists = await getGalleryArtists()
-      const deDuplicatedArtists = [...new Set(currentArtists)]
-      setArtists(deDuplicatedArtists)
+      const noDuplicates = [...new Set(currentArtists)]
+      setArtists(noDuplicates)
     }
     initialiseArtists()
   }, [])
@@ -37,39 +35,31 @@ export default function GlobalHeader({ isFixed = true }) {
 
   const closeHeaderMenu = (event) => {
     event.stopPropagation()
-    setIsNavOpened(false)
+    setIsOpen(false)
   }
 
   const openHeaderMenu = (event) => {
     event.stopPropagation()
-    setIsNavOpened(true)
+    setIsOpen(true)
   }
 
   useEffect(() => {
-    function onRouteChange() {
-      setIsNavOpened(false)
-    }
-
-    router.events.on('routeChangeStart', onRouteChange)
-
-    return () => {
-      router.events.off('routeChangeStart', onRouteChange)
-    }
-  }, [router, setIsNavOpened])
+    setIsOpen(false)
+  }, [pathname, router.query.slug])
 
   useEffect(() => {
-    isNavOpened
+    isOpen
       ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = 'auto')
-  }, [isNavOpened])
+  }, [isOpen])
 
   return (
     <header
       onClick={closeHeaderMenu}
       className={cn(
         isFixed ? 'fixed' : 'absolute',
-        isNavOpened ? 'h-screen w-screen bg-background/95' : 'bg-transparent',
-        'z-500 transition',
+        isOpen ? 'h-screen w-screen bg-background/95' : 'bg-transparent',
+        'z-500 transition-colors',
       )}
     >
       <Link
@@ -86,7 +76,7 @@ export default function GlobalHeader({ isFixed = true }) {
       <nav
         aria-label="Website menu nav"
         className={cn(
-          isNavOpened ? 'block' : 'hidden',
+          isOpen ? 'block' : 'hidden',
           'absolute top-0 h-[calc((100vw/4))] w-screen',
         )}
         onMouseLeave={closeHeaderMenu}
