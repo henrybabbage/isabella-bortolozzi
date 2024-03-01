@@ -3,8 +3,8 @@ import { createWithEqualityFn } from 'zustand/traditional'
 
 export const useNavOpenStore = createWithEqualityFn(
   (set) => ({
-    isNavOpened: false,
-    setIsNavOpened: (value) => set({ isNavOpened: value }),
+    isNavOpen: false,
+    setIsNavOpen: (value) => set({ isNavOpen: value }),
   }),
   shallow,
 )

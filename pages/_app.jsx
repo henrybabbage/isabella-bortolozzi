@@ -97,31 +97,6 @@ export default function App({ Component, pageProps }) {
     }
   }, [router])
 
-  // const lenis = useLenis()
-
-  //   useEffect(() => {
-  //     function onHashChangeStart(url) {
-  //       url = '#' + url.split('#').pop()
-  //       lenis.scrollTo(url)
-  //     }
-
-  //     router.events.on('hashChangeStart', onHashChangeStart)
-
-  //     return () => {
-  //       router.events.off('hashChangeStart', onHashChangeStart)
-  //     }
-  //   }, [lenis, router])
-
-  const isNavOpened = useNavOpenStore(({ isNavOpened }) => isNavOpened)
-
-  //   useEffect(() => {
-  //     if (isNavOpened) {
-  //       lenis?.stop()
-  //     } else {
-  //       lenis?.start()
-  //     }
-  //   }, [lenis, isNavOpened])
-
   // Use the layout defined at the page level, if available
   const Layout =
     Component.layout || (({ children }) => <RootLayout>{children}</RootLayout>)

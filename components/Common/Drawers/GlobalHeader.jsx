@@ -4,11 +4,14 @@ import { useEffect, useState } from 'react'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { artistsQuery } from '@/sanity/lib/sanity.queries'
+import { useNavOpenStore } from '@/stores/useNavOpenStore'
 import { cn } from '@/utils/cn'
 
 export default function GlobalHeader({ isFixed = true }) {
   const [artists, setArtists] = useState([])
-  const [isOpen, setIsOpen] = useState(false)
+  const [isNavOpen, setIsNavOpen] = useNavOpenStore(
+    ({ isNavOpen, setIsNavOpen }) => [isNavOpen, setIsNavOpen],
+  )
 
   const router = useRouter()
   const { pathname } = useRouter()
@@ -35,62 +38,63 @@ export default function GlobalHeader({ isFixed = true }) {
 
   const closeHeaderMenu = (event) => {
     event.stopPropagation()
-    setIsOpen(false)
+    setIsNavOpen(false)
   }
 
-  const openHeaderMenu = (event) => {
-    event.stopPropagation()
-    setIsOpen(true)
-  }
-
-  useEffect(() => {
-    setIsOpen(false)
-  }, [pathname, router.query.slug])
-
-  useEffect(() => {
-    isOpen
-      ? (document.body.style.overflow = 'hidden')
-      : (document.body.style.overflow = 'auto')
-  }, [isOpen])
+  //   useEffect(() => {
+  //     isNavOpen
+  //       ? (document.body.style.overflow = 'hidden')
+  //       : (document.body.style.overflow = 'auto')
+  //   }, [isNavOpen])
 
   return (
     <header
-      onClick={closeHeaderMenu}
+      //   onClick={closeHeaderMenu}
       className={cn(
         isFixed ? 'fixed' : 'absolute',
-        isOpen ? 'h-screen w-screen bg-background/95' : 'bg-transparent',
-        'z-500 transition-colors',
+        isNavOpen ? 'h-[36rem] w-screen bg-background/95' : 'bg-transparent',
+        'z-500',
       )}
     >
-      <Link
-        href="/"
-        className="absolute w-fit whitespace-nowrap px-6 pt-6 z-500"
-        onClick={closeHeaderMenu}
-        onMouseEnter={openHeaderMenu}
-        aria-label="Click to return to home page or hover to view nav"
-      >
-        <h1 className="text-primary transition hover:text-secondary cursor-pointer mix-blend-exclusion">
-          Menu
-        </h1>
-      </Link>
+      <div className="sticky top-0 grid-cols-12 grid w-full">
+        <div className="col-span-1 col-start-1 pt-2">
+          <button
+            className="sticky w-fit top-0 px-4 pt-2 z-500"
+            onClick={() => {
+              setIsNavOpen(!isNavOpen)
+            }}
+            aria-label="Click to view navigation menu"
+          >
+            <h1 className="text-primary hover:text-secondary">Menu</h1>
+          </button>
+        </div>
+        <div
+          className={cn(
+            isNavOpen ? 'block' : 'hidden',
+            'col-span-1 col-start-2 pt-2',
+          )}
+        >
+          <h1 className="text-primary sticky top-0 px-4 pt-2">Artists</h1>
+        </div>
+      </div>
       <nav
         aria-label="Website menu nav"
         className={cn(
-          isOpen ? 'block' : 'hidden',
-          'absolute top-0 h-[calc((100vw/4))] w-screen',
+          isNavOpen ? 'block' : 'hidden',
+          'sticky top-0 h-full w-full',
         )}
-        onMouseLeave={closeHeaderMenu}
+        // onMouseLeave={closeHeaderMenu}
       >
-        <div className="grid h-full w-full grid-cols-12 px-6">
-          <div className="col-span-3 col-start-1 pt-[5.25rem] pl-6">
-            <div className="flex cursor-pointer flex-col space-y-0">
+        <div className="grid h-full w-full grid-cols-12 px-4">
+          <div className="col-span-1 col-start-1 pt-2">
+            <div className="flex flex-col pt-2">
               {menu.map((item, index) => {
                 return (
                   <Link
                     key={index}
                     href={item.path}
-                    className="hover:text-secondary text-primary cursor-pointer text-left transition"
-                    onClick={closeHeaderMenu}
+                    className="hover:text-secondary text-primary cursor-pointer text-left"
+                    // onClick={closeHeaderMenu}
                     aria-label="Main page links"
                   >
                     {item.title}
@@ -99,26 +103,23 @@ export default function GlobalHeader({ isFixed = true }) {
               })}
             </div>
           </div>
-          <div className="col-span-6 col-start-4 pt-6 text-left">
-            {artists.map((artist, index) => {
-              return (
-                <Link
-                  key={index}
-                  href={`/${artist.slug}`}
-                  className="hover:text-secondary text-primary mr-1 inline-flex shrink-0 cursor-pointer transition"
-                  onClick={closeHeaderMenu}
-                  aria-label="Artist page links"
-                >
-                  {index != artists.length - 1
-                    ? artist.name + ','
-                    : artist.name}
-                </Link>
-              )
-            })}
-          </div>
-          <div className="col-span-3 col-start-10">
-            <div className="right-6 top-6 absolute h-fit">
-              {/* <CloseButton didPressButton={closeHeaderMenu} /> */}
+          <div className="col-span-2 col-start-2 pt-2">
+            <div className="pt-2 flex flex-col">
+              {artists.map((artist, index) => {
+                return (
+                  <Link
+                    key={index}
+                    href={`/${artist.slug}`}
+                    className="hover:text-secondary text-primary cursor-pointer"
+                    // onClick={closeHeaderMenu}
+                    aria-label="Artist page links"
+                  >
+                    {index != artists.length - 1
+                      ? artist.name + ','
+                      : artist.name}
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </div>

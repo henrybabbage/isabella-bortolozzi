@@ -72,13 +72,15 @@ export default function TableView({ exhibitions }) {
     requestAnimationFrame(run)
   }, [])
 
-  const virtualItemSize = tabletOrMobile ? 640 : 228
+  const virtualItemSize = tabletOrMobile ? 640 : 144
 
   const virtualizer = useWindowVirtualizer({
     count: exhibitions.length ?? 0,
     estimateSize: () => virtualItemSize,
-    overscan: 12,
+    overscan: 8,
     scrollMargin: listRef?.current?.offsetTop ?? 0,
+    paddingStart: 64,
+    // paddingEnd: 64,
   })
 
   useEffect(() => {
@@ -147,7 +149,7 @@ export default function TableView({ exhibitions }) {
       </div>
       <div
         ref={listRef}
-        className="scrollbar-hide col-start-1 col-span-12 w-full h-fit"
+        className="scrollbar-hide col-start-1 col-span-12 w-full"
       >
         {tabletOrMobile ? (
           <ol ref={listItemsRef}>
@@ -164,7 +166,7 @@ export default function TableView({ exhibitions }) {
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
-              // position: 'relative',
+              //   position: 'relative',
             }}
             className=""
           >
