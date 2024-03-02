@@ -4,6 +4,7 @@
 
 @layer base {
     body { 
+        @apply bg-background;
         @apply text-xs;
         @apply overscroll-none;
     }

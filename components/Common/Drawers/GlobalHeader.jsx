@@ -88,7 +88,7 @@ export default function GlobalHeader({ isFixed = true }) {
                 <Link
                   key={index}
                   href={item.path}
-                  className="hover:text-secondary text-primary cursor-pointer text-left"
+                  className="hover:bg-background text-primary cursor-pointer text-left"
                   onClick={closeHeaderMenu}
                   aria-label="Main page links"
                 >
@@ -98,14 +98,14 @@ export default function GlobalHeader({ isFixed = true }) {
             })}
           </div>
         </div>
-        <div className="col-span-2 col-start-2">
+        <div className="col-span-4 col-start-2">
           <div className="flex flex-col">
             {artists.map((artist, index) => {
               return (
                 <Link
                   key={index}
                   href={`/${artist.slug}`}
-                  className="hover:text-secondary text-primary cursor-pointer"
+                  className="hover:bg-background text-primary cursor-pointer"
                   onClick={closeHeaderMenu}
                   aria-label="Artist page links"
                 >
