@@ -69,7 +69,7 @@ export default function GlobalHeader({ isFixed = true }) {
         <div
           className={cn(
             isNavOpen ? 'visible' : 'invisible',
-            'col-span-1 col-start-2 w-full pt-2 sticky top-0',
+            'col-span-1 col-start-2 w-full pt-2 sticky top-0 bg-background',
           )}
         >
           <h1 className="text-primary pt-2">Artists</h1>
