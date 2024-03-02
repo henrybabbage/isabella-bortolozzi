@@ -1,9 +1,20 @@
 import AutoScroll from 'embla-carousel-auto-scroll'
-import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useEffect, useState } from 'react'
 
-export function EmblaCarousel() {
+import NewsSlide from './NewsSlide'
+
+export function EmblaCarousel({ slides, options }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+    AutoScroll({
+      playOnInit: true,
+      startDelay: 1000,
+      speed: 0.25,
+      stopOnMouseEnter: false,
+      stopOnInteraction: false,
+    }),
+  ])
+
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
 
@@ -13,20 +24,13 @@ export function EmblaCarousel() {
     setNextBtnEnabled(emblaApi.canScrollNext())
   }, [emblaApi])
 
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    options,
-    { loop: true, slidesToScroll: 1 },
-    [
-      Autoplay(),
-      AutoScroll({ playOnInit: false, startDelay: 1000, duration: 25 }),
-    ],
-  )
-
   useEffect(() => {
     if (!emblaApi) return
+
     if (emblaApi) {
       console.log(emblaApi.slideNodes()) // Access API
     }
+
     onSelect()
     emblaApi.on('select', onSelect)
     emblaApi.on('reInit', onSelect)
@@ -45,9 +49,11 @@ export function EmblaCarousel() {
   return (
     <div className="embla" ref={emblaRef}>
       <div className="embla__container">
-        <div className="embla__slide">Slide 1</div>
-        <div className="embla__slide">Slide 2</div>
-        <div className="embla__slide">Slide 3</div>
+        {slides.map((item, index) => (
+          <div className="embla__slide" key={index}>
+            <NewsSlide item={item} />
+          </div>
+        ))}
       </div>
     </div>
   )

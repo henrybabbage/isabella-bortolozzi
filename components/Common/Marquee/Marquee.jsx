@@ -1,38 +1,16 @@
-import { useGSAP } from '@gsap/react'
-import { useRef } from 'react'
+import { EmblaCarousel } from '@/components/ArtistPage/EmblaCarousel'
 
-import { gsap } from '@/lib/gsap'
-import { horizontalLoop } from '@/lib/gsap/horizontalLoop'
-
-import Card from './Card'
+const OPTIONS = {
+  dragFree: true,
+  containScroll: 'trimSnaps',
+  loop: true,
+}
 
 export default function Marquee({ items }) {
-  const containerRef = useRef()
-
-  // TODO Delay start by setting paused to false after an interval
-  useGSAP(
-    () => {
-      const cards = gsap.utils.toArray('.card')
-      const horizontalLoopConfig = {
-        draggable: true,
-        paused: false,
-        repeat: '-1',
-        paddingRight: '32px',
-      }
-      horizontalLoop(cards, horizontalLoopConfig)
-    },
-    { scope: containerRef },
-  )
-
   return (
-    <div
-      ref={containerRef}
-      className="h-[100svh] w-screen flex flex-col pt-16 overflow-x-auto px-6"
-    >
-      <div className="h-full flex gap-8">
-        {items.map((item, index) => (
-          <Card key={index} item={item} />
-        ))}
+    <div className="h-[100svh] max-h-screen w-screen max-w-screen pt-16 overflow-hidden px-6 fixed inset-0">
+      <div className="h-full w-full">
+        <EmblaCarousel slides={items} options={OPTIONS} />
       </div>
     </div>
   )

@@ -5,15 +5,15 @@ import { cn } from 'utils/cn'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 
 export default function StandardImage({
-    image = {},
-    alt = '',
-    width = 0,
-    height = 0,
-    sizes = '100vw',
-    priority = true,
-    fill = false,
-    mode = 'contain',
-    classNames,
+  image = {},
+  alt = '',
+  width = 0,
+  height = 0,
+  sizes = '100vw',
+  priority = true,
+  fill = false,
+  mode = 'contain',
+  classNames,
 }) {
   const imageProps = useNextSanityImage(sanityClient, image?.asset)
 
@@ -24,7 +24,7 @@ export default function StandardImage({
         <Image
           src={imageProps.src}
           loader={imageProps.loader}
-          alt={alt ?? ""}
+          alt={alt ?? ''}
           fill={fill}
           sizes={sizes}
           width={width}
