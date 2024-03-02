@@ -22,13 +22,8 @@ export default function NewsSlide({ item }) {
 
   return (
     <div className="h-full flex flex-col group text-secondary">
-      <div className="relative h-[550px] w-[550px]">
-        <StandardImage
-          image={mainImage}
-          fill={true}
-          mode="cover"
-          classNames="aspect-square"
-        />
+      <div className="relative aspect-square h-full w-full">
+        <StandardImage image={mainImage} fill={true} mode="cover" />
       </div>
       <div className="flex flex-col pt-4">
         {title && <h1 className="group-hover:text-primary">{title}</h1>}

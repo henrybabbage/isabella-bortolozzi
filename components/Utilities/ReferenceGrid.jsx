@@ -41,7 +41,7 @@ export default function ReferenceGrid() {
   }, [displayReferenceGrid, env])
 
   return env !== 'production' && displayReferenceGrid ? (
-    <div className="fixed z-100 w-screen h-screen pl-4 pr-4 grid grid-cols-[repeat(12,1fr)] gap-x-4 pointer-events-none left-0 top-0">
+    <div className="fixed z-100 w-screen h-screen pl-4 pr-4 grid grid-cols-[repeat(12,1fr)] gap-x-0 pointer-events-none left-0 top-0">
       {columns.map((_, index) => {
         return (
           <div

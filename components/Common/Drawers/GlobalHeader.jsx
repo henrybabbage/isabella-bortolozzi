@@ -69,19 +69,29 @@ export default function GlobalHeader({ isFixed = true }) {
         <div
           className={cn(
             isNavOpen ? 'visible' : 'invisible',
-            'col-span-1 col-start-2 w-full pt-2 sticky top-0',
+            'col-span-1 col-start-2 w-full pt-2 sticky top-0 bg-background',
           )}
         >
           <h1 className="text-primary pt-2">Artists</h1>
         </div>
       </div>
+      {/* Fix this overlapping page content when hidden */}
       <nav
         className={cn(
-          isNavOpen ? 'visible' : 'invisible',
+          isNavOpen
+            ? 'block pointer-events-auto'
+            : 'hidden pointer-events-none',
           'grid grid-cols-12 bg-highlight mt-2',
         )}
       >
-        <div className="col-span-1 col-start-1">
+        <div
+          className={cn(
+            isNavOpen
+              ? 'block pointer-events-auto'
+              : 'hidden pointer-events-none',
+            'col-span-1 col-start-1',
+          )}
+        >
           <div className="flex flex-col">
             {menu.map((item, index) => {
               return (
@@ -98,7 +108,14 @@ export default function GlobalHeader({ isFixed = true }) {
             })}
           </div>
         </div>
-        <div className="col-span-4 col-start-2">
+        <div
+          className={cn(
+            isNavOpen
+              ? 'block pointer-events-auto'
+              : 'hidden pointer-events-none',
+            'col-span-4 col-start-2',
+          )}
+        >
           <div className="flex flex-col">
             {artists.map((artist, index) => {
               return (

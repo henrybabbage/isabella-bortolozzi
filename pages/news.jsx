@@ -10,7 +10,7 @@ import { newsQuery } from '@/sanity/lib/sanity.queries'
 export default function News(props) {
   const [news] = useLiveQuery(props.news, newsQuery)
   return (
-    <main className="animate-fade-in min-h-[100dvh] w-screen px-6">
+    <main className="animate-fade-in min-h-[100dvh] w-screen px-4">
       <PageHeader title={'News'} />
       <Marquee items={news} />
     </main>
