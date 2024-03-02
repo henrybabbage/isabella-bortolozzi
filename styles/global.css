@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --background: #f4f3ef;
-}
-
 @layer base {
     body { 
         @apply text-xs;
@@ -58,7 +54,6 @@ html, body {
 }
 
 body {
-    background-color: var(--background);
     margin: 0;
     line-height: inherit;
 }

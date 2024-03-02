@@ -19,9 +19,9 @@ module.exports = {
       colors: {
         primary: '#222222',
         secondary: '#BFBFBF',
-        background: '#f4f3ef',
         border: '#D9D8D5',
-        hover: '#fcfbf6',
+        background: '#FCFBF6',
+        highlight: '#F5F4F0',
       },
       fontFamily: {
         serif: ['var(--font-serif)', ...fontFamily.serif],
