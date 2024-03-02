@@ -2,12 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --background: #f4f3ef;
-}
-
 @layer base {
     body { 
+        @apply bg-background;
         @apply text-xs;
         @apply overscroll-none;
     }
@@ -58,7 +55,6 @@ html, body {
 }
 
 body {
-    background-color: var(--background);
     margin: 0;
     line-height: inherit;
 }

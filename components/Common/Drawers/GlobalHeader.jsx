@@ -41,86 +41,78 @@ export default function GlobalHeader({ isFixed = true }) {
     setIsNavOpen(false)
   }
 
-  //   useEffect(() => {
-  //     isNavOpen
-  //       ? (document.body.style.overflow = 'hidden')
-  //       : (document.body.style.overflow = 'auto')
-  //   }, [isNavOpen])
+  useEffect(() => {
+    isNavOpen
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'auto')
+  }, [isNavOpen])
 
   return (
     <header
-      //   onClick={closeHeaderMenu}
-      className={cn(
-        isFixed ? 'fixed' : 'absolute',
-        isNavOpen ? 'h-[36rem] w-screen bg-background/95' : 'bg-transparent',
-        'z-500',
-      )}
+      onMouseLeave={closeHeaderMenu}
+      className={cn(isFixed ? 'fixed' : 'absolute', 'z-500 w-full px-4')}
     >
-      <div className="sticky top-0 grid-cols-12 grid w-full">
-        <div className="col-span-1 col-start-1 pt-2">
+      <div className="grid-cols-12 grid">
+        <div className="col-span-1 w-full col-start-1 pt-2 sticky top-0">
           <button
-            className="sticky w-fit top-0 px-4 pt-2 z-500"
+            className="pt-2 z-500 w-full"
             onClick={() => {
               setIsNavOpen(!isNavOpen)
             }}
             aria-label="Click to view navigation menu"
           >
-            <h1 className="text-primary hover:text-secondary">Menu</h1>
+            <h1 className="text-primary w-full flex items-start hover:text-secondary">
+              Menu
+            </h1>
           </button>
         </div>
         <div
           className={cn(
-            isNavOpen ? 'block' : 'hidden',
-            'col-span-1 col-start-2 pt-2',
+            isNavOpen ? 'visible' : 'invisible',
+            'col-span-1 col-start-2 w-full pt-2 sticky top-0',
           )}
         >
-          <h1 className="text-primary sticky top-0 px-4 pt-2">Artists</h1>
+          <h1 className="text-primary pt-2">Artists</h1>
         </div>
       </div>
       <nav
-        aria-label="Website menu nav"
         className={cn(
-          isNavOpen ? 'block' : 'hidden',
-          'sticky top-0 h-full w-full',
+          isNavOpen ? 'visible' : 'invisible',
+          'grid grid-cols-12 bg-highlight mt-2',
         )}
-        // onMouseLeave={closeHeaderMenu}
       >
-        <div className="grid h-full w-full grid-cols-12 px-4">
-          <div className="col-span-1 col-start-1 pt-2">
-            <div className="flex flex-col pt-2">
-              {menu.map((item, index) => {
-                return (
-                  <Link
-                    key={index}
-                    href={item.path}
-                    className="hover:text-secondary text-primary cursor-pointer text-left"
-                    // onClick={closeHeaderMenu}
-                    aria-label="Main page links"
-                  >
-                    {item.title}
-                  </Link>
-                )
-              })}
-            </div>
+        <div className="col-span-1 col-start-1">
+          <div className="flex flex-col">
+            {menu.map((item, index) => {
+              return (
+                <Link
+                  key={index}
+                  href={item.path}
+                  className="hover:bg-background text-primary cursor-pointer text-left"
+                  onClick={closeHeaderMenu}
+                  aria-label="Main page links"
+                >
+                  {item.title}
+                </Link>
+              )
+            })}
           </div>
-          <div className="col-span-2 col-start-2 pt-2">
-            <div className="pt-2 flex flex-col">
-              {artists.map((artist, index) => {
-                return (
-                  <Link
-                    key={index}
-                    href={`/${artist.slug}`}
-                    className="hover:text-secondary text-primary cursor-pointer"
-                    // onClick={closeHeaderMenu}
-                    aria-label="Artist page links"
-                  >
-                    {index != artists.length - 1
-                      ? artist.name + ','
-                      : artist.name}
-                  </Link>
-                )
-              })}
-            </div>
+        </div>
+        <div className="col-span-4 col-start-2">
+          <div className="flex flex-col">
+            {artists.map((artist, index) => {
+              return (
+                <Link
+                  key={index}
+                  href={`/${artist.slug}`}
+                  className="hover:bg-background text-primary cursor-pointer"
+                  onClick={closeHeaderMenu}
+                  aria-label="Artist page links"
+                >
+                  {artist.name}
+                </Link>
+              )
+            })}
           </div>
         </div>
       </nav>
