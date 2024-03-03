@@ -47,10 +47,10 @@ export function EmblaCarousel({ slides, options }) {
   )
 
   return (
-    <div className="embla h-screen" ref={emblaRef}>
+    <div className="embla h-[44rem] max-w-full" ref={emblaRef}>
       <div className="embla__container h-full">
         {slides.map((item, index) => (
-          <div className="embla__slide max-w-[50rem]" key={index}>
+          <div className="embla__slide max-w-[44rem]" key={index}>
             <NewsSlide item={item} />
           </div>
         ))}

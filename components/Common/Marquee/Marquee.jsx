@@ -9,7 +9,7 @@ const OPTIONS = {
 export default function Marquee({ items }) {
   return (
     <div className="h-screen max-h-screen overflow-hidden">
-      <div className="pt-16">
+      <div className="pt-16 h-full w-full">
         <EmblaCarousel slides={items} options={OPTIONS} />
       </div>
     </div>

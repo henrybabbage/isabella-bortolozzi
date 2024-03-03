@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
@@ -12,9 +11,6 @@ export default function GlobalHeader({ isFixed = true }) {
   const [isNavOpen, setIsNavOpen] = useNavOpenStore(
     ({ isNavOpen, setIsNavOpen }) => [isNavOpen, setIsNavOpen],
   )
-
-  const router = useRouter()
-  const { pathname } = useRouter()
 
   useEffect(() => {
     const initialiseArtists = async () => {
@@ -69,7 +65,7 @@ export default function GlobalHeader({ isFixed = true }) {
         <div
           className={cn(
             isNavOpen ? 'visible' : 'invisible',
-            'col-span-1 col-start-2 w-full pt-2 sticky top-0 bg-background',
+            'col-span-1 col-start-2 w-full pt-2 sticky top-0',
           )}
         >
           <h1 className="text-primary pt-2">Artists</h1>
