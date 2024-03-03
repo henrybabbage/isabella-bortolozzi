@@ -75,7 +75,7 @@ export default function TableView({ exhibitions }) {
   const virtualItemSize = tabletOrMobile ? 640 : 144
 
   const virtualizer = useWindowVirtualizer({
-    count: exhibitions.length ?? 0,
+    count: exhibitions?.length ?? 0,
     estimateSize: () => virtualItemSize,
     overscan: 8,
     scrollMargin: listItemsRef?.current?.offsetTop ?? 0,
@@ -85,7 +85,7 @@ export default function TableView({ exhibitions }) {
 
   useEffect(() => {
     if (selectedYearIndex !== undefined && selectedYearIndex !== null) {
-      virtualizer.scrollToIndex(selectedYearIndex, {
+      virtualizer?.scrollToIndex(selectedYearIndex, {
         align: 'start',
         smoothScroll: true,
       })
