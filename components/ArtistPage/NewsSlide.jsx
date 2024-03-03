@@ -21,7 +21,7 @@ export default function NewsSlide({ item }) {
   const artistList = artistNames?.join(', ')
 
   return (
-    <div className="h-full flex flex-col group text-secondary">
+    <div className="h-full w-full flex flex-col group text-secondary">
       <div className="relative aspect-square h-full w-full">
         <StandardImage image={mainImage} fill={true} mode="cover" />
       </div>
