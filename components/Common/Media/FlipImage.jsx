@@ -77,6 +77,7 @@ export default function FlipImage({
           priority={priority}
           style={{ objectFit: `${mode}`, objectPosition: 'center' }}
           onClick={clickHandler}
+          className="bg-highlight"
         />
       )}
       {isGridView && image.details && (
