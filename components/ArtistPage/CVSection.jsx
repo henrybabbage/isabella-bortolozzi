@@ -19,7 +19,7 @@ export default function CVSection({ artist, biographyRef }) {
   if (!artist) return null
 
   return (
-    <section ref={ref} id="biography">
+    <section ref={ref} id="biography" className="bg-background">
       <div
         ref={biographyRef}
         className={cn(
@@ -28,7 +28,7 @@ export default function CVSection({ artist, biographyRef }) {
         )}
       >
         <div className="grid grid-cols-12">
-          <div className="h-full col-start-1 col-span-12 sm:col-span-9 sm:col-start-4">
+          <div className="h-full col-start-1 col-span-12 sm:col-span-10 sm:col-start-2">
             <ArtistBio
               artistBio1={artist?.artistBio1}
               artistBio2={artist?.artistBio2}

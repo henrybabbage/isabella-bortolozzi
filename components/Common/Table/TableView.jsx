@@ -17,7 +17,7 @@ function easeInOutQuint(t) {
 }
 
 // Credit to dataexcess (https://github.com/dataexcess) for the initial architecture that informed this feature
-// and to Kesorn Dokphikul for solving the integration with react-virtual
+// and credit to Kesorn Dokphikul for solving the integration with react-virtual
 export default function TableView({ exhibitions }) {
   const hydrated = useHydrated()
   const tabletOrMobile = useMediaQuery(
@@ -49,6 +49,7 @@ export default function TableView({ exhibitions }) {
   )
 
   // react-virtual
+  // scroll to index function
   const scrollToFn = useCallback((offset, canSmooth, instance) => {
     const duration = 1000
     const start = parentRef.current.scrollTop
@@ -73,7 +74,6 @@ export default function TableView({ exhibitions }) {
   }, [])
 
   const virtualItemSize = tabletOrMobile ? 640 : 144
-
   const virtualizer = useWindowVirtualizer({
     count: exhibitions?.length ?? 0,
     estimateSize: () => virtualItemSize,

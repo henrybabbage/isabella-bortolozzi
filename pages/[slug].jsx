@@ -1,6 +1,7 @@
+import { useGSAP } from '@gsap/react'
 import { useScrollIntoView } from '@mantine/hooks'
 import { useLiveQuery } from 'next-sanity/preview'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Client, useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
@@ -9,6 +10,7 @@ import CarouselSection from '@/components/ArtistPage/CarouselSection'
 import CVSection from '@/components/ArtistPage/CVSection'
 import ExhibitionsSection from '@/components/ArtistPage/ExhibitionsSection'
 import MobileArtistSubNav from '@/components/Mobile/MobileArtistSubNav'
+import { ScrollTrigger } from '@/lib/gsap'
 import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
 import { getArtist } from '@/sanity/lib/sanity.fetch'
@@ -21,6 +23,7 @@ import { cn } from '@/utils/cn'
 
 export default function ArtistSlugRoute(props) {
   const [isLoading, setIsLoading] = useState(true)
+  const pageRef = useRef(null)
 
   const hydrated = useHydrated()
   const desktopOrLaptop = useMediaQuery(
@@ -48,6 +51,20 @@ export default function ArtistSlugRoute(props) {
       duration: 400,
     })
 
+  useGSAP(
+    () => {
+      ScrollTrigger.create({
+        trigger: worksRef.current, // Target the section to pin
+        start: 'top top', // Start the pin when the top of the trigger hits the top of the viewport
+        pin: true, // Enable pinning
+        pinSpacing: false, // Disable adding spacing when the element is pinned
+        markers: true, // Show markers for each scroll trigger
+        // end: () => `+=${pageRef.current.offsetHeight}`, // End after scrolling the height of the container
+      })
+    },
+    { scope: pageRef },
+  )
+
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false)
@@ -66,7 +83,7 @@ export default function ArtistSlugRoute(props) {
   })
 
   return (
-    <main className="w-screen animate-fade-in">
+    <main ref={pageRef} className="w-screen animate-fade-in">
       <div className="flex flex-col w-full relative">
         <Client>
           <Desktop>
