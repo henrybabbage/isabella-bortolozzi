@@ -27,7 +27,7 @@ export default function ExhibitionPage({ exhibition }) {
 
   const clickHandler = contextSafe((e) => {
     const { target } = e
-
+    // setIsGridView(false)
     performLayoutFlip(imagesRef)
   })
 
