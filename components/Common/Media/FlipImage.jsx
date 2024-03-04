@@ -80,7 +80,7 @@ export default function FlipImage({
         />
       )}
       {isGridView && image.details && (
-        <div className="pt-4">
+        <div className="pt-4 caption">
           <CustomPortableText value={image.details} classNames="" />
         </div>
       )}

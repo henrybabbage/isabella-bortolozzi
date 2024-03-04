@@ -8,7 +8,6 @@ import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 
 import RootLayout from '@/components/Layout/RootLayout'
-import { useNavOpenStore } from '@/stores/useNavOpenStore'
 
 const PreviewProvider = lazy(() =>
   import('@/components/Previews/PreviewProvider'),
