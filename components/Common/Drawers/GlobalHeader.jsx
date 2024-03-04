@@ -1,6 +1,8 @@
+import { useGSAP } from '@gsap/react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
+import { gsap } from '@/lib/gsap'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { artistsQuery } from '@/sanity/lib/sanity.queries'
 import { useNavOpenStore } from '@/stores/useNavOpenStore'
@@ -11,6 +13,36 @@ export default function GlobalHeader({ isFixed = true }) {
   const [isNavOpen, setIsNavOpen] = useNavOpenStore(
     ({ isNavOpen, setIsNavOpen }) => [isNavOpen, setIsNavOpen],
   )
+  const navRef = useRef(null)
+  const artistsMenuRef = useRef(null)
+  const pagesMenuRef = useRef(null)
+
+  const { contextSafe } = useGSAP({ scope: navRef })
+
+  const toggleNav = contextSafe(() => {
+    const tl = gsap.timeline({ paused: true })
+
+    tl.to(navRef.current, {
+      duration: 1,
+      opacity: 1,
+      height: '80vh',
+      ease: 'expo.inOut',
+    })
+
+    tl.from(
+      artistsMenuRef.current,
+      {
+        duration: 1,
+        opacity: 0,
+        y: 20,
+        stagger: 0.1,
+        ease: 'expo.inOut',
+      },
+      '-=0.5',
+    )
+
+    tl.reverse()
+  })
 
   useEffect(() => {
     const initialiseArtists = async () => {
@@ -45,6 +77,7 @@ export default function GlobalHeader({ isFixed = true }) {
 
   return (
     <header
+      ref={navRef}
       onMouseLeave={closeHeaderMenu}
       className={cn(isFixed ? 'fixed' : 'absolute', 'z-500 w-full px-4')}
     >
@@ -81,6 +114,7 @@ export default function GlobalHeader({ isFixed = true }) {
         )}
       >
         <div
+          ref={pagesMenuRef}
           className={cn(
             isNavOpen
               ? 'block pointer-events-auto'
@@ -96,7 +130,7 @@ export default function GlobalHeader({ isFixed = true }) {
                   href={item.path}
                   className="hover:bg-background text-primary cursor-pointer text-left"
                   onClick={closeHeaderMenu}
-                  aria-label="Main page links"
+                  aria-label="Main pages"
                 >
                   {item.title}
                 </Link>
@@ -105,6 +139,7 @@ export default function GlobalHeader({ isFixed = true }) {
           </div>
         </div>
         <div
+          ref={artistsMenuRef}
           className={cn(
             isNavOpen
               ? 'block pointer-events-auto'
@@ -120,7 +155,7 @@ export default function GlobalHeader({ isFixed = true }) {
                   href={`/${artist.slug}`}
                   className="hover:bg-background text-primary cursor-pointer"
                   onClick={closeHeaderMenu}
-                  aria-label="Artist page links"
+                  aria-label="Artist pages"
                 >
                   {artist.name}
                 </Link>
