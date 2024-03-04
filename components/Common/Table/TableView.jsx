@@ -136,7 +136,7 @@ export default function TableView({ exhibitions }) {
       className="grid w-full grid-cols-12 items-start px-4"
     >
       <div className="hidden sm:visible sm:flex sticky top-16 sm:col-span-6 sm:col-start-1 h-full w-full items-center">
-        <div className="relative aspect-square h-full w-full bg-background">
+        <div className="relative aspect-square h-full w-full bg-background mr-4">
           {exhibitions &&
             exhibitions.map((exhibition, index) => (
               <TableImage
