@@ -133,7 +133,7 @@ export default function TableView({ exhibitions }) {
     <div
       ref={parentRef}
       onMouseLeave={() => setCurrentlyHoveredItem(null)}
-      className="grid w-full grid-cols-12 items-start px-6"
+      className="grid w-full grid-cols-12 items-start px-4"
     >
       <div className="hidden sm:visible sm:flex sticky top-16 sm:col-span-6 sm:col-start-1 h-full w-full items-center">
         <div className="relative aspect-square h-full w-full bg-background">

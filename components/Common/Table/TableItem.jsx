@@ -68,14 +68,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
               {router.pathname.startsWith('/news') && exhibition.heading && (
                 <CustomPortableText
                   value={exhibition.heading}
-                  classNames={cn(
-                    '',
-                    (currentlyHoveredItem
-                      ? currentlyHoveredItem
-                      : inViewItem) === index
-                      ? 'text-primary'
-                      : 'text-secondary',
-                  )}
+                  classNames=''
                 />
               )}
               {router.pathname.startsWith('/news') && exhibition.text && (
@@ -83,11 +76,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
                   value={exhibition.text}
                   classNames={cn(
                     'uppercase',
-                    (currentlyHoveredItem
-                      ? currentlyHoveredItem
-                      : inViewItem) === index
-                      ? 'text-primary'
-                      : 'text-secondary',
+                    '',
                   )}
                 />
               )}

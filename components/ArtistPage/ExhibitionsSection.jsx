@@ -1,6 +1,6 @@
 import { useSectionInView } from '@/hooks/useSectionInView'
 
-import TableView from '../Common/Table/TableView'
+import ExhibitionsTable from './ExhibitionsTable'
 
 export default function ExhibitionsSection({ artist, exhibitionsRef }) {
   const { ref } = useSectionInView('exhibitions', 0.1)
@@ -8,10 +8,10 @@ export default function ExhibitionsSection({ artist, exhibitionsRef }) {
     <section
       ref={ref}
       id="exhibitions"
-      className="bg-background table-section relative h-full min-h-screen flex flex-col"
+      className="bg-background z-10 table-section relative h-full min-h-screen flex flex-col"
     >
       <div ref={exhibitionsRef} className="h-full w-full">
-        <TableView exhibitions={artist.selectedExhibitions} />
+        <ExhibitionsTable exhibitions={artist.selectedExhibitions} />
       </div>
     </section>
   )
