@@ -7,6 +7,7 @@ import { useSectionInView } from '@/hooks/useSectionInView'
 
 import ArrowLeftButton from '../Common/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../Common/Buttons/ArrowRightButton'
+import CarouselCaption from './CarouselCaption'
 import PaginationCounter from './PaginationCounter'
 import SlideImage from './SlideImage'
 
@@ -108,12 +109,15 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
             </Splide>
           )}
         </div>
-        <PaginationCounter
-          ref={splideRef}
-          currentIndex={currentIndex}
-          totalSlides={totalSlides}
-          isLoading={isLoading}
-        />
+        <div className="space-x-8">
+          <PaginationCounter
+            ref={splideRef}
+            currentIndex={currentIndex}
+            totalSlides={totalSlides}
+            isLoading={isLoading}
+          />
+          <CarouselCaption content={artist} currentIndex={currentIndex} />
+        </div>
       </section>
     </>
   )
