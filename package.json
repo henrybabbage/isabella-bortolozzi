@@ -54,7 +54,7 @@
     "react-responsive": "^9.0.2",
     "react-spring": "^9.7.3",
     "rxjs": "^7.8.1",
-    "sanity": "^3.23.1",
+    "sanity": "^3.30.1",
     "sanity-plugin-iframe-pane": "2.6.0",
     "sanity-plugin-media": "^2.2.4",
     "sanity-plugin-simpler-color-input": "^1.1.0",

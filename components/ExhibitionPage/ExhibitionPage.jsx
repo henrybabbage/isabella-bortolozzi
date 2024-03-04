@@ -2,7 +2,7 @@ import { useGSAP } from '@gsap/react'
 import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 
-import { Flip } from '@/lib/gsap'
+import { Flip, gsap } from '@/lib/gsap'
 
 import FlipImage from '../Common/Media/FlipImage'
 
@@ -25,16 +25,46 @@ export default function ExhibitionPage({ exhibition }) {
 
   const { contextSafe } = useGSAP()
 
-  const clickHandler = contextSafe((e) => {
-    const { target } = e
+  const clickHandler = contextSafe((event) => {
+    if (event.target.tagName === 'IMG') {
+      const container =
+        document.querySelector('.flex-container') ||
+        document.querySelector('.grid-container')
+      const switchingToGridView = container.classList.contains('flex-container')
 
-    performLayoutFlip(imagesRef)
+      if (!switchingToGridView) {
+        // Fade out all captions
+        gsap.to('.caption', {
+          duration: 0.5,
+          opacity: 0,
+          ease: 'circ.inOut',
+          onComplete: () => {
+            gsap.set('.caption', { display: 'block' })
+            performLayoutFlip(container)
+          },
+        })
+      } else {
+        performLayoutFlip(container)
+
+        // Fade in all captions with a delay
+        gsap.to('.caption', {
+          delay: 1,
+          duration: 0.5,
+          opacity: 1,
+          stagger: 0.25,
+          ease: 'circ.inOut',
+          onStart: () => {
+            gsap.set('.caption', { display: 'block' })
+          },
+        })
+      }
+    }
   })
 
-  function performLayoutFlip(ref) {
+  function performLayoutFlip(container) {
     const state = Flip.getState('.grid-container img, .flex-container img')
-    ref.current.classList.toggle('grid-container')
-    ref.current.classList.toggle('flex-container')
+    container.classList.toggle('grid-container')
+    container.classList.toggle('flex-container')
 
     Flip.from(state, {
       duration: 0.5,

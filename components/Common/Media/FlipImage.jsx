@@ -4,6 +4,8 @@ import { cn } from 'utils/cn'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
 
+import { CustomPortableText } from '../Text/CustomPortableText'
+
 export default function FlipImage({
   image = {},
   alt = '',
@@ -76,6 +78,11 @@ export default function FlipImage({
           style={{ objectFit: `${mode}`, objectPosition: 'center' }}
           onClick={clickHandler}
         />
+      )}
+      {isGridView && image.details && (
+        <div className="pt-4 caption">
+          <CustomPortableText value={image.details} classNames="" />
+        </div>
       )}
     </div>
   )
