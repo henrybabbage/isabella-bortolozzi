@@ -45,7 +45,7 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
       <section
         ref={ref}
         id="works"
-        className="relative h-screen w-full flex flex-col items-center justify-center overflow-x-hidden"
+        className="carousel-section relative h-screen w-full flex flex-col items-center justify-center overflow-x-hidden"
       >
         <div
           ref={worksRef}
