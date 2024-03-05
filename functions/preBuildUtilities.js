@@ -15,7 +15,7 @@ const ARTISTS_QUERY = `*[_type == "artist" && $galleryArtist == $bool] | order(o
 
 module.exports.preBuildDevelopment = async () => {
   console.log('Loading the development content!')
-  const API = `https://${PROJECT_ID}.api.sanity.io/${API_VERSION}/data/query/${DATASET}?query=${ARTISTS_QUERY}&$galleryArtist='galleryArtist'&$bool=true`
+  const API = `https://${PROJECT_ID}.api.sanity.io/${API_VERSION}/data/query/${DATASET}?query=${ARTISTS_QUERY}&$galleryArtist="galleryArtist"&$bool=true`
   const response = await axios.get(API)
   const data = response.data.result
   console.log(data)
@@ -24,7 +24,7 @@ module.exports.preBuildDevelopment = async () => {
 
 module.exports.preBuildProduction = async () => {
   console.log('Loading the production content!')
-  const API = `https://${PROJECT_ID}.api.sanity.io/${API_VERSION}/data/query/${DATASET}?query=${ARTISTS_QUERY}&$galleryArtist='galleryArtist'&$bool=true`
+  const API = `https://${PROJECT_ID}.api.sanity.io/${API_VERSION}/data/query/${DATASET}?query=${ARTISTS_QUERY}&$galleryArtist="galleryArtist"&$bool=true`
   const response = await axios.get(API)
   const data = response.data.result
   fs.writeFileSync('./data/nav.json', JSON.stringify(data))
