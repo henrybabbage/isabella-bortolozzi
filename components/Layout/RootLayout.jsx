@@ -14,27 +14,6 @@ export default function RootLayout({ children }) {
 
   const isNavOpened = useNavOpenStore(({ isNavOpened }) => isNavOpened)
 
-  //   useEffect(() => {
-  //     if (isNavOpened) {
-  //       lenis?.stop()
-  //     } else {
-  //       lenis?.start()
-  //     }
-  //   }, [lenis, isNavOpened])
-
-  //   useEffect(() => {
-  //     function onHashChangeStart(url) {
-  //       url = '#' + url.split('#').pop()
-  //       lenis.scrollTo(url)
-  //     }
-
-  //     router.events.on('hashChangeStart', onHashChangeStart)
-
-  //     return () => {
-  //       router.events.off('hashChangeStart', onHashChangeStart)
-  //     }
-  //   }, [lenis, router])
-
   return (
     <div id="root" className="-z-0 overscroll-none">
       <SmoothScroll>

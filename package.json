@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "build": "next build",
     "dev": "next",
+    "build": "next build",
     "format": "npx prettier --write . --ignore-path .gitignore",
     "lint": "next lint -- --ignore-path .gitignore",
     "lint:fix": "npm run format && npm run lint -- --fix",
@@ -34,11 +34,13 @@
     "@studio-freight/react-lenis": "^0.0.43",
     "@tanstack/react-query": "^5.12.2",
     "@tanstack/react-virtual": "^3.0.1",
+    "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "embla-carousel-auto-scroll": "^8.0.0",
     "embla-carousel-autoplay": "^8.0.0",
     "embla-carousel-react": "^8.0.0",
+    "fs": "^0.0.1-security",
     "gsap": "file:gsap-bonus.tgz",
     "hamburger-react": "^2.5.0",
     "next": "^14.1.1",
