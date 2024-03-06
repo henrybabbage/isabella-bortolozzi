@@ -1,236 +1,124 @@
 [
-  {
-    "name": "Cerith Wyn Evans",
-    "slug": "cerith-wyn-evans",
-    "galleryArtist": null
-  },
-  { "name": "Sarah Lucas", "slug": null, "galleryArtist": null },
-  { "name": "Abel Auer", "slug": "abel-auer", "galleryArtist": null },
-  { "name": "Man Ray", "slug": "man-ray", "galleryArtist": null },
+  { "name": "Cerith Wyn Evans", "slug": "cerith-wyn-evans" },
+  { "name": "Sarah Lucas", "slug": null },
+  { "name": "Abel Auer", "slug": "abel-auer" },
+  { "name": "Man Ray", "slug": "man-ray" },
   {
     "name": "Jos de Gruyter & Harald Thys",
-    "slug": "jos-de-gruyter-harald-thys",
-    "galleryArtist": true
+    "slug": "jos-de-gruyter-harald-thys"
   },
-  { "name": "Jim Nutt", "slug": "jim-nutt", "galleryArtist": null },
-  { "name": "Susan Philipsz", "slug": "susan-philipsz", "galleryArtist": true },
-  { "name": "Lebon", "slug": "lebon", "galleryArtist": null },
-  {
-    "name": "Juliette Blightman",
-    "slug": "juliette-blightman",
-    "galleryArtist": true
-  },
-  {
-    "name": "Yorgos Sapountzis",
-    "slug": "yorgos-sapountzis",
-    "galleryArtist": null
-  },
-  { "name": "Betty Woodman", "slug": "betty-woodman", "galleryArtist": null },
-  { "name": "Antek Walczak", "slug": "antek-walczak", "galleryArtist": null },
-  {
-    "name": "Estate of Aldo Mondino",
-    "slug": "estate-of-aldo-mondino",
-    "galleryArtist": true
-  },
-  {
-    "name": "Rosemarie Trockel",
-    "slug": "rosemarie-trockel",
-    "galleryArtist": null
-  },
-  { "name": "James Richards", "slug": "james-richards", "galleryArtist": true },
-  {
-    "name": "Donna Huddleston",
-    "slug": "donna-huddleston",
-    "galleryArtist": null
-  },
-  { "name": "Marco Bruzzone", "slug": "marco-bruzzone", "galleryArtist": null },
-  {
-    "name": "Anneliese Hager",
-    "slug": "anneliese-hager",
-    "galleryArtist": null
-  },
-  { "name": "Ellen Cantor", "slug": "ellen-cantor", "galleryArtist": true },
-  { "name": "Tony Conrad", "slug": "tony-conrad", "galleryArtist": null },
-  { "name": "Sergej Jensen", "slug": "sergej-jensen", "galleryArtist": null },
-  { "name": "Jim Shaw", "slug": "jim-shaw", "galleryArtist": null },
-  { "name": "Mimmo Rotella", "slug": "mimmo-rotella", "galleryArtist": null },
-  {
-    "name": "Anthony Symonds",
-    "slug": "anthony-symonds",
-    "galleryArtist": null
-  },
-  { "name": "Lucio Fontana", "slug": "lucio-fontana", "galleryArtist": null },
-  {
-    "name": "Estate of Carol Rama",
-    "slug": "estate-of-carol-rama",
-    "galleryArtist": true
-  },
-  {
-    "name": "Christina Mackie",
-    "slug": "christina-mackie",
-    "galleryArtist": null
-  },
-  { "name": "Delacroix", "slug": "delacroix", "galleryArtist": null },
-  { "name": "Adriana Lara", "slug": "adriana-lara", "galleryArtist": null },
-  { "name": "Barry Johnston", "slug": "barry-johnston", "galleryArtist": null },
-  { "name": "Jimmy Roberts", "slug": "jimmy-roberts", "galleryArtist": null },
+  { "name": "Jim Nutt", "slug": "jim-nutt" },
+  { "name": "Susan Philipsz", "slug": "susan-philipsz" },
+  { "name": "Lebon", "slug": "lebon" },
+  { "name": "Juliette Blightman", "slug": "juliette-blightman" },
+  { "name": "Yorgos Sapountzis", "slug": "yorgos-sapountzis" },
+  { "name": "Betty Woodman", "slug": "betty-woodman" },
+  { "name": "Antek Walczak", "slug": "antek-walczak" },
+  { "name": "Estate of Aldo Mondino", "slug": "estate-of-aldo-mondino" },
+  { "name": "Rosemarie Trockel", "slug": "rosemarie-trockel" },
+  { "name": "James Richards", "slug": "james-richards" },
+  { "name": "Donna Huddleston", "slug": "donna-huddleston" },
+  { "name": "Marco Bruzzone", "slug": "marco-bruzzone" },
+  { "name": "Anneliese Hager", "slug": "anneliese-hager" },
+  { "name": "Ellen Cantor", "slug": "ellen-cantor" },
+  { "name": "Tony Conrad", "slug": "tony-conrad" },
+  { "name": "Sergej Jensen", "slug": "sergej-jensen" },
+  { "name": "Jim Shaw", "slug": "jim-shaw" },
+  { "name": "Mimmo Rotella", "slug": "mimmo-rotella" },
+  { "name": "Anthony Symonds", "slug": "anthony-symonds" },
+  { "name": "Lucio Fontana", "slug": "lucio-fontana" },
+  { "name": "Estate of Carol Rama", "slug": "estate-of-carol-rama" },
+  { "name": "Christina Mackie", "slug": "christina-mackie" },
+  { "name": "Delacroix", "slug": "delacroix" },
+  { "name": "Adriana Lara", "slug": "adriana-lara" },
+  { "name": "Barry Johnston", "slug": "barry-johnston" },
+  { "name": "Jimmy Roberts", "slug": "jimmy-roberts" },
   {
     "name": "Hannah Quinlan & Rosie Hastings",
-    "slug": "hannah-quinlan-rosie-hastings",
-    "galleryArtist": true
+    "slug": "hannah-quinlan-rosie-hastings"
   },
-  { "name": "Vaginal Davis", "slug": "vaginal-davis", "galleryArtist": true },
-  { "name": "Boy Vereecken", "slug": "boy-vereecken", "galleryArtist": null },
-  { "name": "Danny McDonald", "slug": "danny-mcdonald", "galleryArtist": true },
-  { "name": "Nora Schultz", "slug": "nora-schultz", "galleryArtist": true },
-  { "name": "Ed Atkins", "slug": "ed-atkins", "galleryArtist": true },
-  { "name": "Reba Maybury", "slug": null, "galleryArtist": null },
-  {
-    "name": "Stefano Arienti",
-    "slug": "stefano-arienti",
-    "galleryArtist": null
-  },
-  { "name": "Hans Arp", "slug": "hans-arp", "galleryArtist": null },
-  {
-    "name": "Robert Rauschenberg",
-    "slug": "robert-rauschenberg",
-    "galleryArtist": null
-  },
-  { "name": "Kai Althoff", "slug": "kai-althoff", "galleryArtist": null },
-  {
-    "name": "Robert Benayoun",
-    "slug": "robert-benayoun",
-    "galleryArtist": null
-  },
-  { "name": "Leila Hekmat", "slug": "leila-hekmat", "galleryArtist": true },
-  { "name": "Leonor Antunes", "slug": "leonor-antunes", "galleryArtist": null },
-  { "name": "Henrik Olesen", "slug": "henrik-olesen", "galleryArtist": null },
-  { "name": "Dieter Roth", "slug": "dieter-roth", "galleryArtist": null },
-  { "name": "Karl Holmqvist", "slug": "karl-holmqvist", "galleryArtist": null },
-  {
-    "name": "Pierre Klossowski",
-    "slug": "pierre-klossowski",
-    "galleryArtist": true
-  },
-  { "name": "Emile Savitry", "slug": "emile-savitry", "galleryArtist": null },
-  { "name": "Renate Bertlmann", "slug": null, "galleryArtist": null },
-  {
-    "name": "Stephen G. Rhodes",
-    "slug": "stephen-g-rhodes",
-    "galleryArtist": true
-  },
-  { "name": "Steven Zultanski", "slug": null, "galleryArtist": null },
-  { "name": "Emilio Prini", "slug": "emilio-prini", "galleryArtist": null },
-  { "name": "Judith Hopf", "slug": "judith-hopf", "galleryArtist": null },
-  { "name": "Albert Oehlen", "slug": "albert-oehlen", "galleryArtist": null },
-  { "name": "Kalup Linzy", "slug": "kalup-linzy", "galleryArtist": null },
-  { "name": "Linder", "slug": "linder", "galleryArtist": null },
-  { "name": "Yuri Ancarani", "slug": "yuri-ancarani", "galleryArtist": true },
-  { "name": "Paul Laffoley", "slug": "paul-laffoley", "galleryArtist": null },
-  { "name": "Symonds", "slug": "symonds", "galleryArtist": null },
-  { "name": "Jutta Koether", "slug": "jutta-koether", "galleryArtist": null },
-  { "name": "Jeanne Mammen", "slug": "jeanne-mammen", "galleryArtist": null },
-  { "name": "Jurgen Ots", "slug": "jurgen-ots", "galleryArtist": null },
-  { "name": "Simon Thompson", "slug": "simon-thompson", "galleryArtist": null },
-  { "name": "Karl Andersson", "slug": "karl-andersson", "galleryArtist": null },
-  { "name": "Kaari Upson", "slug": "kaari-upson", "galleryArtist": null },
-  {
-    "name": "Bjarne Melgaard",
-    "slug": "bjarne-melgaard",
-    "galleryArtist": null
-  },
-  {
-    "name": "Veit Laurent Kurz",
-    "slug": "veit-laurent-kurz",
-    "galleryArtist": true
-  },
-  { "name": "Wu Tsang", "slug": "wu-tsang", "galleryArtist": true },
-  { "name": "David Lieske", "slug": "david-lieske", "galleryArtist": null },
-  {
-    "name": "Jay Chung & Q Takeki Maeda",
-    "slug": "jay-chung-q-takeki-maeda",
-    "galleryArtist": false
-  },
-  { "name": "Hannah Black", "slug": "hannah-black", "galleryArtist": true },
-  { "name": "Enrico Baj", "slug": "enrico-baj", "galleryArtist": null },
-  { "name": "Carol Rama", "slug": "carol-rama", "galleryArtist": false },
-  { "name": "Maria Lai", "slug": "maria-lai", "galleryArtist": null },
-  { "name": "Morag Keil", "slug": "morag-keil", "galleryArtist": true },
-  { "name": "Peter Wächtler", "slug": "peter-wächtler", "galleryArtist": null },
-  {
-    "name": "Kurt Schwitters",
-    "slug": "kurt-schwitters",
-    "galleryArtist": null
-  },
-  { "name": "Meret Oppenheim", "slug": null, "galleryArtist": null },
-  { "name": "Oscar Murillo", "slug": "oscar-murillo", "galleryArtist": true },
-  {
-    "name": "Thomas Houseago",
-    "slug": "thomas-houseago",
-    "galleryArtist": null
-  },
-  {
-    "name": "Diamond Stingily",
-    "slug": "diamond-stingily",
-    "galleryArtist": true
-  },
-  {
-    "name": "Steven Campbell",
-    "slug": "steven-campbell",
-    "galleryArtist": null
-  },
-  { "name": "Pearmain", "slug": "pearmain", "galleryArtist": null },
-  { "name": "Chakaia Booker", "slug": "chakaia-booker", "galleryArtist": null },
-  {
-    "name": "Adrian Wiszniewski",
-    "slug": "adrian-wiszniewski",
-    "galleryArtist": null
-  },
-  {
-    "name": "Catharine Ahearn",
-    "slug": "catharine-ahearn",
-    "galleryArtist": null
-  },
-  { "name": "Nora Berman", "slug": "nora-berman", "galleryArtist": null },
-  { "name": "Seth Price", "slug": "seth-price", "galleryArtist": true },
+  { "name": "Vaginal Davis", "slug": "vaginal-davis" },
+  { "name": "Boy Vereecken", "slug": "boy-vereecken" },
+  { "name": "Danny McDonald", "slug": "danny-mcdonald" },
+  { "name": "Nora Schultz", "slug": "nora-schultz" },
+  { "name": "Ed Atkins", "slug": "ed-atkins" },
+  { "name": "Reba Maybury", "slug": null },
+  { "name": "Stefano Arienti", "slug": "stefano-arienti" },
+  { "name": "Hans Arp", "slug": "hans-arp" },
+  { "name": "Robert Rauschenberg", "slug": "robert-rauschenberg" },
+  { "name": "Kai Althoff", "slug": "kai-althoff" },
+  { "name": "Robert Benayoun", "slug": "robert-benayoun" },
+  { "name": "Leila Hekmat", "slug": "leila-hekmat" },
+  { "name": "Leonor Antunes", "slug": "leonor-antunes" },
+  { "name": "Henrik Olesen", "slug": "henrik-olesen" },
+  { "name": "Dieter Roth", "slug": "dieter-roth" },
+  { "name": "Karl Holmqvist", "slug": "karl-holmqvist" },
+  { "name": "Pierre Klossowski", "slug": "pierre-klossowski" },
+  { "name": "Emile Savitry", "slug": "emile-savitry" },
+  { "name": "Renate Bertlmann", "slug": null },
+  { "name": "Stephen G. Rhodes", "slug": "stephen-g-rhodes" },
+  { "name": "Steven Zultanski", "slug": null },
+  { "name": "Emilio Prini", "slug": "emilio-prini" },
+  { "name": "Judith Hopf", "slug": "judith-hopf" },
+  { "name": "Albert Oehlen", "slug": "albert-oehlen" },
+  { "name": "Kalup Linzy", "slug": "kalup-linzy" },
+  { "name": "Linder", "slug": "linder" },
+  { "name": "Yuri Ancarani", "slug": "yuri-ancarani" },
+  { "name": "Paul Laffoley", "slug": "paul-laffoley" },
+  { "name": "Symonds", "slug": "symonds" },
+  { "name": "Jutta Koether", "slug": "jutta-koether" },
+  { "name": "Jeanne Mammen", "slug": "jeanne-mammen" },
+  { "name": "Jurgen Ots", "slug": "jurgen-ots" },
+  { "name": "Simon Thompson", "slug": "simon-thompson" },
+  { "name": "Karl Andersson", "slug": "karl-andersson" },
+  { "name": "Kaari Upson", "slug": "kaari-upson" },
+  { "name": "Bjarne Melgaard", "slug": "bjarne-melgaard" },
+  { "name": "Veit Laurent Kurz", "slug": "veit-laurent-kurz" },
+  { "name": "Wu Tsang", "slug": "wu-tsang" },
+  { "name": "David Lieske", "slug": "david-lieske" },
+  { "name": "Jay Chung & Q Takeki Maeda", "slug": "jay-chung-q-takeki-maeda" },
+  { "name": "Hannah Black", "slug": "hannah-black" },
+  { "name": "Enrico Baj", "slug": "enrico-baj" },
+  { "name": "Carol Rama", "slug": "carol-rama" },
+  { "name": "Maria Lai", "slug": "maria-lai" },
+  { "name": "Morag Keil", "slug": "morag-keil" },
+  { "name": "Peter Wächtler", "slug": "peter-wächtler" },
+  { "name": "Kurt Schwitters", "slug": "kurt-schwitters" },
+  { "name": "Meret Oppenheim", "slug": null },
+  { "name": "Oscar Murillo", "slug": "oscar-murillo" },
+  { "name": "Thomas Houseago", "slug": "thomas-houseago" },
+  { "name": "Diamond Stingily", "slug": "diamond-stingily" },
+  { "name": "Steven Campbell", "slug": "steven-campbell" },
+  { "name": "Pearmain", "slug": "pearmain" },
+  { "name": "Chakaia Booker", "slug": "chakaia-booker" },
+  { "name": "Adrian Wiszniewski", "slug": "adrian-wiszniewski" },
+  { "name": "Catharine Ahearn", "slug": "catharine-ahearn" },
+  { "name": "Nora Berman", "slug": "nora-berman" },
+  { "name": "Seth Price", "slug": "seth-price" },
   {
     "name": "Calla Henkel & Max Pitegoff",
-    "slug": "calla-henkel-max-pitegoff",
-    "galleryArtist": true
+    "slug": "calla-henkel-max-pitegoff"
   },
-  { "name": "Ibon Aranberri", "slug": "ibon-aranberri", "galleryArtist": true },
-  { "name": "Friedl Kubeka", "slug": null, "galleryArtist": null },
-  { "name": "Paul Thek", "slug": "paul-thek", "galleryArtist": null },
-  {
-    "name": "Michaela Eichwald",
-    "slug": "michaela-eichwald",
-    "galleryArtist": true
-  },
-  { "name": "René-Jacques", "slug": "rené-jacques", "galleryArtist": null },
-  { "name": "Jos de Gruyter", "slug": "jos-de-gruyter", "galleryArtist": null },
-  { "name": "Andrea Branzi", "slug": "andrea-branzi", "galleryArtist": null },
-  { "name": "Thomas Bayrle", "slug": "thomas-bayrle", "galleryArtist": null },
-  { "name": "David Hammons", "slug": "david-hammons", "galleryArtist": null },
-  { "name": "Danh Vo", "slug": "danh-vo", "galleryArtist": null },
+  { "name": "Ibon Aranberri", "slug": "ibon-aranberri" },
+  { "name": "Friedl Kubeka", "slug": null },
+  { "name": "Paul Thek", "slug": "paul-thek" },
+  { "name": "Michaela Eichwald", "slug": "michaela-eichwald" },
+  { "name": "René-Jacques", "slug": "rené-jacques" },
+  { "name": "Jos de Gruyter", "slug": "jos-de-gruyter" },
+  { "name": "Andrea Branzi", "slug": "andrea-branzi" },
+  { "name": "Thomas Bayrle", "slug": "thomas-bayrle" },
+  { "name": "David Hammons", "slug": "david-hammons" },
+  { "name": "Danh Vo", "slug": "danh-vo" },
   {
     "name": "Contemporary Art Writing Daily",
-    "slug": "contemporary-art-writing-daily",
-    "galleryArtist": null
+    "slug": "contemporary-art-writing-daily"
   },
-  {
-    "name": "Giuseppe Desiato",
-    "slug": "giuseppe-desiato",
-    "galleryArtist": null
-  },
-  { "name": "Richard Rezac", "slug": "richard-rezac", "galleryArtist": true },
-  { "name": "Ingrid Wiener", "slug": "ingrid-wiener", "galleryArtist": null },
-  { "name": "Aaron Curry", "slug": "aaron-curry", "galleryArtist": false },
-  {
-    "name": "Hollis Frampton",
-    "slug": "hollis-frampton",
-    "galleryArtist": null
-  },
-  { "name": "Steve Reinke", "slug": "steve-reinke", "galleryArtist": true },
-  { "name": "Aldo Mondino", "slug": "aldo-mondino", "galleryArtist": null },
-  { "name": "Gina Pane", "slug": null, "galleryArtist": null }
+  { "name": "Giuseppe Desiato", "slug": "giuseppe-desiato" },
+  { "name": "Richard Rezac", "slug": "richard-rezac" },
+  { "name": "Ingrid Wiener", "slug": "ingrid-wiener" },
+  { "name": "Aaron Curry", "slug": "aaron-curry" },
+  { "name": "Hollis Frampton", "slug": "hollis-frampton" },
+  { "name": "Steve Reinke", "slug": "steve-reinke" },
+  { "name": "Aldo Mondino", "slug": "aldo-mondino" },
+  { "name": "Gina Pane", "slug": null }
 ]
