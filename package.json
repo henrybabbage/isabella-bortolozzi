@@ -1,7 +1,9 @@
 {
   "private": true,
   "scripts": {
+    "predev": "node functions/preBuildDev.js",
     "dev": "next",
+    "prebuild": "node functions/preBuildDev.js",
     "build": "next build",
     "format": "npx prettier --write . --ignore-path .gitignore",
     "lint": "next lint -- --ignore-path .gitignore",
