@@ -2,7 +2,6 @@ import { useGSAP } from '@gsap/react'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
-import menu from '@/data/menu.json'
 import { gsap } from '@/lib/gsap'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { artistsQuery } from '@/sanity/lib/sanity.queries'
@@ -16,23 +15,16 @@ export default function GlobalNav({ isFixed = true }) {
   const artistsMenuRef = useRef()
 
   useEffect(() => {
-    const initialiseArtists = async () => {
-      const getGalleryArtists = async () => {
-        const galleryArtists = await sanityClient.fetch(artistsQuery)
-        return !galleryArtists.length ? [] : galleryArtists
-      }
-      const currentArtists = await getGalleryArtists()
-      const noDuplicates = [...new Set(currentArtists)]
-      setArtists(noDuplicates)
+    const fetchArtists = async () => {
+      const galleryArtists = await sanityClient.fetch(artistsQuery)
+      const uniqueArtists = [...new Set(galleryArtists)]
+      setArtists(uniqueArtists)
     }
-    initialiseArtists()
-  }, [])
 
-  const toggleNavOpen = () => {
-    tl.current.reversed(!tl.current.reversed())
-  }
+    fetchArtists()
+  }, [artists])
 
-  useGSAP(
+  const { contextSafe } = useGSAP(
     () => {
       const menu = gsap.utils.toArray('.menu-item')
       tl.current = gsap
@@ -42,12 +34,16 @@ export default function GlobalNav({ isFixed = true }) {
           background: '#F5F4F0',
           duration: 0.75,
         })
-        .from(menu, { y: -10, opacity: 0, stagger: 0.05 })
+        .from(menu, { y: -8, opacity: 0, stagger: 0.05 })
         .to(menu, { y: 0, opacity: 1, stagger: 0.05, duration: 0.1 })
         .reverse()
     },
     { scope: navRef },
   )
+
+  const toggleNavOpen = contextSafe(() => {
+    tl.current.reversed(!tl.current.reversed())
+  })
 
   const menu = [
     { title: 'Current', path: '/current' },

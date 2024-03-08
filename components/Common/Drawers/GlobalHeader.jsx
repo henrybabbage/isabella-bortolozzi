@@ -45,17 +45,14 @@ export default function GlobalHeader({ isFixed = true }) {
   })
 
   useEffect(() => {
-    const initialiseArtists = async () => {
-      const getGalleryArtists = async () => {
-        const galleryArtists = await sanityClient.fetch(artistsQuery)
-        return !galleryArtists.length ? [] : galleryArtists
-      }
-      const currentArtists = await getGalleryArtists()
-      const noDuplicates = [...new Set(currentArtists)]
-      setArtists(noDuplicates)
+    const fetchArtists = async () => {
+      const galleryArtists = await sanityClient.fetch(artistsQuery)
+      const uniqueArtists = [...new Set(galleryArtists)]
+      setArtists(uniqueArtists)
     }
-    initialiseArtists()
-  }, [])
+
+    fetchArtists()
+  }, [artists])
 
   const menu = [
     { title: 'Current', path: '/current' },
