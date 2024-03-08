@@ -1,8 +1,6 @@
-import { useGSAP } from '@gsap/react'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
-import { gsap } from '@/lib/gsap'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { artistsQuery } from '@/sanity/lib/sanity.queries'
 import { useNavOpenStore } from '@/stores/useNavOpenStore'
@@ -17,45 +15,15 @@ export default function GlobalHeader({ isFixed = true }) {
   const artistsMenuRef = useRef(null)
   const pagesMenuRef = useRef(null)
 
-  const { contextSafe } = useGSAP({ scope: navRef })
-
-  const toggleNav = contextSafe(() => {
-    const tl = gsap.timeline({ paused: true })
-
-    tl.to(navRef.current, {
-      duration: 1,
-      opacity: 1,
-      height: '80vh',
-      ease: 'expo.inOut',
-    })
-
-    tl.from(
-      artistsMenuRef.current,
-      {
-        duration: 1,
-        opacity: 0,
-        y: 20,
-        stagger: 0.1,
-        ease: 'expo.inOut',
-      },
-      '-=0.5',
-    )
-
-    tl.reverse()
-  })
-
   useEffect(() => {
-    const initialiseArtists = async () => {
-      const getGalleryArtists = async () => {
-        const galleryArtists = await sanityClient.fetch(artistsQuery)
-        return !galleryArtists.length ? [] : galleryArtists
-      }
-      const currentArtists = await getGalleryArtists()
-      const noDuplicates = [...new Set(currentArtists)]
-      setArtists(noDuplicates)
+    const fetchArtists = async () => {
+      const galleryArtists = await sanityClient.fetch(artistsQuery)
+      const uniqueArtists = [...new Set(galleryArtists)]
+      setArtists(uniqueArtists)
     }
-    initialiseArtists()
-  }, [])
+
+    fetchArtists()
+  }, [artists])
 
   const menu = [
     { title: 'Current', path: '/current' },
@@ -104,7 +72,6 @@ export default function GlobalHeader({ isFixed = true }) {
           <h1 className="text-primary pt-2">Artists</h1>
         </div>
       </div>
-      {/* Fix this overlapping page content when hidden */}
       <nav
         className={cn(
           isNavOpen
