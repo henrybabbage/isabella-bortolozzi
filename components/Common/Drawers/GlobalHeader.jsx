@@ -1,8 +1,6 @@
-import { useGSAP } from '@gsap/react'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
-import { gsap } from '@/lib/gsap'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { artistsQuery } from '@/sanity/lib/sanity.queries'
 import { useNavOpenStore } from '@/stores/useNavOpenStore'
@@ -16,33 +14,6 @@ export default function GlobalHeader({ isFixed = true }) {
   const navRef = useRef(null)
   const artistsMenuRef = useRef(null)
   const pagesMenuRef = useRef(null)
-
-  const { contextSafe } = useGSAP({ scope: navRef })
-
-  const toggleNav = contextSafe(() => {
-    const tl = gsap.timeline({ paused: true })
-
-    tl.to(navRef.current, {
-      duration: 1,
-      opacity: 1,
-      height: '80vh',
-      ease: 'expo.inOut',
-    })
-
-    tl.from(
-      artistsMenuRef.current,
-      {
-        duration: 1,
-        opacity: 0,
-        y: 20,
-        stagger: 0.1,
-        ease: 'expo.inOut',
-      },
-      '-=0.5',
-    )
-
-    tl.reverse()
-  })
 
   useEffect(() => {
     const fetchArtists = async () => {

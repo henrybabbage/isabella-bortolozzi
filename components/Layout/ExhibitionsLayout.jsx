@@ -3,7 +3,7 @@ import { Client } from 'react-hydration-provider'
 
 import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
-import GlobalHeader from '../Common/Drawers/GlobalHeader'
+import GlobalNav from '../Common/Drawers/GlobalNav'
 import MobileHeader from '../Mobile/MobileHeader'
 import ReferenceGrid from '../Utilities/ReferenceGrid'
 
@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
           {!router.pathname.startsWith('/studio') &&
           !router.pathname.startsWith('/exhibitions/') &&
           !router.pathname.startsWith('/viewing-rooms/') ? (
-            <GlobalHeader isFixed={true} />
+            <GlobalNav isFixed={true} />
           ) : null}
         </Desktop>
         <TabletAndBelow>
