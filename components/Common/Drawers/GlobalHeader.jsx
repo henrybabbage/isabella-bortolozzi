@@ -101,7 +101,6 @@ export default function GlobalHeader({ isFixed = true }) {
           <h1 className="text-primary pt-2">Artists</h1>
         </div>
       </div>
-      {/* Fix this overlapping page content when hidden */}
       <nav
         className={cn(
           isNavOpen
