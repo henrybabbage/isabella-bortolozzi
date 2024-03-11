@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 import { gsap } from '@/lib/gsap'
+import { sanityClient } from '@/sanity/lib/sanity.client'
+import { artistsQuery } from '@/sanity/lib/sanity.queries'
+import { cn } from '@/utils/cn'
 
 const menu = [
   { title: 'Current', path: '/current' },
@@ -12,14 +15,28 @@ const menu = [
 ]
 
 export default function GlobalSheet({ isFixed = true }) {
-  const container = useRef()
+  const [artists, setArtists] = useState([])
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const containerRef = useRef()
+  const pagesMenuRef = useRef(null)
+  const artistsMenuRef = useRef(null)
 
   const tl = useRef()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
+
+  useEffect(() => {
+    const fetchArtists = async () => {
+      const galleryArtists = await sanityClient.fetch(artistsQuery)
+      const uniqueArtists = [...new Set(galleryArtists)]
+      setArtists(uniqueArtists)
+    }
+
+    fetchArtists()
+  }, [])
 
   useGSAP(
     () => {
@@ -34,12 +51,12 @@ export default function GlobalSheet({ isFixed = true }) {
         .to('.menu-link-item-holder', {
           y: 0,
           duration: 1,
-          stagger: 0.1,
+          stagger: 0.05,
           ease: 'power4.out',
           delay: -0.75,
         })
     },
-    { scope: container },
+    { scope: containerRef, dependencies: [artists], revertOnUpdate: true },
   )
 
   useEffect(() => {
@@ -51,32 +68,47 @@ export default function GlobalSheet({ isFixed = true }) {
   }, [isMenuOpen])
 
   return (
-    <div className="menu-container" ref={container}>
+    <div className="menu-container" ref={containerRef}>
       {/* menu-bar */}
-      <div className="menu-bar z-[300] fixed top-[0] left-[0] w-screen p-[2em] flex justify-between items-center">
+      <header
+        className={cn(
+          isFixed ? 'fixed' : 'absolute',
+          'menu-bar z-[300] top-[0] left-[0] w-screen p-4 flex justify-between items-center',
+        )}
+      >
         <div className="menu-open cursor-pointer" onClick={toggleMenu}>
           <p className="text-primary hover:text-secondary">Menu</p>
         </div>
         <div className="menu-logo">
           <Link href="/">Bortolozzi</Link>
         </div>
-      </div>
+      </header>
 
       {/* menu-overlay */}
-      <div className="menu-overlay z-[500] fixed top-[0] left-[0] w-screen h-[80vh] p-[2em] bg-[#FCFBF6] flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]">
+      <div className="menu-overlay z-[500] fixed top-[0] left-[0] w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]">
         {/* menu-overlay-bar */}
-        <div className="menu-overlay-bar z-[300] fixed top-[0] left-[0] w-screen p-[2em] flex justify-between items-center">
-          <div className="cursor-pointer" onClick={toggleMenu}>
+        <div className="menu-overlay-bar z-[300] fixed top-[0] left-[0] w-screen p-4 grid grid-cols-12">
+          <div
+            className="cursor-pointer col-start-1 col-span-1"
+            onClick={toggleMenu}
+          >
             <p className="text-primary hover:text-secondary">Close</p>
           </div>
-          <div className="menu-logo">
+          <div className="menu-open cursor-pointer col-span-2 col-start-2">
+            <p className="text-primary hover:text-secondary">Artists</p>
+          </div>
+          <div className="menu-logo col-span-1 col-start-12 place-self-end">
             <Link href="/">Bortolozzi</Link>
           </div>
         </div>
 
-        {/* menu-copy  */}
-        <div className="menu-copy flex flex-col pt-4">
-          <div className="menu-links">
+        {/* menu-links  */}
+        <nav className="menu-copy grid grid-cols-12 w-full pt-4 bg-highlight">
+          {/* menu-links-pages  */}
+          <div
+            ref={pagesMenuRef}
+            className="menu-links col-span-1 col-start-1 flex flex-col pt-4"
+          >
             {menu.map((link, index) => (
               <div
                 key={index}
@@ -87,7 +119,8 @@ export default function GlobalSheet({ isFixed = true }) {
                   onClick={toggleMenu}
                 >
                   <Link
-                    className="menu-link text-primary text-[80px] tracking-[-0.02em] leading-[85%]"
+                    className="menu-link text-primary hover:text-secondary text-xs"
+                    aria-label="Main pages"
                     href={link.path}
                   >
                     {link.title}
@@ -96,7 +129,33 @@ export default function GlobalSheet({ isFixed = true }) {
               </div>
             ))}
           </div>
-        </div>
+          {/* menu-links-artists  */}
+          <div
+            ref={artistsMenuRef}
+            className="col-span-4 col-start-2 flex flex-col pt-4"
+          >
+            {artists.map((artist, index) => (
+              <div
+                key={index}
+                className="menu-link-item w-max [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
+              >
+                <div
+                  className="menu-link-item-holder relative"
+                  onClick={toggleMenu}
+                >
+                  <Link
+                    key={index}
+                    href={`/${artist.slug}`}
+                    className="text-primary hover:text-secondary text-xs menu-item"
+                    aria-label="Artist pages"
+                  >
+                    {artist.name}
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </nav>
       </div>
     </div>
   )
