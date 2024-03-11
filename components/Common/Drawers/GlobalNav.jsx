@@ -33,11 +33,11 @@ export default function GlobalNav({ isFixed = true }) {
   useGSAP(
     () => {
       const menu = gsap.utils.toArray('.menu-item')
+      gsap.set(containerRef.current, { y: 0 })
       tl.current = gsap
         .timeline()
         .to(navRef.current, {
-          height: '80vh',
-          background: '#F5F4F0',
+          y: 0,
           duration: 0.55,
         })
         .from(menu, { y: -4, opacity: 0, stagger: 0.01, duration: 0.1 })
@@ -81,7 +81,10 @@ export default function GlobalNav({ isFixed = true }) {
           <h1 className="text-primary pt-2">Artists</h1>
         </div>
       </header>
-      <nav ref={navRef} className="grid grid-cols-12 mt-2">
+      <nav
+        ref={navRef}
+        className={cn(isNavOpen ? 'block' : 'hidden', 'grid grid-cols-12 mt-2')}
+      >
         <div
           ref={pagesMenuRef}
           className="col-span-1 col-start-1 flex flex-col"
@@ -101,7 +104,10 @@ export default function GlobalNav({ isFixed = true }) {
         </div>
         <div
           ref={artistsMenuRef}
-          className="col-span-4 col-start-2 flex flex-col"
+          className={cn(
+            isNavOpen ? 'block' : 'hidden',
+            'h-fit col-span-4 col-start-2 flex flex-col',
+          )}
         >
           {artists.map((artist, index) => {
             return (
