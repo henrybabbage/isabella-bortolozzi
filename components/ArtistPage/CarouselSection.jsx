@@ -46,7 +46,7 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
       <section
         ref={ref}
         id="works"
-        className="carousel-section relative h-screen w-full flex flex-col items-center justify-center overflow-x-hidden"
+        className="carousel-section bg-background relative h-screen w-full flex flex-col items-center justify-center overflow-x-hidden"
       >
         <div
           ref={worksRef}
@@ -109,7 +109,7 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
             </Splide>
           )}
         </div>
-        <div className="space-x-8">
+        <div className="space-x-8 h-8 z-50">
           <PaginationCounter
             ref={splideRef}
             currentIndex={currentIndex}
@@ -118,6 +118,7 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
           />
           <CarouselCaption content={artist} currentIndex={currentIndex} />
         </div>
+        <div id="caption-background" className="bottom-0 bg-background h-16 w-screen absolute -z-0"></div>
       </section>
     </>
   )
