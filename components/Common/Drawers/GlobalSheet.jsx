@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from '@/lib/gsap'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { artistsQuery } from '@/sanity/lib/sanity.queries'
+import { useNavOpenStore } from '@/stores/useNavOpenStore'
 import { cn } from '@/utils/cn'
 
 const menu = [
@@ -16,7 +17,9 @@ const menu = [
 
 export default function GlobalSheet({ isFixed = true }) {
   const [artists, setArtists] = useState([])
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isNavOpen, setIsNavOpen] = useNavOpenStore(
+    ({ isNavOpen, setIsNavOpen }) => [isNavOpen, setIsNavOpen],
+  )
 
   const containerRef = useRef()
   const pagesMenuRef = useRef(null)
@@ -25,7 +28,7 @@ export default function GlobalSheet({ isFixed = true }) {
   const tl = useRef()
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
+    setIsNavOpen(!isNavOpen)
   }
 
   useEffect(() => {
@@ -60,12 +63,12 @@ export default function GlobalSheet({ isFixed = true }) {
   )
 
   useEffect(() => {
-    if (isMenuOpen) {
+    if (isNavOpen) {
       tl.current.play()
     } else {
       tl.current.reverse()
     }
-  }, [isMenuOpen])
+  }, [isNavOpen])
 
   return (
     <div className="menu-container" ref={containerRef}>
