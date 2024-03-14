@@ -4,7 +4,7 @@ const PaginationCounter = forwardRef(function PaginationCounter(
   { currentIndex, totalSlides, isLoading },
   ref,
 ) {
-  if (isLoading || !ref) return <></>
+  if (isLoading) return <></>
 
   return (
     <div className="absolute left-6 bottom-6 h-8 flex flex-col justify-end">
