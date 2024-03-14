@@ -4,12 +4,12 @@ import { useCallback, useEffect, useState } from 'react'
 
 import NewsSlide from './NewsSlide'
 
-export function EmblaCarousel({ slides, options }) {
+export function NewsCarousel({ slides, options }) {
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     AutoScroll({
       playOnInit: true,
-      startDelay: 1000,
-      speed: 0.25,
+      startDelay: 2000,
+      speed: 0.5,
       stopOnMouseEnter: false,
       stopOnInteraction: false,
     }),
@@ -47,10 +47,13 @@ export function EmblaCarousel({ slides, options }) {
   )
 
   return (
-    <div className="embla h-[44rem] max-w-full" ref={emblaRef}>
-      <div className="embla__container h-full">
+    <div className="embla overflow-hidden h-[44rem] max-w-full" ref={emblaRef}>
+      <div className="embla__container flex h-full">
         {slides.map((item, index) => (
-          <div className="embla__slide max-w-[44rem]" key={index}>
+          <div
+            className="embla__slide flex-[0_0_100%] min-w-0 mr-3 max-w-[44rem]"
+            key={index}
+          >
             <NewsSlide item={item} />
           </div>
         ))}

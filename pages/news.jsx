@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'next-sanity/preview'
 
 import PageHeader from '@/components/Common/Header/PageHeader'
-import Marquee from '@/components/Common/Marquee/Marquee'
+import Marquee from '@/components/NewsPage/Marquee'
 import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
 import { getNews } from '@/sanity/lib/sanity.fetch'

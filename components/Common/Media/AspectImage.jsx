@@ -29,32 +29,54 @@ const AspectImage = forwardRef(function AspectImage(
 
   const imageProps = useNextSanityImage(sanityClient, image)
 
-  const ratioMultiplier =
-    1 / image?.asset?.metadata?.dimensions?.aspectRatio ?? 1
-  const isLandscape = ratioMultiplier < 1
+  // Get aspect ratio
+  const IMAGE_ASPECT_RATIO =
+    image?.asset?.metadata?.dimensions?.aspectRatio ?? 1
 
-  const DESKTOP_PORTRAIT_WIDTH = `calc((${DESKTOP_PORTRAIT_HEIGHT})*(${
-    1 / ratioMultiplier
-  }))`
-  const DESKTOP_LANDSCAPE_HEIGHT = `calc((${DESKTOP_LANDSCAPE_WIDTH})*(${ratioMultiplier}))`
+  // Check orientation
+  // If larger than 1, it is landscape. If smaller than 1, it is portrait. If 1, it is square.
+  // Bortolozzi images are typically 2:3 (portrait) and 3:2 (landscape)
+  const isLandscape = IMAGE_ASPECT_RATIO > 1
 
-  const MOBILE_PORTRAIT_WIDTH = `calc((${MOBILE_PORTRAIT_HEIGHT})*(${
-    1 / ratioMultiplier
-  }))`
-  const MOBILE_LANDSCAPE_HEIGHT = `calc((${MOBILE_LANDSCAPE_WIDTH})*(${ratioMultiplier}))`
+  // height = width / ratio
+  // width = height * ratio
+
+  // Desktop dimensions
+  const DESKTOP_WIDTH = isLandscape
+    ? `${DESKTOP_LANDSCAPE_WIDTH}`
+    : `calc(${DESKTOP_PORTRAIT_HEIGHT}*${IMAGE_ASPECT_RATIO})`
+
+  const DESKTOP_HEIGHT = isLandscape
+    ? `calc(${DESKTOP_LANDSCAPE_WIDTH}*(1/${IMAGE_ASPECT_RATIO}))`
+    : `${DESKTOP_PORTRAIT_HEIGHT}`
+
+  const DESKTOP_MAX_WIDTH = `${DESKTOP_WIDTH}`
+  const DESKTOP_MAX_HEIGHT = `${DESKTOP_HEIGHT}`
+
+  // Mobile dimensions
+  const MOBILE_WIDTH = isLandscape
+    ? `${MOBILE_LANDSCAPE_WIDTH}`
+    : `calc(${MOBILE_PORTRAIT_HEIGHT}*${IMAGE_ASPECT_RATIO})`
+
+  const MOBILE_HEIGHT = isLandscape
+    ? `calc(${MOBILE_LANDSCAPE_WIDTH}*(1/${IMAGE_ASPECT_RATIO}))`
+    : `${MOBILE_PORTRAIT_HEIGHT}`
+
+  const MOBILE_MAX_WIDTH = `${MOBILE_WIDTH}`
+  const MOBILE_MAX_HEIGHT = `${MOBILE_HEIGHT}`
 
   const DESKTOP_ASPECT_RATIO_VALUES = {
-    width: isLandscape ? DESKTOP_LANDSCAPE_WIDTH : DESKTOP_PORTRAIT_WIDTH,
-    height: isLandscape ? DESKTOP_LANDSCAPE_HEIGHT : DESKTOP_PORTRAIT_HEIGHT,
-    maxWidth: DESKTOP_LANDSCAPE_WIDTH,
-    maxHeight: DESKTOP_PORTRAIT_HEIGHT,
+    width: `${DESKTOP_WIDTH}`,
+    maxWidth: `${DESKTOP_MAX_WIDTH}`,
+    height: `${DESKTOP_HEIGHT}`,
+    maxHeight: `${DESKTOP_MAX_HEIGHT}`,
   }
 
   const MOBILE_ASPECT_RATIO_VALUES = {
-    width: isLandscape ? MOBILE_LANDSCAPE_WIDTH : MOBILE_PORTRAIT_WIDTH,
-    height: isLandscape ? MOBILE_LANDSCAPE_HEIGHT : MOBILE_PORTRAIT_HEIGHT,
-    maxWidth: MOBILE_LANDSCAPE_WIDTH,
-    maxHeight: MOBILE_PORTRAIT_HEIGHT,
+    width: `${MOBILE_WIDTH}`,
+    maxWidth: `${MOBILE_MAX_WIDTH}`,
+    height: `${MOBILE_HEIGHT}`,
+    maxHeight: `${MOBILE_MAX_HEIGHT}`,
   }
 
   const hydrated = useHydrated()
