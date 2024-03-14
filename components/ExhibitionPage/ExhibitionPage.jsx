@@ -27,9 +27,7 @@ export default function ExhibitionPage({ exhibition }) {
 
   const clickHandler = contextSafe((event) => {
     if (event.target.tagName === 'IMG') {
-      const container =
-        document.querySelector('.flex-container') ||
-        document.querySelector('.grid-container')
+      const container = imagesRef.current
       const switchingToGridView = container.classList.contains('flex-container')
 
       if (!switchingToGridView) {
