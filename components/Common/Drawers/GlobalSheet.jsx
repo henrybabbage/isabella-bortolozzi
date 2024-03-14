@@ -47,14 +47,14 @@ export default function GlobalSheet({ isFixed = true }) {
       tl.current = gsap
         .timeline({ paused: true })
         .to('.menu-overlay', {
-          duration: 75,
+          duration: 0.75,
           clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
           ease: 'power4.inOut',
         })
         .to('.menu-link-item-container', {
           y: 0,
           duration: 0.5,
-          stagger: 0.05,
+          stagger: 0.025,
           ease: 'power4.out',
           delay: -0.75,
         })
