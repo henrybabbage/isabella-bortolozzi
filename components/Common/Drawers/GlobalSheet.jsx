@@ -43,17 +43,17 @@ export default function GlobalSheet({ isFixed = true }) {
 
   useGSAP(
     () => {
-      gsap.set('.menu-link-item-holder', { y: 75 })
+      gsap.set('.menu-link-item-container', { y: 75 })
       tl.current = gsap
         .timeline({ paused: true })
         .to('.menu-overlay', {
-          duration: 1.25,
+          duration: 75,
           clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
           ease: 'power4.inOut',
         })
-        .to('.menu-link-item-holder', {
+        .to('.menu-link-item-container', {
           y: 0,
-          duration: 1,
+          duration: 0.5,
           stagger: 0.05,
           ease: 'power4.out',
           delay: -0.75,
@@ -118,7 +118,7 @@ export default function GlobalSheet({ isFixed = true }) {
                 className="menu-link-item w-max [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
               >
                 <div
-                  className="menu-link-item-holder relative"
+                  className="menu-link-item-container relative"
                   onClick={toggleMenu}
                 >
                   <Link
@@ -143,7 +143,7 @@ export default function GlobalSheet({ isFixed = true }) {
                 className="menu-link-item w-max [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
               >
                 <div
-                  className="menu-link-item-holder relative"
+                  className="menu-link-item-container relative"
                   onClick={toggleMenu}
                 >
                   <Link
