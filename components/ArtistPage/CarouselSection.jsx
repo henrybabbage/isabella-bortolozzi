@@ -1,11 +1,10 @@
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { useSectionInView } from '@/hooks/useSectionInView'
+import { cn } from '@/utils/cn'
 
-import ArrowLeftButton from '../Common/Buttons/ArrowLeftButton'
-import ArrowRightButton from '../Common/Buttons/ArrowRightButton'
 import CarouselCaption from './CarouselCaption'
 import PaginationCounter from './PaginationCounter'
 import SlideImage from './SlideImage'
@@ -13,30 +12,34 @@ import SlideImage from './SlideImage'
 const OPTIONS = {
   loop: true,
   align: 'center',
-  duration: 0,
 }
 
 export default function CarouselSection({ artist, isLoading, worksRef }) {
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [tooltipText, setTooltipText] = useState('')
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [currentIndex, setCurrentIndex] = useState(0)
   const [totalSlides, setTotalSlides] = useState(artist?.imageGallery?.length)
+  const [isCursorLeft, setIsCursorLeft] = useState(null)
+
+  const containerRef = useRef(null)
 
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [
     Autoplay({
       jump: true,
       delay: 10,
       playOnInit: false,
-      stopOnInteraction: false,
     }),
   ])
 
-  const scrollPrev = useCallback(() => {
+  const handleScrollPrev = useCallback(() => {
     centerCarousel()
-    if (emblaApi) emblaApi.scrollPrev()
+    if (emblaApi) emblaApi.scrollPrev({ jump: true })
   }, [emblaApi])
 
-  const scrollNext = useCallback(() => {
+  const handleScrollNext = useCallback(() => {
     centerCarousel()
-    if (emblaApi) emblaApi.scrollNext()
+    if (emblaApi) emblaApi.scrollNext({ jump: true })
   }, [emblaApi])
 
   useEffect(() => {
@@ -51,6 +54,35 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }
+  }
+
+  const handleMouseEnter = useCallback(() => {
+    setShowTooltip(true)
+  }, [])
+
+  const handleMouseMove = useCallback((e) => {
+    const emblaContainer = containerRef.current
+    if (!emblaContainer) return
+    const { left, width } = emblaContainer.getBoundingClientRect()
+    const cursorX = e.clientX
+
+    // Cursor's X position relative to the carousel
+    const relativeX = cursorX - left
+    // Determine if the cursor is on the left or right half of the carousel
+    const text = relativeX < width / 2 ? 'Prev' : 'Next'
+
+    setIsCursorLeft(relativeX < width / 2)
+    setTooltipText(text)
+    setMousePosition({ x: e.clientX, y: e.clientY })
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    setShowTooltip(false)
+  }, [])
+
+  const handleClick = () => {
+    console.log('Clicked!')
+    isCursorLeft ? handleScrollPrev() : handleScrollNext()
   }
 
   const imageGallery = artist?.imageGallery ?? []
@@ -69,37 +101,46 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
           className="h-full w-full flex justify-center items-center"
         >
           {imageGallery.length > 0 && (
-            <>
-              <div className="embla overflow-hidden">
-                <div className="embla__viewport relative h-full" ref={emblaRef}>
-                  <div className="embla__container flex">
-                    {imageGallery.map((image, index) => (
-                      <div
-                        key={index}
-                        className="embla__slide h-full flex-[0_0_100%] min-w-0"
-                      >
-                        <SlideImage
-                          image={image}
-                          priority={index === 0 ? true : false}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="absolute top-1/2 left-6 embla__prev">
-                  <ArrowLeftButton didPressButton={scrollPrev} />
-                </div>
-                <div className="absolute top-1/2 right-6 embla__next">
-                  <ArrowRightButton didPressButton={scrollNext} />
+            <div ref={containerRef} className="embla overflow-hidden">
+              <button
+                className={cn(
+                  showTooltip ? 'block' : 'hidden',
+                  'z-100 m-0 cursor-none p-0 text-primary bg-white px-1 py-[2px]',
+                )}
+                style={{
+                  position: 'absolute',
+                  left: mousePosition.x - 25,
+                  top: mousePosition.y - 25,
+                }}
+              >
+                {tooltipText}
+              </button>
+              <div className="embla__viewport relative h-full" ref={emblaRef}>
+                <div
+                  onClick={handleClick}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}
+                  className="embla__container flex"
+                >
+                  {imageGallery.map((image, index) => (
+                    <div
+                      key={index}
+                      className="embla__slide h-full flex-[0_0_100%] min-w-0"
+                    >
+                      <SlideImage
+                        image={image}
+                        priority={index === 0 ? true : false}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
-            </>
+            </div>
           )}
         </div>
         <div className="space-x-8 h-8 z-50">
           <PaginationCounter
-            ref={emblaRef}
             currentIndex={currentIndex}
             totalSlides={totalSlides}
             isLoading={isLoading}
