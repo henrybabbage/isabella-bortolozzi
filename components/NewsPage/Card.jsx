@@ -1,8 +1,8 @@
 import DynamicLink from '@/components/Primitives/DynamicLink'
 import { formatDateWithoutYear, getYear } from '@/utils/dateHelpers'
 
-import StandardImage from '../Media/StandardImage'
-import { CustomPortableText } from '../Text/CustomPortableText'
+import StandardImage from '../Common/Media/StandardImage'
+import { CustomPortableText } from '../Common/Text/CustomPortableText'
 
 export default function Card({ item }) {
   const {

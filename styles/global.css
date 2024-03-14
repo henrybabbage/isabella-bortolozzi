@@ -3,10 +3,100 @@
 @tailwind utilities;
 
 @layer base {
-    body { 
-        @apply bg-background;
-        @apply text-xs;
+    #root,
+	#__next {
+		@apply isolate;
+	}
+
+	*,
+	*::before,
+	*::after {
+		@apply box-border;
+	}
+
+	* {
+		@apply m-0;
+		@apply overscroll-none;
+	}
+
+	html {
+        @apply min-h-full;
+        @apply h-auto;
+		@apply overflow-x-hidden;
+		@apply antialiased;
+	}
+
+	body {
+        @apply min-h-full;
+        @apply h-auto;
+        @apply m-0;
         @apply overscroll-none;
+		@apply bg-background;
+		@apply leading-normal;
+		-webkit-font-smoothing: antialiased;
+        @apply text-xs;
+        @apply font-mono;
+	}
+
+	img {
+		@apply block h-auto w-full max-w-[100vw];
+	}
+
+	input,
+	button,
+	textarea,
+	select {
+		@apply text-inherit;
+	}
+
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply break-words;
+	}
+
+    a {
+        @apply text-inherit;
+        @apply decoration-inherit;
+    }
+
+    sub,
+    sup {
+        @apply text-[75%] leading-[0] relative align-baseline;
+    }
+    sub {
+        @apply bottom-[-0.25em];
+    }
+    sup {
+        @apply top-[-0.5em];
+    }
+
+    button,
+    [type="button"],
+    [type="reset"],
+    [type="submit"] {
+        @apply bg-transparent bg-none;
+        -webkit-appearance: button;
+    }
+
+    ol,
+    ul,
+    menu {
+        @apply m-0 p-0;
+        @apply list-none;
+    }
+
+    dialog {
+        @apply p-0;
+    }
+
+    input[type="text"],
+    textarea {
+        @apply bg-background;
     }
 }
 
@@ -36,181 +126,4 @@
     overscroll-behavior: none;
     -webkit-font-smoothing: antialiased;
     overflow: auto;
-}
-
-html {
-    /* font-family: var(--font-serif), serif; */
-    font-family: var(--font-mono), serif;
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-html, body {
-    min-height: 100%;
-    height: auto;
-}
-
-body {
-    margin: 0;
-    line-height: inherit;
-}
-
-button,
-fieldset,
-/* input {
-  all: unset;
-} */
-
-a {
-	color: inherit;
-	text-decoration: inherit;
-}
-
-/*
-Prevent `sub` and `sup` elements from affecting the line height in all browsers.
-*/
-
-sub,
-sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
-}
-
-sub {
-	bottom: -0.25em;
-}
-  
-sup {
-	top: -0.5em;
-}
-
-/*
-1. Change the font styles in all browsers.
-2. Remove the margin in Firefox and Safari.
-3. Remove default padding in all browsers.
-*/
-
-button,
-input,
-optgroup,
-select,
-textarea {
-	font-family: inherit;
-	font-feature-settings: inherit;
-	font-variation-settings: inherit;
-	font-size: 100%;
-	font-weight: inherit;
-	line-height: inherit;
-	color: inherit;
-	margin: 0;
-	padding: 0;
-}
-
-/*
-Remove the inheritance of text transform in Edge and Firefox.
-*/
-
-button,
-select {
- 	text-transform: none;
-}
-
-/*
-1. Correct the inability to style clickable types in iOS and Safari.
-2. Remove default button styles.
-*/
-
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-	-webkit-appearance: button;
-	background-color: transparent;
-	background-image: none;
-}
-
-blockquote,
-dl,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-figure,
-p,
-pre {
-  	margin: 0;
-}
-
-fieldset {
-	margin: 0;
-	padding: 0;
-}
-  
-legend {
-	padding: 0;
-}
-
-ol,
-ul,
-menu {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-/*
-Reset default styling for dialogs.
-*/
-
-dialog {
-	padding: 0;
-}
-
-/*
-Set the default cursor for buttons.
-*/
-
-button,
-[role="button"] {
-	cursor: pointer;
-}
-
-/*
-Constrain images and videos to the parent width and preserve their intrinsic aspect ratio.
-*/
-
-img,
-video {
-	max-width: 100%;
-	height: auto;
-}
-
-input[type='text'],
-textarea {
-	background-color: var(--bg-background);
-}
-
-/* Embla carousel */
-
-.embla {
-    overflow: hidden;
-}
-
-.embla__container {
-    display: flex;
-}
-
-.embla__slide {
-    flex: 0 0 100%;
-    min-width: 0;
-    margin-right: 12px;
 }

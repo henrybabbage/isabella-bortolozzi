@@ -1,7 +1,6 @@
-import '@splidejs/react-splide/css/core'
-
-import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
-import { useRef, useState } from 'react'
+import Autoplay from 'embla-carousel-autoplay'
+import useEmblaCarousel from 'embla-carousel-react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { useSectionInView } from '@/hooks/useSectionInView'
 
@@ -11,25 +10,42 @@ import CarouselCaption from './CarouselCaption'
 import PaginationCounter from './PaginationCounter'
 import SlideImage from './SlideImage'
 
+const OPTIONS = {
+  loop: true,
+  align: 'center',
+  duration: 0,
+}
+
 export default function CarouselSection({ artist, isLoading, worksRef }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [totalSlides, setTotalSlides] = useState(artist?.imageGallery?.length)
 
-  const splideRef = useRef(null)
+  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [
+    Autoplay({
+      jump: true,
+      delay: 10,
+      playOnInit: false,
+      stopOnInteraction: false,
+    }),
+  ])
+
+  const scrollPrev = useCallback(() => {
+    centerCarousel()
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    centerCarousel()
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
+  useEffect(() => {
+    if (emblaApi) {
+      console.log(emblaApi.slideNodes()) // Access API
+    }
+  }, [emblaApi])
 
   const { ref } = useSectionInView('works', 0.1)
-
-  const didClickPrevious = () => {
-    if (splideRef.current) {
-      splideRef.current.splide.go('>')
-    }
-  }
-
-  const didClickNext = () => {
-    if (splideRef.current) {
-      splideRef.current.splide.go('<')
-    }
-  }
 
   const centerCarousel = () => {
     if (typeof window !== 'undefined') {
@@ -53,72 +69,47 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
           className="h-full w-full flex justify-center items-center"
         >
           {imageGallery.length > 0 && (
-            <Splide
-              hasTrack={false}
-              tag="section"
-              ref={splideRef}
-              aria-label={`${artist.name} artworks`}
-              options={{
-                type: 'fade',
-                speed: 400,
-                keyboard: 'global',
-                arrows: true,
-                pagination: false,
-                autoplay: false,
-                rewind: true,
-                width: '100vw',
-                height: '100vh',
-              }}
-              onMoved={(splide, newIndex) => {
-                setCurrentIndex(newIndex)
-                setTotalSlides(splide.length)
-              }}
-              className="flex justify-center items-center"
-            >
-              <div
-                id="wrapper"
-                className="w-screen h-screen items-center flex justify-center"
-              >
-                <SplideTrack className="">
-                  {imageGallery.length > 0 &&
-                    imageGallery.map((image, idx) => (
-                      <SplideSlide
-                        key={idx}
-                        className="flex flex-col justify-center items-center"
+            <>
+              <div className="embla overflow-hidden">
+                <div className="embla__viewport relative h-full" ref={emblaRef}>
+                  <div className="embla__container flex">
+                    {imageGallery.map((image, index) => (
+                      <div
+                        key={index}
+                        className="embla__slide h-full flex-[0_0_100%] min-w-0"
                       >
                         <SlideImage
                           image={image}
-                          priority={idx === 0 ? true : false}
+                          priority={index === 0 ? true : false}
                         />
-                      </SplideSlide>
+                      </div>
                     ))}
-                </SplideTrack>
-                <div className="splide__arrows">
-                  <div className="splide__arrow splide__arrow--prev">
-                    <div className="absolute left-6">
-                      <ArrowLeftButton didClickPrevious={centerCarousel} />
-                    </div>
-                  </div>
-                  <div className="splide__arrow splide__arrow--next">
-                    <div className="absolute right-6">
-                      <ArrowRightButton didClickNext={centerCarousel} />
-                    </div>
                   </div>
                 </div>
+
+                <div className="absolute top-1/2 left-6 embla__prev">
+                  <ArrowLeftButton didPressButton={scrollPrev} />
+                </div>
+                <div className="absolute top-1/2 right-6 embla__next">
+                  <ArrowRightButton didPressButton={scrollNext} />
+                </div>
               </div>
-            </Splide>
+            </>
           )}
         </div>
         <div className="space-x-8 h-8 z-50">
           <PaginationCounter
-            ref={splideRef}
+            ref={emblaRef}
             currentIndex={currentIndex}
             totalSlides={totalSlides}
             isLoading={isLoading}
           />
           <CarouselCaption content={artist} currentIndex={currentIndex} />
         </div>
-        <div id="caption-background" className="bottom-0 bg-background h-16 w-screen absolute -z-0"></div>
+        <div
+          id="caption-background"
+          className="bottom-0 bg-background h-16 w-screen absolute -z-0"
+        ></div>
       </section>
     </>
   )

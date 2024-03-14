@@ -55,6 +55,21 @@ export default function FlipImage({
     maxHeight: `${DESKTOP_MAX_HEIGHT}`,
   }
 
+  const srcSetGridViewPortrait = '(min-width: 740px) calc(17vw - 30px), 84px'
+  const srcSetGridViewLandscape =
+    '(min-width: 1940px) calc(17vw - 30px), (min-width: 800px) calc(18vw - 48px), 84px'
+
+  const srcSetFullViewPortrait = '34vw'
+  const srcSetFullViewLandscape = '64vw'
+
+  let srcSet
+
+  if (isGridView) {
+    srcSet = isLandscape ? srcSetGridViewLandscape : srcSetGridViewPortrait
+  } else {
+    srcSet = isLandscape ? srcSetFullViewLandscape : srcSetFullViewPortrait
+  }
+
   if (!image) return null
   return (
     <div
@@ -68,7 +83,7 @@ export default function FlipImage({
           loader={imageProps.loader}
           alt={alt ?? ''}
           fill={fill}
-          sizes={sizes}
+          sizes={srcSet}
           width={width}
           height={height}
           quality={75}
