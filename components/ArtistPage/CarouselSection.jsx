@@ -24,22 +24,16 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
 
   const containerRef = useRef(null)
 
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [
-    Autoplay({
-      jump: true,
-      delay: 10,
-      playOnInit: false,
-    }),
-  ])
+  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS)
 
   const handleScrollPrev = useCallback(() => {
     centerCarousel()
-    if (emblaApi) emblaApi.scrollPrev({ jump: true })
+    if (emblaApi) emblaApi.scrollPrev(true)
   }, [emblaApi])
 
   const handleScrollNext = useCallback(() => {
     centerCarousel()
-    if (emblaApi) emblaApi.scrollNext({ jump: true })
+    if (emblaApi) emblaApi.scrollNext(true)
   }, [emblaApi])
 
   useEffect(() => {
