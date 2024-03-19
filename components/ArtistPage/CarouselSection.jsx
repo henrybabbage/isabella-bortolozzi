@@ -1,4 +1,3 @@
-import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -21,6 +20,8 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [totalSlides, setTotalSlides] = useState(artist?.imageGallery?.length)
   const [isCursorLeft, setIsCursorLeft] = useState(null)
+
+  console.log(worksRef)
 
   const containerRef = useRef(null)
 

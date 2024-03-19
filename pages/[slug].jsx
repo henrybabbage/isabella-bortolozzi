@@ -23,6 +23,7 @@ import { cn } from '@/utils/cn'
 
 export default function ArtistSlugRoute(props) {
   const [isLoading, setIsLoading] = useState(true)
+  
   const pageRef = useRef(null)
 
   const hydrated = useHydrated()
@@ -58,7 +59,7 @@ export default function ArtistSlugRoute(props) {
         start: 'top top', // Start the pin when the top of the trigger hits the top of the viewport
         pin: true, // Enable pinning
         pinSpacing: false, // Disable adding spacing when the element is pinned
-        markers: false, // Show markers for each scroll trigger
+        markers: true, // Show markers for each scroll trigger
       })
     },
     { scope: pageRef },
