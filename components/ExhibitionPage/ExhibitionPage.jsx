@@ -14,7 +14,7 @@ const scrollToTop = () => {
 }
 
 export default function ExhibitionPage({ exhibition }) {
-  const [isGridView, setIsGridView] = useState(true)
+  const [isGridView, setIsGridView] = useState(false)
   const [targetId, setTargetId] = useState(null)
 
   const router = useRouter()
@@ -76,12 +76,11 @@ export default function ExhibitionPage({ exhibition }) {
     <div ref={pageRef} className="relative h-full w-full px-12 py-24">
       <div
         ref={imagesRef}
-        className="grid-container relative w-full gap-x-4 gap-y-32"
+        className="flex-container relative w-full gap-x-4 gap-y-32"
       >
         {exhibition &&
           exhibition.imageGallery &&
           exhibition.imageGallery
-            // .splice(0, 8)
             .map((image, index) => (
               <FlipImage
                 key={image._key}
