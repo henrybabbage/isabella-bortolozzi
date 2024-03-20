@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 
-import TableItem from '../Common/Table/TableItem'
+import ExhibitionTableItem from './ExhibitionTableItem'
 
-export default function ExhibitionsTable({ exhibitions }) {
+export default function ExhibitionTable({ exhibitions }) {
   // zustand store
   const setCurrentlyHoveredItem = useActiveItemStore(
     (state) => state.setCurrentlyHoveredItem,
@@ -13,7 +13,7 @@ export default function ExhibitionsTable({ exhibitions }) {
   useEffect(() => {
     setCurrentlyHoveredItem(null)
   }, [setCurrentlyHoveredItem])
-  
+
   return (
     <div
       onMouseLeave={() => {
@@ -30,9 +30,9 @@ export default function ExhibitionsTable({ exhibitions }) {
               onMouseEnter={() => {
                 setCurrentlyHoveredItem(index)
               }}
-              className="relative"
+              className="relative cursor-pointer"
             >
-              <TableItem exhibition={exhibition} index={index} />
+              <ExhibitionTableItem exhibition={exhibition} index={index} />
             </li>
           ))}
         </ol>

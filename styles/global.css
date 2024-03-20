@@ -102,7 +102,7 @@
 
 @layer utilities {
     .small-caps {
-      font-variant: all-small-caps;
+        font-variant: all-small-caps;
     }
 
     .grid-container {

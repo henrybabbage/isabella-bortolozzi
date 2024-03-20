@@ -1,5 +1,5 @@
-import { useNextSanityImage } from 'next-sanity-image'
 import Image from 'next/image'
+import { useNextSanityImage } from 'next-sanity-image'
 import { useEffect, useState } from 'react'
 import { cn } from 'utils/cn'
 
@@ -22,8 +22,6 @@ export default function FlipImage({
 }) {
   const [imageSizes, setImageSizes] = useState(null)
   const imageProps = useNextSanityImage(sanityClient, image?.asset)
-
-  console.log(imageSizes)
 
   // Get aspect ratio
   const IMAGE_ASPECT_RATIO =
@@ -82,7 +80,7 @@ export default function FlipImage({
   return (
     <div
       style={isGridView ? GRID_RATIO_STYLES : FLEX_RATIO_STYLES}
-      className={cn('relative grid-item event cursor-pointer')}
+      className={cn('relative image-item event cursor-pointer')}
       data-image-id={index}
     >
       {imageProps && (

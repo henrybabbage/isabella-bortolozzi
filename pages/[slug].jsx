@@ -8,7 +8,7 @@ import { useMediaQuery } from 'react-responsive'
 import ArtistSubNav from '@/components/ArtistPage/ArtistSubNav'
 import CarouselSection from '@/components/ArtistPage/CarouselSection'
 import CVSection from '@/components/ArtistPage/CVSection'
-import ExhibitionsSection from '@/components/ArtistPage/ExhibitionsSection'
+import ExhibitionSection from '@/components/ArtistPage/ExhibitionSection'
 import MobileArtistSubNav from '@/components/Mobile/MobileArtistSubNav'
 import { ScrollTrigger } from '@/lib/gsap'
 import { readToken } from '@/sanity/lib/sanity.api'
@@ -118,7 +118,7 @@ export default function ArtistSlugRoute(props) {
             artist={artist}
             isLoading={isLoading}
           />
-          <ExhibitionsSection exhibitionsRef={exhibitionsRef} artist={artist} />
+          <ExhibitionSection exhibitionsRef={exhibitionsRef} artist={artist} />
           <CVSection biographyRef={biographyRef} artist={artist} />
         </div>
       </div>

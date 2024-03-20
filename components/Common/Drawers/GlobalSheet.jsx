@@ -53,10 +53,10 @@ export default function GlobalSheet({ isFixed = true }) {
         })
         .to('.menu-link-item-container', {
           y: 0,
-          duration: 0.5,
+          duration: 0.3,
           stagger: 0.025,
           ease: 'power4.out',
-          delay: -0.75,
+          delay: -0.1,
         })
     },
     { scope: containerRef, dependencies: [artists], revertOnUpdate: true },
@@ -76,21 +76,24 @@ export default function GlobalSheet({ isFixed = true }) {
       <header
         className={cn(
           isFixed ? 'fixed' : 'absolute',
-          'menu-bar z-[300] top-[0] left-[0] w-screen p-4 flex justify-between items-center',
+          'menu-bar z-400 top-0 left-0 p-4 w-full',
         )}
       >
-        <div className="menu-open cursor-pointer" onClick={toggleMenu}>
+        <div
+          className="menu-open cursor-pointer absolute top-4 left-4"
+          onClick={toggleMenu}
+        >
           <p className="text-primary hover:text-secondary">Menu</p>
         </div>
-        <div className="menu-logo">
+        <div className="menu-logo absolute top-4 right-4">
           <Link href="/">Bortolozzi</Link>
         </div>
       </header>
 
       {/* menu-overlay */}
-      <div className="menu-overlay z-[500] fixed top-[0] left-[0] w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]">
+      <div className="menu-overlay z-500 fixed top-0 left-0 w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]">
         {/* menu-overlay-bar */}
-        <div className="menu-overlay-bar z-[300] fixed top-[0] left-[0] w-screen p-4 grid grid-cols-12">
+        <div className="menu-overlay-bar z-300 fixed top-0 left-0 w-screen p-4 grid grid-cols-12">
           <div
             className="cursor-pointer col-start-1 col-span-1"
             onClick={toggleMenu}

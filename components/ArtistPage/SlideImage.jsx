@@ -15,7 +15,7 @@ export default function SlideImage({ image, priority }) {
           // width={image.asset.metadata.dimensions.width}
           // height={image.asset.metadata.dimensions.height}
           fill
-          sizes="100vw"
+          sizes="(min-width: 1120px) 1120px, (min-width: 660px) 660px, (min-width: 440px) 440px, 300px"
           priority={priority}
           quality={75}
           style={{
