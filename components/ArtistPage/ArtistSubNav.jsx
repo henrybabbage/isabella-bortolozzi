@@ -22,9 +22,8 @@ export default function ArtistSubNav({
 
   if (!artist) return null
   return (
-    <aside className="fixed top-0 grid w-full grid-cols-12 px-4 sm:px-4 z-100">
-      <div className="absolute col-span-1 col-start-1 flex h-[4rem] pt-4 w-full items-baseline bg-background"></div>
-      <div className="absolute col-span-9 col-start-2 inline-flex h-[4rem] pt-4 w-full items-baseline space-x-12 bg-background">
+    <aside className="fixed top-0 grid w-screen grid-cols-12 px-4 sm:px-4 z-300 bg-background h-12">
+      <div className="absolute col-span-9 col-start-2 inline-flex h-[4rem] pt-4 w-full items-baseline space-x-12">
         <h1
           className={cn(
             isNavOpen ? 'invisible' : 'visible',
@@ -38,7 +37,7 @@ export default function ArtistSubNav({
           <button
             type="button"
             className={cn(
-              'z-100 w-fit cursor-pointer transition hover:text-primary uppercase',
+              'z-300 w-fit cursor-pointer transition hover:text-primary uppercase',
               isLoading ? 'hidden' : 'block',
               inViewSection === 'works' ? 'text-primary' : 'text-secondary',
             )}
@@ -51,13 +50,13 @@ export default function ArtistSubNav({
           >
             {'Works'}
           </button>
-          <div className={cn(isLoading ? 'block' : 'hidden', 'w-full z-[999]')}>
+          <div className={cn(isLoading ? 'block' : 'hidden', 'w-full')}>
             <LoadingCounter totalImages={artist.imageGallery?.length} />
           </div>
           <button
             type="button"
             className={cn(
-              'z-100 w-fit cursor-pointer transition hover:text-primary uppercase',
+              'z-300 w-fit cursor-pointer transition hover:text-primary uppercase',
               isLoading ? 'hidden' : 'block',
               inViewSection === 'exhibitions'
                 ? 'text-primary'
@@ -75,7 +74,7 @@ export default function ArtistSubNav({
           <button
             type="button"
             className={cn(
-              'z-100 w-fit cursor-pointer transition hover:text-primary uppercase',
+              'z-300 w-fit cursor-pointer transition hover:text-primary uppercase',
               isLoading ? 'hidden' : 'block',
               inViewSection === 'biography' ? 'text-primary' : 'text-secondary',
             )}

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 
 import { Flip, gsap } from '@/lib/gsap'
+import { cn } from '@/utils/cn'
 
 import FlipImage from '../Common/Media/FlipImage'
 
@@ -14,7 +15,7 @@ const scrollToTop = () => {
 }
 
 export default function ExhibitionPage({ exhibition }) {
-  const [isGridView, setIsGridView] = useState(true)
+  const [isGridView, setIsGridView] = useState(false)
   const [targetId, setTargetId] = useState(null)
 
   const router = useRouter()
@@ -23,7 +24,10 @@ export default function ExhibitionPage({ exhibition }) {
   const imagesRef = useRef()
   const eventsRef = useRef([])
 
-  const { contextSafe } = useGSAP()
+  const { contextSafe } = useGSAP({
+    dependencies: isGridView,
+    scope: imagesRef,
+  })
 
   const clickHandler = contextSafe((event) => {
     if (event.target.tagName === 'IMG') {
@@ -76,28 +80,29 @@ export default function ExhibitionPage({ exhibition }) {
     <div ref={pageRef} className="relative h-full w-full px-12 py-24">
       <div
         ref={imagesRef}
-        className="grid-container relative w-full gap-x-4 gap-y-32"
+        className={cn(
+          isGridView ? 'grid-container' : 'flex-container',
+          'gallery relative w-full gap-x-4 gap-y-32',
+        )}
       >
         {exhibition &&
           exhibition.imageGallery &&
-          exhibition.imageGallery
-            // .splice(0, 8)
-            .map((image, index) => (
-              <FlipImage
-                key={image._key}
-                image={image}
-                fill={false}
-                sizes="80vw"
-                mode="contain"
-                width={image.asset.metadata.dimensions.width}
-                height={image.asset.metadata.dimensions.height}
-                aspectRatio={image.asset.metadata.dimensions.aspectRatio}
-                priority={false}
-                clickHandler={clickHandler}
-                isGridView={isGridView}
-                index={index}
-              />
-            ))}
+          exhibition.imageGallery.map((image, index) => (
+            <FlipImage
+              key={image._key}
+              image={image}
+              fill={false}
+              sizes="80vw"
+              mode="contain"
+              width={image.asset.metadata.dimensions.width}
+              height={image.asset.metadata.dimensions.height}
+              aspectRatio={image.asset.metadata.dimensions.aspectRatio}
+              priority={false}
+              clickHandler={clickHandler}
+              isGridView={isGridView}
+              index={index}
+            />
+          ))}
       </div>
     </div>
   )

@@ -27,7 +27,7 @@ export default function IndexPage(props) {
         start: 'top top', // Start the pin when the top of the trigger hits the top of the viewport
         pin: true, // Enable pinning
         pinSpacing: false, // Disable adding spacing when the element is pinned
-        markers: true, // Show markers for each scroll trigger
+        markers: false, // Show markers for each scroll trigger
       })
     },
     { scope: pageRef },

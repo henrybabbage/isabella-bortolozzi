@@ -110,7 +110,7 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
               >
                 {tooltipText}
               </button>
-              <div className="embla__viewport relative h-full" ref={emblaRef}>
+              <div className="embla__viewport relative h-full cursor-pointer" ref={emblaRef}>
                 <div
                   onClick={handleClick}
                   onMouseEnter={handleMouseEnter}

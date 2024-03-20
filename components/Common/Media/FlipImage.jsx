@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import { useEffect, useState } from 'react'
 import { cn } from 'utils/cn'
 
 import { sanityClient } from '@/sanity/lib/sanity.client'
@@ -19,6 +20,7 @@ export default function FlipImage({
   isGridView,
   index,
 }) {
+  const [imageSizes, setImageSizes] = useState(null)
   const imageProps = useNextSanityImage(sanityClient, image?.asset)
 
   // Get aspect ratio
@@ -62,19 +64,23 @@ export default function FlipImage({
   const srcSetFullViewPortrait = '34vw'
   const srcSetFullViewLandscape = '64vw'
 
-  let srcSet
-
-  if (isGridView) {
-    srcSet = isLandscape ? srcSetGridViewLandscape : srcSetGridViewPortrait
-  } else {
-    srcSet = isLandscape ? srcSetFullViewLandscape : srcSetFullViewPortrait
-  }
+  useEffect(() => {
+    if (isGridView) {
+      setImageSizes(
+        isLandscape ? srcSetGridViewLandscape : srcSetGridViewPortrait,
+      )
+    } else {
+      setImageSizes(
+        isLandscape ? srcSetFullViewLandscape : srcSetFullViewPortrait,
+      )
+    }
+  }, [isGridView, isLandscape])
 
   if (!image) return null
   return (
     <div
       style={isGridView ? GRID_RATIO_STYLES : FLEX_RATIO_STYLES}
-      className={cn('relative grid-item event cursor-pointer')}
+      className={cn('relative image-item event cursor-pointer')}
       data-image-id={index}
     >
       {imageProps && (
@@ -83,7 +89,7 @@ export default function FlipImage({
           loader={imageProps.loader}
           alt={alt ?? ''}
           fill={fill}
-          sizes={srcSet}
+          sizes={imageSizes}
           width={width}
           height={height}
           quality={75}
