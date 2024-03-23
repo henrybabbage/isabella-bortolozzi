@@ -38,14 +38,6 @@ const CarouselSection = forwardRef(function CarouselSection(
     if (emblaApi) emblaApi.scrollNext(true)
   }, [emblaApi])
 
-  useEffect(() => {
-    if (emblaApi) {
-      console.log(emblaApi.slideNodes()) // Access API
-      console.log('in view', emblaApi.slidesInView()) // Current slide in view
-      console.log('not in view', emblaApi.slidesNotInView()) // Slides not currently in view
-    }
-  }, [emblaApi])
-
   const onSelect = useCallback(() => {
     if (!emblaApi) return
     setCurrentIndex(emblaApi.selectedScrollSnap())

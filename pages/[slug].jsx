@@ -82,7 +82,7 @@ export default function ArtistSlugRoute(props) {
   })
 
   return (
-    <main ref={pageRef} className="w-screen animate-fade-in">
+    <main className="w-screen animate-fade-in">
       <div className="flex flex-col w-full relative">
         <Client>
           <Desktop>
@@ -104,7 +104,10 @@ export default function ArtistSlugRoute(props) {
             />
           </TabletAndBelow>
         </Client>
-        <div className="relative flex flex-col gap-24 sm:gap-0 h-full">
+        <div
+          ref={pageRef}
+          className="relative flex flex-col gap-24 sm:gap-0 h-full"
+        >
           <CarouselSection
             ref={worksRef}
             artist={artist}

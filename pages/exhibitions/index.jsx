@@ -1,10 +1,7 @@
 import { useLiveQuery } from 'next-sanity/preview'
-import { Suspense } from 'react'
-import { Client } from 'react-hydration-provider'
 
 import PageHeader from '@/components/Common/Header/PageHeader'
 import TableView from '@/components/Common/Table/TableView'
-import LoadingMessage from '@/components/ExhibitionsPage/LoadingMessage'
 import YearsPopover from '@/components/ExhibitionsPage/YearsPopover'
 import ExhibitionsLayout from '@/components/Layout/ExhibitionsLayout'
 import { readToken } from '@/sanity/lib/sanity.api'
@@ -16,14 +13,10 @@ export default function Exhibitions(props) {
   const [exhibitions] = useLiveQuery(props.exhibitions, exhibitionsQuery)
   return (
     <main className="animate-fade-in min-h-full w-screen">
-      <Client>
-        <PageHeader title={'Exhibitions'}>
-          <YearsPopover exhibitions={exhibitions} />
-        </PageHeader>
-        <Suspense fallback={<LoadingMessage />}>
-          <TableView exhibitions={exhibitions} />
-        </Suspense>
-      </Client>
+      <PageHeader title={'Exhibitions'}>
+        <YearsPopover exhibitions={exhibitions} />
+      </PageHeader>
+      <TableView exhibitions={exhibitions} />
     </main>
   )
 }
