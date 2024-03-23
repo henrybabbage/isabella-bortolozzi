@@ -1,11 +1,9 @@
 import { forwardRef } from 'react'
 
 const PaginationCounter = forwardRef(function PaginationCounter(
-  { currentIndex, totalSlides, isLoading },
+  { currentIndex, totalSlides },
   ref,
 ) {
-  if (isLoading) return <></>
-
   return (
     <div className="absolute left-6 bottom-6 h-8 flex flex-col justify-end">
       <h3 className="inline-flex gap-2.5 w-auto justify-start">
