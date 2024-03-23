@@ -70,6 +70,12 @@ export default function GlobalSheet({ isFixed = true }) {
     }
   }, [isNavOpen])
 
+  useEffect(() => {
+    isNavOpen
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'auto')
+  }, [isNavOpen])
+
   return (
     <div className="menu-container" ref={containerRef}>
       {/* menu-bar */}

@@ -19,11 +19,10 @@ import {
   artistSlugsQuery,
 } from '@/sanity/lib/sanity.queries'
 import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
-import { cn } from '@/utils/cn'
 
 export default function ArtistSlugRoute(props) {
   const [isLoading, setIsLoading] = useState(true)
-  
+
   const pageRef = useRef(null)
 
   const hydrated = useHydrated()
@@ -83,7 +82,7 @@ export default function ArtistSlugRoute(props) {
   })
 
   return (
-    <main ref={pageRef} className="w-screen animate-fade-in">
+    <main className="w-screen animate-fade-in">
       <div className="flex flex-col w-full relative">
         <Client>
           <Desktop>
@@ -106,15 +105,11 @@ export default function ArtistSlugRoute(props) {
           </TabletAndBelow>
         </Client>
         <div
-          className={cn(
-            isLoading && desktopOrLaptop
-              ? '!overflow-hidden opacity-0'
-              : 'opacity-100',
-            'relative flex flex-col gap-24 sm:gap-0 h-full',
-          )}
+          ref={pageRef}
+          className="relative flex flex-col gap-24 sm:gap-0 h-full"
         >
           <CarouselSection
-            worksRef={worksRef}
+            ref={worksRef}
             artist={artist}
             isLoading={isLoading}
           />

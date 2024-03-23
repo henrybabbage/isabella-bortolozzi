@@ -1,5 +1,5 @@
 import useEmblaCarousel from 'embla-carousel-react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 
 import { useSectionInView } from '@/hooks/useSectionInView'
 import { cn } from '@/utils/cn'
@@ -13,15 +13,16 @@ const OPTIONS = {
   align: 'center',
 }
 
-export default function CarouselSection({ artist, isLoading, worksRef }) {
+const CarouselSection = forwardRef(function CarouselSection(
+  { artist, isLoading },
+  ref,
+) {
   const [showTooltip, setShowTooltip] = useState(false)
   const [tooltipText, setTooltipText] = useState('')
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [currentIndex, setCurrentIndex] = useState(0)
   const [totalSlides, setTotalSlides] = useState(artist?.imageGallery?.length)
   const [isCursorLeft, setIsCursorLeft] = useState(null)
-
-  console.log(worksRef)
 
   const containerRef = useRef(null)
 
@@ -37,13 +38,19 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
     if (emblaApi) emblaApi.scrollNext(true)
   }, [emblaApi])
 
-  useEffect(() => {
-    if (emblaApi) {
-      console.log(emblaApi.slideNodes()) // Access API
-    }
-  }, [emblaApi])
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setCurrentIndex(emblaApi.selectedScrollSnap())
+  }, [emblaApi, setCurrentIndex])
 
-  const { ref } = useSectionInView('works', 0.1)
+  useEffect(() => {
+    if (!emblaApi) return
+    onSelect()
+    emblaApi.on('select', onSelect)
+    emblaApi.on('reInit', onSelect)
+  }, [emblaApi, onSelect])
+
+  const { ref: sectionRef } = useSectionInView('works', 0.1)
 
   const centerCarousel = () => {
     if (typeof window !== 'undefined') {
@@ -87,12 +94,12 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
   return (
     <>
       <section
-        ref={ref}
+        ref={sectionRef}
         id="works"
         className="carousel-section bg-background relative h-screen w-full flex flex-col items-center justify-center overflow-x-hidden"
       >
         <div
-          ref={worksRef}
+          ref={ref}
           className="h-full w-full flex justify-center items-center"
         >
           {imageGallery.length > 0 && (
@@ -110,7 +117,10 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
               >
                 {tooltipText}
               </button>
-              <div className="embla__viewport relative h-full cursor-pointer" ref={emblaRef}>
+              <div
+                className="embla__viewport relative h-full cursor-pointer"
+                ref={emblaRef}
+              >
                 <div
                   onClick={handleClick}
                   onMouseEnter={handleMouseEnter}
@@ -138,7 +148,6 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
           <PaginationCounter
             currentIndex={currentIndex}
             totalSlides={totalSlides}
-            isLoading={isLoading}
           />
           <CarouselCaption content={artist} currentIndex={currentIndex} />
         </div>
@@ -149,4 +158,6 @@ export default function CarouselSection({ artist, isLoading, worksRef }) {
       </section>
     </>
   )
-}
+})
+
+export default CarouselSection
