@@ -1,11 +1,11 @@
-import { useContext, useRef } from 'react'
+import { useRef } from 'react'
 
-import { TransitionContext } from '@/context/TransitionContext'
+import useTransitionContext from '@/context/TransitionContext'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { gsap } from '@/lib/gsap'
 
 const FadeInOut = ({ children }) => {
-  const { timeline } = useContext(TransitionContext)
+  const { timeline } = useTransitionContext()
   const el = useRef()
 
   // useIsomorphicLayoutEffect to avoid console warnings
@@ -20,7 +20,7 @@ const FadeInOut = ({ children }) => {
     timeline.add(
       gsap.to(el.current, {
         opacity: 0,
-        duration: 0.5,
+        duration: 1,
       }),
       0,
     )

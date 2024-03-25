@@ -1,12 +1,11 @@
-import { memo, useContext, useRef } from 'react'
+import { memo, useRef } from 'react'
 
-import { TransitionContext } from '@/context/TransitionContext'
+import useTransitionContext from '@/context/TransitionContext'
 import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
 import { gsap } from '@/lib/gsap'
 
 const AnimateInOut = ({
   children,
-  as,
   from,
   to,
   durationIn,
@@ -16,7 +15,7 @@ const AnimateInOut = ({
   set,
   skipOutro,
 }) => {
-  const { timeline } = useContext(TransitionContext)
+  const { timeline } = useTransitionContext()
   const el = useRef()
 
   useIsomorphicLayoutEffect(() => {
@@ -44,7 +43,7 @@ const AnimateInOut = ({
   }, [])
 
   return (
-    <div ref={el} style={from}>  
+    <div ref={el} style={from}>
       {children}
     </div>
   )

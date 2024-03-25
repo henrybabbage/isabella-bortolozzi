@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
@@ -20,11 +19,9 @@ export default function ExhibitionSlugRoute(props) {
   const image = props.image
 
   return (
-    <>
-      <main className="h-full w-full">
-        <ExhibitionPage exhibition={exhibition} />
-      </main>
-    </>
+    <main className="h-full w-full">
+      <ExhibitionPage exhibition={exhibition} />
+    </main>
   )
 }
 

@@ -7,9 +7,8 @@ import { useRouter } from 'next/router'
 import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 
-import TransitionLayout from '@/components/Animation/TransitionLayout'
 import RootLayout from '@/components/Layout/RootLayout'
-import { TransitionProvider } from '@/context/TransitionContext'
+import { TransitionContextProvider } from '@/context/TransitionContext'
 
 const PreviewProvider = lazy(() =>
   import('@/components/Previews/PreviewProvider'),
@@ -126,13 +125,11 @@ export default function App({ Component, pageProps }) {
             </Layout>
           </PreviewProvider>
         ) : (
-          <TransitionProvider>
-            <TransitionLayout>
-              <Layout>
-                <Component {...pageProps} key={key} />
-              </Layout>
-            </TransitionLayout>
-          </TransitionProvider>
+          <TransitionContextProvider>
+            <Layout>
+              <Component {...pageProps} key={key} />
+            </Layout>
+          </TransitionContextProvider>
         )}
       </HydrationProvider>
     </>
