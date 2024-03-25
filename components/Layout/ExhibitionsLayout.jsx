@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import GlobalSheet from '../Common/Drawers/GlobalSheet'
 import ReferenceGrid from '../Utilities/ReferenceGrid'
 
-export default function RootLayout({ children }) {
+export default function ExhibitionsLayout({ children }) {
   const router = useRouter()
   return (
     <div id="exhibitions" className="overscroll-none">
