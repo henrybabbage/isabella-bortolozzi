@@ -1,7 +1,7 @@
 export default function Contact() {
   return (
-    <div className="animate-fade-in h-screen w-full flex flex-col justify-center items-center">
-      <h1 className="font-serif text-primary text-sm uppercase">Contact</h1>
+    <div className="min-h-[100dvh] w-screen max-w-screen flex flex-col justify-center items-center">
+      <h1 className="text-primary uppercase">Contact</h1>
     </div>
   )
 }

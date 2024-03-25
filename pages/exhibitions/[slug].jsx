@@ -21,7 +21,7 @@ export default function ExhibitionSlugRoute(props) {
 
   return (
     <>
-      <main className="animate-fade-in h-full w-full">
+      <main className="h-full w-full">
         <ExhibitionPage exhibition={exhibition} />
       </main>
     </>

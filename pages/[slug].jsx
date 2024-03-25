@@ -24,6 +24,7 @@ export default function ArtistSlugRoute(props) {
   const [isLoading, setIsLoading] = useState(true)
 
   const pageRef = useRef(null)
+  const worksRef = useRef(null)
 
   const hydrated = useHydrated()
   const desktopOrLaptop = useMediaQuery(
@@ -31,7 +32,7 @@ export default function ArtistSlugRoute(props) {
     hydrated ? undefined : { deviceWidth: 992 },
   )
 
-  const { scrollIntoView: scrollIntoViewWorks, targetRef: worksRef } =
+  const { scrollIntoView: scrollIntoViewWorks, targetRef: topRef } =
     useScrollIntoView({
       offset: 0,
       duration: 400,
@@ -56,6 +57,7 @@ export default function ArtistSlugRoute(props) {
       ScrollTrigger.create({
         trigger: worksRef.current, // Target the section to pin
         start: 'top top', // Start the pin when the top of the trigger hits the top of the viewport
+        end: 'bottom top', // End the pin when the bottom of the trigger hits the bottom of the viewport
         pin: true, // Enable pinning
         pinSpacing: false, // Disable adding spacing when the element is pinned
         markers: false, // Show markers for each scroll trigger
@@ -82,7 +84,7 @@ export default function ArtistSlugRoute(props) {
   })
 
   return (
-    <main className="w-screen animate-fade-in">
+    <main ref={topRef} className="w-screen max-w-screen">
       <div className="flex flex-col w-full relative">
         <Client>
           <Desktop>

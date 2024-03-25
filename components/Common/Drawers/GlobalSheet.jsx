@@ -144,7 +144,7 @@ export default function GlobalSheet({ isFixed = true }) {
                   onClick={toggleMenu}
                 >
                   <Link
-                    className="menu-link text-primary hover:text-secondary text-xs"
+                    className="menu-link text-primary hover:text-secondary"
                     aria-label="Main pages"
                     href={link.path}
                   >
@@ -171,7 +171,7 @@ export default function GlobalSheet({ isFixed = true }) {
                   <Link
                     key={index}
                     href={`/${artist.slug}`}
-                    className="menu-link text-primary hover:text-secondary text-xs"
+                    className="menu-link text-primary hover:text-secondary"
                     aria-label="Artist pages"
                   >
                     {artist.name}

@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-    /* #root,
+    #root,
 	#__next {
 		@apply isolate;
-	} */
+	}
 
 	*,
 	*::before,
@@ -15,21 +15,18 @@
 	}
 
 	* {
-		/* @apply m-0; */
+		@apply m-0;
 		@apply overscroll-none;
 	}
 
 	html {
-        /* @apply min-h-full;
-        @apply h-auto; */
-		@apply overflow-x-hidden;
 		@apply antialiased;
 	}
 
 	body {
-        /* @apply min-h-full; */
-        /* @apply h-auto; */
-        /* @apply m-0; */
+        @apply min-h-full;
+        @apply h-auto;
+        @apply m-0;
         @apply overscroll-none;
 		@apply bg-background;
 		@apply leading-normal;

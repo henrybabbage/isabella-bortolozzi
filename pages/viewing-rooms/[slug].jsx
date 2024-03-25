@@ -26,7 +26,7 @@ export default function ViewingRoomSlugRoute(props) {
   return (
     <>
       <Head>{image && <link rel="preload" as="image" href={image.url} />}</Head>
-      <main className="animate-fade-in">
+      <main className="">
         <ExhibitionPage exhibition={viewingRoom} />
       </main>
     </>
