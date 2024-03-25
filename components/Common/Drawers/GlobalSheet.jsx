@@ -43,7 +43,7 @@ export default function GlobalSheet({ isFixed = true }) {
 
   useGSAP(
     () => {
-      gsap.set('.menu-link-item-container', { y: 75 })
+      gsap.set('.menu-link-item-holder', { y: 75 })
       tl.current = gsap
         .timeline({ paused: true })
         .to('.menu-overlay', {
@@ -51,7 +51,7 @@ export default function GlobalSheet({ isFixed = true }) {
           clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
           ease: 'power4.inOut',
         })
-        .to('.menu-link-item-container', {
+        .to('.menu-link-item-holder', {
           y: 0,
           duration: 0.3,
           stagger: 0.025,
@@ -78,20 +78,29 @@ export default function GlobalSheet({ isFixed = true }) {
 
   return (
     <div className="menu-container" ref={containerRef}>
-      {/* menu-bar */}
+      {/* menu-trigger */}
       <header
         className={cn(
           isFixed ? 'fixed' : 'absolute',
-          'menu-bar z-400 top-0 left-0 p-4 w-full',
+          'menu-bar z-400 top-0 left-0 p-4 w-fit',
         )}
       >
-        <div
-          className="menu-open cursor-pointer absolute top-4 left-4"
+        <button
+          type="button"
+          className="menu-open cursor-pointer"
           onClick={toggleMenu}
         >
           <p className="text-primary hover:text-secondary">Menu</p>
-        </div>
-        <div className="menu-logo absolute top-4 right-4">
+        </button>
+      </header>
+
+      <header
+        className={cn(
+          isFixed ? 'fixed' : 'absolute',
+          'menu-bar z-400  top-0 right-0 p-4 w-fit',
+        )}
+      >
+        <div className="menu-open cursor-pointer">
           <Link href="/">Bortolozzi</Link>
         </div>
       </header>
@@ -100,16 +109,20 @@ export default function GlobalSheet({ isFixed = true }) {
       <div className="menu-overlay z-500 fixed top-0 left-0 w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]">
         {/* menu-overlay-bar */}
         <div className="menu-overlay-bar z-300 fixed top-0 left-0 w-screen p-4 grid grid-cols-12">
-          <div
-            className="cursor-pointer col-start-1 col-span-1"
+          <button
+            type="button"
+            className="cursor-pointer col-start-1 col-span-1 p-0 m-0 place-self-start"
             onClick={toggleMenu}
           >
             <p className="text-primary hover:text-secondary">Close</p>
-          </div>
-          <div className="menu-open cursor-pointer col-span-2 col-start-2">
+          </button>
+          <button
+            type="button"
+            className="menu-open cursor-pointer col-span-2 col-start-2 p-0 m-0 place-self-start"
+          >
             <p className="text-primary hover:text-secondary">Artists</p>
-          </div>
-          <div className="menu-logo col-span-1 col-start-12 place-self-end">
+          </button>
+          <div className="menu-open col-span-1 col-start-12 place-self-end">
             <Link href="/">Bortolozzi</Link>
           </div>
         </div>
@@ -127,11 +140,11 @@ export default function GlobalSheet({ isFixed = true }) {
                 className="menu-link-item w-max [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
               >
                 <div
-                  className="menu-link-item-container relative"
+                  className="menu-link-item-holder relative"
                   onClick={toggleMenu}
                 >
                   <Link
-                    className="menu-link text-primary hover:text-secondary text-xs"
+                    className="menu-link text-primary hover:text-secondary"
                     aria-label="Main pages"
                     href={link.path}
                   >
@@ -152,13 +165,13 @@ export default function GlobalSheet({ isFixed = true }) {
                 className="menu-link-item w-max [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
               >
                 <div
-                  className="menu-link-item-container relative"
+                  className="menu-link-item-holder relative"
                   onClick={toggleMenu}
                 >
                   <Link
                     key={index}
                     href={`/${artist.slug}`}
-                    className="text-primary hover:text-secondary text-xs menu-item"
+                    className="menu-link text-primary hover:text-secondary"
                     aria-label="Artist pages"
                   >
                     {artist.name}

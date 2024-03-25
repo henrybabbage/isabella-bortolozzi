@@ -20,9 +20,6 @@
 	}
 
 	html {
-        @apply min-h-full;
-        @apply h-auto;
-		@apply overflow-x-hidden;
 		@apply antialiased;
 	}
 
@@ -39,7 +36,7 @@
 	}
 
 	img {
-		@apply block h-auto w-full max-w-[100vw];
+		@apply block h-auto w-full max-w-full;
 	}
 
 	input,
@@ -84,8 +81,7 @@
     }
 
     ol,
-    ul,
-    menu {
+    ul {
         @apply m-0 p-0;
         @apply list-none;
     }

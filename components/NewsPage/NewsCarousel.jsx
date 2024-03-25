@@ -1,5 +1,6 @@
 import AutoScroll from 'embla-carousel-auto-scroll'
 import useEmblaCarousel from 'embla-carousel-react'
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import { useCallback, useEffect, useState } from 'react'
 
 import NewsSlide from './NewsSlide'
@@ -13,6 +14,7 @@ export function NewsCarousel({ slides, options }) {
       stopOnMouseEnter: false,
       stopOnInteraction: false,
     }),
+    WheelGesturesPlugin(),
   ])
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
@@ -47,7 +49,7 @@ export function NewsCarousel({ slides, options }) {
   )
 
   return (
-    <div className="embla overflow-hidden h-[44rem] max-w-full" ref={emblaRef}>
+    <div className="is-wheel-dragging embla overflow-hidden h-[44rem] max-w-full" ref={emblaRef}>
       <div className="embla__container flex h-full">
         {slides.map((item, index) => (
           <div
