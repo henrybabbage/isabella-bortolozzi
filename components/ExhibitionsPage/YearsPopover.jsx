@@ -35,7 +35,7 @@ export default function YearsPopover({ exhibitions }) {
     <Popover.Root
       open={isOpen}
       onOpenChange={setIsOpen}
-      className="bg-background h-fit"
+      className="bg-background"
     >
       <Popover.Trigger
         asChild
@@ -54,40 +54,36 @@ export default function YearsPopover({ exhibitions }) {
       <Popover.Portal className="shadow-transparent shadow-none focus:shadow-none">
         <Popover.Content
           onCloseAutoFocus={(event) => event.preventDefault()}
-          className="shadow-transparent shadow-none focus:shadow-none outline-none focus:outline-none h-fit bg-background"
+          className="px-4 grid grid-cols-12 w-screen pt-1 pb-2 sm:pt-2 shadow-transparent shadow-none focus:shadow-none outline-none focus:outline-none h-10 bg-background"
         >
-          <nav className="grid grid-cols-12 w-screen px-6 sm:px-0 pt-1 pb-2 sm:pt-1">
-            <div className="sm:col-span-9 sm:col-start-4 col-span-12 col-start-1 sm:pl-3">
-              <div className="h-fit w-full sm:w-2/3">
-                {years.map((year, index) => (
-                  <span key={index} className="h-fit inline-flex">
-                    <button
-                      onClick={() => {
-                        didClickYear(year)
-                      }}
-                      aria-label={`Scroll to exhibitions from the year ${year}`}
-                      className="h-fit focus-visible:outline-1 focus-visible:ring-secondary focus-visible:ring-offset-1"
+          <div className="sm:col-span-9 sm:col-start-3 col-span-12 col-start-1">
+            <div className="h-fit w-full">
+              {years.map((year, index) => (
+                <span key={index} className="h-fit inline-flex">
+                  <button
+                    onClick={() => {
+                      didClickYear(year)
+                    }}
+                    aria-label={`Scroll to exhibitions from the year ${year}`}
+                    className="h-fit focus-visible:outline-1 focus-visible:ring-secondary focus-visible:ring-offset-1"
+                  >
+                    <h3
+                      className={cn(
+                        'cursor-pointer h-fit inline-flex shrink-0 text-secondary hover:text-primary',
+                        inViewYear === year ? 'text-primary' : 'text-secondary',
+                      )}
+                      key={index}
                     >
-                      <h3
-                        className={cn(
-                          'cursor-pointer h-fit inline-flex shrink-0 text-secondary hover:text-primary',
-                          inViewYear === year
-                            ? 'text-primary'
-                            : 'text-secondary',
-                        )}
-                        key={index}
-                      >
-                        {year}
-                      </h3>
-                    </button>
-                    <span className="text-secondary mr-1 h-fit w-fit">
-                      {index < years.length - 1 ? ',' : ''}
-                    </span>
+                      {year}
+                    </h3>
+                  </button>
+                  <span className="text-secondary mr-1 h-fit w-fit">
+                    {index < years.length - 1 ? ',' : ''}
                   </span>
-                ))}
-              </div>
+                </span>
+              ))}
             </div>
-          </nav>
+          </div>
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
