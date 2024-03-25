@@ -31,7 +31,7 @@ export default function IndexPage(props) {
   )
 
   return (
-    <main className="animate-fade-in w-screen h-full">
+    <main className="w-screen h-full">
       <div ref={pageRef} className="w-screen h-full">
         <ExhibitionSection
           exhibition={home.publicisedExhibitions[0]}

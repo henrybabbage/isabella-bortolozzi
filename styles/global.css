@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-    #root,
+    /* #root,
 	#__next {
 		@apply isolate;
-	}
+	} */
 
 	*,
 	*::before,
@@ -27,8 +27,8 @@
 	}
 
 	body {
-        @apply min-h-full;
-        @apply h-auto;
+        /* @apply min-h-full; */
+        /* @apply h-auto; */
         @apply m-0;
         @apply overscroll-none;
 		@apply bg-background;
@@ -39,7 +39,7 @@
 	}
 
 	img {
-		@apply block h-auto w-full max-w-[100vw];
+		@apply block h-auto w-full max-w-full;
 	}
 
 	input,

@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
   const isNavOpened = useNavOpenStore(({ isNavOpened }) => isNavOpened)
 
   return (
-    <div id="root" className="-z-0 overscroll-none">
+    <div id="root" className="overscroll-none">
       <SmoothScroll>
         {!router.pathname.startsWith('/studio') &&
         !router.pathname.startsWith('/exhibitions/') &&
