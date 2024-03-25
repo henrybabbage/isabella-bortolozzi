@@ -31,7 +31,7 @@ export default function IndexPage(props) {
   )
 
   return (
-    <main className="max-w-screen w-screen min-h-[100dvh]">
+    <main className="max-w-screen w-screen min-h-screen">
       <div ref={pageRef} className="w-full h-full">
         <ExhibitionSection
           exhibition={home.publicisedExhibitions[0]}

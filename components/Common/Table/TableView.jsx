@@ -33,7 +33,7 @@ export default function TableView({ exhibitions }) {
   useGSAP(
     () => {
       // animations
-      gsap.from('.list-container', { opacity: 0, stagger: 0.25 })
+      gsap.from('.list-container', { opacity: 0, stagger: 0.5 })
     },
     { scope: parentRef },
   )
@@ -79,7 +79,7 @@ export default function TableView({ exhibitions }) {
     estimateSize: () => virtualItemSize,
     overscan: 12,
     scrollMargin: listItemsRef?.current?.offsetTop ?? 0,
-    paddingStart: 64,
+    // paddingStart: 64,
     // paddingEnd: 64,
   })
 
@@ -133,7 +133,7 @@ export default function TableView({ exhibitions }) {
     <div
       ref={parentRef}
       onMouseLeave={() => setCurrentlyHoveredItem(null)}
-      className="grid w-full grid-cols-12 items-start px-4"
+      className="grid w-full grid-cols-12 px-4"
     >
       <div className="hidden sm:visible sm:flex sticky top-16 sm:col-span-6 sm:col-start-1 h-full w-full items-center">
         <div className="relative aspect-square h-full w-full bg-background">
@@ -149,7 +149,7 @@ export default function TableView({ exhibitions }) {
       </div>
       <div
         ref={listRef}
-        className="scrollbar-hide col-start-1 col-span-12 h-fit w-full"
+        className="scrollbar-hide col-start-1 col-span-12 w-full"
       >
         {tabletOrMobile ? (
           <ol ref={listItemsRef}>
@@ -166,7 +166,7 @@ export default function TableView({ exhibitions }) {
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
-              // position: 'relative',
+              //   position: 'relative',
             }}
             className=""
           >
@@ -182,7 +182,7 @@ export default function TableView({ exhibitions }) {
                   // virtualizer styles
                   style={{
                     position: 'absolute',
-                    top: 0,
+                    top: 64,
                     left: 0,
                     width: '100%',
                     height: `${item.size}px`,
@@ -190,7 +190,7 @@ export default function TableView({ exhibitions }) {
                       item.start - virtualizer.options.scrollMargin
                     }px)`,
                   }}
-                  className="list-container"
+                  className=""
                 >
                   <TableItem
                     exhibition={exhibitions[item.index]}

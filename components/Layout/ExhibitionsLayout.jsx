@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import GlobalSheet from '../Common/Drawers/GlobalSheet'
+import GlobalSheet from '../Common/Nav/GlobalSheet'
 import ReferenceGrid from '../Utilities/ReferenceGrid'
 
 export default function ExhibitionsLayout({ children }) {

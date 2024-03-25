@@ -106,7 +106,12 @@ export default function GlobalSheet({ isFixed = true }) {
       </header>
 
       {/* menu-overlay */}
-      <div className="menu-overlay z-500 fixed top-0 left-0 w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]">
+      <div
+        className={cn(
+          isNavOpen ? 'block' : 'hidden',
+          'menu-overlay z-500 fixed top-0 left-0 w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]',
+        )}
+      >
         {/* menu-overlay-bar */}
         <div className="menu-overlay-bar z-300 fixed top-0 left-0 w-screen p-4 grid grid-cols-12">
           <button
@@ -128,7 +133,12 @@ export default function GlobalSheet({ isFixed = true }) {
         </div>
 
         {/* menu-links  */}
-        <nav className="menu-copy grid grid-cols-12 w-full pt-4 bg-highlight">
+        <nav
+          className={cn(
+            isNavOpen ? 'block' : 'hidden',
+            'menu-copy grid grid-cols-12 w-full pt-4 bg-highlight',
+          )}
+        >
           {/* menu-links-pages  */}
           <div
             ref={pagesMenuRef}

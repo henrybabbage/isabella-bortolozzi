@@ -12,7 +12,7 @@ import { exhibitionsQuery } from '@/sanity/lib/sanity.queries'
 export default function Exhibitions(props) {
   const [exhibitions] = useLiveQuery(props.exhibitions, exhibitionsQuery)
   return (
-    <main className="h-[100dvh] w-screen">
+    <main className="min-h-screen w-screen">
       <PageHeader title={'Exhibitions'}>
         <YearsPopover exhibitions={exhibitions} />
       </PageHeader>

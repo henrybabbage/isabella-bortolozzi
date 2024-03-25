@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import { useNavOpenStore } from '@/stores/useNavOpenStore'
 
-import GlobalSheet from '../Common/Drawers/GlobalSheet'
+import GlobalSheet from '../Common/Nav/GlobalSheet'
 import ReferenceGrid from '../Utilities/ReferenceGrid'
 import SmoothScroll from '../Utilities/SmoothScroll'
 
