@@ -3,13 +3,12 @@ import '@/styles/global.css'
 import { useAsPathWithoutHash } from '@madeinhaus/nextjs-page-transition'
 import localFont from 'next/font/local'
 import Head from 'next/head'
-import { lazy } from 'react'
+import { useRouter } from 'next/router'
+import { lazy, useEffect, useRef } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 
 import RootLayout from '@/components/Layout/RootLayout'
-import { NavigationContextProvider } from '@/context/NavigationContext'
 import { TransitionContextProvider } from '@/context/TransitionContext'
-import useScrollRestoration from '@/hooks/useScrollRestoration'
 
 const PreviewProvider = lazy(() =>
   import('@/components/Previews/PreviewProvider'),
@@ -45,8 +44,56 @@ const mono = localFont({
 export default function App({ Component, pageProps }) {
   const { draftMode, token } = pageProps
   const key = useAsPathWithoutHash()
+  const router = useRouter()
+  const scrollCache = useRef({})
+  const activeRestorePath = useRef()
 
-  useScrollRestoration()
+  useEffect(() => {
+    if (history.scrollRestoration !== 'manual') {
+      history.scrollRestoration = 'manual'
+    }
+    const getCurrentPath = () => location.pathname + location.search
+    router.beforePopState(() => {
+      activeRestorePath.current = getCurrentPath()
+      return true
+    })
+    const onComplete = () => {
+      const scrollPath = activeRestorePath.current
+      if (!scrollPath || !(scrollPath in scrollCache.current)) {
+        window.scrollTo(0, 0)
+        return
+      }
+
+      activeRestorePath.current = undefined
+      const [scrollX, scrollY] = scrollCache.current[scrollPath]
+      window.scrollTo(scrollX, scrollY)
+      // allow for page taking longer to load
+      const delays = [10, 20, 40, 80, 160]
+      const checkAndScroll = () => {
+        if (
+          (window.scrollX === scrollX && window.scrollY === scrollY) ||
+          scrollPath !== getCurrentPath()
+        ) {
+          return
+        }
+        window.scrollTo(scrollX, scrollY)
+        const delay = delays.shift()
+        if (delay) {
+          setTimeout(checkAndScroll, delay)
+        }
+      }
+      setTimeout(checkAndScroll, delays.shift())
+    }
+    const onScroll = () => {
+      scrollCache.current[getCurrentPath()] = [window.scrollX, window.scrollY]
+    }
+    router.events.on('routeChangeComplete', onComplete)
+    window.addEventListener('scroll', onScroll)
+    return () => {
+      router.events.off('routeChangeComplete', onComplete)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [router])
 
   // Use the layout defined at the page level, if available
   const Layout =
@@ -77,11 +124,9 @@ export default function App({ Component, pageProps }) {
           </PreviewProvider>
         ) : (
           <TransitionContextProvider>
-            <NavigationContextProvider>
-              <Layout>
-                <Component {...pageProps} key={key} />
-              </Layout>
-            </NavigationContextProvider>
+            <Layout>
+              <Component {...pageProps} key={key} />
+            </Layout>
           </TransitionContextProvider>
         )}
       </HydrationProvider>

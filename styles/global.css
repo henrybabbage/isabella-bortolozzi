@@ -113,6 +113,11 @@
         align-items: center;
         justify-content: center;
     }
+
+    /* .is-transitioning {
+        cursor: wait;
+        pointer-events: none;
+    } */
 }
 
 /* This assumes no margin or padding on #app's parent(s) */

@@ -24,7 +24,7 @@ export default function CVSection({ artist, biographyRef }) {
         ref={biographyRef}
         className={cn(
           tabletOrMobile ? 'pt-[8rem]' : 'pt-[4.5rem]',
-          'h-full min-h-screen px-6',
+          'h-full min-h-screen px-4',
         )}
       >
         <div className="grid grid-cols-12">
