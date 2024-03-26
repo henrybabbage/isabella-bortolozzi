@@ -1,5 +1,4 @@
 import { useGSAP } from '@gsap/react'
-import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 
 import { Flip, gsap } from '@/lib/gsap'
@@ -17,8 +16,6 @@ const scrollToTop = () => {
 export default function ExhibitionPage({ exhibition }) {
   const [isGridView, setIsGridView] = useState(false)
   const [targetId, setTargetId] = useState(null)
-
-  const router = useRouter()
 
   const pageRef = useRef()
   const imagesRef = useRef()
@@ -92,7 +89,6 @@ export default function ExhibitionPage({ exhibition }) {
               key={image._key}
               image={image}
               fill={false}
-              sizes="80vw"
               mode="contain"
               width={image.asset.metadata.dimensions.width}
               height={image.asset.metadata.dimensions.height}

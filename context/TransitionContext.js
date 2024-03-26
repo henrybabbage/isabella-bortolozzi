@@ -1,24 +1,51 @@
-import { createContext, useState } from 'react'
+import CustomEase from 'gsap/dist/CustomEase'
+import { createContext, useContext, useState } from 'react'
 
 import { gsap } from '@/lib/gsap'
 
-const TransitionContext = createContext({})
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(CustomEase)
+}
 
-const TransitionProvider = ({ children }) => {
-  const [timeline, setTimeline] = useState(() =>
-    gsap.timeline({ paused: true }),
+const TransitionContext = createContext({
+  timeline: null,
+  setTimeline: () => {},
+  resetTimeline: () => {},
+  primaryEase: null,
+})
+
+export function TransitionContextProvider({ children }) {
+  const setTransition = () => {
+    document.documentElement.classList.add('is-transitioning')
+  }
+
+  const [timeline, setTimeline] = useState(
+    gsap.timeline({ onStart: setTransition, paused: true }),
   )
 
+  const primaryEase =
+    typeof window !== 'undefined'
+      ? CustomEase.create('primaryEase', 'M0,0 C0.62,0.05 0.01,0.99 1,1')
+      : null
+
+  const resetTimeline = () => {
+    timeline.pause().clear()
+  }
+
+  const contextValue = {
+    timeline,
+    setTimeline,
+    resetTimeline,
+    primaryEase,
+  }
+
   return (
-    <TransitionContext.Provider
-      value={{
-        timeline,
-        setTimeline,
-      }}
-    >
+    <TransitionContext.Provider value={contextValue}>
       {children}
     </TransitionContext.Provider>
   )
 }
 
-export { TransitionContext, TransitionProvider }
+export default function useTransitionContext() {
+  return useContext(TransitionContext)
+}

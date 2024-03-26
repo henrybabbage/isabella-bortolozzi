@@ -10,7 +10,7 @@ import { newsQuery } from '@/sanity/lib/sanity.queries'
 export default function News(props) {
   const [news] = useLiveQuery(props.news, newsQuery)
   return (
-    <main className="min-h-[100dvh] w-screen max-w-screen px-4">
+    <main className="min-h-screen w-screen max-w-screen px-4">
       <PageHeader title={'News'} />
       <Marquee items={news} />
     </main>

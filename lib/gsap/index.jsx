@@ -4,7 +4,9 @@ import { Draggable } from 'gsap/dist/Draggable'
 import { Flip } from 'gsap/dist/Flip'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
-gsap.registerPlugin(CustomEase, Flip, Draggable, ScrollTrigger)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(CustomEase, Flip, Draggable, ScrollTrigger)
+}
 
 const GOLDEN_RATIO = (1 + Math.sqrt(5)) / 2
 const RECIPROCAL_GR = 1 / GOLDEN_RATIO

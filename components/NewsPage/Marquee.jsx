@@ -3,6 +3,7 @@ import { NewsCarousel } from './NewsCarousel'
 const OPTIONS = {
   dragFree: true,
   loop: true,
+  align: 'start',
 }
 
 export default function Marquee({ items }) {

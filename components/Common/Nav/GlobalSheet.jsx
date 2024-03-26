@@ -37,7 +37,6 @@ export default function GlobalSheet({ isFixed = true }) {
       const uniqueArtists = [...new Set(galleryArtists)]
       setArtists(uniqueArtists)
     }
-
     fetchArtists()
   }, [])
 
@@ -47,14 +46,14 @@ export default function GlobalSheet({ isFixed = true }) {
       tl.current = gsap
         .timeline({ paused: true })
         .to('.menu-overlay', {
-          duration: 0.75,
+          duration: 0.5,
           clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
           ease: 'power4.inOut',
         })
         .to('.menu-link-item-holder', {
           y: 0,
-          duration: 0.3,
-          stagger: 0.025,
+          duration: 0.1,
+          stagger: 0.02,
           ease: 'power4.out',
           delay: -0.1,
         })
@@ -106,7 +105,12 @@ export default function GlobalSheet({ isFixed = true }) {
       </header>
 
       {/* menu-overlay */}
-      <div className="menu-overlay z-500 fixed top-0 left-0 w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]">
+      <div
+        className={cn(
+          isNavOpen ? 'block' : 'hidden',
+          'menu-overlay z-500 fixed top-0 left-0 w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]',
+        )}
+      >
         {/* menu-overlay-bar */}
         <div className="menu-overlay-bar z-300 fixed top-0 left-0 w-screen p-4 grid grid-cols-12">
           <button
@@ -116,19 +120,21 @@ export default function GlobalSheet({ isFixed = true }) {
           >
             <p className="text-primary hover:text-secondary">Close</p>
           </button>
-          <button
-            type="button"
-            className="menu-open cursor-pointer col-span-2 col-start-2 p-0 m-0 place-self-start"
-          >
-            <p className="text-primary hover:text-secondary">Artists</p>
-          </button>
-          <div className="menu-open col-span-1 col-start-12 place-self-end">
+          <div className="menu-open col-span-2 col-start-2 p-0 m-0 place-self-start">
+            <p className="text-primary">Artists</p>
+          </div>
+          <div className="menu-open w-full hover:bg-background col-span-1 col-start-12 flex cursor-pointer justify-end place-self-end">
             <Link href="/">Bortolozzi</Link>
           </div>
         </div>
 
         {/* menu-links  */}
-        <nav className="menu-copy grid grid-cols-12 w-full pt-4 bg-highlight">
+        <nav
+          className={cn(
+            isNavOpen ? 'block' : 'hidden',
+            'menu-copy grid grid-cols-12 w-full pt-4 bg-highlight',
+          )}
+        >
           {/* menu-links-pages  */}
           <div
             ref={pagesMenuRef}
@@ -137,14 +143,14 @@ export default function GlobalSheet({ isFixed = true }) {
             {menu.map((link, index) => (
               <div
                 key={index}
-                className="menu-link-item w-max [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
+                className="menu-link-item hover:bg-background cursor-pointer w-full [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
               >
                 <div
                   className="menu-link-item-holder relative"
                   onClick={toggleMenu}
                 >
                   <Link
-                    className="menu-link text-primary hover:text-secondary"
+                    className="menu-link text-primary"
                     aria-label="Main pages"
                     href={link.path}
                   >
@@ -162,7 +168,7 @@ export default function GlobalSheet({ isFixed = true }) {
             {artists.map((artist, index) => (
               <div
                 key={index}
-                className="menu-link-item w-max [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
+                className="menu-link-item hover:bg-background cursor-pointer w-full [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
               >
                 <div
                   className="menu-link-item-holder relative"
@@ -171,7 +177,7 @@ export default function GlobalSheet({ isFixed = true }) {
                   <Link
                     key={index}
                     href={`/${artist.slug}`}
-                    className="menu-link text-primary hover:text-secondary"
+                    className="menu-link text-primary"
                     aria-label="Artist pages"
                   >
                     {artist.name}

@@ -1,50 +1,66 @@
-import { memo, useContext, useRef } from 'react'
+import { memo, useRef } from 'react'
 
-import { TransitionContext } from '@/context/TransitionContext'
+import useTransitionContext from '@/context/TransitionContext'
 import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
 import { gsap } from '@/lib/gsap'
 
-const AnimateInOut = ({
+function AnimateInOut({
   children,
-  as,
-  from,
-  to,
   durationIn,
   durationOut,
   delay,
   delayOut,
-  set,
+  from,
+  to,
   skipOutro,
-}) => {
-  const { timeline } = useContext(TransitionContext)
-  const el = useRef()
+  watch,
+  start,
+  end,
+  scrub,
+  markers,
+}) {
+  const { timeline } = useTransitionContext()
+  const element = useRef()
 
   useIsomorphicLayoutEffect(() => {
-    // intro animation
-    if (set) {
-      gsap.set(el.current, { ...set })
-    }
-    gsap.to(el.current, {
-      ...to,
-      delay: delay || 0,
-      duration: durationIn,
-    })
+    const scrollTrigger = watch
+      ? {
+          scrollTrigger: {
+            trigger: element.current,
+            start,
+            end,
+            scrub,
+            markers: markers,
+          },
+        }
+      : {}
 
-    // outro animation
-    if (!skipOutro) {
-      timeline.add(
-        gsap.to(el.current, {
-          ...from,
-          delay: delayOut || 0,
-          duration: durationOut,
-        }),
-        0,
-      )
-    }
+    const ctx = gsap.context(() => {
+      /* Intro animation */
+      gsap.to(element.current, {
+        ...to,
+        delay,
+        duration: durationIn,
+        ...scrollTrigger,
+      })
+
+      /* Outro animation */
+      if (!skipOutro) {
+        timeline.add(
+          gsap.to(element.current, {
+            ...from,
+            delay: delayOut,
+            duration: durationOut,
+          }),
+          0,
+        )
+      }
+    }, element)
+    return () => ctx.revert()
   }, [])
 
   return (
-    <div ref={el} style={from}>  
+    <div ref={element} style={from}>
       {children}
     </div>
   )

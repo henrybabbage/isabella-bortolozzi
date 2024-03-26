@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { cn } from 'utils/cn'
 
@@ -32,31 +32,6 @@ export default function FlipImage({
   // Bortolozzi images are typically 2:3 (portrait) and 3:2 (landscape)
   const isLandscape = IMAGE_ASPECT_RATIO > 1
 
-  const DESKTOP_PORTRAIT_HEIGHT = '90vh'
-  const DESKTOP_LANDSCAPE_WIDTH = '64vw'
-
-  // height = width / ratio
-  // width = height * ratio
-  const DESKTOP_WIDTH = isLandscape
-    ? `${DESKTOP_LANDSCAPE_WIDTH}`
-    : `calc(${DESKTOP_PORTRAIT_HEIGHT}*${IMAGE_ASPECT_RATIO})`
-
-  const DESKTOP_HEIGHT = isLandscape
-    ? `calc(${DESKTOP_LANDSCAPE_WIDTH}*(1/${IMAGE_ASPECT_RATIO}))`
-    : `${DESKTOP_PORTRAIT_HEIGHT}`
-
-  const DESKTOP_MAX_WIDTH = `${DESKTOP_WIDTH}`
-  const DESKTOP_MAX_HEIGHT = `${DESKTOP_HEIGHT}`
-
-  // Flip states
-  const GRID_RATIO_STYLES = {}
-  const FLEX_RATIO_STYLES = {
-    width: `${DESKTOP_WIDTH}`,
-    maxWidth: `${DESKTOP_MAX_WIDTH}`,
-    height: `${DESKTOP_HEIGHT}`,
-    maxHeight: `${DESKTOP_MAX_HEIGHT}`,
-  }
-
   const srcSetGridViewPortrait = '(min-width: 740px) calc(17vw - 30px), 84px'
   const srcSetGridViewLandscape =
     '(min-width: 1940px) calc(17vw - 30px), (min-width: 800px) calc(18vw - 48px), 84px'
@@ -79,8 +54,7 @@ export default function FlipImage({
   if (!image) return null
   return (
     <div
-      style={isGridView ? GRID_RATIO_STYLES : FLEX_RATIO_STYLES}
-      className={cn('relative image-item event cursor-pointer')}
+      className={cn('relative image-item event cursor-pointer max-w-4xl')}
       data-image-id={index}
     >
       {imageProps && (

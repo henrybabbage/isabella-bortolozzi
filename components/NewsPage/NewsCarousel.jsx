@@ -13,6 +13,7 @@ export function NewsCarousel({ slides, options }) {
       speed: 0.5,
       stopOnMouseEnter: false,
       stopOnInteraction: false,
+      stopOnFocusIn: true,
     }),
     WheelGesturesPlugin(),
   ])
@@ -49,7 +50,10 @@ export function NewsCarousel({ slides, options }) {
   )
 
   return (
-    <div className="is-wheel-dragging embla overflow-hidden h-[44rem] max-w-full" ref={emblaRef}>
+    <div
+      className="is-wheel-dragging embla overflow-hidden h-[44rem] max-w-full"
+      ref={emblaRef}
+    >
       <div className="embla__container flex h-full">
         {slides.map((item, index) => (
           <div
