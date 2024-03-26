@@ -12,7 +12,6 @@ export default function useScrollRestoration() {
     }
 
     const getCurrentPath = () => location.pathname + location.search
-
     router.beforePopState(() => {
       activeRestorePath.current = getCurrentPath()
       return true
@@ -28,7 +27,6 @@ export default function useScrollRestoration() {
       activeRestorePath.current = undefined
       const [scrollX, scrollY] = scrollCache.current[scrollPath]
       window.scrollTo(scrollX, scrollY)
-
       // allow for page taking longer to load
       const delays = [10, 20, 40, 80, 160]
       const checkAndScroll = () => {
@@ -53,10 +51,11 @@ export default function useScrollRestoration() {
 
     router.events.on('routeChangeComplete', onComplete)
     window.addEventListener('scroll', onScroll)
-
+    
     return () => {
       router.events.off('routeChangeComplete', onComplete)
       window.removeEventListener('scroll', onScroll)
     }
+    
   }, [router])
 }
