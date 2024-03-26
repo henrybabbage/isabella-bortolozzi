@@ -1,5 +1,5 @@
-import { useNextSanityImage } from 'next-sanity-image'
 import Image from 'next/image'
+import { useNextSanityImage } from 'next-sanity-image'
 import { useEffect, useState } from 'react'
 import { cn } from 'utils/cn'
 
@@ -17,7 +17,7 @@ export default function FlipImage({
   fill = false,
   mode = 'contain',
   clickHandler,
-  isGridView,
+  isGridView = 'false',
   index,
 }) {
   const [imageSizes, setImageSizes] = useState(null)
@@ -75,7 +75,7 @@ export default function FlipImage({
           className="bg-highlight"
         />
       )}
-      {isGridView && image.details && (
+      {image.details && (
         <div className="pt-4 caption">
           <CustomPortableText value={image.details} classNames="" />
         </div>

@@ -9,6 +9,7 @@ import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
 import { getGallery, getHome } from '@/sanity/lib/sanity.fetch'
 import { galleryQuery, homeQuery } from '@/sanity/lib/sanity.queries'
+import FadeInOut from '@/components/Animation/FadeInOut'
 
 export default function IndexPage(props) {
   const [home] = useLiveQuery(props.home, homeQuery)
@@ -31,19 +32,21 @@ export default function IndexPage(props) {
   )
 
   return (
-    <main className="max-w-screen w-screen min-h-screen">
-      <div ref={pageRef} className="w-full h-full">
-        <ExhibitionSection
-          exhibition={home.publicisedExhibitions[0]}
-          ref={heroRef}
-        />
-        <Footer
-          featuredExhibition={home.publicisedExhibitions[0]}
-          override={home.logoControl}
-          gallery={props.gallery}
-        />
-      </div>
-    </main>
+    <FadeInOut delay={0.25}>
+      <main className="max-w-screen w-screen min-h-screen">
+        <div ref={pageRef} className="w-full h-full">
+          <ExhibitionSection
+            exhibition={home.publicisedExhibitions[0]}
+            ref={heroRef}
+          />
+          <Footer
+            featuredExhibition={home.publicisedExhibitions[0]}
+            override={home.logoControl}
+            gallery={props.gallery}
+          />
+        </div>
+      </main>
+    </FadeInOut>
   )
 }
 

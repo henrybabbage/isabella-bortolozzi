@@ -14,7 +14,7 @@ const scrollToTop = () => {
 }
 
 export default function ExhibitionPage({ exhibition }) {
-  const [isGridView, setIsGridView] = useState(false)
+  //   const [isGridView, setIsGridView] = useState(false)
   const [targetId, setTargetId] = useState(null)
 
   const pageRef = useRef()
@@ -22,7 +22,7 @@ export default function ExhibitionPage({ exhibition }) {
   const eventsRef = useRef([])
 
   const { contextSafe } = useGSAP({
-    dependencies: isGridView,
+    // dependencies: isGridView,
     scope: imagesRef,
   })
 
@@ -78,8 +78,9 @@ export default function ExhibitionPage({ exhibition }) {
       <div
         ref={imagesRef}
         className={cn(
-          isGridView ? 'grid-container' : 'flex-container',
-          'gallery relative w-full gap-x-4 gap-y-32',
+          '',
+          // isGridView ? 'grid-container' : 'flex-container',
+          'flex-container gallery relative w-full gap-x-4 gap-y-32',
         )}
       >
         {exhibition &&
@@ -95,7 +96,7 @@ export default function ExhibitionPage({ exhibition }) {
               aspectRatio={image.asset.metadata.dimensions.aspectRatio}
               priority={false}
               clickHandler={clickHandler}
-              isGridView={isGridView}
+              // isGridView={isGridView}
               index={index}
             />
           ))}

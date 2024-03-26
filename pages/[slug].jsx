@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Client, useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
+import FadeInOut from '@/components/Animation/FadeInOut'
 import ArtistSubNav from '@/components/ArtistPage/ArtistSubNav'
 import CarouselSection from '@/components/ArtistPage/CarouselSection'
 import CVSection from '@/components/ArtistPage/CVSection'
@@ -84,42 +85,47 @@ export default function ArtistSlugRoute(props) {
   })
 
   return (
-    <main ref={topRef} className="w-screen max-w-screen">
-      <div className="flex flex-col w-full relative">
-        <Client>
-          <Desktop>
-            <ArtistSubNav
+    <FadeInOut delay={0.25}>
+      <main ref={topRef} className="w-screen max-w-screen">
+        <div className="flex flex-col w-full relative">
+          <Client>
+            <Desktop>
+              <ArtistSubNav
+                artist={artist}
+                isLoading={isLoading}
+                scrollIntoViewWorks={scrollIntoViewWorks}
+                scrollIntoViewExhibitions={scrollIntoViewExhibitions}
+                scrollIntoViewBiography={scrollIntoViewBiography}
+              />
+            </Desktop>
+            <TabletAndBelow>
+              <MobileArtistSubNav
+                artist={artist}
+                isLoading={isLoading}
+                scrollIntoViewWorks={scrollIntoViewWorks}
+                scrollIntoViewExhibitions={scrollIntoViewExhibitions}
+                scrollIntoViewBiography={scrollIntoViewBiography}
+              />
+            </TabletAndBelow>
+          </Client>
+          <div
+            ref={pageRef}
+            className="relative flex flex-col gap-24 sm:gap-0 h-full"
+          >
+            <CarouselSection
+              ref={worksRef}
               artist={artist}
               isLoading={isLoading}
-              scrollIntoViewWorks={scrollIntoViewWorks}
-              scrollIntoViewExhibitions={scrollIntoViewExhibitions}
-              scrollIntoViewBiography={scrollIntoViewBiography}
             />
-          </Desktop>
-          <TabletAndBelow>
-            <MobileArtistSubNav
+            <ExhibitionSection
+              exhibitionsRef={exhibitionsRef}
               artist={artist}
-              isLoading={isLoading}
-              scrollIntoViewWorks={scrollIntoViewWorks}
-              scrollIntoViewExhibitions={scrollIntoViewExhibitions}
-              scrollIntoViewBiography={scrollIntoViewBiography}
             />
-          </TabletAndBelow>
-        </Client>
-        <div
-          ref={pageRef}
-          className="relative flex flex-col gap-24 sm:gap-0 h-full"
-        >
-          <CarouselSection
-            ref={worksRef}
-            artist={artist}
-            isLoading={isLoading}
-          />
-          <ExhibitionSection exhibitionsRef={exhibitionsRef} artist={artist} />
-          <CVSection biographyRef={biographyRef} artist={artist} />
+            <CVSection biographyRef={biographyRef} artist={artist} />
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </FadeInOut>
   )
 }
 
