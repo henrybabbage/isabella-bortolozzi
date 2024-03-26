@@ -1,6 +1,6 @@
 import { useLiveQuery } from 'next-sanity/preview'
 
-import FadeInOut from '@/components/Animation/FadeInOut'
+import FadeInOutUp from '@/components/Animation/FadeInOutUp'
 import ExhibitionPage from '@/components/ExhibitionPage/ExhibitionPage'
 import ExhibitionLayout from '@/components/Layout/ExhibitionLayout'
 import { readToken } from '@/sanity/lib/sanity.api'
@@ -20,11 +20,11 @@ export default function ExhibitionSlugRoute(props) {
   const image = props.image
 
   return (
-    <main className="h-full w-full">
-      <FadeInOut delay={0.25}>
+    <FadeInOutUp delay={0.25}>
+      <main className="h-full w-full">
         <ExhibitionPage exhibition={exhibition} />
-      </FadeInOut>
-    </main>
+      </main>
+    </FadeInOutUp>
   )
 }
 
