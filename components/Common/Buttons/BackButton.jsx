@@ -9,7 +9,7 @@ const BackButton = forwardRef(function BackButton(props, ref) {
     useEffect(() => {
 		setTimeout(() => {
 			setpageReady(true)
-		}, 4000)
+		}, 1000)
 	}, [])
     const { backPathname } = props
     const router = useRouter()
