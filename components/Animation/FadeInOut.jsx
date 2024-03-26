@@ -1,37 +1,42 @@
-import { useRef } from 'react'
+import AnimateInOut from './AnimateInOut'
 
-import useTransitionContext from '@/context/TransitionContext'
-import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
-import { gsap } from '@/lib/gsap'
-
-const FadeInOut = ({ children }) => {
-  const { timeline } = useTransitionContext()
-  const el = useRef()
-
-  // useIsomorphicLayoutEffect to avoid console warnings
-  useIsomorphicLayoutEffect(() => {
-    // intro animation will play immediately
-    gsap.to(el.current, {
-      opacity: 1,
-      duration: 1,
-    })
-
-    // add outro animation to top-level outro animation timeline
-    timeline.add(
-      gsap.to(el.current, {
-        opacity: 0,
-        duration: 1,
-      }),
-      0,
-    )
-  }, [])
-
+export default function FadeInOut({
+  children,
+  durationIn = 0.5,
+  durationOut = 0.25,
+  delay = 0,
+  delayOut = 0,
+  ease = 'power4.out',
+  skipOutro,
+  watch,
+  start = 'top bottom',
+  end = 'bottom top',
+  scrub = false,
+  markers,
+}) {
   return (
-    // set initial opacity to 0 to avoid FOUC for SSR
-    <div ref={el} style={{ opacity: 0 }}>
-      {children}
-    </div>
+    <>
+      <AnimateInOut
+        durationIn={durationIn}
+        durationOut={durationOut}
+        delay={delay}
+        delayOut={delayOut}
+        from={{
+          opacity: 0,
+        }}
+        to={{
+          ease,
+          opacity: 1,
+        }}
+        skipOutro={skipOutro}
+        watch={watch}
+        start={start}
+        end={end}
+        scrub={scrub}
+        markers={markers}
+      >
+        {children}
+      </AnimateInOut>
+    </>
   )
 }
-
-export default FadeInOut
