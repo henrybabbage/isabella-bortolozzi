@@ -65,6 +65,33 @@ export default defineType({
 			],
 		}, {strict: false }),
 		defineField({
+			name: 'navControl',
+			title: 'Nav button control',
+			type: 'object',
+			description: 'Control the colour of the nav button',
+			fields: [
+				defineField({
+					name: 'overrideColor',
+					title: 'Override color',
+					type: 'boolean',
+					description: 'Override the automatically generated colour?',
+				}),
+				defineField({
+					name: 'logoColor',
+					title: 'Logo color',
+					type: 'simplerColor',
+					options: {
+						colorList: [
+							{ label: 'Black', value: '#222' },
+							{ label: 'White', value: '#FFF' },
+						],
+					},
+					hidden: ({ parent, value }) => !value && !parent?.overrideColor,
+					description: 'Choose a colour for the nav button to override the default black colour',
+				}),
+			],
+		}, {strict: false }),
+		defineField({
 			name: 'banner',
 			title: 'Banner',
 			type: 'object',

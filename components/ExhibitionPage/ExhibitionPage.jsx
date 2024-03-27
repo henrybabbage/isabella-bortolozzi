@@ -14,7 +14,7 @@ const scrollToTop = () => {
 }
 
 export default function ExhibitionPage({ exhibition }) {
-  //   const [isGridView, setIsGridView] = useState(false)
+    const [isGridView, setIsGridView] = useState(false)
   const [targetId, setTargetId] = useState(null)
 
   const pageRef = useRef()
@@ -27,6 +27,7 @@ export default function ExhibitionPage({ exhibition }) {
   })
 
   const clickHandler = contextSafe((event) => {
+    console.log({ event })
     if (event.target.tagName === 'IMG') {
       const container = imagesRef.current
       const switchingToGridView = container.classList.contains('flex-container')
@@ -39,6 +40,7 @@ export default function ExhibitionPage({ exhibition }) {
           ease: 'circ.inOut',
           onComplete: () => {
             gsap.set('.caption', { display: 'block' })
+
             performLayoutFlip(container)
           },
         })
@@ -96,7 +98,7 @@ export default function ExhibitionPage({ exhibition }) {
               aspectRatio={image.asset.metadata.dimensions.aspectRatio}
               priority={false}
               clickHandler={clickHandler}
-              // isGridView={isGridView}
+              isGridView={isGridView}
               index={index}
             />
           ))}

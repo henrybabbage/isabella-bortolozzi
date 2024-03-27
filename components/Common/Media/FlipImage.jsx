@@ -17,7 +17,7 @@ export default function FlipImage({
   fill = false,
   mode = 'contain',
   clickHandler,
-  isGridView = 'false',
+  isGridView,
   index,
 }) {
   const [imageSizes, setImageSizes] = useState(null)

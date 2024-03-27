@@ -9,15 +9,15 @@ export default function ExhibitionLayout({ children }) {
   const router = useRouter()
   return (
     <TransitionLayout>
-      <div id="exhibition" className="overscroll-none">
-        <SmoothScroll>
+      <SmoothScroll>
+        <div id="exhibition" className="overscroll-none">
           <div className="fixed top-6 right-6 z-50">
             <BackButton backPathname={router.pathname.split('/')[1]} />
           </div>
           <ReferenceGrid />
-          <TransitionLayout>{children}</TransitionLayout>
-        </SmoothScroll>
-      </div>
+          {children}
+        </div>
+      </SmoothScroll>
     </TransitionLayout>
   )
 }

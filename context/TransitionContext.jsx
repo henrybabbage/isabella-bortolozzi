@@ -1,5 +1,5 @@
 import CustomEase from 'gsap/dist/CustomEase'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useRef, useState } from 'react'
 
 import { gsap } from '@/lib/gsap'
 
@@ -8,6 +8,9 @@ if (typeof window !== 'undefined') {
 }
 
 const TransitionContext = createContext({
+  layoutRef: {
+    current: null,
+  },
   timeline: null,
   setTimeline: () => {},
   resetTimeline: () => {},
@@ -19,6 +22,7 @@ export function TransitionContextProvider({ children }) {
     document.documentElement.classList.add('is-transitioning')
   }
 
+  const layoutRef = useRef(null)
   const [timeline, setTimeline] = useState(
     gsap.timeline({ onStart: setTransition, paused: true }),
   )
@@ -33,6 +37,7 @@ export function TransitionContextProvider({ children }) {
   }
 
   const contextValue = {
+    layoutRef,
     timeline,
     setTimeline,
     resetTimeline,

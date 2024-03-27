@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { useNavOpenStore } from '@/stores/useNavOpenStore'
+import useTransitionContext from '@/context/TransitionContext'
 
 import TransitionLayout from '../Animation/TransitionLayout'
 import GlobalSheet from '../Common/Nav/GlobalSheet'
@@ -9,13 +9,11 @@ import SmoothScroll from '../Utilities/SmoothScroll'
 
 export default function RootLayout({ children }) {
   const router = useRouter()
-
-  const isNavOpened = useNavOpenStore(({ isNavOpened }) => isNavOpened)
-
+  const { layoutRef } = useTransitionContext()
   return (
     <TransitionLayout>
-      <div id="root" className="overscroll-none">
-        <SmoothScroll>
+      <SmoothScroll>
+        <div ref={layoutRef} id="root" className="overscroll-none">
           {!router.pathname.startsWith('/studio') &&
           !router.pathname.startsWith('/exhibitions/') &&
           !router.pathname.startsWith('/viewing-rooms/') ? (
@@ -23,8 +21,8 @@ export default function RootLayout({ children }) {
           ) : null}
           <ReferenceGrid />
           {children}
-        </SmoothScroll>
-      </div>
+        </div>
+      </SmoothScroll>
     </TransitionLayout>
   )
 }
