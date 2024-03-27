@@ -1,5 +1,5 @@
-import { useNextSanityImage } from 'next-sanity-image'
 import Image from 'next/image'
+import { useNextSanityImage } from 'next-sanity-image'
 import { useEffect, useState } from 'react'
 import { cn } from 'utils/cn'
 
