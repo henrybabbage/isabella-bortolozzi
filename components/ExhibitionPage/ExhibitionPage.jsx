@@ -14,7 +14,7 @@ const scrollToTop = () => {
 }
 
 export default function ExhibitionPage({ exhibition }) {
-    const [isGridView, setIsGridView] = useState(false)
+  const [isGridView, setIsGridView] = useState(false)
   const [targetId, setTargetId] = useState(null)
 
   const pageRef = useRef()

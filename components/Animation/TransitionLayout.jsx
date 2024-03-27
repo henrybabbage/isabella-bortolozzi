@@ -47,11 +47,11 @@ export default function TransitionLayout({ children }) {
     if (currentPage.route !== router.asPath) {
       if (timeline.duration() === 0) {
         /* There are no outro animations, so immediately transition */
+    
         setCurrentPage({
           route: router.asPath,
           children,
         })
-        animateLayout()
         ScrollTrigger.refresh(true)
         return
       }
@@ -59,11 +59,11 @@ export default function TransitionLayout({ children }) {
       timeline.play().then(() => {
         /* outro complete so reset to an empty paused timeline */
         resetTimeline()
+
         setCurrentPage({
           route: router.asPath,
           children,
         })
-        animateLayout()
         ScrollTrigger.refresh(true)
       })
     } else {
