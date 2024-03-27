@@ -1,13 +1,13 @@
 import gsap from 'gsap'
 import { CustomEase } from 'gsap/dist/CustomEase'
-import { Draggable } from 'gsap/dist/Draggable'
 import { Flip } from 'gsap/dist/Flip'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(CustomEase, Flip, Draggable, ScrollTrigger)
+  gsap.registerPlugin(CustomEase, Flip, ScrollTrigger)
 }
 
+// Defaults from https://basement.studio/blog/gsap-next-js-setup-the-bsmnt-way
 const GOLDEN_RATIO = (1 + Math.sqrt(5)) / 2
 const RECIPROCAL_GR = 1 / GOLDEN_RATIO
 const DURATION = RECIPROCAL_GR
@@ -28,7 +28,6 @@ gsap.defaults({
 // Once the desired configurations are set, we simply export what we need to work with in the future.
 export {
   CustomEase,
-  Draggable,
   DURATION,
   EASE,
   Flip,
