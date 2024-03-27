@@ -55,7 +55,7 @@ export default function GlobalSheet({ isFixed = true }) {
         })
         .to('.menu-link-item-holder', {
           y: 0,
-          duration: 0.1,
+          // duration: 0.1,
           stagger: 0.02,
           ease: 'power4.out',
           delay: -0.1,
