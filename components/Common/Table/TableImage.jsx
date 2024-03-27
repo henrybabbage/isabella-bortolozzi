@@ -1,12 +1,17 @@
+import { useGSAP } from '@gsap/react'
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import { useRef } from 'react'
 import { cn } from 'utils/cn'
 
 import DynamicLink from '@/components/Primitives/DynamicLink'
+import { gsap } from '@/lib/gsap'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 
 export default function TableImage({ exhibition, index }) {
+  const imageRef = useRef(null)
+
   const { mainImage } = exhibition
 
   const currentImage = mainImage?.asset ?? ''
@@ -14,10 +19,29 @@ export default function TableImage({ exhibition, index }) {
   const imageProps = useNextSanityImage(sanityClient, currentImage)
 
   const inViewItem = useActiveItemStore((state) => state.inViewItem)
+
   // get currently hovered item from zustand store if any
   const currentlyHoveredItem = useActiveItemStore(
     (state) => state.currentlyHoveredItem,
   )
+
+  useGSAP(() => {
+    gsap.fromTo(
+      imageRef.current,
+      {
+        opacity: 1,
+        clipPath: 'inset(0% 0% 100% 0%)',
+        ease: 'power4.inOut',
+      },
+      {
+        opacity: 1,
+        clipPath: 'inset(0% 0% 0% 0%)',
+        ease: 'power4.inOut',
+        delay: 0.25,
+        duration: 1,
+      },
+    )
+  })
 
   if (!currentImage) return null
 
@@ -25,7 +49,7 @@ export default function TableImage({ exhibition, index }) {
     <DynamicLink link={exhibition} scroll={false}>
       <div
         className={cn(
-          'cursor-pointer absolute inset-0 h-full w-full z-50',
+          'cursor-pointer absolute inset-0 h-full w-full z-50 bg-background',
           (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none',

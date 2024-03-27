@@ -1,5 +1,6 @@
 import { useGSAP } from '@gsap/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 
 import { gsap } from '@/lib/gsap'
@@ -20,7 +21,7 @@ export default function GlobalSheet({ isFixed = true }) {
   const [isNavOpen, setIsNavOpen] = useNavOpenStore(
     ({ isNavOpen, setIsNavOpen }) => [isNavOpen, setIsNavOpen],
   )
-
+  const router = useRouter()
   const containerRef = useRef()
   const pagesMenuRef = useRef(null)
   const artistsMenuRef = useRef(null)
@@ -89,7 +90,15 @@ export default function GlobalSheet({ isFixed = true }) {
           className="menu-open cursor-pointer"
           onClick={toggleMenu}
         >
-          <p className="text-primary hover:text-secondary">Menu</p>
+          <p
+            className={cn(
+              router.pathname === '/'
+                ? 'text-white hover:text-primary'
+                : 'text-primary hover:text-secondary',
+            )}
+          >
+            Menu
+          </p>
         </button>
       </header>
 
@@ -100,7 +109,16 @@ export default function GlobalSheet({ isFixed = true }) {
         )}
       >
         <div className="menu-open cursor-pointer">
-          <Link href="/">Bortolozzi</Link>
+          <Link
+            href="/"
+            className={cn(
+              router.pathname === '/'
+                ? 'text-white hover:text-primary'
+                : 'text-primary hover:text-secondary',
+            )}
+          >
+            Bortolozzi
+          </Link>
         </div>
       </header>
 
