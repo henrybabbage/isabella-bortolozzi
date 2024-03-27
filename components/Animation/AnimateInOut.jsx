@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react'
+import React, { memo, useRef } from 'react'
 
 import useTransitionContext from '@/context/TransitionContext'
 import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
@@ -45,6 +45,7 @@ function AnimateInOut({
       })
 
       /* Outro animation */
+      /* Played unless skipped */
       if (!skipOutro) {
         timeline.add(
           gsap.to(element.current, {
