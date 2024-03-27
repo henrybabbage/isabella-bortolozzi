@@ -156,7 +156,7 @@ export default function GlobalSheet({ isFixed = true }) {
           {/* menu-links-pages  */}
           <div
             ref={pagesMenuRef}
-            className="menu-links col-span-1 col-start-1 flex flex-col pt-4 z-500"
+            className="menu-links col-span-1 col-start-1 flex flex-col space-y-[2px] pt-4 z-500"
           >
             {menu.map((link, index) => (
               <div
@@ -181,7 +181,7 @@ export default function GlobalSheet({ isFixed = true }) {
           {/* menu-links-artists  */}
           <div
             ref={artistsMenuRef}
-            className="col-span-4 col-start-2 flex flex-col pt-4"
+            className="col-span-4 col-start-2 flex flex-col space-y-[2px] pt-4"
           >
             {artists.map((artist, index) => (
               <div
