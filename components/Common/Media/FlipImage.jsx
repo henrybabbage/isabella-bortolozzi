@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { cn } from 'utils/cn'
 
@@ -32,6 +32,7 @@ export default function FlipImage({
   // Bortolozzi images are typically 2:3 (portrait) and 3:2 (landscape)
   const isLandscape = IMAGE_ASPECT_RATIO > 1
 
+  // Set up srcSets for grid view and single column view
   const srcSetGridViewPortrait = '(min-width: 740px) calc(17vw - 30px), 84px'
   const srcSetGridViewLandscape =
     '(min-width: 1940px) calc(17vw - 30px), (min-width: 800px) calc(18vw - 48px), 84px'
@@ -54,7 +55,7 @@ export default function FlipImage({
   if (!image) return null
   return (
     <div
-      className={cn('relative image-item event cursor-pointer max-w-4xl')}
+      className={cn('relative image-item cursor-pointer max-w-4xl')}
       data-image-id={index}
     >
       {imageProps && (

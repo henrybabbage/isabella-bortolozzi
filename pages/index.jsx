@@ -32,7 +32,7 @@ export default function IndexPage(props) {
   )
 
   return (
-    // <FadeInOut delay={0.25} durationIn={0.5} durationOut={0.25}>
+    <FadeInOut delay={0.25}>
       <main className="max-w-screen w-screen min-h-screen">
         <div ref={pageRef} className="w-full h-full">
           <ExhibitionSection
@@ -46,7 +46,7 @@ export default function IndexPage(props) {
           />
         </div>
       </main>
-    // </FadeInOut>
+    </FadeInOut>
   )
 }
 

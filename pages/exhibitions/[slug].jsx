@@ -21,7 +21,7 @@ export default function ExhibitionSlugRoute(props) {
 
   return (
     <FadeInOutUp delay={0.25} durationIn={2}>
-      <main className="h-full w-full z-[999]">
+      <main className="h-full w-full">
         <ExhibitionPage exhibition={exhibition} />
       </main>
     </FadeInOutUp>
