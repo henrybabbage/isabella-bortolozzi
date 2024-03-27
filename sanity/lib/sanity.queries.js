@@ -153,15 +153,15 @@ export const exhibitionsQuery = groq`*[_type == "exhibition" && location == 'gal
     }
 `
 
-// export const exhibitionsQuery = groq`
-//     {
-//         "total": count(*[_type == "exhibition" && location == 'gallery' && defined(slug.current)])
-//         "exhibitions": *[_type == "exhibition" && location == 'gallery' && defined(slug.current)] | order(endDate desc)
-//             {
-//                 ${exhibitionCompact}
-//         }
-//     }
-// `
+export const exhibitionsWithCountQuery = groq`
+    {
+        "total": count(*[_type == "exhibition" && location == 'gallery' && defined(slug.current)])
+        "exhibitions": *[_type == "exhibition" && location == 'gallery' && defined(slug.current)] | order(endDate desc)
+            {
+                ${exhibitionCompact}
+        }
+    }
+`
 
 export const newsQuery = groq`*[_type == "news"] | order(endDate desc)
     {

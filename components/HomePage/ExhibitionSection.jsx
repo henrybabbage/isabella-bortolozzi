@@ -6,7 +6,6 @@ const ExhibitionSection = forwardRef(function ExhibitionSection(
   { exhibition },
   ref,
 ) {
-  console.log(ref)
   if (!exhibition) return null
   return (
     <div

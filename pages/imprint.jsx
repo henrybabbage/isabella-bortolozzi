@@ -1,5 +1,6 @@
 import { useLiveQuery } from 'next-sanity/preview'
 
+import FadeInOut from '@/components/Animation/FadeInOut'
 import PageHeader from '@/components/Common/Header/PageHeader'
 import { CustomPortableText } from '@/components/Common/Text/CustomPortableText'
 import { readToken } from '@/sanity/lib/sanity.api'
@@ -10,26 +11,28 @@ import { imprintQuery } from '@/sanity/lib/sanity.queries'
 export default function Imprint(props) {
   const [imprint] = useLiveQuery(props.imprint, imprintQuery)
   return (
-    <main className="max-w-screen min-h-screen w-screen py-8">
-      <PageHeader title={'Imprint'} />
-      <section className="flex flex-col sm:grid sm:grid-cols-12 px-6 py-6">
-        {imprint.heading && (
-          <div className="sm:col-span-5 sm:col-start-9">
-            <CustomPortableText value={imprint.heading} />
-          </div>
-        )}
-        {imprint.imprint && (
-          <div className="sm:col-span-5 sm:col-start-9">
-            <CustomPortableText value={imprint.imprint} />
-          </div>
-        )}
-        {imprint.privacyPolicy && (
-          <div className="sm:col-span-5 sm:col-start-9">
-            <CustomPortableText value={imprint.privacyPolicy} />
-          </div>
-        )}
-      </section>
-    </main>
+    <FadeInOut delay={0.25}>
+      <main className="max-w-screen min-h-screen w-screen py-8">
+        <PageHeader title={'Imprint'} />
+        <section className="flex flex-col sm:grid sm:grid-cols-12 px-6 py-6">
+          {imprint.heading && (
+            <div className="sm:col-span-5 sm:col-start-9">
+              <CustomPortableText value={imprint.heading} />
+            </div>
+          )}
+          {imprint.imprint && (
+            <div className="sm:col-span-5 sm:col-start-9">
+              <CustomPortableText value={imprint.imprint} />
+            </div>
+          )}
+          {imprint.privacyPolicy && (
+            <div className="sm:col-span-5 sm:col-start-9">
+              <CustomPortableText value={imprint.privacyPolicy} />
+            </div>
+          )}
+        </section>
+      </main>
+    </FadeInOut>
   )
 }
 

@@ -32,10 +32,23 @@ export default function TableView({ exhibitions }) {
 
   useGSAP(
     () => {
-      // animations
-      gsap.from('.list-container', { opacity: 0, stagger: 0.5 })
+      gsap.fromTo(
+        '.list-item',
+        {
+          y: 40,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.05,
+          ease: 'power4.out',
+          delay: 0.1,
+        },
+      )
     },
-    { scope: parentRef },
+    { scope: listItemsRef, dependencies: [] },
   )
 
   // zustand stores
@@ -95,12 +108,13 @@ export default function TableView({ exhibitions }) {
   const handleScroll = useCallback(() => {
     if (!listItemsRef.current) return
     Array.from(listItemsRef?.current?.children).map((item) => {
-      // index of map array is not the same as index of virtualizer
-      // to illustrate see changing length of array of children in console.log
+      // index of the map array is not the same as the index of virtualizer array
+      // to illustrate observe the changing length of the array of children in console.log
       // console.log(listItemsRef.current.children)
+
       // get each list item container
       const itemRect = item.getBoundingClientRect()
-      // if container is within center of viewport update stores
+      // if container is within center of viewport update zustand stores
       if (
         itemRect.top < window.innerHeight / 2 &&
         itemRect.bottom > window.innerHeight / 2
@@ -119,11 +133,6 @@ export default function TableView({ exhibitions }) {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
-
-  // on every page load or route change reset the currentlyHoveredItem
-  useEffect(() => {
-    setCurrentlyHoveredItem(null)
-  }, [setCurrentlyHoveredItem])
 
   // TODO separate mobile table component for mobile only logic
   // TODO replace class "sticky" with class "fixed" on archive page image and uncomment "relative" on <ol> to fix effect on position of grid list
@@ -166,7 +175,7 @@ export default function TableView({ exhibitions }) {
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
-              //   position: 'relative',
+              // position: 'relative',
             }}
             className=""
           >
@@ -190,7 +199,7 @@ export default function TableView({ exhibitions }) {
                       item.start - virtualizer.options.scrollMargin
                     }px)`,
                   }}
-                  className=""
+                  className="list-item"
                 >
                   <TableItem
                     exhibition={exhibitions[item.index]}

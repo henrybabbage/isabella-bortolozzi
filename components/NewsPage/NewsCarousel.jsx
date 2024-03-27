@@ -30,10 +30,6 @@ export function NewsCarousel({ slides, options }) {
   useEffect(() => {
     if (!emblaApi) return
 
-    if (emblaApi) {
-      console.log(emblaApi.slideNodes()) // Access API
-    }
-
     onSelect()
     emblaApi.on('select', onSelect)
     emblaApi.on('reInit', onSelect)

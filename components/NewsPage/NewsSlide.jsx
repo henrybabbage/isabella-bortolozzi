@@ -24,7 +24,12 @@ export default function NewsSlide({ item }) {
   return (
     <div className="h-full w-full flex flex-col group text-secondary">
       <div className="relative aspect-square h-full w-full cursor-grab">
-        <StandardImage image={mainImage} fill={true} mode="cover" />
+        <StandardImage
+          image={mainImage}
+          fill={true}
+          mode="cover"
+          sizes="(min-width: 780px) 704px, calc(94.78vw - 16px)"
+        />
       </div>
       <DynamicLink link={item} scroll={false}>
         <div className="relative">

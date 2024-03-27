@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import useTransitionContext from '@/context/TransitionContext'
 import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
+import { gsap } from '@/lib/gsap'
 
 export default function TransitionLayout({ children }) {
   const router = useRouter()
@@ -11,7 +12,36 @@ export default function TransitionLayout({ children }) {
     route: router.asPath,
     children,
   })
-  const { timeline, resetTimeline } = useTransitionContext()
+  const { primaryEase, layoutRef, timeline, resetTimeline } =
+    useTransitionContext()
+
+  const animateLayout = () => {
+    /* Intro animation */
+    gsap.fromTo(
+      layoutRef.current,
+      {
+        y: '-100%',
+      },
+      {
+        opacity: 1,
+        y: 0,
+        willChange: 'transform',
+        ease: primaryEase,
+        delay: 1,
+        duration: 1.25,
+      },
+    )
+
+    /* Outro animation */
+    timeline?.add(
+      gsap.to(layoutRef.current, {
+        opacity: 0,
+        ease: primaryEase,
+        duration: 0.35,
+      }),
+      0,
+    )
+  }
 
   useIsomorphicLayoutEffect(() => {
     if (currentPage.route !== router.asPath) {
@@ -21,6 +51,7 @@ export default function TransitionLayout({ children }) {
           route: router.asPath,
           children,
         })
+        animateLayout()
         ScrollTrigger.refresh(true)
         return
       }
@@ -32,6 +63,7 @@ export default function TransitionLayout({ children }) {
           route: router.asPath,
           children,
         })
+        animateLayout()
         ScrollTrigger.refresh(true)
       })
     } else {

@@ -1,5 +1,6 @@
 import { useLiveQuery } from 'next-sanity/preview'
 
+import FadeInOut from '@/components/Animation/FadeInOut'
 import PageHeader from '@/components/Common/Header/PageHeader'
 import TableView from '@/components/Common/Table/TableView'
 import YearsPopover from '@/components/ExhibitionsPage/YearsPopover'
@@ -12,12 +13,14 @@ import { exhibitionsQuery } from '@/sanity/lib/sanity.queries'
 export default function Exhibitions(props) {
   const [exhibitions] = useLiveQuery(props.exhibitions, exhibitionsQuery)
   return (
-    <main className="min-h-screen w-screen">
-      <PageHeader title={'Exhibitions'}>
-        <YearsPopover exhibitions={exhibitions} />
-      </PageHeader>
-      <TableView exhibitions={exhibitions} />
-    </main>
+    <FadeInOut delay={0.25}>
+      <main className="min-h-screen w-screen">
+        <PageHeader title={'Exhibitions'}>
+          <YearsPopover exhibitions={exhibitions} />
+        </PageHeader>
+        <TableView exhibitions={exhibitions} />
+      </main>
+    </FadeInOut>
   )
 }
 

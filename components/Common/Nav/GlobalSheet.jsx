@@ -1,5 +1,6 @@
 import { useGSAP } from '@gsap/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 
 import { gsap } from '@/lib/gsap'
@@ -20,7 +21,7 @@ export default function GlobalSheet({ isFixed = true }) {
   const [isNavOpen, setIsNavOpen] = useNavOpenStore(
     ({ isNavOpen, setIsNavOpen }) => [isNavOpen, setIsNavOpen],
   )
-
+  const router = useRouter()
   const containerRef = useRef()
   const pagesMenuRef = useRef(null)
   const artistsMenuRef = useRef(null)
@@ -89,7 +90,15 @@ export default function GlobalSheet({ isFixed = true }) {
           className="menu-open cursor-pointer"
           onClick={toggleMenu}
         >
-          <p className="text-primary hover:text-secondary">Menu</p>
+          <p
+            className={cn(
+              router.pathname === '/'
+                ? 'text-white hover:text-primary'
+                : 'text-primary hover:text-secondary',
+            )}
+          >
+            Menu
+          </p>
         </button>
       </header>
 
@@ -100,7 +109,16 @@ export default function GlobalSheet({ isFixed = true }) {
         )}
       >
         <div className="menu-open cursor-pointer">
-          <Link href="/">Bortolozzi</Link>
+          <Link
+            href="/"
+            className={cn(
+              router.pathname === '/'
+                ? 'text-white hover:text-primary'
+                : 'text-primary hover:text-secondary',
+            )}
+          >
+            Bortolozzi
+          </Link>
         </div>
       </header>
 
@@ -138,7 +156,7 @@ export default function GlobalSheet({ isFixed = true }) {
           {/* menu-links-pages  */}
           <div
             ref={pagesMenuRef}
-            className="menu-links col-span-1 col-start-1 flex flex-col pt-4"
+            className="menu-links col-span-1 col-start-1 flex flex-col pt-4 z-500"
           >
             {menu.map((link, index) => (
               <div
@@ -150,7 +168,7 @@ export default function GlobalSheet({ isFixed = true }) {
                   onClick={toggleMenu}
                 >
                   <Link
-                    className="menu-link text-primary"
+                    className="menu-link text-primary z-500"
                     aria-label="Main pages"
                     href={link.path}
                   >
@@ -177,7 +195,7 @@ export default function GlobalSheet({ isFixed = true }) {
                   <Link
                     key={index}
                     href={`/${artist.slug}`}
-                    className="menu-link text-primary"
+                    className="menu-link text-primary z-500"
                     aria-label="Artist pages"
                   >
                     {artist.name}

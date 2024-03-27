@@ -4,9 +4,10 @@ import { useAsPathWithoutHash } from '@madeinhaus/nextjs-page-transition'
 import localFont from 'next/font/local'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { lazy, useEffect, useRef } from 'react'
+import { lazy, useEffect, useRef, useState } from 'react'
 import { HydrationProvider } from 'react-hydration-provider'
 
+import Loader from '@/components/Animation/Loader'
 import RootLayout from '@/components/Layout/RootLayout'
 import { TransitionContextProvider } from '@/context/TransitionContext'
 
@@ -42,6 +43,9 @@ const mono = localFont({
 })
 
 export default function App({ Component, pageProps }) {
+  const [isLoading, setIsLoading] = useState(true)
+  const [isReady, setIsReady] = useState(false)
+
   const { draftMode, token } = pageProps
   const key = useAsPathWithoutHash()
   const router = useRouter()
@@ -108,6 +112,9 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="data:," />
       </Head>
       <HydrationProvider>
+        {/* {isLoading && (
+          <Loader setIsLoading={setIsLoading} setIsReady={setIsReady} />
+        )} */}
         <style jsx global>
           {`
             :root {

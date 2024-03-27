@@ -2,6 +2,7 @@ import { useGSAP } from '@gsap/react'
 import { useLiveQuery } from 'next-sanity/preview'
 import { useRef } from 'react'
 
+import FadeInOut from '@/components/Animation/FadeInOut'
 import ExhibitionSection from '@/components/HomePage/ExhibitionSection'
 import Footer from '@/components/HomePage/Footer'
 import { ScrollTrigger } from '@/lib/gsap'
@@ -31,19 +32,21 @@ export default function IndexPage(props) {
   )
 
   return (
-    <main className="max-w-screen w-screen min-h-screen">
-      <div ref={pageRef} className="w-full h-full">
-        <ExhibitionSection
-          exhibition={home.publicisedExhibitions[0]}
-          ref={heroRef}
-        />
-        <Footer
-          featuredExhibition={home.publicisedExhibitions[0]}
-          override={home.logoControl}
-          gallery={props.gallery}
-        />
-      </div>
-    </main>
+    // <FadeInOut delay={0.25} durationIn={0.5} durationOut={0.25}>
+      <main className="max-w-screen w-screen min-h-screen">
+        <div ref={pageRef} className="w-full h-full">
+          <ExhibitionSection
+            exhibition={home.publicisedExhibitions[0]}
+            ref={heroRef}
+          />
+          <Footer
+            featuredExhibition={home.publicisedExhibitions[0]}
+            override={home.logoControl}
+            gallery={props.gallery}
+          />
+        </div>
+      </main>
+    // </FadeInOut>
   )
 }
 

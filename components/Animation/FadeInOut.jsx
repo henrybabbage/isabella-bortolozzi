@@ -15,7 +15,7 @@ export default function FadeInOut({
   markers,
 }) {
   return (
-    <div className="!overflow-hidden">
+    <>
       <AnimateInOut
         durationIn={durationIn}
         durationOut={durationOut}
@@ -37,6 +37,6 @@ export default function FadeInOut({
       >
         {children}
       </AnimateInOut>
-    </div>
+    </>
   )
 }
