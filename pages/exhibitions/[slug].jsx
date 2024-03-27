@@ -20,7 +20,7 @@ export default function ExhibitionSlugRoute(props) {
   const image = props.image
 
   return (
-    <FadeInOutUp delay={0.25}>
+    <FadeInOutUp delay={0.25} durationIn={2}>
       <main className="h-full w-full">
         <ExhibitionPage exhibition={exhibition} />
       </main>

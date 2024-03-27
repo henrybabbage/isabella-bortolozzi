@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 import useTransitionContext from '@/context/TransitionContext'
 import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
-import { gsap } from '@/lib/gsap'
 
 export default function TransitionLayout({ children }) {
   const router = useRouter()
@@ -12,42 +11,12 @@ export default function TransitionLayout({ children }) {
     route: router.asPath,
     children,
   })
-  const { primaryEase, layoutRef, timeline, resetTimeline } =
-    useTransitionContext()
-
-  const animateLayout = () => {
-    /* Intro animation */
-    gsap.fromTo(
-      layoutRef.current,
-      {
-        y: '-100%',
-      },
-      {
-        opacity: 1,
-        y: 0,
-        willChange: 'transform',
-        ease: primaryEase,
-        delay: 1,
-        duration: 1.25,
-      },
-    )
-
-    /* Outro animation */
-    timeline?.add(
-      gsap.to(layoutRef.current, {
-        opacity: 0,
-        ease: primaryEase,
-        duration: 0.35,
-      }),
-      0,
-    )
-  }
+  const { timeline, resetTimeline } = useTransitionContext()
 
   useIsomorphicLayoutEffect(() => {
     if (currentPage.route !== router.asPath) {
       if (timeline.duration() === 0) {
         /* There are no outro animations, so immediately transition */
-    
         setCurrentPage({
           route: router.asPath,
           children,
@@ -59,7 +28,6 @@ export default function TransitionLayout({ children }) {
       timeline.play().then(() => {
         /* outro complete so reset to an empty paused timeline */
         resetTimeline()
-
         setCurrentPage({
           route: router.asPath,
           children,

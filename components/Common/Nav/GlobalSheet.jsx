@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 
+import useTransitionContext from '@/context/TransitionContext'
 import { gsap } from '@/lib/gsap'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { artistsQuery } from '@/sanity/lib/sanity.queries'
@@ -25,6 +26,7 @@ export default function GlobalSheet({ isFixed = true }) {
   const containerRef = useRef()
   const pagesMenuRef = useRef(null)
   const artistsMenuRef = useRef(null)
+  const { navigationRef } = useTransitionContext()
 
   const tl = useRef()
 
@@ -80,6 +82,8 @@ export default function GlobalSheet({ isFixed = true }) {
     <div className="menu-container" ref={containerRef}>
       {/* menu-trigger */}
       <header
+        ref={navigationRef}
+        // style={{ opacity: 0 }}
         className={cn(
           isFixed ? 'fixed' : 'absolute',
           'menu-bar z-400 top-0 left-0 p-4 w-fit',
@@ -103,6 +107,7 @@ export default function GlobalSheet({ isFixed = true }) {
       </header>
 
       <header
+        // style={{ opacity: 0 }}
         className={cn(
           isFixed ? 'fixed' : 'absolute',
           'menu-bar z-400  top-0 right-0 p-4 w-fit',
@@ -156,7 +161,7 @@ export default function GlobalSheet({ isFixed = true }) {
           {/* menu-links-pages  */}
           <div
             ref={pagesMenuRef}
-            className="menu-links col-span-1 col-start-1 flex flex-col pt-4 z-500"
+            className="menu-links col-span-1 col-start-1 flex flex-col space-y-[2px] pt-4 z-500"
           >
             {menu.map((link, index) => (
               <div
@@ -181,7 +186,7 @@ export default function GlobalSheet({ isFixed = true }) {
           {/* menu-links-artists  */}
           <div
             ref={artistsMenuRef}
-            className="col-span-4 col-start-2 flex flex-col pt-4"
+            className="col-span-4 col-start-2 flex flex-col space-y-[2px] pt-4"
           >
             {artists.map((artist, index) => (
               <div

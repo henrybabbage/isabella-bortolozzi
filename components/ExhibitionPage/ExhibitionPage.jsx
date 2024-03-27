@@ -6,28 +6,18 @@ import { cn } from '@/utils/cn'
 
 import FlipImage from '../Common/Media/FlipImage'
 
-const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  })
-}
-
 export default function ExhibitionPage({ exhibition }) {
   const [isGridView, setIsGridView] = useState(false)
   const [targetId, setTargetId] = useState(null)
 
   const pageRef = useRef()
   const imagesRef = useRef()
-  const eventsRef = useRef([])
 
   const { contextSafe } = useGSAP({
-    // dependencies: isGridView,
     scope: imagesRef,
   })
 
   const clickHandler = contextSafe((event) => {
-    console.log({ event })
     if (event.target.tagName === 'IMG') {
       const container = imagesRef.current
       const switchingToGridView = container.classList.contains('flex-container')
@@ -40,19 +30,17 @@ export default function ExhibitionPage({ exhibition }) {
           ease: 'circ.inOut',
           onComplete: () => {
             gsap.set('.caption', { display: 'block' })
-
             performLayoutFlip(container)
           },
         })
       } else {
         performLayoutFlip(container)
-
         // Fade in all captions with a delay
         gsap.to('.caption', {
           delay: 1,
           duration: 0.5,
           opacity: 1,
-          stagger: 0.25,
+          stagger: 0.15,
           ease: 'circ.inOut',
           onStart: () => {
             gsap.set('.caption', { display: 'block' })
@@ -81,8 +69,7 @@ export default function ExhibitionPage({ exhibition }) {
         ref={imagesRef}
         className={cn(
           '',
-          // isGridView ? 'grid-container' : 'flex-container',
-          'flex-container gallery relative w-full gap-x-4 gap-y-32',
+          'flex-container relative w-full gap-x-4 gap-y-32',
         )}
       >
         {exhibition &&

@@ -1,27 +1,39 @@
 import { useRouter } from 'next/router'
+import { Client } from 'react-hydration-provider'
 
-import useTransitionContext from '@/context/TransitionContext'
+import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 import TransitionLayout from '../Animation/TransitionLayout'
 import GlobalSheet from '../Common/Nav/GlobalSheet'
+import MobileHeader from '../Mobile/MobileHeader'
 import ReferenceGrid from '../Utilities/ReferenceGrid'
 import SmoothScroll from '../Utilities/SmoothScroll'
 
 export default function RootLayout({ children }) {
   const router = useRouter()
-  const { layoutRef } = useTransitionContext()
   return (
     <TransitionLayout>
       <SmoothScroll>
-        <div ref={layoutRef} id="root" className="overscroll-none">
-          {!router.pathname.startsWith('/studio') &&
-          !router.pathname.startsWith('/exhibitions/') &&
-          !router.pathname.startsWith('/viewing-rooms/') ? (
-            <GlobalSheet isFixed={true} />
-          ) : null}
-          <ReferenceGrid />
-          {children}
-        </div>
+        <Client>
+          <div id="root" className="overscroll-none">
+            <Desktop>
+              {!router.pathname.startsWith('/studio') &&
+              !router.pathname.startsWith('/exhibitions/') &&
+              !router.pathname.startsWith('/viewing-rooms/') ? (
+                <GlobalSheet isFixed={true} />
+              ) : null}
+            </Desktop>
+            <TabletAndBelow>
+              {!router.pathname.startsWith('/studio') &&
+              !router.pathname.startsWith('/exhibitions/') &&
+              !router.pathname.startsWith('/viewing-rooms/') ? (
+                <MobileHeader isFixed={true} />
+              ) : null}
+            </TabletAndBelow>
+            <ReferenceGrid />
+            {children}
+          </div>
+        </Client>
       </SmoothScroll>
     </TransitionLayout>
   )
