@@ -12,13 +12,13 @@ export default function TransitionLayout({ children }) {
     route: router.asPath,
     children,
   })
-  const { primaryEase, layoutRef, timeline, resetTimeline } =
+  const { primaryEase, navigationRef, timeline, resetTimeline } =
     useTransitionContext()
 
-  const animateLayout = () => {
+  const animateNavigationButtons = () => {
     /* Intro animation */
     gsap.fromTo(
-      layoutRef.current,
+      navigationRef.current,
       {
         y: '-100%',
       },
@@ -34,7 +34,7 @@ export default function TransitionLayout({ children }) {
 
     /* Outro animation */
     timeline?.add(
-      gsap.to(layoutRef.current, {
+      gsap.to(navigationRef.current, {
         opacity: 0,
         ease: primaryEase,
         duration: 0.35,
@@ -47,7 +47,6 @@ export default function TransitionLayout({ children }) {
     if (currentPage.route !== router.asPath) {
       if (timeline.duration() === 0) {
         /* There are no outro animations, so immediately transition */
-    
         setCurrentPage({
           route: router.asPath,
           children,
@@ -59,7 +58,6 @@ export default function TransitionLayout({ children }) {
       timeline.play().then(() => {
         /* outro complete so reset to an empty paused timeline */
         resetTimeline()
-
         setCurrentPage({
           route: router.asPath,
           children,

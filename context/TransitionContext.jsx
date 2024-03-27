@@ -8,6 +8,9 @@ if (typeof window !== 'undefined') {
 }
 
 const TransitionContext = createContext({
+  navigationRef: {
+    current: null,
+  },
   layoutRef: {
     current: null,
   },
@@ -22,6 +25,7 @@ export function TransitionContextProvider({ children }) {
     document.documentElement.classList.add('is-transitioning')
   }
 
+  const navigationRef = useRef(null)
   const layoutRef = useRef(null)
   const [timeline, setTimeline] = useState(
     gsap.timeline({ onStart: setTransition, paused: true }),
@@ -37,6 +41,7 @@ export function TransitionContextProvider({ children }) {
   }
 
   const contextValue = {
+    navigationRef,
     layoutRef,
     timeline,
     setTimeline,
