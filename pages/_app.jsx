@@ -64,9 +64,9 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="data:," />
       </Head>
       <HydrationProvider>
-        {isLoading && (
+        {/* {isLoading && (
           <Loader setIsLoading={setIsLoading} setIsReady={setIsReady} />
-        )}
+        )} */}
         <style jsx global>
           {`
             :root {

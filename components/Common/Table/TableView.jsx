@@ -21,6 +21,7 @@ export default function TableView({ exhibitions }) {
   )
 
   const parentRef = useRef(null)
+  const listRef = useRef(null)
   const listItemsRef = useRef(null)
 
   // zustand stores
@@ -38,7 +39,7 @@ export default function TableView({ exhibitions }) {
     count: exhibitions?.length ?? 0,
     estimateSize: () => virtualItemSize,
     overscan: 12,
-    scrollMargin: parentRef?.current?.offsetTop ?? 0,
+    scrollMargin: listRef?.current?.offsetTop ?? 0,
     paddingStart: 64,
     // getScrollElement: () => listItemsRef.current,
   })
@@ -81,19 +82,17 @@ export default function TableView({ exhibitions }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
-  // TODO replace class "sticky" with class "fixed" on archive page image and uncomment "relative" on <ol> to fix effect on position of grid list
-
   if (!exhibitions) return null
   return (
     <Client>
       <div
         ref={parentRef}
         onMouseLeave={() => setCurrentlyHoveredItem(null)}
-        className="w-full grid grid-cols-12 px-4"
+        className="grid w-full grid-cols-12 items-start px-4"
       >
         <Desktop>
-          <div className="sm:flex sticky top-16 sm:col-span-6 sm:col-start-1 h-full w-full sm:items-center">
-            <div className="relative aspect-square h-full w-full">
+          <div className="flex fixed top-16 sm:col-span-6 sm:col-start-1 h-full w-full items-start">
+            <div className="relative h-[50vw] w-[50vw] bg-background">
               {exhibitions &&
                 exhibitions.map((exhibition, index) => (
                   <TableImage
@@ -105,56 +104,62 @@ export default function TableView({ exhibitions }) {
             </div>
           </div>
         </Desktop>
-        <TabletAndBelow>
-          <ol ref={listItemsRef}>
-            {exhibitions &&
-              exhibitions.map((exhibition) => (
-                <div key={exhibition._id} id={exhibition.year} className="">
-                  <TableItem exhibition={exhibition} />
-                </div>
-              ))}
-          </ol>
-        </TabletAndBelow>
-        <Desktop>
-          <ol
-            ref={listItemsRef}
-            style={{
-              height: `${virtualizer.getTotalSize()}px`,
-              width: '100%',
-              // position: 'relative',
-            }}
-            className="sm:col-span-6 sm:col-start-6"
-          >
-            {virtualizer.getVirtualItems().map((item, index) => {
-              return (
-                <li
-                  id={index}
-                  key={item.key}
-                  dataexhibitionid={exhibitions[item.index]._id}
-                  onMouseEnter={() => {
-                    setCurrentlyHoveredItem(item.index)
-                  }}
-                  style={{
-                    position: 'absolute',
-                    top: 64,
-                    left: 0,
-                    width: '100%',
-                    height: `${item.size}px`,
-                    transform: `translateY(${
-                      item.start - virtualizer.options.scrollMargin
-                    }px)`,
-                  }}
-                  className="list-item"
-                >
-                  <TableItem
-                    exhibition={exhibitions[item.index]}
-                    index={item.index}
-                  />
-                </li>
-              )
-            })}
-          </ol>
-        </Desktop>
+        <div
+          ref={listRef}
+          className="sm:col-span-6 sm:col-start-7 col-start-1 col-span-12 w-full"
+        >
+          <TabletAndBelow>
+            <ol ref={listItemsRef}>
+              {exhibitions &&
+                exhibitions.map((exhibition) => (
+                  <div key={exhibition._id} id={exhibition.year} className="">
+                    <TableItem exhibition={exhibition} />
+                  </div>
+                ))}
+            </ol>
+          </TabletAndBelow>
+          <Desktop>
+            <ol
+              ref={listItemsRef}
+              style={{
+                height: `${virtualizer.getTotalSize()}px`,
+                width: '100%',
+                position: 'relative',
+              }}
+            >
+              {virtualizer.getVirtualItems().map((item, index) => {
+                return (
+                  <li
+                    id={index}
+                    key={item.key}
+                    dataExhibitionId={exhibitions[item.index]._id}
+                    onMouseEnter={() => {
+                      setCurrentlyHoveredItem(item.index)
+                    }}
+                    onMouseLeave={() => setCurrentlyHoveredItem(null)}
+                    // virtualizer styles
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: `${item.size}px`,
+                      transform: `translateY(${
+                        item.start - virtualizer.options.scrollMargin
+                      }px)`,
+                    }}
+                    className="list-item"
+                  >
+                    <TableItem
+                      exhibition={exhibitions[item.index]}
+                      index={item.index}
+                    />
+                  </li>
+                )
+              })}
+            </ol>
+          </Desktop>
+        </div>
       </div>
     </Client>
   )
