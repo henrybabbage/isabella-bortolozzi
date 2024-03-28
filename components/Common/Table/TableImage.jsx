@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react'
-import { useNextSanityImage } from 'next-sanity-image'
 import Image from 'next/image'
+import { useNextSanityImage } from 'next-sanity-image'
 import { useRef } from 'react'
 import { cn } from 'utils/cn'
 

@@ -1,10 +1,8 @@
-import { useGSAP } from '@gsap/react'
-import { elementScroll, useWindowVirtualizer } from '@tanstack/react-virtual'
+import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useCallback, useEffect, useRef } from 'react'
 import { Client, useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
-import { gsap } from '@/lib/gsap'
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 import { useActiveYearStore } from '@/stores/useActiveYearStore'
 import { useSelectedYearStore } from '@/stores/useSelectedYearStore'
@@ -27,30 +25,7 @@ export default function TableView({ exhibitions }) {
   )
 
   const parentRef = useRef(null)
-  const listRef = useRef(null)
   const listItemsRef = useRef(null)
-  const scrollingRef = useRef()
-
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        '.list-item',
-        {
-          y: 40,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.05,
-          ease: 'power4.out',
-          delay: 0.1,
-        },
-      )
-    },
-    { scope: listItemsRef, dependencies: [] },
-  )
 
   // zustand stores
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
@@ -62,50 +37,14 @@ export default function TableView({ exhibitions }) {
     (state) => state.setCurrentlyHoveredItem,
   )
 
-  // react-virtual
-  // scroll to index function
-  const scrollToFn = useCallback((offset, canSmooth, instance) => {
-    const duration = 1000
-    const start = parentRef.current.scrollTop
-    const startTime = (scrollingRef.current = Date.now())
-
-    const run = () => {
-      if (scrollingRef.current !== startTime) return
-      const now = Date.now()
-      const elapsed = now - startTime
-      const progress = easeInOutQuint(Math.min(elapsed / duration, 1))
-      const interpolated = start + (offset - start) * progress
-
-      if (elapsed < duration) {
-        elementScroll(interpolated, canSmooth, instance)
-        requestAnimationFrame(run)
-      } else {
-        elementScroll(interpolated, canSmooth, instance)
-      }
-    }
-
-    requestAnimationFrame(run)
-  }, [])
-
   const virtualItemSize = tabletOrMobile ? 640 : 144
   const virtualizer = useWindowVirtualizer({
     count: exhibitions?.length ?? 0,
     estimateSize: () => virtualItemSize,
     overscan: 12,
-    scrollMargin: listItemsRef?.current?.offsetTop ?? 0,
-    // paddingStart: 64,
-    // paddingEnd: 64,
+    scrollMargin: parentRef?.current?.offsetTop ?? 0,
+    // getScrollElement: () => parentRef.current,
   })
-
-  // Option without absolute positioning
-  //   const items = virtualizer.getVirtualItems()
-  //   const [paddingTop, paddingBottom] =
-  //     items.length > 0
-  //       ? [
-  //           Math.max(0, items[0].start - virtualizer.options.scrollMargin),
-  //           Math.max(0, virtualizer.getTotalSize() - items[items.length - 1].end),
-  //         ]
-  //       : [0, 0]
 
   useEffect(() => {
     if (selectedYearIndex !== undefined && selectedYearIndex !== null) {
@@ -145,7 +84,6 @@ export default function TableView({ exhibitions }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
-  // TODO separate mobile table component for mobile only logic
   // TODO replace class "sticky" with class "fixed" on archive page image and uncomment "relative" on <ol> to fix effect on position of grid list
 
   if (!exhibitions) return null
@@ -157,7 +95,7 @@ export default function TableView({ exhibitions }) {
         className="w-full grid grid-cols-12 px-4"
       >
         <Desktop>
-          <div className="sm:flex sticky top-16 sm:col-span-6 sm:col-start-1 h-full w-full items-center">
+          <div className="sm:flex sticky top-16 sm:col-span-6 sm:col-start-1 h-full w-full sm:items-center">
             <div className="relative aspect-square h-full w-full">
               {exhibitions &&
                 exhibitions.map((exhibition, index) => (
@@ -188,7 +126,7 @@ export default function TableView({ exhibitions }) {
               width: '100%',
               // position: 'relative',
             }}
-            className="col-start-1 col-span-12"
+            className="sm:col-span-6 sm:col-start-6"
           >
             {virtualizer.getVirtualItems().map((item, index) => {
               return (
@@ -199,11 +137,6 @@ export default function TableView({ exhibitions }) {
                   onMouseEnter={() => {
                     setCurrentlyHoveredItem(item.index)
                   }}
-                  // virtualizer styles
-                  //   style={{
-                  //     paddingTop,
-                  //     paddingBottom,
-                  //   }}
                   style={{
                     position: 'absolute',
                     top: 64,
@@ -214,7 +147,6 @@ export default function TableView({ exhibitions }) {
                       item.start - virtualizer.options.scrollMargin
                     }px)`,
                   }}
-                  //   ref={virtualizer.measureElement}
                   className="list-item"
                 >
                   <TableItem
