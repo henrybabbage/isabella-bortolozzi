@@ -101,7 +101,7 @@ export default function GlobalSheet({ isFixed = true }) {
         // style={{ opacity: 0 }}
         className={cn(
           isFixed ? 'fixed' : 'absolute',
-          'menu-bar z-400  top-0 right-0 p-4 w-fit',
+          'hidden menu-bar z-400  top-0 right-0 p-4 w-fit',
         )}
       >
         <div className="menu-open cursor-pointer">
