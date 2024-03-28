@@ -32,7 +32,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
         className={cn(
           (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
             ? 'bg-highlight'
-            : 'bg-background',
+            : 'bg-none',
           '-z-50 text-primary transition-colors duration-700 ease-in-out group relative flex flex-col sm:grid h-[40rem] sm:h-[10.25vw] sm:max-h-[10.25vw] cursor-pointer sm:grid-cols-12 px-6 content-start pt-1 sm:pt-0 sm:pb-6 text-left',
         )}
       >

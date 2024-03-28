@@ -49,7 +49,7 @@ export default function TableImage({ exhibition, index }) {
     <DynamicLink link={exhibition} scroll={false}>
       <div
         className={cn(
-          'cursor-pointer absolute inset-0 h-full w-full',
+          'cursor-pointer absolute inset-0 h-full w-full z-[999]',
           (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none',
