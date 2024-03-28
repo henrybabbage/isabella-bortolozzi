@@ -117,6 +117,7 @@ export default function TableView({ exhibitions }) {
         </TabletAndBelow>
         <Desktop>
           <div
+            ref={listItemsRef}
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
@@ -127,7 +128,6 @@ export default function TableView({ exhibitions }) {
             {virtualizer.getVirtualItems().map((item, index) => {
               return (
                 <ol
-                  ref={listItemsRef}
                   id={index}
                   key={item.key}
                   dataexhibitionid={exhibitions[item.index]._id}

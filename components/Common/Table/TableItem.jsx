@@ -29,12 +29,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
     <DynamicLink link={exhibition} scroll={false}>
       <li
         ref={ref}
-        className={cn(
-          (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
-            ? 'bg-highlight'
-            : 'bg-none',
-          '-z-50 text-primary transition-colors duration-700 ease-in-out group relative flex flex-col sm:grid h-[40rem] sm:h-[10.25vw] sm:max-h-[10.25vw] cursor-pointer sm:grid-cols-12 px-6 content-start pt-1 sm:pt-0 sm:pb-6 text-left',
-        )}
+        className="-z-50 text-primary transition-colors duration-700 ease-in-out group relative flex flex-col sm:grid h-[40rem] sm:h-[10.25vw] sm:max-h-[10.25vw] cursor-pointer sm:grid-cols-12 px-6 content-start pt-1 sm:pt-0 sm:pb-6 text-left"
       >
         <TabletAndBelow>
           <div className="sm:hidden h-[22rem] max-h-full w-full overflow-hidden pb-6">
@@ -44,9 +39,17 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
             />
           </div>
         </TabletAndBelow>
-        <div className="sm:col-span-6 sm:col-start-7">
-          <div className="grid grid-cols-6 w-full">
-            <div className="flex flex-col sm:col-span-3 sm:col-start-1 pt-6 sm:pt-3 w-fit">
+        <div className="sm:col-span-6 sm:col-start-7 h-full">
+          <div
+            className={cn(
+              (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) ===
+                index
+                ? 'bg-highlight'
+                : 'bg-none',
+              'grid grid-cols-6 w-full h-full',
+            )}
+          >
+            <div className="flex flex-col sm:col-span-3 sm:col-start-1 pt-6 sm:pt-3 w-fit h-full">
               {exhibition.title && (
                 <h1 className="text-primary uppercase">{exhibition?.title}</h1>
               )}
@@ -57,7 +60,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
                 <h2 className="text-primary pl-8">{artistList}</h2>
               )}
             </div>
-            <div className="flex flex-col sm:col-span-1 sm:col-start-4 w-fit sm:pt-3 pt-6 pl-8 h-fit">
+            <div className="flex flex-col sm:col-span-1 sm:col-start-4 w-fit sm:pt-3 pt-6 pl-8 h-full">
               {!router.pathname.startsWith('/exhibitions') &&
                 exhibition.venue && (
                   <h3 className="text-primary">{exhibition?.venue?.name}</h3>
@@ -77,8 +80,8 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
                 </h3>
               )}
             </div>
-            <div className="w-full sm:pt-3 pt-6 sm:col-span-2 sm:col-start-5 flex justify-end">
-              <div className="inline-flex">
+            <div className="w-full h-full sm:pt-3 pt-6 sm:col-span-2 sm:col-start-5 flex justify-end">
+              <div className="inline-flex h-full">
                 {exhibition.startDate && exhibition.endDate && (
                   <h3 className="inline-flex space-x-2 text-primary">
                     <span className="align-baseline">

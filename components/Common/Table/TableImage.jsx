@@ -65,7 +65,7 @@ export default function TableImage({ exhibition, index }) {
             quality={75}
             priority
             style={{ objectFit: 'cover', objectPosition: 'center' }}
-            className="bg-highlight"
+            className="pr-4"
           />
         )}
       </div>
