@@ -10,7 +10,7 @@ export function NewsCarousel({ slides, options }) {
     AutoScroll({
       playOnInit: true,
       startDelay: 2000,
-      speed: 0.5,
+      speed: 0.7,
       stopOnMouseEnter: false,
       stopOnInteraction: false,
       stopOnFocusIn: true,
