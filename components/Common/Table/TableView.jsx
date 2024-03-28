@@ -41,6 +41,7 @@ export default function TableView({ exhibitions }) {
     overscan: 12,
     scrollMargin: listRef?.current?.offsetTop ?? 0,
     paddingStart: 64,
+    paddingEnd: 144,
     // getScrollElement: () => listItemsRef.current,
   })
 
@@ -145,7 +146,7 @@ export default function TableView({ exhibitions }) {
                     // virtualizer styles
                     style={{
                       position: 'absolute',
-                      top: 0,
+                      top: 48,
                       left: 0,
                       width: '100%',
                       height: `${item.size}px`,
