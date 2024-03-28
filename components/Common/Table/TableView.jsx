@@ -1,20 +1,15 @@
-import { useGSAP } from '@gsap/react'
-import { elementScroll, useWindowVirtualizer } from '@tanstack/react-virtual'
+import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useCallback, useEffect, useRef } from 'react'
-import { useHydrated } from 'react-hydration-provider'
+import { Client, useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
-import { gsap } from '@/lib/gsap'
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 import { useActiveYearStore } from '@/stores/useActiveYearStore'
 import { useSelectedYearStore } from '@/stores/useSelectedYearStore'
+import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 import TableImage from './TableImage'
 import TableItem from './TableItem'
-
-function easeInOutQuint(t) {
-  return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t
-}
 
 // Credit to dataexcess (https://github.com/dataexcess) for the initial architecture that informed this feature
 // and credit to Kesorn Dokphikul for solving the integration with react-virtual
@@ -28,28 +23,6 @@ export default function TableView({ exhibitions }) {
   const parentRef = useRef(null)
   const listRef = useRef(null)
   const listItemsRef = useRef(null)
-  const scrollingRef = useRef()
-
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        '.list-item',
-        {
-          y: 40,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.05,
-          ease: 'power4.out',
-          delay: 0.1,
-        },
-      )
-    },
-    { scope: listItemsRef, dependencies: [] },
-  )
 
   // zustand stores
   const setInViewItem = useActiveItemStore((state) => state.setInViewItem)
@@ -61,50 +34,15 @@ export default function TableView({ exhibitions }) {
     (state) => state.setCurrentlyHoveredItem,
   )
 
-  // react-virtual
-  // scroll to index function
-  const scrollToFn = useCallback((offset, canSmooth, instance) => {
-    const duration = 1000
-    const start = parentRef.current.scrollTop
-    const startTime = (scrollingRef.current = Date.now())
-
-    const run = () => {
-      if (scrollingRef.current !== startTime) return
-      const now = Date.now()
-      const elapsed = now - startTime
-      const progress = easeInOutQuint(Math.min(elapsed / duration, 1))
-      const interpolated = start + (offset - start) * progress
-
-      if (elapsed < duration) {
-        elementScroll(interpolated, canSmooth, instance)
-        requestAnimationFrame(run)
-      } else {
-        elementScroll(interpolated, canSmooth, instance)
-      }
-    }
-
-    requestAnimationFrame(run)
-  }, [])
-
   const virtualItemSize = tabletOrMobile ? 640 : 144
   const virtualizer = useWindowVirtualizer({
     count: exhibitions?.length ?? 0,
     estimateSize: () => virtualItemSize,
     overscan: 12,
-    scrollMargin: listItemsRef?.current?.offsetTop ?? 0,
-    // paddingStart: 64,
-    // paddingEnd: 64,
+    scrollMargin: listRef?.current?.offsetTop ?? 0,
+    paddingStart: 64,
+    // getScrollElement: () => listItemsRef.current,
   })
-
-  // Option without absolute positioning
-  //   const items = virtualizer.getVirtualItems()
-  //   const [paddingTop, paddingBottom] =
-  //     items.length > 0
-  //       ? [
-  //           Math.max(0, items[0].start - virtualizer.options.scrollMargin),
-  //           Math.max(0, virtualizer.getTotalSize() - items[items.length - 1].end),
-  //         ]
-  //       : [0, 0]
 
   useEffect(() => {
     if (selectedYearIndex !== undefined && selectedYearIndex !== null) {
@@ -144,88 +82,85 @@ export default function TableView({ exhibitions }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
-  // TODO separate mobile table component for mobile only logic
-  // TODO replace class "sticky" with class "fixed" on archive page image and uncomment "relative" on <ol> to fix effect on position of grid list
-
   if (!exhibitions) return null
   return (
-    <div
-      ref={parentRef}
-      onMouseLeave={() => setCurrentlyHoveredItem(null)}
-      className="grid w-full grid-cols-12 px-4"
-    >
-      <div className="hidden sm:visible sm:flex sticky top-16 sm:col-span-6 sm:col-start-1 h-full w-full items-center">
-        <div className="relative aspect-square h-full w-full bg-background">
-          {exhibitions &&
-            exhibitions.map((exhibition, index) => (
-              <TableImage
-                key={exhibition._id}
-                index={index}
-                exhibition={exhibition}
-              />
-            ))}
+    <Client>
+      <div
+        ref={parentRef}
+        onMouseLeave={() => setCurrentlyHoveredItem(null)}
+        className="grid w-full grid-cols-12 items-start px-4"
+      >
+        <Desktop>
+          <div className="flex fixed top-16 sm:col-span-6 sm:col-start-1 h-full w-full items-start">
+            <div className="relative h-[50vw] w-[50vw] bg-background">
+              {exhibitions &&
+                exhibitions.map((exhibition, index) => (
+                  <TableImage
+                    key={exhibition._id}
+                    index={index}
+                    exhibition={exhibition}
+                  />
+                ))}
+            </div>
+          </div>
+        </Desktop>
+        <div
+          ref={listRef}
+          className="sm:col-span-6 sm:col-start-7 col-start-1 col-span-12 w-full"
+        >
+          <TabletAndBelow>
+            <ol ref={listItemsRef}>
+              {exhibitions &&
+                exhibitions.map((exhibition) => (
+                  <div key={exhibition._id} id={exhibition.year} className="">
+                    <TableItem exhibition={exhibition} />
+                  </div>
+                ))}
+            </ol>
+          </TabletAndBelow>
+          <Desktop>
+            <ol
+              ref={listItemsRef}
+              style={{
+                height: `${virtualizer.getTotalSize()}px`,
+                width: '100%',
+                position: 'relative',
+              }}
+            >
+              {virtualizer.getVirtualItems().map((item, index) => {
+                return (
+                  <li
+                    id={index}
+                    key={item.key}
+                    dataExhibitionId={exhibitions[item.index]._id}
+                    onMouseEnter={() => {
+                      setCurrentlyHoveredItem(item.index)
+                    }}
+                    onMouseLeave={() => setCurrentlyHoveredItem(null)}
+                    // virtualizer styles
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: `${item.size}px`,
+                      transform: `translateY(${
+                        item.start - virtualizer.options.scrollMargin
+                      }px)`,
+                    }}
+                    className="list-item"
+                  >
+                    <TableItem
+                      exhibition={exhibitions[item.index]}
+                      index={item.index}
+                    />
+                  </li>
+                )
+              })}
+            </ol>
+          </Desktop>
         </div>
       </div>
-      <div
-        ref={listRef}
-        className="scrollbar-hide col-start-1 col-span-12 w-full"
-      >
-        {tabletOrMobile ? (
-          <ol ref={listItemsRef}>
-            {exhibitions &&
-              exhibitions.map((exhibition) => (
-                <li key={exhibition._id} id={exhibition.year} className="">
-                  <TableItem exhibition={exhibition} />
-                </li>
-              ))}
-          </ol>
-        ) : (
-          <ol
-            ref={listItemsRef}
-            style={{
-              height: `${virtualizer.getTotalSize()}px`,
-              width: '100%',
-              // position: 'relative',
-            }}
-            className=""
-          >
-            {virtualizer.getVirtualItems().map((item, index) => {
-              return (
-                <li
-                  id={index}
-                  key={item.key}
-                  dataexhibitionid={exhibitions[item.index]._id}
-                  onMouseEnter={() => {
-                    setCurrentlyHoveredItem(item.index)
-                  }}
-                  // virtualizer styles
-                  //   style={{
-                  //     paddingTop,
-                  //     paddingBottom,
-                  //   }}
-                  style={{
-                    position: 'absolute',
-                    top: 64,
-                    left: 0,
-                    width: '100%',
-                    height: `${item.size}px`,
-                    transform: `translateY(${
-                      item.start - virtualizer.options.scrollMargin
-                    }px)`,
-                  }}
-                //   ref={virtualizer.measureElement}
-                  className="list-item"
-                >
-                  <TableItem
-                    exhibition={exhibitions[item.index]}
-                    index={item.index}
-                  />
-                </li>
-              )
-            })}
-          </ol>
-        )}
-      </div>
-    </div>
+    </Client>
   )
 }

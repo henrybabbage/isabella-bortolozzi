@@ -2,7 +2,6 @@ import { useGSAP } from '@gsap/react'
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
 import { useRef } from 'react'
-import { cn } from 'utils/cn'
 
 import DynamicLink from '@/components/Primitives/DynamicLink'
 import { gsap } from '@/lib/gsap'
@@ -44,17 +43,9 @@ export default function TableImage({ exhibition, index }) {
   })
 
   if (!currentImage) return null
-
   return (
     <DynamicLink link={exhibition} scroll={false}>
-      <div
-        className={cn(
-          'cursor-pointer absolute inset-0 h-full w-full z-50 bg-background',
-          (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none',
-        )}
-      >
+      <div className="absolute flex items-start h-full w-full z-50 bg-background">
         {imageProps && (
           <Image
             src={imageProps.src}
@@ -64,7 +55,7 @@ export default function TableImage({ exhibition, index }) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 54vw, 54vw"
             quality={75}
             priority
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            className="object-cover object-center pr-4"
           />
         )}
       </div>
