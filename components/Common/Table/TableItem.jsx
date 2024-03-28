@@ -27,7 +27,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
   if (!exhibition) return null
   return (
     <DynamicLink link={exhibition} scroll={false}>
-      <li
+      <div
         ref={ref}
         className="-z-50 text-primary transition-colors duration-700 ease-in-out group relative flex flex-col sm:grid h-[40rem] sm:h-[10.25vw] sm:max-h-[10.25vw] cursor-pointer sm:grid-cols-12 px-6 content-start pt-1 sm:pt-0 sm:pb-6 text-left"
       >
@@ -39,16 +39,15 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
             />
           </div>
         </TabletAndBelow>
-        <div className="sm:col-span-6 sm:col-start-7 h-full">
-          <div
-            className={cn(
-              (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) ===
-                index
-                ? 'bg-highlight'
-                : 'bg-none',
-              'grid grid-cols-6 w-full h-full',
-            )}
-          >
+        <div
+          className={cn(
+            (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
+              ? 'bg-highlight'
+              : 'bg-none',
+            'sm:col-span-6 sm:col-start-7 h-full',
+          )}
+        >
+          <div className="grid grid-cols-6 w-full h-full">
             <div className="flex flex-col sm:col-span-3 sm:col-start-1 pt-6 sm:pt-3 w-fit h-full">
               {exhibition.title && (
                 <h1 className="text-primary uppercase">{exhibition?.title}</h1>
@@ -102,7 +101,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
             </div>
           </div>
         </div>
-      </li>
+      </div>
     </DynamicLink>
   )
 })
