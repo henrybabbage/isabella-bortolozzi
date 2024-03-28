@@ -9,8 +9,6 @@ export function resolveHref(
       return slug ? `/${slug}` : undefined
     case 'exhibition':
       return slug ? `/exhibitions/${slug}` : undefined
-    case 'viewingRoom':
-      return slug ? `/viewing-rooms/${slug}` : undefined
     default:
       console.warn('Invalid document type:', documentType)
       return undefined

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useKeyPress } from '@/utils/useKeyPress'
+import { useKeyPress } from '@/hooks/useKeyPress'
 
 // CTRL-G to display reference grid
 export default function ReferenceGrid() {
