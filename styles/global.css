@@ -114,9 +114,9 @@
         justify-content: center;
     }
 
-    /* .is-transitioning {
+    .is-transitioning {
         cursor: wait;
         pointer-events: none;
-    } */
+    }
 }
 

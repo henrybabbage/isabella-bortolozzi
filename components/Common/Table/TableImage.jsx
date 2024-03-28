@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react'
-import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import Image from 'next/image'
 import { useRef } from 'react'
 import { cn } from 'utils/cn'
 
@@ -49,7 +49,7 @@ export default function TableImage({ exhibition, index }) {
     <DynamicLink link={exhibition} scroll={false}>
       <div
         className={cn(
-          'cursor-pointer absolute inset-0 h-full w-full z-50 bg-background',
+          'cursor-pointer absolute inset-0 h-full w-full',
           (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none',
@@ -65,6 +65,7 @@ export default function TableImage({ exhibition, index }) {
             quality={75}
             priority
             style={{ objectFit: 'cover', objectPosition: 'center' }}
+            className="bg-highlight"
           />
         )}
       </div>

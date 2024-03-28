@@ -1,13 +1,14 @@
 import { useGSAP } from '@gsap/react'
 import { elementScroll, useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useCallback, useEffect, useRef } from 'react'
-import { useHydrated } from 'react-hydration-provider'
+import { Client, useHydrated } from 'react-hydration-provider'
 import { useMediaQuery } from 'react-responsive'
 
 import { gsap } from '@/lib/gsap'
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 import { useActiveYearStore } from '@/stores/useActiveYearStore'
 import { useSelectedYearStore } from '@/stores/useSelectedYearStore'
+import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 import TableImage from './TableImage'
 import TableItem from './TableItem'
@@ -149,28 +150,27 @@ export default function TableView({ exhibitions }) {
 
   if (!exhibitions) return null
   return (
-    <div
-      ref={parentRef}
-      onMouseLeave={() => setCurrentlyHoveredItem(null)}
-      className="grid w-full grid-cols-12 px-4"
-    >
-      <div className="hidden sm:visible sm:flex sticky top-16 sm:col-span-6 sm:col-start-1 h-full w-full items-center">
-        <div className="relative aspect-square h-full w-full bg-background">
-          {exhibitions &&
-            exhibitions.map((exhibition, index) => (
-              <TableImage
-                key={exhibition._id}
-                index={index}
-                exhibition={exhibition}
-              />
-            ))}
-        </div>
-      </div>
+    <Client>
       <div
-        ref={listRef}
-        className="scrollbar-hide col-start-1 col-span-12 w-full"
+        ref={parentRef}
+        onMouseLeave={() => setCurrentlyHoveredItem(null)}
+        className="w-full grid grid-cols-12 px-4"
       >
-        {tabletOrMobile ? (
+        <Desktop>
+          <div className="sm:flex sticky top-16 sm:col-span-6 sm:col-start-1 h-full w-full items-center">
+            <div className="relative aspect-square h-full w-full">
+              {exhibitions &&
+                exhibitions.map((exhibition, index) => (
+                  <TableImage
+                    key={exhibition._id}
+                    index={index}
+                    exhibition={exhibition}
+                  />
+                ))}
+            </div>
+          </div>
+        </Desktop>
+        <TabletAndBelow>
           <ol ref={listItemsRef}>
             {exhibitions &&
               exhibitions.map((exhibition) => (
@@ -179,7 +179,8 @@ export default function TableView({ exhibitions }) {
                 </li>
               ))}
           </ol>
-        ) : (
+        </TabletAndBelow>
+        <Desktop>
           <ol
             ref={listItemsRef}
             style={{
@@ -187,7 +188,7 @@ export default function TableView({ exhibitions }) {
               width: '100%',
               // position: 'relative',
             }}
-            className=""
+            className="col-start-1 col-span-12"
           >
             {virtualizer.getVirtualItems().map((item, index) => {
               return (
@@ -213,7 +214,7 @@ export default function TableView({ exhibitions }) {
                       item.start - virtualizer.options.scrollMargin
                     }px)`,
                   }}
-                //   ref={virtualizer.measureElement}
+                  //   ref={virtualizer.measureElement}
                   className="list-item"
                 >
                   <TableItem
@@ -224,8 +225,8 @@ export default function TableView({ exhibitions }) {
               )
             })}
           </ol>
-        )}
+        </Desktop>
       </div>
-    </div>
+    </Client>
   )
 }
