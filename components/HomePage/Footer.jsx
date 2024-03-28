@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form'
 
 import SvgBortolozziLogo from '@/public/components/BortolozziLogo'
 
+import GlobalSheet from '../Common/Nav/GlobalSheet'
+
 export default function Footer({ gallery, featuredExhibition, override }) {
   const [submitting, setSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -63,6 +65,7 @@ export default function Footer({ gallery, featuredExhibition, override }) {
 
   return (
     <div className="relative flex h-screen w-screen flex-col justify-end px-6 pt-6 pb-4 bg-background">
+      <GlobalSheet isFixed={false} />
       <div className="h-auto w-full">
         <SvgBortolozziLogo
           fill={getLogoFillColor(override, dominantColor)}

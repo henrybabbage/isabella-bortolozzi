@@ -93,15 +93,7 @@ export default function GlobalSheet({ isFixed = true }) {
           className="menu-open cursor-pointer"
           onClick={toggleMenu}
         >
-          <p
-            className={cn(
-              router.pathname === '/'
-                ? 'text-white hover:text-primary'
-                : 'text-primary hover:text-secondary',
-            )}
-          >
-            Menu
-          </p>
+          <h2 className="text-primary hover:text-secondary">Menu</h2>
         </button>
       </header>
 
@@ -113,15 +105,8 @@ export default function GlobalSheet({ isFixed = true }) {
         )}
       >
         <div className="menu-open cursor-pointer">
-          <Link
-            href="/"
-            className={cn(
-              router.pathname === '/'
-                ? 'text-white hover:text-primary'
-                : 'text-primary hover:text-secondary',
-            )}
-          >
-            Bortolozzi
+          <Link href="/">
+            <h2 className="text-primary hover:text-secondary">Bortolozzi</h2>
           </Link>
         </div>
       </header>

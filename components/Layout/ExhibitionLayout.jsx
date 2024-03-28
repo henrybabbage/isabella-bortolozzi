@@ -10,7 +10,7 @@ export default function ExhibitionLayout({ children }) {
   return (
     <TransitionLayout>
       <SmoothScroll>
-        <div id="exhibition" className="overscroll-none">
+        <div id="exhibition">
           <div className="fixed top-6 right-6 z-50">
             <BackButton backPathname={router.pathname.split('/')[1]} />
           </div>

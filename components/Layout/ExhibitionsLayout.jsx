@@ -14,7 +14,7 @@ export default function ExhibitionsLayout({ children }) {
   return (
     <TransitionLayout>
       <Client>
-        <div id="exhibitions" className="overscroll-none">
+        <div id="exhibitions">
           <Desktop>
             {!router.pathname.startsWith('/studio') &&
             !router.pathname.startsWith('/exhibitions/') &&
