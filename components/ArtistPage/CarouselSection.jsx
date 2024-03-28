@@ -137,7 +137,10 @@ const CarouselSection = forwardRef(function CarouselSection(
           className="h-full w-full flex justify-center items-center"
         >
           {imageGallery.length > 0 && (
-            <div ref={containerRef} className="embla overflow-hidden max-w-[96vw] mx-auto">
+            <div
+              ref={containerRef}
+              className="embla overflow-hidden max-w-[96vw] mx-auto"
+            >
               <button
                 className={cn(
                   showTooltip ? 'block' : 'hidden',
@@ -166,7 +169,10 @@ const CarouselSection = forwardRef(function CarouselSection(
                   {imageGallery.map((image, index) => (
                     <div
                       key={index}
-                      className="embla__slide h-full flex-[0_0_100%] min-w-0"
+                      className={cn(
+                        currentIndex === index ? '' : '',
+                        'embla__slide h-full flex-[0_0_100%] min-w-0',
+                      )}
                     >
                       <SlideImage
                         image={image}
