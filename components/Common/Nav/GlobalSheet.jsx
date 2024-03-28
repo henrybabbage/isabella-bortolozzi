@@ -146,9 +146,12 @@ export default function GlobalSheet({ isFixed = true }) {
           <div className="menu-open col-span-2 col-start-2 p-0 m-0 place-self-start">
             <p className="text-primary">Artists</p>
           </div>
-          <div className="menu-open w-full hover:bg-background col-span-1 col-start-12 flex cursor-pointer justify-end place-self-end">
-            <Link href="/">Bortolozzi</Link>
-          </div>
+          <Link
+            href="/"
+            className="menu-open w-full hover:bg-background col-span-1 col-start-12 flex cursor-pointer justify-end place-self-end"
+          >
+            <h2>Bortolozzi</h2>
+          </Link>
         </div>
 
         {/* menu-links  */}
@@ -164,49 +167,40 @@ export default function GlobalSheet({ isFixed = true }) {
             className="menu-links col-span-1 col-start-1 flex flex-col space-y-[2px] pt-4 z-500"
           >
             {menu.map((link, index) => (
-              <div
+              <Link
                 key={index}
+                href={link.path}
                 className="menu-link-item hover:bg-background cursor-pointer w-full [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
               >
                 <div
                   className="menu-link-item-holder relative"
                   onClick={toggleMenu}
                 >
-                  <Link
-                    className="menu-link text-primary z-500"
-                    aria-label="Main pages"
-                    href={link.path}
-                  >
-                    {link.title}
-                  </Link>
+                  <h3 className="menu-link text-primary z-500">{link.title}</h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           {/* menu-links-artists  */}
           <div
             ref={artistsMenuRef}
-            className="col-span-4 col-start-2 flex flex-col space-y-[2px] pt-4"
+            className="col-span-11 col-start-2 flex flex-col space-y-[2px] pt-4"
           >
             {artists.map((artist, index) => (
-              <div
+              <Link
                 key={index}
+                href={`/${artist.slug}`}
                 className="menu-link-item hover:bg-background cursor-pointer w-full [clip-path:polygon(0_0,_100%_0,_100%_100%,_0%_100%)]"
               >
                 <div
                   className="menu-link-item-holder relative"
                   onClick={toggleMenu}
                 >
-                  <Link
-                    key={index}
-                    href={`/${artist.slug}`}
-                    className="menu-link text-primary z-500"
-                    aria-label="Artist pages"
-                  >
+                  <h3 className="menu-link text-primary z-500">
                     {artist.name}
-                  </Link>
+                  </h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </nav>
