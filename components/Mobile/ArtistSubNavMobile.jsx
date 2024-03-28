@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useActiveSectionStore } from '@/stores/useActiveSectionStore'
 import { cn } from '@/utils/cn'
 
-export default function MobileArtistSubNav({
+export default function ArtistSubNavMobile({
   artist,
   isLoading,
   scrollIntoViewWorks,

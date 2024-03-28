@@ -9,7 +9,7 @@ import { cn } from '@/utils/cn'
 
 import MenuButton from '../Common/Buttons/MenuButton'
 
-export default function MobileHeader({ isFixed = true }) {
+export default function HeaderMobile({ isFixed = true }) {
   const [artists, setArtists] = useState([])
   const [isOpen, setIsOpen] = useState(false)
 

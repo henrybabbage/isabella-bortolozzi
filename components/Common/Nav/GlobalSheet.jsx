@@ -47,7 +47,21 @@ export default function GlobalSheet({ isFixed = true }) {
     () => {
       gsap.set('.menu-link-item-holder', { y: 75 })
       tl.current = gsap
-        .timeline({ paused: true })
+        .timeline({
+          paused: true,
+          onStart: () => {
+            document.querySelector('.menu-container').style.pointerEvents =
+              'none'
+          },
+          onReverseComplete: () => {
+            document.querySelector('.menu-container').style.pointerEvents =
+              'auto'
+          },
+          onComplete: () => {
+            document.querySelector('.menu-container').style.pointerEvents =
+              'auto'
+          },
+        })
         .to('.menu-overlay', {
           duration: 0.5,
           clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
@@ -55,10 +69,10 @@ export default function GlobalSheet({ isFixed = true }) {
         })
         .to('.menu-link-item-holder', {
           y: 0,
-          // duration: 0.1,
+          duration: 0.1,
           stagger: 0.02,
           ease: 'power4.out',
-          delay: -0.1,
+          delay: 0.1,
         })
     },
     { scope: containerRef, dependencies: [artists], revertOnUpdate: true },
@@ -117,7 +131,12 @@ export default function GlobalSheet({ isFixed = true }) {
           'menu-overlay z-500 fixed top-0 left-0 w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]',
         )}
       >
-        <div className="menu-overlay-bar z-300 fixed top-0 left-0 w-screen p-4 grid grid-cols-12">
+        <div
+          className={cn(
+            isNavOpen ? 'block' : 'hidden',
+            'menu-overlay-bar z-300 fixed top-0 left-0 w-screen p-4 grid grid-cols-12',
+          )}
+        >
           <button
             type="button"
             className="cursor-pointer col-start-1 col-span-1 p-0 m-0 place-self-start"

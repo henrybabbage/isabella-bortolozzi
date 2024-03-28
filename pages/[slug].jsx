@@ -10,7 +10,7 @@ import ArtistSubNav from '@/components/ArtistPage/ArtistSubNav'
 import CarouselSection from '@/components/ArtistPage/CarouselSection'
 import CVSection from '@/components/ArtistPage/CVSection'
 import ExhibitionSection from '@/components/ArtistPage/ExhibitionSection'
-import MobileArtistSubNav from '@/components/Mobile/MobileArtistSubNav'
+import ArtistSubNavMobile from '@/components/Mobile/ArtistSubNavMobile'
 import { ScrollTrigger } from '@/lib/gsap'
 import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
@@ -99,7 +99,7 @@ export default function ArtistSlugRoute(props) {
               />
             </Desktop>
             <TabletAndBelow>
-              <MobileArtistSubNav
+              <ArtistSubNavMobile
                 artist={artist}
                 isLoading={isLoading}
                 scrollIntoViewWorks={scrollIntoViewWorks}

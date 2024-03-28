@@ -5,7 +5,7 @@ import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 
 import TransitionLayout from '../Animation/TransitionLayout'
 import GlobalSheet from '../Common/Nav/GlobalSheet'
-import MobileHeader from '../Mobile/MobileHeader'
+import MobileHeader from '../Mobile/HeaderMobile'
 import ReferenceGrid from '../Utilities/ReferenceGrid'
 
 export default function ExhibitionsLayout({ children }) {
