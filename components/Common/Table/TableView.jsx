@@ -39,7 +39,8 @@ export default function TableView({ exhibitions }) {
     estimateSize: () => virtualItemSize,
     overscan: 12,
     scrollMargin: parentRef?.current?.offsetTop ?? 0,
-    // getScrollElement: () => parentRef.current,
+    paddingStart: 64,
+    // getScrollElement: () => listItemsRef.current,
   })
 
   useEffect(() => {
@@ -108,15 +109,14 @@ export default function TableView({ exhibitions }) {
           <ol ref={listItemsRef}>
             {exhibitions &&
               exhibitions.map((exhibition) => (
-                <li key={exhibition._id} id={exhibition.year} className="">
+                <div key={exhibition._id} id={exhibition.year} className="">
                   <TableItem exhibition={exhibition} />
-                </li>
+                </div>
               ))}
           </ol>
         </TabletAndBelow>
         <Desktop>
-          <ol
-            ref={listItemsRef}
+          <div
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
@@ -126,7 +126,8 @@ export default function TableView({ exhibitions }) {
           >
             {virtualizer.getVirtualItems().map((item, index) => {
               return (
-                <li
+                <ol
+                  ref={listItemsRef}
                   id={index}
                   key={item.key}
                   dataexhibitionid={exhibitions[item.index]._id}
@@ -149,10 +150,10 @@ export default function TableView({ exhibitions }) {
                     exhibition={exhibitions[item.index]}
                     index={item.index}
                   />
-                </li>
+                </ol>
               )
             })}
-          </ol>
+          </div>
         </Desktop>
       </div>
     </Client>

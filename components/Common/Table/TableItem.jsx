@@ -27,7 +27,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
   if (!exhibition) return null
   return (
     <DynamicLink link={exhibition} scroll={false}>
-      <div
+      <li
         ref={ref}
         className={cn(
           (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
@@ -99,7 +99,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
             </div>
           </div>
         </div>
-      </div>
+      </li>
     </DynamicLink>
   )
 })
