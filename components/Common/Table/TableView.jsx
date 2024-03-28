@@ -56,7 +56,7 @@ export default function TableView({ exhibitions }) {
   const handleScroll = useCallback(() => {
     // if we detect a scroll then we set the hovered item to null and use the in view item instead
     setCurrentlyHoveredItem(null)
-    
+
     if (!listItemsRef.current) return
     Array.from(listItemsRef?.current?.children).map((item) => {
       // index of the map array is not the same as the index of virtualizer array
@@ -139,6 +139,8 @@ export default function TableView({ exhibitions }) {
                     onMouseEnter={() => {
                       setCurrentlyHoveredItem(item.index)
                     }}
+                    // instead of setting null on leave we will set null when scrolling is detected
+                    // this allows us to hover over the image and retain the index from the last hovered item
                     // onMouseLeave={() => setCurrentlyHoveredItem(null)}
                     // virtualizer styles
                     style={{
