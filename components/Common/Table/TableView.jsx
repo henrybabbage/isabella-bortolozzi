@@ -54,7 +54,9 @@ export default function TableView({ exhibitions }) {
   }, [selectedYearIndex, virtualizer])
 
   const handleScroll = useCallback(() => {
+    // if we detect a scroll then we set the hovered item to null and use the in view item instead
     setCurrentlyHoveredItem(null)
+    
     if (!listItemsRef.current) return
     Array.from(listItemsRef?.current?.children).map((item) => {
       // index of the map array is not the same as the index of virtualizer array
