@@ -7,6 +7,7 @@ import DynamicLink from '@/components/Primitives/DynamicLink'
 import { gsap } from '@/lib/gsap'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
+import { cn } from '@/utils/cn'
 
 export default function TableImage({ exhibition, index }) {
   const imageRef = useRef(null)
@@ -45,7 +46,14 @@ export default function TableImage({ exhibition, index }) {
   if (!currentImage) return null
   return (
     <DynamicLink link={exhibition} scroll={false}>
-      <div className="absolute flex items-start h-full w-full z-50 bg-background">
+      <div
+        className={cn(
+          'cursor-pointer absolute inset-0 h-full w-full z-50',
+          (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none',
+        )}
+      >
         {imageProps && (
           <Image
             src={imageProps.src}
