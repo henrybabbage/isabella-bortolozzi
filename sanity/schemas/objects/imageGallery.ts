@@ -1,4 +1,4 @@
-import { getExtension, getImageDimensions } from '@sanity/asset-utils'
+// import { getExtension, getImageDimensions } from '@sanity/asset-utils'
 import { defineField, defineType, type Image } from 'sanity'
 
 export default defineType({
@@ -20,21 +20,21 @@ export default defineType({
                         imageUrl: 'asset.url',
                     },
                 },
-                validation: (Rule) =>
-                    Rule.custom((value: Image, context) => {
-                        if (!value || !value.asset) {
-                            return true
-                        }
-                        const filetype = getExtension(value.asset._ref)
-                        if (filetype !== 'jpg' && filetype !== 'png') {
-                            return 'Image must be a JPG or PNG'
-                        }
-                        const { width, height } = getImageDimensions(value.asset._ref)
-                        if (width < 1200 || height < 680) {
-                            return 'Image must be at least 1200x680 pixels'
-                        }
-                        return true
-                    }).warning(),
+                // validation: (Rule) =>
+                //     Rule.custom((value: Image, context) => {
+                //         if (!value || !value.asset) {
+                //             return true
+                //         }
+                //         const filetype = getExtension(value.asset._ref)
+                //         if (filetype !== 'jpg' && filetype !== 'png') {
+                //             return 'Image must be a JPG or PNG'
+                //         }
+                //         const { width, height } = getImageDimensions(value.asset._ref)
+                //         if (width < 1200 || height < 680) {
+                //             return 'Image must be at least 1200x680 pixels'
+                //         }
+                //         return true
+                //     }).warning(),
                 fields: [
                     defineField({
                         name: 'alt',
