@@ -1,7 +1,9 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 
+import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
 import { useSectionInView } from '@/hooks/useSectionInView'
+import { gsap } from '@/lib/gsap'
 import { cn } from '@/utils/cn'
 
 import CarouselCaption from './CarouselCaption'
@@ -25,6 +27,7 @@ const CarouselSection = forwardRef(function CarouselSection(
   const [isCursorLeft, setIsCursorLeft] = useState(null)
 
   const containerRef = useRef(null)
+  const carouselRef = useRef(null)
 
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS)
 
@@ -51,6 +54,37 @@ const CarouselSection = forwardRef(function CarouselSection(
   }, [emblaApi, onSelect])
 
   const { ref: sectionRef } = useSectionInView('works', 0.1)
+
+  useIsomorphicLayoutEffect(() => {
+    if (!containerRef.current) return
+
+    const timeline = gsap.timeline({
+      paused: true,
+      defaults: {
+        ease: 'power4.out',
+      },
+    })
+
+    timeline.fromTo(
+      containerRef.current,
+      {
+        autoAlpha: 0,
+        yPercent: 10,
+      },
+      {
+        delay: 1,
+        duration: 2,
+        autoAlpha: 1,
+        yPercent: 0,
+      },
+    )
+
+    timeline.play()
+
+    return () => {
+      timeline.revert()
+    }
+  }, [])
 
   const centerCarousel = () => {
     if (typeof window !== 'undefined') {
@@ -103,7 +137,10 @@ const CarouselSection = forwardRef(function CarouselSection(
           className="h-full w-full flex justify-center items-center"
         >
           {imageGallery.length > 0 && (
-            <div ref={containerRef} className="embla overflow-hidden">
+            <div
+              ref={containerRef}
+              className="embla overflow-hidden max-w-[96vw] mx-auto"
+            >
               <button
                 className={cn(
                   showTooltip ? 'block' : 'hidden',
@@ -122,6 +159,7 @@ const CarouselSection = forwardRef(function CarouselSection(
                 ref={emblaRef}
               >
                 <div
+                  ref={carouselRef}
                   onClick={handleClick}
                   onMouseEnter={handleMouseEnter}
                   onMouseMove={handleMouseMove}
@@ -131,7 +169,10 @@ const CarouselSection = forwardRef(function CarouselSection(
                   {imageGallery.map((image, index) => (
                     <div
                       key={index}
-                      className="embla__slide h-full flex-[0_0_100%] min-w-0"
+                      className={cn(
+                        currentIndex === index ? '' : '',
+                        'embla__slide h-full flex-[0_0_100%] min-w-0',
+                      )}
                     >
                       <SlideImage
                         image={image}

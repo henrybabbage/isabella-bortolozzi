@@ -131,7 +131,7 @@ export default defineType({
       options: {
         columns: 2,
       },
-      hidden: ({ document }) => document._type == 'exhibition',
+      hidden: ({ document }) => document?._type == 'exhibition',
       fields: [
         defineField({
           name: 'currency',

@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import FadeInOut from '@/components/Animation/FadeInOut'
 import ExhibitionSection from '@/components/HomePage/ExhibitionSection'
 import Footer from '@/components/HomePage/Footer'
+import HomeLayout from '@/components/Layout/HomeLayout'
 import { ScrollTrigger } from '@/lib/gsap'
 import { readToken } from '@/sanity/lib/sanity.api'
 import { getClient } from '@/sanity/lib/sanity.client'
@@ -49,6 +50,8 @@ export default function IndexPage(props) {
     </FadeInOut>
   )
 }
+
+IndexPage.layout = HomeLayout
 
 export const getStaticProps = async ({ draftMode = false }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)

@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     <TransitionLayout>
       <SmoothScroll>
         <Client>
-          <div id="root" className="overscroll-none">
+          <div id="root">
             <Desktop>
               {!router.pathname.startsWith('/studio') &&
               !router.pathname.startsWith('/exhibitions/') &&

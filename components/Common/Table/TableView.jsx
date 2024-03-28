@@ -96,6 +96,16 @@ export default function TableView({ exhibitions }) {
     // paddingEnd: 64,
   })
 
+  // Option without absolute positioning
+  //   const items = virtualizer.getVirtualItems()
+  //   const [paddingTop, paddingBottom] =
+  //     items.length > 0
+  //       ? [
+  //           Math.max(0, items[0].start - virtualizer.options.scrollMargin),
+  //           Math.max(0, virtualizer.getTotalSize() - items[items.length - 1].end),
+  //         ]
+  //       : [0, 0]
+
   useEffect(() => {
     if (selectedYearIndex !== undefined && selectedYearIndex !== null) {
       virtualizer?.scrollToIndex(selectedYearIndex, {
@@ -189,6 +199,10 @@ export default function TableView({ exhibitions }) {
                     setCurrentlyHoveredItem(item.index)
                   }}
                   // virtualizer styles
+                  //   style={{
+                  //     paddingTop,
+                  //     paddingBottom,
+                  //   }}
                   style={{
                     position: 'absolute',
                     top: 64,
@@ -199,6 +213,7 @@ export default function TableView({ exhibitions }) {
                       item.start - virtualizer.options.scrollMargin
                     }px)`,
                   }}
+                //   ref={virtualizer.measureElement}
                   className="list-item"
                 >
                   <TableItem
