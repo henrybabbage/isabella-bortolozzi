@@ -5,6 +5,11 @@ import { useCallback } from 'react'
  * Scroll to index function
  * https://tanstack.com/virtual/latest/docs/framework/react/examples/smooth-scroll
  */
+
+function easeInOutQuint(t) {
+    return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t
+}
+
 export const useScrollToVirtualItem = (parentRef, scrollingRef) => {
   const scrollToVirtualItem = useCallback((offset, canSmooth, instance) => {
     const duration = 1000

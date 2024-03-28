@@ -11,10 +11,6 @@ import { Desktop, TabletAndBelow } from '@/utils/breakpoints'
 import TableImage from './TableImage'
 import TableItem from './TableItem'
 
-function easeInOutQuint(t) {
-  return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t
-}
-
 // Credit to dataexcess (https://github.com/dataexcess) for the initial architecture that informed this feature
 // and credit to Kesorn Dokphikul for solving the integration with react-virtual
 export default function TableView({ exhibitions }) {
