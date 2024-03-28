@@ -131,7 +131,12 @@ export default function GlobalSheet({ isFixed = true }) {
           'menu-overlay z-500 fixed top-0 left-0 w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]',
         )}
       >
-        <div className="menu-overlay-bar z-300 fixed top-0 left-0 w-screen p-4 grid grid-cols-12">
+        <div
+          className={cn(
+            isNavOpen ? 'block' : 'hidden',
+            'menu-overlay-bar z-300 fixed top-0 left-0 w-screen p-4 grid grid-cols-12',
+          )}
+        >
           <button
             type="button"
             className="cursor-pointer col-start-1 col-span-1 p-0 m-0 place-self-start"

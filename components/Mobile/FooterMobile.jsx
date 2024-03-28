@@ -1,6 +1,6 @@
 import SvgBortolozziLogo from '@/public/components/BortolozziLogo'
 
-export default function MobileFooter({
+export default function FooterMobile({
   gallery,
   featuredExhibition,
   override,
