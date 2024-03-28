@@ -30,7 +30,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
       <div
         ref={ref}
         className={cn(
-          '-z-50 text-primary group relative flex flex-col sm:grid h-[40rem] sm:h-[10.25vw] sm:max-h-[10.25vw] cursor-pointer sm:grid-flow-dense sm:grid-cols-12 px-6 content-start pt-1 sm:pt-0 sm:pb-6 text-left',
+          '-z-50 text-primary group relative flex flex-col sm:grid h-[40rem] sm:h-[10.25vw] sm:max-h-[10.25vw] cursor-pointer sm:grid-cols-12 px-6 content-start pt-1 sm:pt-0 sm:pb-6 text-left',
           '',
         )}
       >
@@ -42,7 +42,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
         </div>
         <div
           id="divider"
-          className="sm:ml-4 sm:col-span-6 sm:col-start-7 sm:border-t sm:border-solid sm:border-border"
+          className="sm:ml-4 sm:col-span-6 sm:col-start-7 sm:border-t sm:border-solid h-[10.25vw] sm:border-border"
         ></div>
         <div
           className={cn(
@@ -52,42 +52,31 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
               : 'bg-background',
           )}
         >
-          <div
-            className={cn(
-              'sm:col-span-3 sm:col-start-7 flex flex-col h-full sm:h-auto',
-              '',
+          <div className="flex flex-col sm:col-span-3 sm:col-start-7 pt-6 sm:pt-3 w-fit">
+            {exhibition.title && (
+              <h1 className="text-primary uppercase pr-2">
+                {exhibition.title}
+              </h1>
             )}
-          >
-            <div className="flex w-full flex-col pt-6 sm:pt-3">
-              {exhibition.title && (
-                <h1 className="uppercase pr-2">{exhibition.title}</h1>
-              )}
-              {exhibition.subtitle && (
-                <h2 className="h-auto">{exhibition.subtitle}</h2>
-              )}
-              {router.pathname.startsWith('/news') && exhibition.heading && (
-                <CustomPortableText
-                  value={exhibition.heading}
-                  classNames=''
-                />
-              )}
-              {router.pathname.startsWith('/news') && exhibition.text && (
-                <CustomPortableText
-                  value={exhibition.text}
-                  classNames={cn(
-                    'uppercase',
-                    '',
-                  )}
-                />
-              )}
-            </div>
-            <div className="sm:col-span-3 sm:col-start-2 pt-4 sm:pt-0">
-              <h2 className="pl-8">{artistList}</h2>
-            </div>
+            {exhibition.subtitle && (
+              <h2 className="text-primary h-auto">{exhibition.subtitle}</h2>
+            )}
+            {router.pathname.startsWith('/news') && exhibition.heading && (
+              <CustomPortableText value={exhibition.heading} classNames="" />
+            )}
+            {router.pathname.startsWith('/news') && exhibition.text && (
+              <CustomPortableText
+                value={exhibition.text}
+                classNames={cn('uppercase', '')}
+              />
+            )}
           </div>
-          <div className="sm:col-span-2 sm:col-start-9 flex flex-col pt-3 h-fit sm:h-auto">
+          <div className="sm:col-span-3 sm:col-start-7 pt-6 sm:pt-3 w-fit">
+            {artistList && <h2 className="text-primary pl-8">{artistList}</h2>}
+          </div>
+          <div className="flex flex-col sm:col-span-2 sm:col-start-9 w-fit sm:pt-3 pt-6 h-fit">
             {!router.pathname.startsWith('/exhibitions') && (
-              <h3 className="pr-0">
+              <h3 className="text-primary">
                 {exhibition.venue && exhibition.venue.name && (
                   <span>
                     {exhibition.venue.city || exhibition.venue.country
@@ -108,18 +97,20 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
               </h3>
             )}
           </div>
-          <div className="sm:col-span-2 sm:col-start-11 flex justify-end pt-3 h-fit sm:h-auto">
-            <div className="flex w-full sm:w-auto justify-between sm:justify-normal">
+          <div className="w-full sm:pt-3 pt-6 sm:col-span-2 sm:col-start-11 flex justify-end">
+            <h3 className="inline-flex space-x-6 text-primary">
               {exhibition.startDate && exhibition.endDate && (
-                <h3 className="">
+                <span className="align-baseline">
                   {formatDateWithoutYear(exhibition.startDate)}—
                   {formatDateWithoutYear(exhibition.endDate)}
-                </h3>
+                </span>
               )}
               {exhibition.endDate && (
-                <h3 className="pl-6">{getYear(exhibition.endDate)}</h3>
+                <span className="align-baseline">
+                  {getYear(exhibition.endDate)}
+                </span>
               )}
-            </div>
+            </h3>
           </div>
         </div>
       </div>
