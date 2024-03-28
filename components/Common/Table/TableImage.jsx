@@ -9,6 +9,7 @@ import { sanityClient } from '@/sanity/lib/sanity.client'
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 import { cn } from '@/utils/cn'
 
+
 export default function TableImage({ exhibition, index }) {
   const imageRef = useRef(null)
 
@@ -34,19 +35,21 @@ export default function TableImage({ exhibition, index }) {
         ease: 'power4.inOut',
       },
       {
+        delay: 0.25,
+        duration: 1,
         opacity: 1,
         clipPath: 'inset(0% 0% 0% 0%)',
         ease: 'power4.inOut',
-        delay: 0.25,
-        duration: 1,
       },
-    )
+    ),
+      { dependencies: [] }
   })
 
   if (!currentImage) return null
   return (
     <DynamicLink link={exhibition} scroll={false}>
       <div
+        ref={imageRef}
         className={cn(
           'cursor-pointer absolute inset-0 h-full w-full z-50',
           (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
