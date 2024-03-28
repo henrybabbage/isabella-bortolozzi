@@ -75,7 +75,7 @@ export default function Footer({ gallery, featuredExhibition, override }) {
         <div className="col-start-6 col-span-4 text-left">
           <Link href={`/exhibitions/${slug}`}>
             <h3 className="text-primary">{title}</h3>
-            <h3 className="text-primary">{artistList}</h3>
+            <h3 className="text-primary pl-6">{artistList}</h3>
           </Link>
         </div>
         <div className="col-start-11 col-span-2 text-left justify-end flex">
