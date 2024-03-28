@@ -29,14 +29,14 @@ export default defineType({
         },
         prepare(value) {
         const block = (value.blocks || []).find(
-            (block) => block._type === 'block',
+            (block) => block?._type === 'block',
         )
         const { year } = value
         return {
                 title: block
                 ? block.children
-                    .filter((child) => child._type === 'span')
-                    .map((span) => span.text)
+                    .filter((child) => child?._type === 'span')
+                    .map((span) => span?.text)
                     .join('')
                 : 'No data',
                 subtitle: year ? year : 'No year',
