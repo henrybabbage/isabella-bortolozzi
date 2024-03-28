@@ -5,7 +5,7 @@
 // import { deDELocale } from '@sanity/locale-de-de'
 import { visionTool } from '@sanity/vision'
 import { defineConfig, SanityDocument } from 'sanity'
-import { DefaultDocumentNodeResolver, deskTool } from 'sanity/desk'
+import { DefaultDocumentNodeResolver, structureTool } from 'sanity/structure'
 import {
     defineUrlResolver,
     Iframe,
@@ -41,7 +41,7 @@ function getPreviewUrl(doc: SanityDocument) {
 }
 
 const defaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaType }) => {
-    // Only show preview pane on `movie` schema type documents
+    // e.g. Only show preview pane on `artist` schema type documents
     switch (schemaType) {
         case `artist`:
             return S.document().views([
@@ -94,7 +94,7 @@ export default defineConfig({
     //edit schemas in './src/schemas'
     schema,
     plugins: [
-        deskTool({
+        structureTool({
             structure: structure,
             // `defaultDocumentNode` is responsible for adding a “Preview” tab to the document pane
             // You can add any React component to `S.view.component` and it will be rendered in the pane
