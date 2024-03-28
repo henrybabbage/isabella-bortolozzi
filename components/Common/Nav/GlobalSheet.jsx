@@ -80,7 +80,6 @@ export default function GlobalSheet({ isFixed = true }) {
 
   return (
     <div className="menu-container" ref={containerRef}>
-      {/* menu-trigger */}
       <header
         ref={navigationRef}
         // style={{ opacity: 0 }}
@@ -127,14 +126,12 @@ export default function GlobalSheet({ isFixed = true }) {
         </div>
       </header>
 
-      {/* menu-overlay */}
       <div
         className={cn(
           isNavOpen ? 'block' : 'hidden',
           'menu-overlay z-500 fixed top-0 left-0 w-screen h-[75vh] p-4 bg-background flex [clip-path:polygon(0%_0%,_100%_0%,_100%_0%,_0%_0%)]',
         )}
       >
-        {/* menu-overlay-bar */}
         <div className="menu-overlay-bar z-300 fixed top-0 left-0 w-screen p-4 grid grid-cols-12">
           <button
             type="button"
@@ -154,14 +151,12 @@ export default function GlobalSheet({ isFixed = true }) {
           </Link>
         </div>
 
-        {/* menu-links  */}
         <nav
           className={cn(
             isNavOpen ? 'block' : 'hidden',
             'menu-copy grid grid-cols-12 w-full pt-4 bg-highlight',
           )}
         >
-          {/* menu-links-pages  */}
           <div
             ref={pagesMenuRef}
             className="menu-links col-span-1 col-start-1 flex flex-col space-y-[2px] pt-4 z-500"
@@ -181,7 +176,6 @@ export default function GlobalSheet({ isFixed = true }) {
               </Link>
             ))}
           </div>
-          {/* menu-links-artists  */}
           <div
             ref={artistsMenuRef}
             className="col-span-11 col-start-2 flex flex-col space-y-[2px] pt-4"
