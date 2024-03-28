@@ -21,9 +21,9 @@ import {
     dataset,
     previewSecretId,
     projectId,
-} from '@/sanity/lib/sanity.api'
-import structure from '@/sanity/lib/sanity.structure'
-import { schema } from '@/sanity/schemas'
+} from './sanity/lib/sanity.api'
+import structure from './sanity/lib/sanity.structure'
+import { schema } from './sanity/schemas'
 
 const iframeOptions = {
     url: defineUrlResolver({
