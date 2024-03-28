@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react'
-import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
+import Image from 'next/image'
 import { useRef } from 'react'
 
 import DynamicLink from '@/components/Primitives/DynamicLink'
@@ -8,7 +8,6 @@ import { gsap } from '@/lib/gsap'
 import { sanityClient } from '@/sanity/lib/sanity.client'
 import { useActiveItemStore } from '@/stores/useActiveItemStore'
 import { cn } from '@/utils/cn'
-
 
 export default function TableImage({ exhibition, index }) {
   const imageRef = useRef(null)
@@ -49,7 +48,6 @@ export default function TableImage({ exhibition, index }) {
   return (
     <DynamicLink link={exhibition} scroll={false}>
       <div
-        ref={imageRef}
         className={cn(
           'cursor-pointer absolute inset-0 h-full w-full z-50',
           (currentlyHoveredItem ? currentlyHoveredItem : inViewItem) === index
@@ -59,6 +57,7 @@ export default function TableImage({ exhibition, index }) {
       >
         {imageProps && (
           <Image
+            ref={imageRef}
             src={imageProps.src}
             loader={imageProps.loader}
             alt=""
