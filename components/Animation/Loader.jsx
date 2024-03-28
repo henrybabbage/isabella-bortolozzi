@@ -1,20 +1,18 @@
-import CustomEase from 'gsap/dist/CustomEase'
+
 import { useRef } from 'react'
 
 import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
-import { gsap } from '@/lib/gsap'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(CustomEase)
-}
+import { gsap, PRIMARY_EASE } from '@/lib/gsap'
 
 export default function Loader({ setIsLoading, setIsReady }) {
   const loaderRef = useRef(null)
 
+  const primaryEase = PRIMARY_EASE
+
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to(loaderRef.current, {
-        ease: CustomEase.create('primaryEase', 'M0,0 C0.62,0.05 0.01,0.99 1,1'),
+        ease: primaryEase,
         scaleY: 0,
         transformOrigin: '50% 0',
         willChange: 'transform',

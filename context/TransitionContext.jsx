@@ -1,11 +1,6 @@
-import CustomEase from 'gsap/dist/CustomEase'
 import { createContext, useContext, useRef, useState } from 'react'
 
-import { gsap } from '@/lib/gsap'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(CustomEase)
-}
+import { gsap, PRIMARY_EASE } from '@/lib/gsap'
 
 const TransitionContext = createContext({
   navigationRef: {
@@ -31,10 +26,7 @@ export function TransitionContextProvider({ children }) {
     gsap.timeline({ onStart: setTransition, paused: true }),
   )
 
-  const primaryEase =
-    typeof window !== 'undefined'
-      ? CustomEase.create('primaryEase', 'M0,0 C0.62,0.05 0.01,0.99 1,1')
-      : null
+  const primaryEase = PRIMARY_EASE
 
   const resetTimeline = () => {
     timeline.pause().clear()
