@@ -20,6 +20,9 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
     (state) => state.currentlyHoveredItem,
   )
 
+  console.log({ inViewItem })
+  console.log({ currentlyHoveredItem })
+
   // format list of artist names for this row item
   const artistNames = exhibition?.artists?.map((a) => a.name)
   const artistList = artistNames?.join(', ')
@@ -50,7 +53,7 @@ const TableItem = forwardRef(function TableItem({ exhibition, index }, ref) {
           <div className="grid grid-cols-6 w-full h-full">
             <div className="flex flex-col sm:col-span-3 sm:col-start-1 pt-6 sm:pt-3 w-fit h-full">
               {exhibition.title && (
-                <h1 className="text-primary uppercase">{exhibition?.title}</h1>
+                <h1 className="text-primary">{exhibition?.title}</h1>
               )}
               {exhibition.subtitle && (
                 <h2 className="text-primary">{exhibition?.subtitle}</h2>

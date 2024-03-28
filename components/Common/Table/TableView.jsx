@@ -54,6 +54,7 @@ export default function TableView({ exhibitions }) {
   }, [selectedYearIndex, virtualizer])
 
   const handleScroll = useCallback(() => {
+    setCurrentlyHoveredItem(null)
     if (!listItemsRef.current) return
     Array.from(listItemsRef?.current?.children).map((item) => {
       // index of the map array is not the same as the index of virtualizer array
@@ -75,7 +76,7 @@ export default function TableView({ exhibitions }) {
         setInViewYear(exhibitions[exhibitionIndex]?.year)
       }
     })
-  }, [exhibitions, setInViewItem, setInViewYear])
+  }, [exhibitions, setCurrentlyHoveredItem, setInViewItem, setInViewYear])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -136,7 +137,7 @@ export default function TableView({ exhibitions }) {
                     onMouseEnter={() => {
                       setCurrentlyHoveredItem(item.index)
                     }}
-                    onMouseLeave={() => setCurrentlyHoveredItem(null)}
+                    // onMouseLeave={() => setCurrentlyHoveredItem(null)}
                     // virtualizer styles
                     style={{
                       position: 'absolute',
